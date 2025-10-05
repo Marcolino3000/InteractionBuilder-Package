@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86e6013fb5415d9fc88ab06a37cd42, type: 3}
+  m_Name: LotsOfGreetingsPaulDialog
+  m_EditorClassIdentifier: DialogBuilder::Tree.DialogTree
+  StartNodes:
+  - {fileID: 2498272908223577246}
+  nodes:
+  - {fileID: 5917853435677152448}
+  - {fileID: 2498272908223577246}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+--- !u!114 &2498272908223577246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: NpcDialogOption
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: d2e1a5d42d3a34ac79f32f13be2b8b28
+  Position: {x: 918, y: 389.14282}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: Heyy du schon wieder???
+  TextPreview: Heyy du schon wi...
+  Children:
+  - {fileID: 5917853435677152448}
+  PopularityValue: 0
+--- !u!114 &5917853435677152448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: PlayerDialogOption
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: f9829f589e00c4eacb02c3e5c41039aa
+  Position: {x: 918, y: 574}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: ........
+  TextPreview: ........
+  Children: []
+  answerVibe: 0
+  _popularityModifier: 0

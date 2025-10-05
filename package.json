@@ -1,0 +1,13 @@
+{
+  "name": "com.marc.interactionbuilder",
+  "version": "0.0.1",
+  "displayName": "Interaction Builder",
+  "description": "",
+  "unity": "",
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
+  },
+  "author": {
+    "name": "Marc"
+  }
+}

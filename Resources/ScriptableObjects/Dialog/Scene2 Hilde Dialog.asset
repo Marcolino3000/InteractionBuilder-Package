@@ -1,0 +1,303 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5552093274568481724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: PlayerDialogOption
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: e65381316552041fc905d3067debfa83
+  Position: {x: 1674, y: 220}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "*T\xFCr zumachen*"
+  TextPreview: "*T\xFCr zumachen*"
+  Children:
+  - {fileID: 1915434644692900419}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &-3792276879913639869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Woher kennst du ...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 54602903f2f6e4cbfa4d6bdf6e9f31d2
+  Position: {x: 1364.0001, y: 542}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Woher kennst du meine Mutter?
+  TextPreview: Woher kennst du ...
+  Children:
+  - {fileID: 6672911882890037600}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 2
+  _popularityModifier: -5
+--- !u!114 &-3274434093672825564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: PlayerDialogOption
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: abc8470ed206b40cfa362257c32acf20
+  Position: {x: 1054.2858, y: 220}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Wer bist duu?
+  TextPreview: Wer bist duu?
+  Children:
+  - {fileID: 1915434644692900419}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86e6013fb5415d9fc88ab06a37cd42, type: 3}
+  m_Name: Scene2 Hilde Dialog
+  m_EditorClassIdentifier: DialogBuilder::Tree.DialogTree
+  StartNodes:
+  - {fileID: 2344694954255602327}
+  nodes:
+  - {fileID: 2344694954255602327}
+  - {fileID: -3274434093672825564}
+  - {fileID: 7790654144729022355}
+  - {fileID: -5552093274568481724}
+  - {fileID: 1915434644692900419}
+  - {fileID: 6672911882890037600}
+  - {fileID: 5610354696499689273}
+  - {fileID: -3792276879913639869}
+  - {fileID: 3002424332067101770}
+  - {fileID: 6114419220264409788}
+  - {fileID: 7345349763600981903}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 02546d8373e6c4db49dab48dd3cd41bc, type: 2}
+--- !u!114 &1915434644692900419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Ahhhhh dahana he...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 92f30844cabea4a9dbcb51b5cfd8d51b
+  Position: {x: 1364, y: 371.7506}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: 'Ahhhhh dahana hedd sich der kloi Ganove verschdeggd!
+
+    Vo dainr
+    Muadr.'
+  TextPreview: Ahhhhh dahana he...
+  Children:
+  - {fileID: 5610354696499689273}
+  - {fileID: -3792276879913639869}
+  - {fileID: 3002424332067101770}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &2344694954255602327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: NpcDialogOption
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 5cd6c37eac3fa480891c87004d42048d
+  Position: {x: 1363.7142, y: 74.85715}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "Ah wie foi, dess i di dreff! Du, i muss dir unbedingd was geba.\nDa
+    heb mol.\nAlso was wichdich isch, isch dess du ihn jeda Dag f\xFCdderschd - wo
+    isch er noh jedzd??"
+  TextPreview: Ah wie foi, dess...
+  Children:
+  - {fileID: -3274434093672825564}
+  - {fileID: 7790654144729022355}
+  - {fileID: -5552093274568481724}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &3002424332067101770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: "*T\xFCr zumachen*"
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 09a84881cd5464238a28256bb8dba87e
+  Position: {x: 1674, y: 542}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "*T\xFCr zumachen*"
+  TextPreview: "*T\xFCr zumachen*"
+  Children:
+  - {fileID: 6672911882890037600}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &5610354696499689273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Wer bist duu?
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: b5652b70c667b401589cfbd8d0f46af5
+  Position: {x: 1054, y: 541.99994}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Wer bist duu?
+  TextPreview: Wer bist duu?
+  Children:
+  - {fileID: 6672911882890037600}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 1
+  _popularityModifier: 5
+--- !u!114 &6114419220264409788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Achso, dai Muadr...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: a142a0bff974f471987bc96e5065de93
+  Position: {x: 1541, y: 928}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "Achso, dai Muadr, die isch dod. \nNa gnau, gibschd hald druffachd,
+    dess ned zu warm, ned zu kaldisch d\xE4m Sauerdeig\u2026"
+  TextPreview: Achso, dai Muadr...
+  Children: []
+  RequiredNodes:
+  - {fileID: -3792276879913639869}
+  BlockerNodes: []
+  PopularityValue: -5
+--- !u!114 &6672911882890037600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Also wie gsagd.....
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 8ad8f68af2f1c4d558470bfec2e0c95f
+  Position: {x: 1363.9999, y: 718.7143}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Also wie gsagd.... Soll i's dir lieber ufschreiba?
+  TextPreview: Also wie gsagd.....
+  Children:
+  - {fileID: 7345349763600981903}
+  - {fileID: 6114419220264409788}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &7345349763600981903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: I bin die Hild! ...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: dc0288f54023c4ec49f9bb80b030c8e0
+  Position: {x: 1194.2493, y: 928.0057}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: 'I bin die Hild! Kennsch mi nemme?
+
+    Die beschde Freindin vo dainr
+    Muadr.'
+  TextPreview: I bin die Hild! ...
+  Children: []
+  RequiredNodes:
+  - {fileID: 5610354696499689273}
+  BlockerNodes: []
+  PopularityValue: 5
+--- !u!114 &7790654144729022355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Wo ist meine Mut...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: eb4f287d67f4546f68b4054c507f8133
+  Position: {x: 1364.0001, y: 220.2857}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Wo ist meine Mutter?
+  TextPreview: Wo ist meine Mut...
+  Children:
+  - {fileID: 1915434644692900419}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0

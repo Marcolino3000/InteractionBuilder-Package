@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86e6013fb5415d9fc88ab06a37cd42, type: 3}
+  m_Name: ClosedDoor5TimesReactionDialog
+  m_EditorClassIdentifier: DialogBuilder::Tree.DialogTree
+  StartNodes:
+  - {fileID: 3604035952535119325}
+  nodes:
+  - {fileID: 3604035952535119325}
+  - {fileID: 6377631270921176417}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+--- !u!114 &3604035952535119325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: NpcDialogOption
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 5ded0336c97fe45428fb465419d49259
+  Position: {x: 798, y: 374}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: "St\xE4ndig haust du mir die T\xFCr vor der Nase zu :("
+  TextPreview: "St\xE4ndig haust du..."
+  Children:
+  - {fileID: 6377631270921176417}
+  PopularityValue: 0
+--- !u!114 &6377631270921176417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: PlayerDialogOption
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 9ac5b96a399a0492d9fd4864e6ba0815
+  Position: {x: 798, y: 563}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: .... -.- ....
+  TextPreview: .... -.- ....
+  Children: []
+  answerVibe: 0
+  _popularityModifier: 0
