@@ -107,11 +107,20 @@ namespace Runtime.Scripts.Core
             PrerequisiteRecord prereq)
         {
             if (dictionary.ContainsKey(trigger))
-                dictionary[trigger].Add(prereq);
+            {
+                TryAddToList(dictionary[trigger], prereq);
+            }
             else
                 dictionary.Add(trigger, new List<PrerequisiteRecord> { prereq });
         }
 
+        private void TryAddToList(List<PrerequisiteRecord> prerequisiteRecords, PrerequisiteRecord prereq)
+        {
+            if (prerequisiteRecords.Contains(prereq))
+                return;
+            
+            prerequisiteRecords.Add(prereq);
+        }
     }
 
     public enum InteractionTriggerVia
