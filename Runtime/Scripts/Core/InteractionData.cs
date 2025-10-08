@@ -15,7 +15,7 @@ namespace Runtime.Scripts.Core
         [SerializeField] private Reaction successReaction;
         [SerializeField] private Reaction failureReaction;
 
-        public override StateData State => new InteractionStateData { Owner = this, ThresholdReached = ThresholdReached };
+        public override StateData CurrentState => new InteractionStateData { Owner = this, ThresholdReached = ThresholdReached };
         public bool ThresholdReached;
 
         public void HandleInteraction(bool succeeded)
@@ -47,7 +47,7 @@ namespace Runtime.Scripts.Core
             SetThresholdBool();
         }
 
-        public class InteractionStateData : StateData
+        public record InteractionStateData : StateData
         {
             public bool ThresholdReached;
         }

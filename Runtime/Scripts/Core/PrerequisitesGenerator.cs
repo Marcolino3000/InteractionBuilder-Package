@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Runtime.Scripts.Interactables;
 using Runtime.Scripts.Utility;
 using UnityEditor;
@@ -18,10 +20,12 @@ namespace Runtime.Scripts.Core
         [SerializeField] private InteractableState TriggeringInteractable;
         
         [Header("Condition Settings")]
-        [SerializeField] private InteractableState InteractableState;
-        [SerializeField] private InteractionData InteractionState;
+        // [SerializeField] private InteractableState InteractableState;
+        // [SerializeField] private InteractionData InteractionState;
         [Tooltip("If true, the interaction will not execute if this condition is not met (otherwise is will execute the failure reaction)")]
-        [SerializeField] public bool IsHardCondition;
+        // [SerializeField] public bool IsHardCondition;
+        
+        [SerializeField] private List<OwnerWithSettings> Conditions = new();
 
         [InspectorButton("GeneratePrerequisites")]
         public bool Generate;
@@ -30,37 +34,51 @@ namespace Runtime.Scripts.Core
 
         private void GeneratePrerequisites()
         {
-            var prereq = CreateRecord(TriggerType, TriggeringInteractable, 
-                InteractableState, InteractionState, InteractionToExecute);
+            var prerequisite = new PrerequisiteRecord
+            {
+                InteractionToExecute = InteractionToExecute,
+                TriggerType = TriggerType,
+                TriggeringInteractable = TriggeringInteractable
+            };
+
+            if(Conditions != null)
+            {   
+                prerequisite.Conditions = new List<StateWithSettings>();
+                
+                foreach (var condition in Conditions)
+                {
+                    prerequisite.Conditions.Add(new StateWithSettings()
+                    {
+                        RecordedState = condition.Owner.CurrentState,
+                        IsHardCondition = condition.IsHardCondition
+                    });
+                }
+            }
             
-            interactionHandler.AddPrerequisite(IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prereq);
+            interactionHandler.AddPrerequisite(IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);
             
             EditorUtility.SetDirty(this);
         }
         
-        private PrerequisiteRecord CreateRecord(InteractionTriggerVia triggerType, InteractableState triggeringInteractable,
-            InteractableState interactableData, InteractionData interactionData, InteractionData interactionToExecute = null)
-        {
-            var prereq = new PrerequisiteRecord();
-
-            prereq.InteractionToExecute = interactionToExecute;
-            prereq.TriggerType = triggerType;
-            prereq.TriggeringInteractable = triggeringInteractable;
-            
-            if(interactableData != null)
-            {
-                prereq.InteractableData = interactableData;
-                prereq.InteractableState = JsonUtility.ToJson(interactableData.State, true);
-            }
-            
-            if(interactionData != null)
-            {
-                prereq.InteractionData = interactionData;
-                prereq.InteractionState = JsonUtility.ToJson(interactionData.State, true);
-                prereq.IsHardCondition = IsHardCondition;
-            }
-            
-            return prereq;
-        }
+        // private PrerequisiteRecord CreateRecord(InteractionTriggerVia triggerType, InteractableState triggeringInteractable,
+        //     InteractionData interactionToExecute)
+        // {
+        //     
+        //     
+        //     // if(interactionData != null)
+        //     // {
+        //     //     prereq.InteractionState = JsonUtility.ToJson(interactionData.State, true);
+        //     //     prereq.IsHardCondition = IsHardCondition;
+        //     // }
+        //     
+        //     return prereq;
+        // }
+    }
+    
+    [Serializable]
+    public class OwnerWithSettings
+    {
+        public WorldStateOwner Owner;
+        public bool IsHardCondition;
     }
 }

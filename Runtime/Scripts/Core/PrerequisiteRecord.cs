@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Runtime.Scripts.Interactables;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Runtime.Scripts.Core
@@ -13,52 +15,62 @@ namespace Runtime.Scripts.Core
         public InteractionTriggerVia TriggerType;
         public InteractableState TriggeringInteractable;
         //Conditions
-        public InteractableState InteractableData;
-        public string InteractableState;
-        public InteractionData InteractionData;
-        public bool IsHardCondition;
-        public string InteractionState;
+        // public WorldStateOwner.StateData InteractableData;
+        // public bool IsHardCondition;
+        public List<StateWithSettings> Conditions;
 
-        public bool TryExecuteInteraction(InteractableState triggeringInteractable)
+        public void TryExecuteInteraction()
         {
             if(InteractionToExecute.OneTimeUse && InteractionToExecute.Count > 0)
-                return false;
+                return;
+
+            ExecutionStatus status = CheckConditions(); 
             
-            bool conditionsMet = true;
-            
-            if(!CompareStates(InteractableState, InteractableData))
-                conditionsMet = false;
-            
-            if(!CompareStates(InteractionState, InteractionData))
+            if(status == ExecutionStatus.Failed)
+                InteractionToExecute?.HandleInteraction(false);
+            if(status == ExecutionStatus.Succeeded)
+                InteractionToExecute?.HandleInteraction(true);
+        }
+
+        // private bool CompareStates(InteractionData interaction)
+        // {
+        //     if (interaction == null)
+        //         return true;
+        //  
+        //     return inter
+        // } 
+
+        private ExecutionStatus CheckConditions()
+        {
+            if (Conditions.IsNullOrEmpty())
+                return ExecutionStatus.Succeeded;
+
+            foreach (var condition in Conditions)
             {
-                conditionsMet = false;
-                
-                if(IsHardCondition)
-                    return false;
+                if (condition.RecordedState.Owner.CurrentState != condition.RecordedState)
+                {
+                    if (condition.IsHardCondition)
+                        return ExecutionStatus.Cancelled;
+                    return ExecutionStatus.Failed;
+                }
             }
             
-            InteractionToExecute?.HandleInteraction(conditionsMet);
-            // triggeringInteractable.HandleInteractionCallback(conditionsMet);
-            
-            return conditionsMet;
+            return ExecutionStatus.Succeeded;
         }
+    }
 
-        private bool CompareStates(string recordedState, InteractionData interaction)
-        {
-            if (interaction == null)
-                return true;
-            
-            var currentState = JsonUtility.ToJson(interaction.State, true);
-            return recordedState== currentState;
-        }
+    [Serializable]
+    public class StateWithSettings
+    {
+        public WorldStateOwner.StateData RecordedState;
+        public bool IsHardCondition;
+    }
 
-        private bool CompareStates(string recordedState, InteractableState interactable)
-        {
-            if (interactable == null)
-                return true;
-            
-            var currentState = JsonUtility.ToJson(interactable.State, true);
-            return recordedState == currentState;
-        }
+    [Serializable]
+    public enum ExecutionStatus
+    {
+        Succeeded,
+        Failed,
+        Cancelled
     }
 }

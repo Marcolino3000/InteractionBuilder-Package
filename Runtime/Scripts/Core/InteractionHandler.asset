@@ -20,6 +20,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f1055e3e4d52345d7b5ad0eab3067a03, type: 2}
     - {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
     - {fileID: 11400000, guid: 73533f209c6654d4a99e1e0636438711, type: 2}
+    - {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
+    - {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -56,7 +58,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
@@ -91,21 +93,42 @@ MonoBehaviour:
     - Name: TriggeringInteractable
       Entry: 10
       Data: 0
-    - Name: InteractableData
+    - Name: Conditions
+      Entry: 7
+      Data: 6|System.Collections.Generic.List`1[[Runtime.Scripts.Core.StateWithSettings,
+        InteractionBuilder]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 7|Runtime.Scripts.Core.StateWithSettings, InteractionBuilder
+    - Name: RecordedState
+      Entry: 7
+      Data: 8|Runtime.Scripts.Interactables.Toggleable+ToggleableStateDate, InteractionBuilder
+    - Name: Owner
       Entry: 10
       Data: 0
-    - Name: InteractableState
+    - Name: Name
       Entry: 1
-      Data: "{\n    \"Owner\": {\n        \"instanceID\": 38696\n    },\n    \"Name\":
-        \"KeyToggleable\",\n    \"ToggleState\": false\n}"
-    - Name: InteractionData
-      Entry: 6
+      Data: KeyToggleable
+    - Name: ToggleState
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
       Data: 
     - Name: IsHardCondition
       Entry: 5
       Data: false
-    - Name: InteractionState
-      Entry: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
@@ -124,7 +147,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 7
-      Data: 6|Runtime.Scripts.Core.Trigger, InteractionBuilder
+      Data: 9|Runtime.Scripts.Core.Trigger, InteractionBuilder
     - Name: TriggerType
       Entry: 3
       Data: 2
@@ -136,14 +159,14 @@ MonoBehaviour:
       Data: 
     - Name: $v
       Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[Runtime.Scripts.Core.PrerequisiteRecord,
+      Data: 10|System.Collections.Generic.List`1[[Runtime.Scripts.Core.PrerequisiteRecord,
         InteractionBuilder]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 8|Runtime.Scripts.Core.PrerequisiteRecord, InteractionBuilder
+      Data: 11|Runtime.Scripts.Core.PrerequisiteRecord, InteractionBuilder
     - Name: InteractionToExecute
       Entry: 10
       Data: 3
@@ -153,21 +176,125 @@ MonoBehaviour:
     - Name: TriggeringInteractable
       Entry: 10
       Data: 2
-    - Name: InteractableData
+    - Name: Conditions
+      Entry: 7
+      Data: 12|System.Collections.Generic.List`1[[Runtime.Scripts.Core.StateWithSettings,
+        InteractionBuilder]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 13|Runtime.Scripts.Core.StateWithSettings, InteractionBuilder
+    - Name: RecordedState
+      Entry: 7
+      Data: 14|Runtime.Scripts.Interactables.Toggleable+ToggleableStateDate, InteractionBuilder
+    - Name: Owner
       Entry: 10
       Data: 0
-    - Name: InteractableState
+    - Name: Name
       Entry: 1
-      Data: "{\n    \"Owner\": {\n        \"instanceID\": 38696\n    },\n    \"Name\":
-        \"KeyToggleable\",\n    \"ToggleState\": false\n}"
-    - Name: InteractionData
-      Entry: 6
+      Data: KeyToggleable
+    - Name: ToggleState
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
       Data: 
     - Name: IsHardCondition
       Entry: 5
       Data: false
-    - Name: InteractionState
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: 15|Runtime.Scripts.Core.Trigger, InteractionBuilder
+    - Name: TriggerType
+      Entry: 3
+      Data: 2
+    - Name: TriggeringInteractable
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 7
+      Data: 16|System.Collections.Generic.List`1[[Runtime.Scripts.Core.PrerequisiteRecord,
+        InteractionBuilder]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 17|Runtime.Scripts.Core.PrerequisiteRecord, InteractionBuilder
+    - Name: InteractionToExecute
+      Entry: 10
+      Data: 5
+    - Name: TriggerType
+      Entry: 3
+      Data: 2
+    - Name: TriggeringInteractable
+      Entry: 10
+      Data: 4
+    - Name: Conditions
+      Entry: 7
+      Data: 18|System.Collections.Generic.List`1[[Runtime.Scripts.Core.StateWithSettings,
+        InteractionBuilder]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 19|Runtime.Scripts.Core.StateWithSettings, InteractionBuilder
+    - Name: RecordedState
+      Entry: 7
+      Data: 20|Runtime.Scripts.Core.InteractionData+InteractionStateData, InteractionBuilder
+    - Name: Owner
+      Entry: 10
+      Data: 3
+    - Name: Name
       Entry: 6
+      Data: 
+    - Name: ThresholdReached
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsHardCondition
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8

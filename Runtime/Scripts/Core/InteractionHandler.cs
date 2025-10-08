@@ -26,7 +26,7 @@ namespace Runtime.Scripts.Core
             {
                 foreach (var prereqHighPrio in prereqsHighPrio)
                 {
-                    prereqHighPrio.TryExecuteInteraction(triggeringInteractable);
+                    prereqHighPrio.TryExecuteInteraction();
                 }
 
                 return;
@@ -36,7 +36,7 @@ namespace Runtime.Scripts.Core
             {
                 foreach (var prereqLowPrio in prereqsLowPrio)
                 {
-                    prereqLowPrio.TryExecuteInteraction(triggeringInteractable);
+                    prereqLowPrio.TryExecuteInteraction();
                 }
             }
         }

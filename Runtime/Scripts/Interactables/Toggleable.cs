@@ -13,7 +13,7 @@ namespace Runtime.Scripts.Interactables
         public string StatusOn;
         public string StatusOff;
         
-        public override StateData State => new ToggleableStateDate { Owner = this, Name = name, ToggleState = ToggleState };
+        public override StateData CurrentState => new ToggleableStateDate { Owner = this, Name = name, ToggleState = ToggleState };
     
         public override void HandleInteraction()
         {
@@ -33,7 +33,7 @@ namespace Runtime.Scripts.Interactables
             StatusDescription = ToggleState ? StatusOn : StatusOff;
         }
 
-        private class ToggleableStateDate : StateData
+        private record ToggleableStateDate : StateData
         {
             public bool ToggleState;
         }
