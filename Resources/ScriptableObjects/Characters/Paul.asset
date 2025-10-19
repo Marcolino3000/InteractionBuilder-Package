@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec5258a5a8341139e95c6d6e600cb62, type: 3}
   m_Name: Paul
   m_EditorClassIdentifier: DialogBuilder::Core.CharacterData
-  Icon: {fileID: 21300000, guid: 6c715d9e34fab409b926c14ef8387214, type: 3}
+  Icon: {fileID: 229522924, guid: 857082fb73f7e452f984ce1ddf98ef26, type: 3}
   BasePopularity: 0
   Influenceability: 0

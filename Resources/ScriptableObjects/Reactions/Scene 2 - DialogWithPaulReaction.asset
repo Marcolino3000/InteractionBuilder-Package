@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 623fa79c384042e3bb49a575d178c3c0, type: 3}
-  m_Name: LotsOfGreetingsReactionPaul
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Reaction
-  DialogTree: {fileID: 11400000, guid: 6eeb10d9b3df0414fb2709a29319f86f, type: 2}
-  InteractionCountThreshold: 5
+  m_Name: Scene 2 - DialogWithPaulReaction
+  m_EditorClassIdentifier: Assembly-CSharp::Core.Reaction
+  DialogTree: {fileID: 11400000, guid: a36626f8320174c4d90b2388492a6a9a, type: 2}
+  Interactable: {fileID: 0}
+  ObjectToMoveIn: {fileID: 0}
+  ObjectToMoveOut: {fileID: 0}

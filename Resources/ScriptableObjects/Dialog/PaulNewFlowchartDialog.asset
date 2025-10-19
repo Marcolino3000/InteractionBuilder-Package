@@ -1,0 +1,447 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8988139489344893849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: "\xC4h lao jetzt hab..."
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: e51ac47178af241b483d4280c17bc17c
+  Position: {x: 704, y: 532}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "\xC4h lao jetzt hab ich schon die Bettina gefragt und die hat \"ja\"
+    gesagt... Oh mannnn, du tust mir sooo leid, ey. "
+  TextPreview: "\xC4h lao jetzt hab..."
+  Children:
+  - {fileID: 8085212009698060535}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &-8048188151878612785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: "\xC4h, geht schon."
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 38efc634ea7c9437f9376e9f3e7a8842
+  Position: {x: 363.99985, y: 1393.7596}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "\xC4h, geht schon."
+  TextPreview: "\xC4h, geht schon."
+  Children:
+  - {fileID: 2808233927382367910}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &-7333344779732859433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: "Du kannst \xFCbrige..."
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 0d33c274007004e9d943895ae06b05f3
+  Position: {x: 363.99994, y: 1228}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "Du kannst \xFCbrigens immer zu mir kommen, das wei\xDFt du. Wir haben
+    \xFCbrigens ne S\xE4ngerin engagiert - ich darf noch nicht verraten wer. Nur
+    so viel: es wir Schlager!"
+  TextPreview: "Du kannst \xFCbrige..."
+  Children:
+  - {fileID: -8048188151878612785}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &-6803145621671451528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: ..........
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 03b2e755808af4be2a11cc7641d46335
+  Position: {x: 664, y: 1227.7142}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: '..........
+
+    Ha haha.'
+  TextPreview: ..........
+  Children:
+  - {fileID: 3763332025459159164}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &-6513156832186138597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Wow.
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: f1e18b875eb654b4291bafd5343c7e80
+  Position: {x: 364, y: 677}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Wow.
+  TextPreview: Wow.
+  Children:
+  - {fileID: 2222438248265898299}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &-5698017459747491426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: "N\xE4."
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 474a8b1a5c3b0496c9e4338d5995b258
+  Position: {x: 363.9999, y: 1063.9999}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "N\xE4."
+  TextPreview: "N\xE4."
+  Children:
+  - {fileID: -7333344779732859433}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &-2688511531172365443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Wenn ich irgende...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: da2c3b83e8b8e4f4d9bd515c7aa4e725
+  Position: {x: 704, y: 838}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "Wenn ich irgendetwas f\xFCr dich tun kann, sag Bescheid. Du kannst
+    ja trotzdem zur Hochzeit kommen wenn du eh schon da bist. Der Pastor fragt ja
+    immer ob jemand Einw\xE4nde hat. (zwinkert)"
+  TextPreview: Wenn ich irgende...
+  Children:
+  - {fileID: -1684802565267805722}
+  - {fileID: -1841288247479553364}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &-1841288247479553364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Willst du Bettin...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: e85476316f76549bc84f6e39c9cc32d0
+  Position: {x: 982.5714, y: 1064}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Willst du Bettina jetzt abmurksen oder soll ich?
+  TextPreview: Willst du Bettin...
+  Children: []
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &-1684802565267805722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: "(W\xFCrrrrg)"
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 9978ffcd41b814e63b7ca215346b255d
+  Position: {x: 664, y: 1064.1428}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "(W\xFCrrrrg)"
+  TextPreview: "(W\xFCrrrrg)"
+  Children:
+  - {fileID: -6803145621671451528}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86e6013fb5415d9fc88ab06a37cd42, type: 3}
+  m_Name: PaulNewFlowchartDialog
+  m_EditorClassIdentifier: DialogBuilder::Tree.DialogTree
+  StartNodes:
+  - {fileID: 6762665367975901611}
+  nodes:
+  - {fileID: 2341995984515022322}
+  - {fileID: 6762665367975901611}
+  - {fileID: 301512098433764171}
+  - {fileID: 7063686440716729322}
+  - {fileID: 2222438248265898299}
+  - {fileID: -6513156832186138597}
+  - {fileID: -8988139489344893849}
+  - {fileID: 8085212009698060535}
+  - {fileID: -2688511531172365443}
+  - {fileID: -1841288247479553364}
+  - {fileID: -1684802565267805722}
+  - {fileID: -6803145621671451528}
+  - {fileID: -5698017459747491426}
+  - {fileID: 3763332025459159164}
+  - {fileID: -7333344779732859433}
+  - {fileID: -8048188151878612785}
+  - {fileID: 2808233927382367910}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+--- !u!114 &301512098433764171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Bitte gib mir no...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: cfc3b86de9b264dcca1c78899fb0e6dd
+  Position: {x: 703.71436, y: 385}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Bitte gib mir noch eine Chance!
+  TextPreview: Bitte gib mir no...
+  Children:
+  - {fileID: -8988139489344893849}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &2222438248265898299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Ich wollte dich ...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 0d9ba584893ff4758a0be770f5fcebde
+  Position: {x: 363.99994, y: 838}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Ich wollte dich einladen.
+  TextPreview: Ich wollte dich ...
+  Children:
+  - {fileID: 3763332025459159164}
+  - {fileID: -5698017459747491426}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &2341995984515022322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Ne.
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 6c1fa4285005842b194a23df691e6333
+  Position: {x: 364, y: 385.42856}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Ne.
+  TextPreview: Ne.
+  Children:
+  - {fileID: 7063686440716729322}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &2808233927382367910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Bist du dir sich...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: b8c00f28e8cd542bfb28a67a8c9943b9
+  Position: {x: 363.99985, y: 1562.375}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "Bist du dir sicher? Ich war immer f\xFCr dich da, auch wenn du es
+    nicht wusstest. Du erinnerst mich so an deine Mutter... Ich hatte immer ein Auge
+    auf sie."
+  TextPreview: Bist du dir sich...
+  Children:
+  - {fileID: 3763332025459159164}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &3763332025459159164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: "Woher wei\xDFt du e..."
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: ef96b783defc54717831a9346b02194a
+  Position: {x: -283.23575, y: 1764.9043}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "Woher wei\xDFt du eigentlich, dass ich in der Stadt bin?"
+  TextPreview: "Woher wei\xDFt du e..."
+  Children: []
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &6762665367975901611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Hey Marlene, sch...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: ee61cc8fbb8b64acb844d19096812133
+  Position: {x: 564, y: 226.57141}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: "Hey Marlene, sch\xF6n dich zu sehen. Ist es nicht schade, dass es
+    mit uns damals nicht geklappt hat?"
+  TextPreview: Hey Marlene, sch...
+  Children:
+  - {fileID: 2341995984515022322}
+  - {fileID: 301512098433764171}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &7063686440716729322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Ich heirate jetz...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: c708b0c26a4424cb2b99d70603ca9dfe
+  Position: {x: 364, y: 515.1429}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Ich heirate jetzt die Bettina.
+  TextPreview: Ich heirate jetz...
+  Children:
+  - {fileID: -6513156832186138597}
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &8085212009698060535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Das war nur iron...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 95a09a325dc774e69ba2aa8352a44e4a
+  Position: {x: 704, y: 677}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: Das war nur ironisch... also das...
+  TextPreview: Das war nur iron...
+  Children:
+  - {fileID: -2688511531172365443}
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
