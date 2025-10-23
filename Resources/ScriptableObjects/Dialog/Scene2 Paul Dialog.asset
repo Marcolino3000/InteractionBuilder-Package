@@ -22,6 +22,8 @@ MonoBehaviour:
   - {fileID: 4346923093556952275}
   - {fileID: -5383730266762262135}
   - {fileID: 7977693498305313975}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -45,6 +47,8 @@ MonoBehaviour:
   TextPreview: "Ich wei\xDF gar nic..."
   Children:
   - {fileID: 1326023653020022437}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -59,7 +63,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
-  m_Name: NpcDialogOption
+  m_Name: Hey Marlene, sch...
   m_EditorClassIdentifier: 
   Guid: f6cde50405b9f4f5e9e5c440c9d78f41
   Position: {x: 32.99999, y: -1652.5763}
@@ -72,6 +76,8 @@ MonoBehaviour:
   - {fileID: 428056451835201189}
   - {fileID: 2676999720429140291}
   - {fileID: -4663519145765460523}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -95,6 +101,8 @@ MonoBehaviour:
   TextPreview: Also ich wollte ...
   Children:
   - {fileID: 321336787002640964}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 6
@@ -118,6 +126,8 @@ MonoBehaviour:
   TextPreview: Das war nur iron...
   Children:
   - {fileID: -6846182487938745993}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes:
   - {fileID: 428056451835201189}
   BlockerNodes: []
@@ -143,6 +153,8 @@ MonoBehaviour:
   TextPreview: Ou-kayyy....(???...
   Children:
   - {fileID: 2038494943355648970}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -167,6 +179,8 @@ MonoBehaviour:
   TextPreview: Ja... aber woher...
   Children:
   - {fileID: 4947966587424837287}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -191,6 +205,8 @@ MonoBehaviour:
   TextPreview: "*Die T\xFCr zuknall..."
   Children:
   - {fileID: -6846182487938745993}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -208,13 +224,15 @@ MonoBehaviour:
   m_Name: "*Die T\xFCr zuknall..."
   m_EditorClassIdentifier: 
   Guid: f258f2f47c0144f848080ea5db99bdc3
-  Position: {x: 366.91696, y: -1518.9998}
+  Position: {x: 330.99994, y: -1518.9998}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 02546d8373e6c4db49dab48dd3cd41bc, type: 2}
   DialogLine: "*Die T\xFCr zuknallen*"
   TextPreview: "*Die T\xFCr zuknall..."
   Children:
   - {fileID: 8214506094242630894}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -239,6 +257,8 @@ MonoBehaviour:
   TextPreview: Genau, ja, Autor...
   Children:
   - {fileID: 1326023653020022437}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -262,6 +282,8 @@ MonoBehaviour:
   DialogLine: 
   TextPreview: 
   Children: []
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -285,6 +307,8 @@ MonoBehaviour:
   TextPreview: "Sch\xF6n f\xFCr euch."
   Children:
   - {fileID: -6846182487938745993}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -308,6 +332,8 @@ MonoBehaviour:
   DialogLine: "*Die T\xFCr langsam wortlos schlie\xDFen*"
   TextPreview: "*Die T\xFCr langsam..."
   Children: []
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -332,6 +358,8 @@ MonoBehaviour:
   TextPreview: "Woher wei\xDFt du, ..."
   Children:
   - {fileID: -8406367446726604415}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -398,6 +426,8 @@ MonoBehaviour:
   TextPreview: ...toll.
   Children:
   - {fileID: 7715138301334161512}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -422,6 +452,8 @@ MonoBehaviour:
   TextPreview: Bitte gib mir no...
   Children:
   - {fileID: 8214506094242630894}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -448,6 +480,8 @@ MonoBehaviour:
   TextPreview: Meine Cousine is...
   Children:
   - {fileID: -1641519375501217118}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -473,6 +507,8 @@ MonoBehaviour:
   Children:
   - {fileID: -7961286758752456900}
   - {fileID: -4340736748771555055}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -496,6 +532,8 @@ MonoBehaviour:
   TextPreview: Du warst der ein...
   Children:
   - {fileID: 8214506094242630894}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -520,6 +558,8 @@ MonoBehaviour:
   TextPreview: "\xC4hm magst du das..."
   Children:
   - {fileID: 4947966587424837287}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -546,6 +586,8 @@ MonoBehaviour:
   Children:
   - {fileID: -6117493512016797897}
   - {fileID: 8415505403560475243}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -570,6 +612,8 @@ MonoBehaviour:
   TextPreview: Ja, wir haben ne...
   Children:
   - {fileID: -1171378232159094076}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -593,6 +637,8 @@ MonoBehaviour:
   TextPreview: "*T\xFCr schlie\xDFen.*..."
   Children:
   - {fileID: 4947966587424837287}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -619,6 +665,8 @@ MonoBehaviour:
   - {fileID: -6623330606900721193}
   - {fileID: -3974068873530576135}
   - {fileID: -4954209596611156742}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 5
@@ -642,6 +690,8 @@ MonoBehaviour:
   TextPreview: .......
   Children:
   - {fileID: 2038494943355648970}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0

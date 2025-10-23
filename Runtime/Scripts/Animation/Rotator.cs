@@ -40,13 +40,13 @@ namespace Runtime.Scripts.Animation
             isOpen = !isOpen;
         }
 
-        private void OnGUI()
-        {
-            if (GUI.Button(new Rect(10, 10, 100, 30), "Start Rotation"))
-            {
-                StartRotation();
-            }
-        }
+        // private void OnGUI()
+        // {
+        //     if (GUI.Button(new Rect(10, 10, 100, 30), "Start Rotation"))
+        //     {
+        //         StartRotation();
+        //     }
+        // }
 
         private void Awake()
         {

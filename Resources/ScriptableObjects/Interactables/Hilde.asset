@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7400cd62aa42a6af487a125e822cc7, type: 3}
   m_Name: Hilde
   m_EditorClassIdentifier: Assembly-CSharp::Interactables.InteractableWorldData
-  Sprite: {fileID: 0}
-  LocationOnMap: {x: 2, y: 4}
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
+  Sprite: {fileID: 2800000, guid: 0dc3ccd1933884c15aee69535626fb43, type: 3}
+  LocationOnMap: {x: 2, y: 4}
+  AwarenessLevel: 0

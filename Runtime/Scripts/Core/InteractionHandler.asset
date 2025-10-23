@@ -21,6 +21,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
     - {fileID: 11400000, guid: 73533f209c6654d4a99e1e0636438711, type: 2}
     - {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
+    - {fileID: 1703354423148605636, guid: a36626f8320174c4d90b2388492a6a9a, type: 2}
     - {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -87,6 +88,9 @@ MonoBehaviour:
     - Name: InteractionToExecute
       Entry: 10
       Data: 1
+    - Name: DialogOptionToUnlock
+      Entry: 6
+      Data: 
     - Name: TriggerType
       Entry: 3
       Data: 2
@@ -170,6 +174,9 @@ MonoBehaviour:
     - Name: InteractionToExecute
       Entry: 10
       Data: 3
+    - Name: DialogOptionToUnlock
+      Entry: 6
+      Data: 
     - Name: TriggerType
       Entry: 3
       Data: 2
@@ -246,11 +253,14 @@ MonoBehaviour:
         InteractionBuilder]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 17|Runtime.Scripts.Core.PrerequisiteRecord, InteractionBuilder
     - Name: InteractionToExecute
+      Entry: 6
+      Data: 
+    - Name: DialogOptionToUnlock
       Entry: 10
       Data: 5
     - Name: TriggerType
@@ -271,7 +281,62 @@ MonoBehaviour:
       Data: 19|Runtime.Scripts.Core.StateWithSettings, InteractionBuilder
     - Name: RecordedState
       Entry: 7
-      Data: 20|Runtime.Scripts.Core.InteractionData+InteractionStateData, InteractionBuilder
+      Data: 20|Runtime.Scripts.Interactables.Toggleable+ToggleableStateDate, InteractionBuilder
+    - Name: Owner
+      Entry: 10
+      Data: 0
+    - Name: Name
+      Entry: 1
+      Data: Key
+    - Name: ToggleState
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsHardCondition
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 21|Runtime.Scripts.Core.PrerequisiteRecord, InteractionBuilder
+    - Name: InteractionToExecute
+      Entry: 10
+      Data: 6
+    - Name: DialogOptionToUnlock
+      Entry: 6
+      Data: 
+    - Name: TriggerType
+      Entry: 3
+      Data: 2
+    - Name: TriggeringInteractable
+      Entry: 10
+      Data: 4
+    - Name: Conditions
+      Entry: 7
+      Data: 22|System.Collections.Generic.List`1[[Runtime.Scripts.Core.StateWithSettings,
+        InteractionBuilder]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 23|Runtime.Scripts.Core.StateWithSettings, InteractionBuilder
+    - Name: RecordedState
+      Entry: 7
+      Data: 24|Runtime.Scripts.Core.InteractionData+InteractionStateData, InteractionBuilder
     - Name: Owner
       Entry: 10
       Data: 3

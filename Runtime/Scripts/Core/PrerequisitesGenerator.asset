@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b55897dba794d06859c80b86806536e, type: 3}
   m_Name: PrerequisitesGenerator
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.PrerequisitesGenerator
-  InteractionToExecute: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
+  InteractionToExecute: {fileID: 0}
+  DialogOptionToUnlock: {fileID: 1703354423148605636, guid: a36626f8320174c4d90b2388492a6a9a, type: 2}
   IsHighPriority: 0
   TriggerType: 2
   TriggeringInteractable: {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
   Conditions:
-  - Owner: {fileID: 11400000, guid: 73533f209c6654d4a99e1e0636438711, type: 2}
+  - Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
     IsHardCondition: 0
   Generate: 0
   interactionHandler: {fileID: 11400000, guid: 7ee7f6559697b45d09c05394a0f5ecce, type: 2}
+  InteractionViewer: {fileID: 11400000, guid: 4455d36fc78104a33834ae22785169d4, type: 2}

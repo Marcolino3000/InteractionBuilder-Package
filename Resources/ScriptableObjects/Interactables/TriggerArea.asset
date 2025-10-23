@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactables.Toggleable
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 2800000, guid: 670c92303edea4007914be2f9864cb33, type: 3}
   LocationOnMap: {x: 0, y: 0}
+  AwarenessLevel: 0
   ToggleState: 0
   StatusDescription: 
   StatusOn: 

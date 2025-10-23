@@ -9,6 +9,7 @@ namespace Editor
         private bool showStaticData = true;
         private SerializedProperty spriteProp;
         private SerializedProperty locationOnMapProp;
+        private SerializedProperty discoveryTypeProp;
 
         protected override void OnEnable()
         {
@@ -16,6 +17,7 @@ namespace Editor
             
             spriteProp = serializedObject.FindProperty("Sprite");
             locationOnMapProp = serializedObject.FindProperty("LocationOnMap");
+            discoveryTypeProp = serializedObject.FindProperty("AwarenessLevel");
         }
 
         public override void OnInspectorGUI()
@@ -28,6 +30,7 @@ namespace Editor
             {
                 EditorGUILayout.PropertyField(spriteProp);
                 EditorGUILayout.PropertyField(locationOnMapProp);
+                EditorGUILayout.PropertyField(discoveryTypeProp);
             }
         
             serializedObject.ApplyModifiedProperties();

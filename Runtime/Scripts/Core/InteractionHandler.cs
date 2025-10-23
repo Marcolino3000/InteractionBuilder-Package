@@ -26,7 +26,7 @@ namespace Runtime.Scripts.Core
             {
                 foreach (var prereqHighPrio in prereqsHighPrio)
                 {
-                    prereqHighPrio.TryExecuteInteraction();
+                    prereqHighPrio.Execute();
                 }
 
                 return;
@@ -36,7 +36,7 @@ namespace Runtime.Scripts.Core
             {
                 foreach (var prereqLowPrio in prereqsLowPrio)
                 {
-                    prereqLowPrio.TryExecuteInteraction();
+                    prereqLowPrio.Execute();
                 }
             }
         }
@@ -87,8 +87,30 @@ namespace Runtime.Scripts.Core
                 if (mode == PlayModeStateChange.EnteredPlayMode)
                 {
                     Setup();
+                    SetDialogOptionsAvailability();
                 }
             };
+        }
+
+        private void SetDialogOptionsAvailability()
+        {
+            foreach (var triggerType in triggersToPrerequisitesLowPrio)
+            {
+                foreach (var record in triggerType.Value)
+                {
+                    if(record.DialogOptionToUnlock != null)
+                        record.DialogOptionToUnlock.IsAvailable = false;
+                }
+            }
+            
+            foreach (var triggerType in triggersToPrerequisitesHighPrio)
+            {
+                foreach (var record in triggerType.Value)
+                {
+                    if(record.DialogOptionToUnlock != null)
+                        record.DialogOptionToUnlock.IsAvailable = false;
+                }
+            }
         }
 
 

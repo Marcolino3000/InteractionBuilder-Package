@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Nodes.Decorator;
 using Runtime.Scripts.Interactables;
 using Runtime.Scripts.Utility;
 using UnityEditor;
@@ -12,6 +13,7 @@ namespace Runtime.Scripts.Core
     {
         [Header("Interaction to execute")]
         [SerializeField] private InteractionData InteractionToExecute;
+        [SerializeField] private DialogOptionNode DialogOptionToUnlock;
 
         [Header("Prerequisites for interaction")]
         [Header("Trigger Settings")]
@@ -20,18 +22,14 @@ namespace Runtime.Scripts.Core
         [SerializeField] private InteractableState TriggeringInteractable;
         
         [Header("Condition Settings")]
-        // [SerializeField] private InteractableState InteractableState;
-        // [SerializeField] private InteractionData InteractionState;
-        [Tooltip("If true, the interaction will not execute if this condition is not met (otherwise is will execute the failure reaction)")]
-        // [SerializeField] public bool IsHardCondition;
-        
         [SerializeField] private List<OwnerWithSettings> Conditions = new();
 
         [InspectorButton("GeneratePrerequisites")]
         public bool Generate;
 
         [HideInInspector] [SerializeField] private InteractionHandler interactionHandler;
-
+        [HideInInspector] [SerializeField] InteractionViewer InteractionViewer;
+        
         private void GeneratePrerequisites()
         {
             var prerequisite = new PrerequisiteRecord
@@ -40,6 +38,12 @@ namespace Runtime.Scripts.Core
                 TriggerType = TriggerType,
                 TriggeringInteractable = TriggeringInteractable
             };
+
+            if (DialogOptionToUnlock != null)
+            {
+                DialogOptionToUnlock.IsAvailable = false;
+                prerequisite.DialogOptionToUnlock = DialogOptionToUnlock;
+            }
 
             if(Conditions != null)
             {   
@@ -56,29 +60,16 @@ namespace Runtime.Scripts.Core
             }
             
             interactionHandler.AddPrerequisite(IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);
-            
+            // InteractionViewer.AddInteraction(InteractionToExecute.name, IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);   
             EditorUtility.SetDirty(this);
         }
-        
-        // private PrerequisiteRecord CreateRecord(InteractionTriggerVia triggerType, InteractableState triggeringInteractable,
-        //     InteractionData interactionToExecute)
-        // {
-        //     
-        //     
-        //     // if(interactionData != null)
-        //     // {
-        //     //     prereq.InteractionState = JsonUtility.ToJson(interactionData.State, true);
-        //     //     prereq.IsHardCondition = IsHardCondition;
-        //     // }
-        //     
-        //     return prereq;
-        // }
     }
     
     [Serializable]
     public class OwnerWithSettings
     {
         public WorldStateOwner Owner;
+        [Tooltip("If true, the interaction will not execute if this condition is not met (otherwise is will execute the failure reaction)")]
         public bool IsHardCondition;
     }
 }

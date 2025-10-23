@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\xC4h lao jetzt hab..."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: e51ac47178af241b483d4280c17bc17c
-  Position: {x: 704, y: 532}
+  Position: {x: 704, y: 515}
   Blackboard:
     CharacterData: {fileID: 0}
   DialogLine: "\xC4h lao jetzt hab ich schon die Bettina gefragt und die hat \"ja\"
@@ -21,6 +21,8 @@ MonoBehaviour:
   TextPreview: "\xC4h lao jetzt hab..."
   Children:
   - {fileID: 8085212009698060535}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -44,6 +46,8 @@ MonoBehaviour:
   TextPreview: "\xC4h, geht schon."
   Children:
   - {fileID: 2808233927382367910}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -70,6 +74,8 @@ MonoBehaviour:
   TextPreview: "Du kannst \xFCbrige..."
   Children:
   - {fileID: -8048188151878612785}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -95,6 +101,8 @@ MonoBehaviour:
   TextPreview: ..........
   Children:
   - {fileID: 3763332025459159164}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -111,13 +119,15 @@ MonoBehaviour:
   m_Name: Wow.
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: f1e18b875eb654b4291bafd5343c7e80
-  Position: {x: 364, y: 677}
+  Position: {x: 363.99994, y: 644}
   Blackboard:
     CharacterData: {fileID: 0}
   DialogLine: Wow.
   TextPreview: Wow.
   Children:
   - {fileID: 2222438248265898299}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -142,6 +152,8 @@ MonoBehaviour:
   TextPreview: "N\xE4."
   Children:
   - {fileID: -7333344779732859433}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -159,7 +171,7 @@ MonoBehaviour:
   m_Name: Wenn ich irgende...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: da2c3b83e8b8e4f4d9bd515c7aa4e725
-  Position: {x: 704, y: 838}
+  Position: {x: 704, y: 771}
   Blackboard:
     CharacterData: {fileID: 0}
   DialogLine: "Wenn ich irgendetwas f\xFCr dich tun kann, sag Bescheid. Du kannst
@@ -169,6 +181,8 @@ MonoBehaviour:
   Children:
   - {fileID: -1684802565267805722}
   - {fileID: -1841288247479553364}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -191,6 +205,8 @@ MonoBehaviour:
   DialogLine: Willst du Bettina jetzt abmurksen oder soll ich?
   TextPreview: Willst du Bettin...
   Children: []
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -215,6 +231,8 @@ MonoBehaviour:
   TextPreview: "(W\xFCrrrrg)"
   Children:
   - {fileID: -6803145621671451528}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -251,6 +269,7 @@ MonoBehaviour:
   - {fileID: -7333344779732859433}
   - {fileID: -8048188151878612785}
   - {fileID: 2808233927382367910}
+  - {fileID: 1703354423148605636}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
 --- !u!114 &301512098433764171
@@ -273,6 +292,34 @@ MonoBehaviour:
   TextPreview: Bitte gib mir no...
   Children:
   - {fileID: -8988139489344893849}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &1703354423148605636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: "Schl\xFCssel gefund..."
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 2341c3d28dbff48cd97951c5ff6cc0c1
+  Position: {x: 1070.1428, y: 385}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: "Schl\xFCssel gefunden"
+  TextPreview: "Schl\xFCssel gefund..."
+  Children:
+  - {fileID: -2688511531172365443}
+  FallThrough: 0
+  IsAvailable: 0
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -290,7 +337,7 @@ MonoBehaviour:
   m_Name: Ich wollte dich ...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 0d9ba584893ff4758a0be770f5fcebde
-  Position: {x: 363.99994, y: 838}
+  Position: {x: 364, y: 771}
   Blackboard:
     CharacterData: {fileID: 0}
   DialogLine: Ich wollte dich einladen.
@@ -298,6 +345,8 @@ MonoBehaviour:
   Children:
   - {fileID: 3763332025459159164}
   - {fileID: -5698017459747491426}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -321,6 +370,8 @@ MonoBehaviour:
   TextPreview: Ne.
   Children:
   - {fileID: 7063686440716729322}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -347,6 +398,8 @@ MonoBehaviour:
   TextPreview: Bist du dir sich...
   Children:
   - {fileID: 3763332025459159164}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -369,6 +422,8 @@ MonoBehaviour:
   DialogLine: "Woher wei\xDFt du eigentlich, dass ich in der Stadt bin?"
   TextPreview: "Woher wei\xDFt du e..."
   Children: []
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -395,6 +450,9 @@ MonoBehaviour:
   Children:
   - {fileID: 2341995984515022322}
   - {fileID: 301512098433764171}
+  - {fileID: 1703354423148605636}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -418,6 +476,8 @@ MonoBehaviour:
   TextPreview: Ich heirate jetz...
   Children:
   - {fileID: -6513156832186138597}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -434,13 +494,15 @@ MonoBehaviour:
   m_Name: Das war nur iron...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 95a09a325dc774e69ba2aa8352a44e4a
-  Position: {x: 704, y: 677}
+  Position: {x: 704, y: 643.5}
   Blackboard:
     CharacterData: {fileID: 0}
   DialogLine: Das war nur ironisch... also das...
   TextPreview: Das war nur iron...
   Children:
   - {fileID: -2688511531172365443}
+  FallThrough: 0
+  IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0

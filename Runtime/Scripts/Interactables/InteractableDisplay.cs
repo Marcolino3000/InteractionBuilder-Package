@@ -6,7 +6,7 @@ namespace Runtime.Scripts.Interactables
 {
     public class InteractableDisplay : MonoBehaviour
     {
-        [SerializeField] private InteractableState state;
+        [SerializeField] private Interactable interactable;
         [SerializeField] private TriggerArea triggerArea;
         [SerializeField] private float fadeDuration = 0.5f;
         [SerializeField] private float opacity = 0.7f;
@@ -19,25 +19,25 @@ namespace Runtime.Scripts.Interactables
         {
             root = GetComponent<UIDocument>().rootVisualElement;
             
-            backgroundImage = new StyleBackground(state.Sprite);
+            backgroundImage = new StyleBackground(interactable.Data.Sprite);
             root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
 
-            triggerArea.OnTriggerEntered += (PlayerController) => 
-            {
-                Show();
-            };
-            
-            triggerArea.OnTriggerExited += Hide;
+            // triggerArea.OnPlayerEntered += (PlayerController) => 
+            // {
+            //     Show();
+            // };
+            //
+            // triggerArea.OnPlayerExited += Hide;
 
             StartCoroutine(FadeIcon(false));
         }
 
-        private void Hide()
+        public void Hide()
         {
             StartCoroutine(FadeIcon(false));
         }
 
-        private void Show()
+        public void Show()
         {
             StartCoroutine(FadeIcon(true));
         }
@@ -73,6 +73,11 @@ namespace Runtime.Scripts.Interactables
             newTexture.Apply();
     
             return newTexture;
+        }
+
+        public void MarkAsFound()
+        {
+            root.Query<VisualElement>("icon").First().style.backgroundColor = Color.green; 
         }
     }
 }

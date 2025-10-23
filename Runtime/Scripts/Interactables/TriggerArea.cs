@@ -6,25 +6,30 @@ namespace Runtime.Scripts.Interactables
 {
     public class TriggerArea : MonoBehaviour
     {
-        public event Action<PlayerController> OnTriggerEntered;
-        public event Action OnTriggerExited;
+        public event Action<PlayerController> OnPlayerEntered;
+        public event Action<Sauerteig> OnSauerteigEntered;
+        public event Action OnPlayerExited;
         private void OnTriggerEnter(Collider other)
         {
             var player = other.gameObject.GetComponent<PlayerController>();
-        
-            if (player == null)
+            var sauerteig = other.gameObject.GetComponent<Sauerteig>();
+
+            if(player != null)
             {
-                Debug.LogWarning("TriggerArea: Non-player object entered the trigger area. Aborting trigger event.");
-                return;
+                OnPlayerEntered?.Invoke(player);
             }
-        
-            OnTriggerEntered?.Invoke(player);
+
+            if (sauerteig != null)
+            {
+                OnSauerteigEntered?.Invoke(sauerteig);
+                Debug.Log("sauerteig entered");
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
             // Debug.Log(other.name + " exited");
-            OnTriggerExited?.Invoke();
+            OnPlayerExited?.Invoke();
         }
     }
 }

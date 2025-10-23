@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Nodes.Decorator;
 using Runtime.Scripts.Interactables;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -9,36 +10,46 @@ namespace Runtime.Scripts.Core
     [Serializable]
     public record PrerequisiteRecord()
     {
-        //Interaction to execute
         public InteractionData InteractionToExecute;
-        //Trigger
+        public DialogOptionNode DialogOptionToUnlock;
         public InteractionTriggerVia TriggerType;
         public InteractableState TriggeringInteractable;
-        //Conditions
-        // public WorldStateOwner.StateData InteractableData;
-        // public bool IsHardCondition;
         public List<StateWithSettings> Conditions;
+        
+        public void Execute()
+        {
+            if (InteractionToExecute == null && DialogOptionToUnlock == null)
+            {
+                Debug.LogWarning("Interaction and DialogOption are null! Returning early.");
+                return;
+            }
+            
+            ExecutionStatus status = CheckConditions();     
+            
+            if (InteractionToExecute != null)
+                TryExecuteInteraction(status);
+            
+            if(DialogOptionToUnlock != null)
+            {
+                if(status == ExecutionStatus.Succeeded)
+                {
+                    DialogOptionToUnlock.IsAvailable = true;
+                }
+            }
+        }
 
-        public void TryExecuteInteraction()
+        private void TryExecuteInteraction(ExecutionStatus status)
         {
             if(InteractionToExecute.OneTimeUse && InteractionToExecute.Count > 0)
                 return;
-
-            ExecutionStatus status = CheckConditions(); 
             
             if(status == ExecutionStatus.Failed)
                 InteractionToExecute?.HandleInteraction(false);
             if(status == ExecutionStatus.Succeeded)
+            {
                 InteractionToExecute?.HandleInteraction(true);
+            }
         }
-
-        // private bool CompareStates(InteractionData interaction)
-        // {
-        //     if (interaction == null)
-        //         return true;
-        //  
-        //     return inter
-        // } 
 
         private ExecutionStatus CheckConditions()
         {

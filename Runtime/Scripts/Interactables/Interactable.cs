@@ -13,36 +13,48 @@ namespace Runtime.Scripts.Interactables
         public event Action OnInteractionSuccessful;
 
         [SerializeField] private float triggerAreaRadius = 0.5f;
-        [SerializeField] private InteractableState data;
-
+        public InteractableState Data;
+        
         [SerializeField] private SphereCollider _collider;
         
+        private InteractableDisplay _interactableDisplay;
         private TriggerArea _triggerArea;
         private PlayerController _player;
+        private Action<InteractableState> _interactableDiscoveredCallback;
 
 
         private void OnEnable()
         {
             _triggerArea = GetComponentInChildren<TriggerArea>();
             _collider = GetComponentInChildren<SphereCollider>();
+            _interactableDisplay = GetComponentInChildren<InteractableDisplay>();
             
-            _triggerArea.OnTriggerEntered += player =>
+            _triggerArea.OnPlayerEntered += player =>
             {
                 _player = player;
                 
-                OnEnteredTriggerArea?.Invoke(InteractionTriggerVia.EnteringTriggerArea, data);
+                OnEnteredTriggerArea?.Invoke(InteractionTriggerVia.EnteringTriggerArea, Data);
                 
                 SubscribeToPlayerInteraction(player);
-            };  
+            };
+
+            _triggerArea.OnSauerteigEntered += sauerteig =>
+            {
+                if(Data.AwarenessLevel == sauerteig.awarenessLevel)
+                {
+                    _interactableDiscoveredCallback = sauerteig.HandleInteractableDiscovered;
+                    _interactableDisplay.Show();
+                }
+            };
             
-            _triggerArea.OnTriggerExited += () =>
+            _triggerArea.OnPlayerExited += () =>
             {
                 UnsubscribeFromPlayerInteraction();
 
-                OnExitedTriggerArea?.Invoke(InteractionTriggerVia.ExitingTriggerArea, data);
+                OnExitedTriggerArea?.Invoke(InteractionTriggerVia.ExitingTriggerArea, Data);
             };
 
-            data.OnInteractionFeedback += HandleInteractionFeedback;
+            Data.OnInteractionFeedback += HandleInteractionFeedback;
         }
 
         private void SubscribeToPlayerInteraction(PlayerController player)
@@ -64,7 +76,16 @@ namespace Runtime.Scripts.Interactables
 
         private void HandlePlayerTriggeredInteraction()
         {
-            OnInteractionStarted?.Invoke(InteractionTriggerVia.ButtonPress, data);
+            OnInteractionStarted?.Invoke(InteractionTriggerVia.ButtonPress, Data);
+
+            _interactableDiscoveredCallback?.Invoke(Data);
+            
+            if(_interactableDiscoveredCallback != null)
+                _interactableDisplay.MarkAsFound();
+            
+            _interactableDiscoveredCallback = null;
+
+            
         }
 
         private void HandleInteractionFeedback()
