@@ -16,9 +16,9 @@ MonoBehaviour:
   Position: {x: 704, y: 515}
   Blackboard:
     CharacterData: {fileID: 0}
-  DialogLine: "\xC4h lao jetzt hab ich schon die Bettina gefragt und die hat \"ja\"
+  DialogLine: "\xC4h also jetzt hab ich schon die Bettina gefragt und die hat \"ja\"
     gesagt... Oh mannnn, du tust mir sooo leid, ey. "
-  TextPreview: "\xC4h lao jetzt hab..."
+  TextPreview: "\xC4h also jetzt ha..."
   Children:
   - {fileID: 8085212009698060535}
   FallThrough: 0
@@ -26,6 +26,32 @@ MonoBehaviour:
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
+--- !u!114 &-8516185644013324826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Also ja oderja?
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 785f33f714db34f4faec22029cd9e4ef
+  Position: {x: 983, y: 1360.5}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: Also ja oder ja?
+  TextPreview: Also ja oder ja?...
+  Children:
+  - {fileID: -4060168214706072488}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
 --- !u!114 &-8048188151878612785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,6 +72,32 @@ MonoBehaviour:
   TextPreview: "\xC4h, geht schon."
   Children:
   - {fileID: 2808233927382367910}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &-7585718207666709163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: "Ich wei\xDF gar nic..."
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 378db561054754440a3a88fbe4210054
+  Position: {x: -495, y: 2610.2856}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: "Ich wei\xDF gar nicht warum ich dich damals so unangenehm fand."
+  TextPreview: "Ich wei\xDF gar nic..."
+  Children:
+  - {fileID: 4775721121082114731}
   FallThrough: 0
   IsAvailable: 1
   RequiredNodes: []
@@ -92,7 +144,7 @@ MonoBehaviour:
   m_Name: ..........
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 03b2e755808af4be2a11cc7641d46335
-  Position: {x: 664, y: 1227.7142}
+  Position: {x: 663.99994, y: 1228}
   Blackboard:
     CharacterData: {fileID: 0}
   DialogLine: '..........
@@ -158,6 +210,34 @@ MonoBehaviour:
   BlockerNodes: []
   answerVibe: 0
   _popularityModifier: 0
+--- !u!114 &-4060168214706072488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Haha
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 148af7451eb0a47d7a57cdd2f41ad9e7
+  Position: {x: 983.0001, y: 1503.3215}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: 'Haha
+
+    Hahaha
+
+    Ha'
+  TextPreview: Haha
+  Children: []
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
 --- !u!114 &-2688511531172365443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +266,33 @@ MonoBehaviour:
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
+--- !u!114 &-2282044182001695174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Bist du jetzt Au...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 653a78698769a469dafb09187f0dedc6
+  Position: {x: -295, y: 2294.3223}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: "Bist du jetzt Autorin geworden wie du immer gesagt hast? Das intellektuelle
+    macht dich bisschen s\xFC\xDF."
+  TextPreview: Bist du jetzt Au...
+  Children:
+  - {fileID: -7585718207666709163}
+  - {fileID: 44116864480115097}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
 --- !u!114 &-1841288247479553364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +311,8 @@ MonoBehaviour:
     CharacterData: {fileID: 0}
   DialogLine: Willst du Bettina jetzt abmurksen oder soll ich?
   TextPreview: Willst du Bettin...
-  Children: []
+  Children:
+  - {fileID: 7292865212971121757}
   FallThrough: 0
   IsAvailable: 1
   RequiredNodes: []
@@ -231,6 +339,31 @@ MonoBehaviour:
   TextPreview: "(W\xFCrrrrg)"
   Children:
   - {fileID: -6803145621671451528}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &-1423573845504466739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: "Die T\xFCr langsam ..."
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: b70d5174ae7304a22a004a398990d82f
+  Position: {x: -295.00012, y: 3268.2148}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: "Die T\xFCr langsam wortlos schlie\xDFen"
+  TextPreview: "Die T\xFCr langsam ..."
+  Children: []
   FallThrough: 0
   IsAvailable: 1
   RequiredNodes: []
@@ -269,9 +402,44 @@ MonoBehaviour:
   - {fileID: -7333344779732859433}
   - {fileID: -8048188151878612785}
   - {fileID: 2808233927382367910}
-  - {fileID: 1703354423148605636}
+  - {fileID: 7292865212971121757}
+  - {fileID: -8516185644013324826}
+  - {fileID: -4060168214706072488}
+  - {fileID: 6800994452100073450}
+  - {fileID: 2289955944869358627}
+  - {fileID: -2282044182001695174}
+  - {fileID: -7585718207666709163}
+  - {fileID: 44116864480115097}
+  - {fileID: 4775721121082114731}
+  - {fileID: -1423573845504466739}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+--- !u!114 &44116864480115097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: Genau, ja, Autor...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 672652390f8d5470280aab6e9e495c12
+  Position: {x: -95, y: 2610}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: Genau, ja, Autorin, genau.
+  TextPreview: Genau, ja, Autor...
+  Children:
+  - {fileID: 4775721121082114731}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
 --- !u!114 &301512098433764171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,32 +462,6 @@ MonoBehaviour:
   - {fileID: -8988139489344893849}
   FallThrough: 0
   IsAvailable: 1
-  RequiredNodes: []
-  BlockerNodes: []
-  answerVibe: 0
-  _popularityModifier: 0
---- !u!114 &1703354423148605636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: "Schl\xFCssel gefund..."
-  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
-  Guid: 2341c3d28dbff48cd97951c5ff6cc0c1
-  Position: {x: 1070.1428, y: 385}
-  Blackboard:
-    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
-  DialogLine: "Schl\xFCssel gefunden"
-  TextPreview: "Schl\xFCssel gefund..."
-  Children:
-  - {fileID: -2688511531172365443}
-  FallThrough: 0
-  IsAvailable: 0
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
@@ -350,6 +492,32 @@ MonoBehaviour:
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
+--- !u!114 &2289955944869358627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: O-kay
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: c2369e4cb381b472fb03eafb32ee614d
+  Position: {x: -295, y: 2068.072}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: O-kay
+  TextPreview: O-kay
+  Children:
+  - {fileID: -2282044182001695174}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
 --- !u!114 &2341995984515022322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,18 +584,46 @@ MonoBehaviour:
   m_Name: "Woher wei\xDFt du e..."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: ef96b783defc54717831a9346b02194a
-  Position: {x: -283.23575, y: 1764.9043}
+  Position: {x: -295.32147, y: 1677.8932}
   Blackboard:
     CharacterData: {fileID: 0}
   DialogLine: "Woher wei\xDFt du eigentlich, dass ich in der Stadt bin?"
   TextPreview: "Woher wei\xDFt du e..."
-  Children: []
+  Children:
+  - {fileID: 6800994452100073450}
   FallThrough: 0
   IsAvailable: 1
   RequiredNodes: []
   BlockerNodes: []
   answerVibe: 0
   _popularityModifier: 0
+--- !u!114 &4775721121082114731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Meine Cousine is...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: cb03469873fe445f69d34df46d8337df
+  Position: {x: -295, y: 2953}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: "Meine Cousine ist ja auch Autorin. \"Verloren im Kuss der Sehnsucht\",
+    vielleicht hast du davon schon mal geh\xF6rt. Gibt's sogar am Bahnhof. Wie l\xE4ufts
+    bei dir?"
+  TextPreview: Meine Cousine is...
+  Children:
+  - {fileID: -1423573845504466739}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
 --- !u!114 &6762665367975901611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,7 +646,32 @@ MonoBehaviour:
   Children:
   - {fileID: 2341995984515022322}
   - {fileID: 301512098433764171}
-  - {fileID: 1703354423148605636}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &6800994452100073450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Ja also ich hab ...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 97d1bff9a2ff74d9fbfaceee9d463597
+  Position: {x: -295, y: 1876.4647}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: "Ja also ich hab so'n \xDCberwachungsprogramm geschrieben. Das erkennt
+    dein Gesicht und verfolgt dich mit den Kameras in der Stadt."
+  TextPreview: Ja also ich hab ...
+  Children:
+  - {fileID: 2289955944869358627}
   FallThrough: 0
   IsAvailable: 1
   RequiredNodes: []
@@ -476,6 +697,32 @@ MonoBehaviour:
   TextPreview: Ich heirate jetz...
   Children:
   - {fileID: -6513156832186138597}
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  PopularityValue: 0
+--- !u!114 &7292865212971121757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
+  m_Name: Ha haha hahaha. ...
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
+  Guid: 3fd9cbba510264c4a80904d92cea1de3
+  Position: {x: 983.0001, y: 1228}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
+  DialogLine: "Ha haha hahaha. \nDu und deine Geschichten immer. Fand ich schon immer
+    s\xFC\xDF."
+  TextPreview: Ha haha hahaha. ...
+  Children:
+  - {fileID: -8516185644013324826}
   FallThrough: 0
   IsAvailable: 1
   RequiredNodes: []

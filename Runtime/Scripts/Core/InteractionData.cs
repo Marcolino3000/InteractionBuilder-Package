@@ -18,7 +18,7 @@ namespace Runtime.Scripts.Core
         public override StateData CurrentState => new InteractionStateData { Owner = this, ThresholdReached = ThresholdReached };
         public bool ThresholdReached;
 
-        public void HandleInteraction(bool succeeded)
+        public void HandleInteraction(bool succeeded = false)
         {
             Count++;
             SetThresholdBool();
@@ -31,8 +31,11 @@ namespace Runtime.Scripts.Core
                 case false when failureReaction != null:
                     failureReaction.Execute();
                     break;
-                case true when failureReaction == null || successReaction == null:
-                    Debug.LogWarning($"No reaction assigned for {(succeeded ? "success" : "failure")} in interaction {name}");
+                case true when successReaction == null:
+                    Debug.LogWarning($"No reaction assigned for success in interaction {name}");
+                    break;
+                case false when failureReaction == null:
+                    Debug.LogWarning($"No reaction assigned for failure in interaction {name}");
                     break;
             }
         }

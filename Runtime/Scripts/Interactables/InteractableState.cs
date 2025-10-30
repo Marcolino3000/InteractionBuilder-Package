@@ -8,6 +8,8 @@ namespace Runtime.Scripts.Interactables
     public class InteractableState : WorldStateOwner
     {
         public event Action OnInteractionFeedback;
+        
+        public Interactable Interactable;
 
         public Texture2D Sprite;
         public Vector2 LocationOnMap;
@@ -27,6 +29,11 @@ namespace Runtime.Scripts.Interactables
                 // Name = stateData.Name;
             }
                 
+        }
+        
+        public void SetInteractable(Interactable interactable)
+        {
+            Interactable = interactable;
         }
     }
     

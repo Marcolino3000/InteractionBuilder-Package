@@ -25,6 +25,9 @@ namespace Runtime.Scripts.Interactables
 
         private void OnEnable()
         {
+            if(Data != null)
+                Data.SetInteractable(this);
+            
             _triggerArea = GetComponentInChildren<TriggerArea>();
             _collider = GetComponentInChildren<SphereCollider>();
             _interactableDisplay = GetComponentInChildren<InteractableDisplay>();
@@ -40,7 +43,7 @@ namespace Runtime.Scripts.Interactables
 
             _triggerArea.OnSauerteigEntered += sauerteig =>
             {
-                if(Data.AwarenessLevel == sauerteig.awarenessLevel)
+                if(Data.AwarenessLevel <= sauerteig.awarenessLevel)
                 {
                     _interactableDiscoveredCallback = sauerteig.HandleInteractableDiscovered;
                     _interactableDisplay.Show();
@@ -84,8 +87,6 @@ namespace Runtime.Scripts.Interactables
                 _interactableDisplay.MarkAsFound();
             
             _interactableDiscoveredCallback = null;
-
-            
         }
 
         private void HandleInteractionFeedback()

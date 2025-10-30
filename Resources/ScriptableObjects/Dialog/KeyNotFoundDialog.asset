@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: PlayerDialogOption
+  m_Name: Hmm verschlossen...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 8ad611484a30f409e98d4fc270333d75
   Position: {x: 542, y: 552}
@@ -19,6 +19,10 @@ MonoBehaviour:
   DialogLine: "Hmm verschlossen - der Schl\xFCssel muss irgendwo hier im Garten sein."
   TextPreview: Hmm verschlossen...
   Children: []
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
   answerVibe: 0
   _popularityModifier: 0
 --- !u!114 &11400000
@@ -51,7 +55,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: PlayerDialogOption
+  m_Name: Wo ist der verda...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 692b9f86a5fe740d893ec4ccbe68ed90
   Position: {x: 885.4286, y: 552}
@@ -60,5 +64,9 @@ MonoBehaviour:
   DialogLine: "Wo ist der verdammte Schl\xFCssel??"
   TextPreview: Wo ist der verda...
   Children: []
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
   answerVibe: 0
   _popularityModifier: 0

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Runtime.Scripts.Interactables;
 using Runtime.Scripts.Utility;
+using UnityEditor;
 using UnityEngine;
 
 namespace Runtime.Scripts.Core
@@ -29,6 +31,17 @@ namespace Runtime.Scripts.Core
             states.RemoveAll(s => s.Owner == owner);
             
             states.Add(state);
+        }
+        
+        private void OnEnable()
+        {
+            EditorApplication.playModeStateChanged += mode =>
+            {
+                if (mode == PlayModeStateChange.EnteredPlayMode)
+                {
+                    LoadCurrentSceneStates();
+                }
+            };
         }
     }
 }

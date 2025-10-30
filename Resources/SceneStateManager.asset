@@ -14,13 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Core.SceneStateSaver
   LoadState: 0
   states:
-  - rid: 6889332171956552661
+  - rid: 6889332720958177924
+  - rid: 6889332738688811395
+  - rid: 6889332738688811412
+  - rid: 6889332738688811657
   references:
     version: 2
     RefIds:
-    - rid: 6889332171956552661
+    - rid: 6889332720958177924
+      type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: InteractionBuilder}
+      data:
+        Owner: {fileID: 11400000, guid: 73533f209c6654d4a99e1e0636438711, type: 2}
+        Name: 
+        ThresholdReached: 0
+    - rid: 6889332738688811395
       type: {class: Toggleable/ToggleableStateDate, ns: Runtime.Scripts.Interactables, asm: InteractionBuilder}
       data:
         Owner: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-        Name: DoorToggleable
+        Name: Portal
         ToggleState: 0
+    - rid: 6889332738688811412
+      type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: InteractionBuilder}
+      data:
+        Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
+        Name: 
+        ThresholdReached: 0
+    - rid: 6889332738688811657
+      type: {class: Toggleable/ToggleableStateDate, ns: Runtime.Scripts.Interactables, asm: InteractionBuilder}
+      data:
+        Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
+        Name: Key
+        ToggleState: 1
