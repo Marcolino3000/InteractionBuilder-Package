@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b55897dba794d06859c80b86806536e, type: 3}
   m_Name: InteractionGenerator
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.PrerequisitesGenerator
-  InteractionToExecute: {fileID: 11400000, guid: 0da0d0da5081e459c890c4d75f9945a2, type: 2}
+  InteractionToExecute: {fileID: 11400000, guid: 451526fc10c6747a895ffb1c8f45d728, type: 2}
   DialogOptionToUnlock: {fileID: 0}
   IsHighPriority: 0
   TriggerType: 2
-  TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+  TriggeringInteractable: {fileID: 11400000, guid: 31bbaa1d4963b433eaf50b28b594e86d, type: 2}
   Conditions:
   - Owner: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
     IsHardCondition: 0

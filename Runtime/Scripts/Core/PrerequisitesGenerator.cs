@@ -60,7 +60,7 @@ namespace Runtime.Scripts.Core
             }
             
             interactionHandler.AddPrerequisite(IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);
-            // InteractionViewer.AddInteraction(InteractionToExecute.name, IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);   
+            InteractionViewer.AddInteraction(InteractionToExecute.name, IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);   
             EditorUtility.SetDirty(this);
         }
     }

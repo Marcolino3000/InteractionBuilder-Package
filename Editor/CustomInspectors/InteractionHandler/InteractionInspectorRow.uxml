@@ -5,13 +5,13 @@
     <ui:VisualElement name="row" style="flex-grow: 1; flex-direction: row; align-items: flex-start;">
         <ui:VisualElement name="stayOnTopContainer" style="flex-grow: 1; overflow: hidden; flex-direction: row; align-items: center;">
             <ui:VisualElement name="triggerContainer" style="flex-grow: 1; flex-direction: column; flex-shrink: 1; overflow: hidden;">
-                <ui:EnumField label="Trigger Type" value="OnButtonPress" type="Runtime.Scripts.Core.TriggerType, Assembly-CSharp" />
-                <uie:ObjectField label="Object Field" type="Runtime.Scripts.Core.InteractionData, InteractionBuilder" binding-path="Interaction" name="ObjectField" />
+                <ui:EnumField label="Trigger Type" value="OnButtonPress" type="Runtime.Scripts.Core.TriggerType, Assembly-CSharp" name="triggerType" />
+                <uie:ObjectField label="Object Field" type="Runtime.Scripts.Core.InteractionData, InteractionBuilder" binding-path="Interaction" name="triggeringInteractable" />
             </ui:VisualElement>
             <ui:Instance template="InRowSeparator" style="overflow: hidden; flex-shrink: 0;" />
             <ui:VisualElement name="executeContainer" style="flex-grow: 1; overflow: hidden;">
-                <uie:ObjectField label="Interaction To Execute" name="ObjectField" type="Runtime.Scripts.Core.InteractionData, InteractionBuilder" />
-                <uie:ObjectField label="Dialog Option To Unlock" type="Nodes.Decorator.DialogOptionNode, DialogBuilder" />
+                <uie:ObjectField label="Interaction To Execute" name="interactionToExecute" type="Runtime.Scripts.Core.InteractionData, InteractionBuilder" />
+                <uie:ObjectField label="Dialog Option To Unlock" type="Nodes.Decorator.DialogOptionNode, DialogBuilder" name="dialogOptionNode" />
             </ui:VisualElement>
             <ui:Instance template="InRowSeparator" />
         </ui:VisualElement>

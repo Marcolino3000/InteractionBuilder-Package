@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3041dc13f845549891bd97b3b56a61, type: 3}
   m_Name: InteractionViewer
   m_EditorClassIdentifier: InteractionBuilder::Runtime.Scripts.Core.InteractionViewer
-  interactions: []
+  triggerToPrerequisites:
+  - rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
