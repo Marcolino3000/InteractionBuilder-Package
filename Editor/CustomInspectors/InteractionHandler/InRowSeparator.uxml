@@ -1,0 +1,4 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Editor/UIToolkit/inRowSeperator.uss?fileID=7433441132597879392&amp;guid=d8e24d40c37254a368f12e6e9f83829a&amp;type=3#inRowSeperator" />
+    <engine:VisualElement name="inRowSeperator" class="inRowSeparator" style="min-width: 5px; overflow: hidden;" />
+</engine:UXML>

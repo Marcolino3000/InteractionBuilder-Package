@@ -1,0 +1,8 @@
+.unity-enum-field > .unity-label {
+    min-width: 70px;
+    margin-right: 0;
+}
+
+.unity-object-field > .unity-label {
+    min-width: 70px;
+}
