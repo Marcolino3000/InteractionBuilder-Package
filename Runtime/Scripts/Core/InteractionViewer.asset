@@ -12,10 +12,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3041dc13f845549891bd97b3b56a61, type: 3}
   m_Name: InteractionViewer
   m_EditorClassIdentifier: InteractionBuilder::Runtime.Scripts.Core.InteractionViewer
+  interactionHandler: {fileID: 11400000, guid: de2875705826e4c23822b0c221a84697, type: 2}
   triggerToPrerequisites:
-  - rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  - Trigger:
+      TriggerType: 0
+      TriggeringInteractable: {fileID: 0}
+    Prerequisites: []
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 31bbaa1d4963b433eaf50b28b594e86d, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 451526fc10c6747a895ffb1c8f45d728, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: 31bbaa1d4963b433eaf50b28b594e86d, type: 2}
+        Conditions:
+        - RecordedState:
+            Owner: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+            Name: Portal
+          IsHardCondition: 0
+        - RecordedState:
+            Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
+            Name: 
+          IsHardCondition: 0
+      Name: SchildInteraction
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 451526fc10c6747a895ffb1c8f45d728, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 31bbaa1d4963b433eaf50b28b594e86d, type: 2}
+        Conditions:
+        - RecordedState:
+            Owner: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+            Name: Portal
+          IsHardCondition: 0
+        - RecordedState:
+            Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
+            Name: 
+          IsHardCondition: 0
+      Name: SchildInteraction
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 451526fc10c6747a895ffb1c8f45d728, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 31bbaa1d4963b433eaf50b28b594e86d, type: 2}
+        Conditions:
+        - RecordedState:
+            Owner: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+            Name: Portal
+          IsHardCondition: 0
+        - RecordedState:
+            Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
+            Name: 
+          IsHardCondition: 0
+      Name: SchildInteraction
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 451526fc10c6747a895ffb1c8f45d728, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: 31bbaa1d4963b433eaf50b28b594e86d, type: 2}
+        Conditions:
+        - RecordedState:
+            Owner: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+            Name: Portal
+          IsHardCondition: 0
+        - RecordedState:
+            Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
+            Name: 
+          IsHardCondition: 0
+      Name: SchildInteraction
+      HighPriority: 0

@@ -23,5 +23,5 @@ MonoBehaviour:
   - Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
     IsHardCondition: 0
   Generate: 0
-  interactionHandler: {fileID: 11400000, guid: 7ee7f6559697b45d09c05394a0f5ecce, type: 2}
+  interactionHandler: {fileID: 11400000, guid: de2875705826e4c23822b0c221a84697, type: 2}
   InteractionViewer: {fileID: 11400000, guid: 4455d36fc78104a33834ae22785169d4, type: 2}

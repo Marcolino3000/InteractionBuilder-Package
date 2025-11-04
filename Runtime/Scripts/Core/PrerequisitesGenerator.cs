@@ -27,8 +27,8 @@ namespace Runtime.Scripts.Core
         [InspectorButton("GeneratePrerequisites")]
         public bool Generate;
 
-        [HideInInspector] [SerializeField] private InteractionHandler interactionHandler;
-        [HideInInspector] [SerializeField] InteractionViewer InteractionViewer;
+        [SerializeField] private InteractionHandler interactionHandler;
+        [SerializeField] InteractionViewer InteractionViewer;
         
         private void GeneratePrerequisites()
         {
@@ -59,7 +59,7 @@ namespace Runtime.Scripts.Core
                 }
             }
             
-            interactionHandler.AddPrerequisite(IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);
+            // interactionHandler.AddPrerequisite(IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);
             InteractionViewer.AddInteraction(InteractionToExecute.name, IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);   
             EditorUtility.SetDirty(this);
         }
