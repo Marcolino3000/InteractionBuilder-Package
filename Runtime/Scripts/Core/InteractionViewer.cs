@@ -11,7 +11,7 @@ namespace Runtime.Scripts.Core
     public class InteractionViewer : ScriptableObject
     {
         [SerializeField] private InteractionHandler interactionHandler;
-        [SerializeReference] public List<TriggerToPrereqs> triggerToPrerequisites;
+        public List<TriggerToPrereqs> triggerToPrerequisites;
         // [SerializeField] private List<Interaction> interactions;
 
         public void AddInteraction(string interactionName, bool highPriority, Trigger trigger, PrerequisiteRecord record)

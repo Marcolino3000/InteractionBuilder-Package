@@ -80,7 +80,33 @@ namespace Editor.CustomInspectors
                     }
                     
                     var conditionsField = row.Q<PropertyField>("conditions");
-                    conditionsField.BindProperty(prereq.FindPropertyRelative("Record").FindPropertyRelative("Conditions"));
+                    
+                    SerializedProperty conditions = prereq.FindPropertyRelative("Record").FindPropertyRelative("Conditions");
+
+                    var condiditonsFoldout = new Foldout();
+                    
+                    if (conditions.propertyType == SerializedPropertyType.Generic)
+                    {
+                        
+                        // conditionsField.BindProperty(conditions);
+                        for(int w = 0; w < conditions.arraySize; w++)
+                        {
+                            // var obj = conditions.GetArrayElementAtIndex(i).FindPropertyRelative("RecordedState").objectReferenceValue;
+                            var obj = conditions.GetArrayElementAtIndex(w);
+                            var value = obj.boxedValue;
+                            // var hardCondition = obj.FindPropertyRelative("IsHardCondition");
+                            var stateWithSettingsField = new PropertyField();
+                            stateWithSettingsField.BindProperty(obj);
+                            condiditonsFoldout.Add(stateWithSettingsField);
+                            
+                            var recordedState = obj.FindPropertyRelative("RecordedState");
+                            var recordedStateField = new PropertyField(recordedState);
+                            recordedStateField.BindProperty(recordedState);
+                            condiditonsFoldout.Add(recordedStateField);
+                        }
+                    }
+                    
+                    row.Add(condiditonsFoldout);
                     
                     triggerFoldout.Add(row);
                 }
@@ -88,7 +114,7 @@ namespace Editor.CustomInspectors
                 root.Add(triggerFoldoutContainer);
             }
 
-            InspectorElement.FillDefaultInspector(root , serializedObject, this);
+            // InspectorElement.FillDefaultInspector(root , serializedObject, this);
 
             return root ;
         }

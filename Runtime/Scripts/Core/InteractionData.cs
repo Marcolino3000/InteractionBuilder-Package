@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Runtime.Scripts.Interactables;
 using UnityEngine;
@@ -50,6 +51,7 @@ namespace Runtime.Scripts.Core
             SetThresholdBool();
         }
 
+        [Serializable]
         public record InteractionStateData : StateData
         {
             public bool ThresholdReached;

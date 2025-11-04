@@ -73,7 +73,7 @@ namespace Runtime.Scripts.Core
     [Serializable]
     public class StateWithSettings
     {
-        public WorldStateOwner.StateData RecordedState;
+        [SerializeReference] public WorldStateOwner.StateData RecordedState;
         public bool IsHardCondition;
     }
 

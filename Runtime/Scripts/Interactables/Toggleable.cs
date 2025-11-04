@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
@@ -33,6 +34,7 @@ namespace Runtime.Scripts.Interactables
             StatusDescription = ToggleState ? StatusOn : StatusOff;
         }
 
+        [Serializable]
         private record ToggleableStateDate : StateData
         {
             public bool ToggleState;
