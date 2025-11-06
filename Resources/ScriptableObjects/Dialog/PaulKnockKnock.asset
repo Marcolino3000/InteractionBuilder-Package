@@ -41,4 +41,4 @@ MonoBehaviour:
   nodes:
   - {fileID: -5410210432804604217}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}

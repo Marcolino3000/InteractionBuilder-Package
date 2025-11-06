@@ -17,6 +17,7 @@ namespace Runtime.Scripts.Core
         public InteractableState Interactable;
         public InteractableState ObjectToMoveIn;
         public InteractableState ObjectToMoveOut;
+        public bool CancelCurrentDialog;
 
         public void Execute()
         {
@@ -40,6 +41,11 @@ namespace Runtime.Scripts.Core
             if (ObjectToMoveOut != null)
             {
                 ObjectToMoveOut.Interactable.transform.position += new Vector3(0,-3,0);
+            }
+
+            if (CancelCurrentDialog)
+            {
+                OnStopDialog?.Invoke();
             }
         }
     }

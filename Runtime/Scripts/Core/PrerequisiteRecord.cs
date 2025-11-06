@@ -43,6 +43,9 @@ namespace Runtime.Scripts.Core
             if(InteractionToExecute.OneTimeUse && InteractionToExecute.Count > 0)
                 return;
             
+            if(status == ExecutionStatus.Cancelled)
+                return;
+            
             if(status == ExecutionStatus.Failed)
                 InteractionToExecute?.HandleInteraction(false);
             if(status == ExecutionStatus.Succeeded)

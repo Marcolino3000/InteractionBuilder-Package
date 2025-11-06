@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Runtime.Scripts.PlayerInput;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
@@ -10,6 +11,9 @@ namespace Runtime.Scripts.Interactables
         public Action OnPlayerEnter;
         private void OnTriggerEnter(Collider other)
         {
+            if(other.GetComponent<PlayerController>() == null)
+                return;
+            
             StartCoroutine(StartPlayerEnteredCooldown());
         }
 

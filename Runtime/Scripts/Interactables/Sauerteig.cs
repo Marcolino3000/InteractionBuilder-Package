@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -65,6 +66,11 @@ namespace Runtime.Scripts.Interactables
                     awarenessLevel = AwarenessLevel.Super;
                     break;
             }
+        }
+
+        private void OnGUI()
+        {
+            GUI.Label(new Rect(1400, 550, 200, 30), $"Activity: {Activity} | Level: {awarenessLevel}");
         }
     }
     

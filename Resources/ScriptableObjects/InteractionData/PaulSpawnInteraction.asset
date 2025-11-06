@@ -15,9 +15,9 @@ MonoBehaviour:
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
   Reactions: []
-  Count: 2
-  Threshold: 0
-  OneTimeUse: 0
+  Count: 0
+  Threshold: 1
+  OneTimeUse: 1
   successReaction: {fileID: 11400000, guid: 9a7b7ee2a2d924c33b55ed3c28095a02, type: 2}
   failureReaction: {fileID: 0}
-  ThresholdReached: 1
+  ThresholdReached: 0

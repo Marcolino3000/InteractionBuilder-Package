@@ -405,7 +405,7 @@ MonoBehaviour:
   - {fileID: -4340736748771555055}
   - {fileID: -1641519375501217118}
   Blackboard:
-    CharacterData: {fileID: 11400000, guid: 02546d8373e6c4db49dab48dd3cd41bc, type: 2}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
 --- !u!114 &321336787002640964
 MonoBehaviour:
   m_ObjectHideFlags: 0

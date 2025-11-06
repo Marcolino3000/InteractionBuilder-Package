@@ -43,6 +43,9 @@ namespace Runtime.Scripts.Interactables
 
             _triggerArea.OnSauerteigEntered += sauerteig =>
             {
+                if (Data.AwarenessLevel == AwarenessLevel.NotSet)
+                    return;
+                
                 if(Data.AwarenessLevel <= sauerteig.awarenessLevel)
                 {
                     _interactableDiscoveredCallback = sauerteig.HandleInteractableDiscovered;

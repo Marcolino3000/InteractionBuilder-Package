@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: InteractionBuilder::Runtime.Scripts.Interactables.InteractableState
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
+  Interactable: {fileID: 0}
   Sprite: {fileID: 0}
   LocationOnMap: {x: 0, y: 0}
-  AwarenessLevel: 0
+  AwarenessLevel: 1
