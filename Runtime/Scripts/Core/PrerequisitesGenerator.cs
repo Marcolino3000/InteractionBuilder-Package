@@ -14,9 +14,9 @@ namespace Runtime.Scripts.Core
         [Header("Interaction to execute")]
         [SerializeField] private InteractionData InteractionToExecute;
         [SerializeField] private DialogOptionNode DialogOptionToUnlock;
-
-        [Header("Prerequisites for interaction")]
+        
         [Header("Trigger Settings")]
+        [Tooltip("If true, the interaction will not execute if this condition is not met (otherwise is will execute the failure reaction)")]
         [SerializeField] private bool IsHighPriority;
         [SerializeField] private InteractionTriggerVia TriggerType;
         [SerializeField] private InteractableState TriggeringInteractable;
@@ -27,8 +27,8 @@ namespace Runtime.Scripts.Core
         [InspectorButton("GeneratePrerequisites")]
         public bool Generate;
 
-        [SerializeField] private InteractionHandler interactionHandler;
-        [SerializeField] InteractionViewer InteractionViewer;
+        // [SerializeField] private InteractionHandler interactionHandler;
+        [SerializeField] private InteractionViewer InteractionViewer;
         
         private void GeneratePrerequisites()
         {
@@ -59,8 +59,10 @@ namespace Runtime.Scripts.Core
                 }
             }
             
-            interactionHandler.AddPrerequisite(IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);
-            InteractionViewer.AddInteraction(InteractionToExecute.name, IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);   
+            // interactionHandler.AddPrerequisite(IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);
+            InteractionViewer.AddInteraction(InteractionToExecute.name, IsHighPriority, new Trigger(TriggerType, TriggeringInteractable), prerequisite);
+            EditorUtility.SetDirty(InteractionViewer);
+            
             EditorUtility.SetDirty(this);
         }
     }

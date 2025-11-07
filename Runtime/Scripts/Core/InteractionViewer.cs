@@ -12,8 +12,35 @@ namespace Runtime.Scripts.Core
     {
         [SerializeField] private InteractionHandler interactionHandler;
         public List<TriggerToPrereqs> triggerToPrerequisites;
-        // [SerializeField] private List<Interaction> interactions;
 
+        [ContextMenu("Reset Interactions")]
+        private void OnValidate()
+        {
+            SetupInteractionHandler();
+        }
+
+        private void ResetInteractions()
+        {
+            triggerToPrerequisites = new List<TriggerToPrereqs>();
+        }
+        
+        [ContextMenu("Write Changes to Handler")]
+        private void SetupInteractionHandler()
+        {
+            interactionHandler.triggersToPrerequisitesLowPrio = null;
+            interactionHandler.triggersToPrerequisitesHighPrio = null;
+            
+            foreach (var triggerToPrerequisite in triggerToPrerequisites)
+            {
+                foreach (var prerequisite in triggerToPrerequisite.Prerequisites)
+                {
+                    interactionHandler.AddPrerequisite(prerequisite.HighPriority, triggerToPrerequisite.Trigger, prerequisite.Record);        
+                }
+            }
+            
+            interactionHandler.Setup();
+        }
+        
         public void AddInteraction(string interactionName, bool highPriority, Trigger trigger, PrerequisiteRecord record)
         {
             // interactions.Add(new Interaction(interactionName, highPriority, trigger, record));
@@ -45,18 +72,6 @@ namespace Runtime.Scripts.Core
                     SetupInteractionHandler();
                 } 
             };
-        }
-
-        private void SetupInteractionHandler()
-        {
-            foreach (var triggerToPrerequisite in triggerToPrerequisites)
-            {
-                foreach (var prerequisite in triggerToPrerequisite.Prerequisites)
-                {
-                    interactionHandler.AddPrerequisite(prerequisite.HighPriority, triggerToPrerequisite.Trigger, prerequisite.Record);        
-                }
-            }
-            
         }
     }
 

@@ -6,3 +6,7 @@
 .unity-object-field > .unity-label {
     min-width: 70px;
 }
+
+#interactionToExecute > .unity-label {
+    margin-right: 12px;
+}

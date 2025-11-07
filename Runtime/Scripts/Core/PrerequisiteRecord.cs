@@ -54,6 +54,8 @@ namespace Runtime.Scripts.Core
             }
         }
 
+        //Hard conditions have to be on top of the list otherwise they won't have any effect as the status will
+        //be set to Failed instead of Cancelled if a soft condition is checked and fails first.
         private ExecutionStatus CheckConditions()
         {
             if (Conditions.IsNullOrEmpty())

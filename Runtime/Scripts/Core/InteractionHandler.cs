@@ -12,8 +12,8 @@ namespace Runtime.Scripts.Core
     [CreateAssetMenu(menuName = "ScriptableObjects/InteractionHandler")]
     public class InteractionHandler : SerializedScriptableObject
     {
-        [SerializeField] Dictionary<Trigger, List<PrerequisiteRecord>> triggersToPrerequisitesHighPrio;
-        [SerializeField] Dictionary<Trigger, List<PrerequisiteRecord>> triggersToPrerequisitesLowPrio;
+        [SerializeField] public Dictionary<Trigger, List<PrerequisiteRecord>> triggersToPrerequisitesHighPrio;
+        [SerializeField] public Dictionary<Trigger, List<PrerequisiteRecord>> triggersToPrerequisitesLowPrio;
 
         [HideInInspector] [SerializeField] private PrerequisitesGenerator PrerequisitesGenerator;
 
@@ -74,23 +74,24 @@ namespace Runtime.Scripts.Core
             }
         }
 
-        private void Setup()
+        public void Setup()
         {
             FindClients();
             FindEventSystem();
+            SetDialogOptionsAvailability();
         }
 
-        private void OnEnable()
-        {
-            EditorApplication.playModeStateChanged += mode =>
-            {
-                if (mode == PlayModeStateChange.EnteredPlayMode)
-                {
-                    Setup();
-                    SetDialogOptionsAvailability();
-                }
-            };
-        }
+        // private void OnEnable()
+        // {
+        //     EditorApplication.playModeStateChanged += mode =>
+        //     {
+        //         if (mode == PlayModeStateChange.EnteredPlayMode)
+        //         {
+        //             Setup();
+        //             
+        //         }
+        //     };
+        // }
 
         private void SetDialogOptionsAvailability()
         {
