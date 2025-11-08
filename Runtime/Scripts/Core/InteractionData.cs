@@ -8,13 +8,12 @@ namespace Runtime.Scripts.Core
     [CreateAssetMenu(menuName = "ScriptableObjects/InteractionData")]
     public class InteractionData : WorldStateOwner
     {
-        public List<Reaction> Reactions;
         public int Count;
         public int Threshold;
         public bool OneTimeUse;
         
-        [SerializeField] private Reaction successReaction;
-        [SerializeField] private Reaction failureReaction;
+        [SerializeField] public Reaction successReaction;
+        [SerializeField] public Reaction failureReaction;
 
         public override StateData CurrentState => new InteractionStateData { Owner = this, ThresholdReached = ThresholdReached };
         public bool ThresholdReached;

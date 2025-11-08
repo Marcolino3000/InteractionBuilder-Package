@@ -26,6 +26,27 @@ MonoBehaviour:
         Conditions: []
       Name: KeyInteractionData
       HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 73533f209c6654d4a99e1e0636438711, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+        Conditions:
+        - RecordedState:
+            rid: 7734685136613802505
+          IsHardCondition: 0
+      Name: DoorInteractionData
+      HighPriority: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7734685136613802505
+      type: {class: Toggleable/ToggleableStateDate, ns: Runtime.Scripts.Interactables, asm: InteractionBuilder}
+      data:
+        Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
+        Name: Key
+        ToggleState: 0

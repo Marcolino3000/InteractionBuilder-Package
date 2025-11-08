@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Core.InteractionData
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
-  Reactions: []
   Count: 0
   Threshold: 1
   OneTimeUse: 1

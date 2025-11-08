@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e32a255760647d79c9e712cbffa0e42, type: 3}
   m_Name: TagebuchInteraction
   m_EditorClassIdentifier: Assembly-CSharp::Core.InteractionData
-  Reactions: []
+  _SaveStateToCurrentScene: 0
+  _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
   Count: 0
   Threshold: 1
   OneTimeUse: 0
   successReaction: {fileID: 11400000, guid: 5f487c0626dbe41efb04613aefc4ccba, type: 2}
   failureReaction: {fileID: 0}
   ThresholdReached: 0
-  _SaveStateToCurrentScene: 0
-  _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
