@@ -41,6 +41,8 @@ namespace Editor
         
         [SerializeField] private InteractionViewer viewer;
         private string assetPath = "Packages/com.marc.interactionbuilder/Resources/ScriptableObjects/";
+        private string nameOfLastCreatedInteraction;
+        private Button deleteButton;
         private string dropDownValue;
 
         [MenuItem("Tools/Interaction Creator")]
@@ -123,11 +125,26 @@ namespace Editor
             }
                 
             var trigger = new Trigger(triggerType, triggeringInteractable);
-                
+            
             viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
+            
+            nameOfLastCreatedInteraction = interactionName;
+            deleteButton.SetEnabled(true);
+        }
+
+        private void DeleteNewlyCreatedAssets()
+        {
+            AssetDatabase.DeleteAsset(assetPath + "InteractionData/" + nameOfLastCreatedInteraction + "Data.asset");
+            AssetDatabase.DeleteAsset(assetPath + "Interactables/" + nameOfLastCreatedInteraction + "Interactable.asset");
+            AssetDatabase.DeleteAsset(assetPath + "Reactions/" + nameOfLastCreatedInteraction + "SuccessReaction.asset");
+            AssetDatabase.DeleteAsset(assetPath + "Reactions/" + nameOfLastCreatedInteraction + "FailureReaction.asset");
+            AssetDatabase.DeleteAsset(assetPath + "Dialog/" + nameOfLastCreatedInteraction + "Dialog.asset");
+            
+            deleteButton.SetEnabled(false);
         }
 
         #region BuildEditorUI
+
         public void CreateGUI()
         {
             editor = new SerializedObject(this);
@@ -147,14 +164,51 @@ namespace Editor
             container.Add(CreateScriptableObjectFields());
 
             container.Add(CreateInteractionFields());
-            
-            container.Add(CreateConditionsField());
 
             container.Add(CreateCreatorButton());
+            
+            container.Add(CreateDeleteButton());
             
             root.Add(container);
 
             root.Add(CreateInspectorContainer(null));
+        }
+
+        private VisualElement CreateDeleteButton()
+        {
+            var button = new Button()
+            {
+                text = "Delete Created Assets",
+                style =
+                {
+                    width = 150,
+                    marginTop = 10,
+                    alignSelf = Align.Center
+                }
+            };
+
+            button.clicked += DeleteNewlyCreatedAssets;
+            button.SetEnabled(false);
+            
+            deleteButton = button;
+            return button;
+        }
+
+        private VisualElement CreateCreatorButton()
+        {
+            var button = new Button
+            {
+                text = "Create",
+                style =
+                {
+                    width = 150,
+                    marginTop = 10,
+                    alignSelf = Align.Center
+                }
+            };
+
+            button.clicked += () => OnCreateInteractionClicked();
+            return button;
         }
 
         private VisualElement CreateConditionsField()
@@ -204,6 +258,8 @@ namespace Editor
             container.Add(CreateTriggerTpyeEnumField());
             
             container.Add(CreatePriorityToggleField());
+            
+            container.Add(CreateConditionsField());
             
             InteractionPrerequisiteElements.AddRange(container.Children().Skip(1).ToList());
             
@@ -346,17 +402,6 @@ namespace Editor
                 container.Add(CreateSOField(soType, soPropertyName));
 
             return container;
-        }
-
-        private VisualElement CreateCreatorButton()
-        {
-            var button = new Button{text = "Create"};
-            button.style.width = 150;
-            button.style.marginTop = 10;
-            button.style.alignSelf = Align.Center;
-            
-            button.clicked += () => OnCreateInteractionClicked();
-            return button;
         }
 
         private Toggle CreateFieldToggle(string label, EventCallback<ChangeEvent<bool>> toggleHandler)
