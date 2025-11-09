@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nodes.Decorator;
 using Runtime.Scripts.Core;
 using Runtime.Scripts.Interactables;
 using Tree;
 using UnityEditor;
+using UnityEditor.Compilation;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -22,20 +24,27 @@ namespace Editor
         [SerializeField] private Reaction successReaction;
         [SerializeField] private Reaction failureReaction;
         [SerializeField] private DialogTree dialogTree;
+        
+        [SerializeField] private Toggle interactableToggle;
 
         [SerializeField] private InteractionData interactionToExecute;
+        [SerializeField] private DialogOptionNode dialogOptionToUnlock;
         [SerializeField] private InteractableState triggeringInteractable;
         [SerializeField] private InteractionTriggerVia triggerType;
         [SerializeField] private bool isHighPriority;
+        [SerializeField] private List<OwnerWithSettings> conditions = new();
+        
+        [SerializeField] private VisualElement inspectorContainer;
         
         [SerializeField] private bool createInteractionWithPrerequisites;
         [SerializeField] private List<VisualElement> InteractionPrerequisiteElements = new ();
         
         [SerializeField] private InteractionViewer viewer;
         private string assetPath = "Packages/com.marc.interactionbuilder/Resources/ScriptableObjects/";
+        private string dropDownValue;
 
         [MenuItem("Tools/Interaction Creator")]
-        public static void ShowExample()
+        public static void ShowWindow()
         {
             CompleteInteractionCreator wnd = GetWindow<CompleteInteractionCreator>();
             wnd.titleContent = new GUIContent("Interaction Creator");
@@ -92,8 +101,28 @@ namespace Editor
                 TriggerType = triggerType,
                 TriggeringInteractable = triggeringInteractable
             };
+            
+            if (dialogOptionToUnlock != null)
+            {
+                dialogOptionToUnlock.IsAvailable = false;
+                record.DialogOptionToUnlock = dialogOptionToUnlock;
+            }
+            
+            if(conditions != null)
+            {   
+                record.Conditions = new List<StateWithSettings>();
                 
-            Trigger trigger = new Trigger(triggerType, triggeringInteractable);
+                foreach (var condition in conditions)
+                {
+                    record.Conditions.Add(new StateWithSettings()
+                    {
+                        RecordedState = condition.Owner.CurrentState,
+                        IsHardCondition = condition.IsHardCondition
+                    });
+                }
+            }
+                
+            var trigger = new Trigger(triggerType, triggeringInteractable);
                 
             viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
         }
@@ -104,14 +133,61 @@ namespace Editor
             editor = new SerializedObject(this);
             
             VisualElement root = rootVisualElement;
-
-            root.Add(CreateNameField());
+            root.style.flexDirection = FlexDirection.Row;
             
-            CreateScriptableObjectFields(root);
-            
-            root.Add(CreateInteractionFields());
+            minSize = new Vector2(700, 400);
+            maxSize = new Vector2(1000, 1000);
 
-            root.Add(CreateCreatorButton());
+            var container = new VisualElement();
+            container.style.flexDirection = FlexDirection.Column;
+            container.style.marginRight = 10;
+            
+            container.Add(CreateNameField());
+            
+            container.Add(CreateScriptableObjectFields());
+
+            container.Add(CreateInteractionFields());
+            
+            container.Add(CreateConditionsField());
+
+            container.Add(CreateCreatorButton());
+            
+            root.Add(container);
+
+            root.Add(CreateInspectorContainer(null));
+        }
+
+        private VisualElement CreateConditionsField()
+        {
+            var listProp = editor.FindProperty("conditions");
+            var listField = new PropertyField(listProp);
+            listField.BindProperty(listProp);
+            return listField;
+            
+        }
+
+        private VisualElement CreateInspectorContainer(SerializedProperty property)
+        {
+            inspectorContainer = new VisualElement();
+            inspectorContainer.style.minWidth = 320;
+            // inspectorContainer.style.flexGrow = 1;
+            inspectorContainer.style.borderBottomColor = new Color(0.8f, 0.8f, 0.8f);
+            inspectorContainer.style.borderBottomWidth = 1;
+            inspectorContainer.style.borderLeftColor = new Color(0.8f, 0.8f, 0.8f);
+            inspectorContainer.style.borderLeftWidth = 1;
+            inspectorContainer.style.borderRightColor = new Color(0.8f, 0.8f, 0.8f);
+            inspectorContainer.style.borderRightWidth = 1;
+            inspectorContainer.style.borderTopColor = new Color(0.8f, 0.8f, 0.8f);
+            inspectorContainer.style.borderTopWidth = 1;
+            
+            inspectorContainer.style.borderBottomLeftRadius = 4;
+            inspectorContainer.style.borderBottomRightRadius = 4;
+            inspectorContainer.style.borderTopLeftRadius = 4;
+            inspectorContainer.style.borderTopRightRadius = 4;
+
+            CreateInspector(property);
+
+            return inspectorContainer;
         }
 
         private VisualElement CreateInteractionFields()
@@ -119,6 +195,7 @@ namespace Editor
             var container = new VisualElement();
             
             container.style.width = 276;
+            container.style.marginTop = 15;
             
             container.Add(CreateInteractionToggle());
             
@@ -147,19 +224,24 @@ namespace Editor
             return enumField;
         }
 
-        private void CreateInteractionScriptableObjectFields(VisualElement root)
+        private void CreateInteractionScriptableObjectFields(VisualElement container)
         {
-            root.Add(CreateScriptableObjectFields(
+            container.Add(CreateScriptableObjectFields(
                 "Interaction to Execute", null, typeof(InteractionData), nameof(interactionToExecute)));
             
-            root.Add(CreateScriptableObjectFields(
+            container.Add(CreateScriptableObjectFields(
                 "Triggering Interactable", null, typeof(InteractableState), nameof(triggeringInteractable)));
+            
+            container.Add(CreateScriptableObjectFields(
+                "Dialog Option to Unlock", null, typeof(DialogOptionNode), nameof(dialogOptionToUnlock)));
         }
 
         private VisualElement CreateInteractionToggle()
         {
             var toggle = new Toggle();
             toggle.text = "Create Interaction with Prerequisites";
+            toggle.style.marginBottom = 7;
+            
             toggle.RegisterValueChangedCallback(HandleCreatInteractionToggle);
             return toggle;
         }
@@ -180,28 +262,64 @@ namespace Editor
             triggeringInteractable = interactableState;
         }
 
-        private void CreateScriptableObjectFields(VisualElement root)
+        private VisualElement CreateScriptableObjectFields()
         {
-            root.Add(CreateScriptableObjectFields(
+            var container = new VisualElement();
+            container.style.height = 140;
+            container.style.justifyContent = Justify.SpaceBetween;
+            
+            container.Add(CreateScriptableObjectFields(
                 "Create new Interaction", HandleCreateInteractionDataToggled, typeof(InteractionData), nameof(interactionData)));
             
-            root.Add(CreateScriptableObjectFields(
-                "Create new Interactable", HandleCreateInteractableDataToggled, typeof(InteractableState), nameof(interactableState)));
+            var interactableField = CreateScriptableObjectFields(
+                "Create new", HandleCreateInteractableDataToggled, typeof(InteractableState), nameof(interactableState));
+
+            AddDropDownToToggle(interactableField);
+
+            container.Add(interactableField);
             
-            root.Add(CreateScriptableObjectFields(
+            container.Add(CreateScriptableObjectFields(
                 "Create new Dialog Tree", HandleCreateDialogTreeToggled, typeof(DialogTree), nameof(dialogTree)));
             
-            root.Add(CreateScriptableObjectFields(
-                "Create success Reaction", HandleCreateReactionToggled, typeof(Reaction), nameof(successReaction)));
+            container.Add(CreateScriptableObjectFields(
+                "Create success Reaction", HandleCreateSuccessReactionToggled, typeof(Reaction), nameof(successReaction)));
             
-            root.Add(CreateScriptableObjectFields(
-                "Create failure Reaction", HandleCreateReactionToggled, typeof(Reaction), nameof(failureReaction)));
+            container.Add(CreateScriptableObjectFields(
+                "Create failure Reaction", HandleCreateFailureReactionToggled, typeof(Reaction), nameof(failureReaction)));
+            
+            return container;
+        }
+
+        private void AddDropDownToToggle(VisualElement interactableField)
+        {
+            interactableToggle = (Toggle) interactableField.hierarchy.ElementAt(0);
+            var dropDown = new DropdownField();
+            dropDown.choices = GetInteractableTypeNames();
+            dropDown.style.width = 87;
+            dropDown.style.flexShrink = 0;
+            dropDown.RegisterValueChangedCallback(HandleDropDownValueChanged);
+            
+            interactableToggle.hierarchy.Insert(1, dropDown);
+            interactableToggle.hierarchy.ElementAt(0).style.width = 69;
+            interactableToggle.hierarchy.ElementAt(0).style.minWidth = 20;
+            interactableToggle.hierarchy.ElementAt(0).style.marginRight = 0;
+        }
+
+        private void HandleDropDownValueChanged(ChangeEvent<string> evt)
+        {
+            dropDownValue = evt.newValue;
+            interactableToggle.value = false;
+            interactableToggle.value = true;
         }
 
         private VisualElement CreateNameField()
         {
             var nameTextField = new TextField("Interaction Name");
             nameTextField.value = interactionName;
+            nameTextField.style.marginBottom = 10;
+            nameTextField.style.marginTop = 10;
+            nameTextField.style.width = 400;
+            
             nameTextField.RegisterValueChangedCallback(evt => interactionName = evt.newValue);
             return nameTextField;
         }
@@ -215,28 +333,28 @@ namespace Editor
                     flexDirection = FlexDirection.Row
                 }
             };
-
-            Foldout inspectorFoldout = null;
-
+            
+            
             if(toggleHandler != null)
             {
-                container.Add(CreateFieldToggle(toggleLabel, toggleHandler));
-                inspectorFoldout = CreateInspectorFoldout();
+                var toggle = CreateFieldToggle(toggleLabel, toggleHandler);
+                container.Add(toggle);
+                container.Add(CreateSOField(soType, soPropertyName, toggle));
             }
 
-            container.Add(CreateSOField(soType, soPropertyName, inspectorFoldout));
-
-            if(inspectorFoldout != null)
-            {
-                container.Add(inspectorFoldout);
-            }
+            else
+                container.Add(CreateSOField(soType, soPropertyName));
 
             return container;
         }
 
         private VisualElement CreateCreatorButton()
         {
-            var button = new Button{text = "Create Interaction"};
+            var button = new Button{text = "Create"};
+            button.style.width = 150;
+            button.style.marginTop = 10;
+            button.style.alignSelf = Align.Center;
+            
             button.clicked += () => OnCreateInteractionClicked();
             return button;
         }
@@ -245,9 +363,9 @@ namespace Editor
         {
             var interactionFieldToggle = new Toggle(label);
             {
-                interactionFieldToggle.style.width = 160;
+                interactionFieldToggle.style.width = 180;
                 interactionFieldToggle.style.alignItems = Align.FlexStart;
-                interactionFieldToggle.labelElement.style.width = 140;
+                interactionFieldToggle.labelElement.style.width = 160;
                 interactionFieldToggle.style.marginTop = 5;
             }
             
@@ -256,21 +374,36 @@ namespace Editor
             return interactionFieldToggle;
         }
 
-        private ObjectField CreateSOField(Type type, string propertyName, Foldout inspectorFoldout)
+        private ObjectField CreateSOField(Type type, string propertyName, Toggle toggle = null)
         {
-            var interactionField = new ObjectField
+            var soField = new ObjectField
             {
                 objectType = type,
                 style = { width = 270, height = 22, flexGrow = 0f, flexShrink = 0f }
             };
             
             var soProp = editor.FindProperty(propertyName);
+            soField.RegisterValueChangedCallback(evt => CreateInspector(soProp));
+
+            if (toggle != null)
+                soField.RegisterValueChangedCallback(evt => { toggle.value = evt.newValue != null; });
             
-            interactionField.RegisterValueChangedCallback(evt => HandleSoFieldChanged(type, evt, inspectorFoldout, propertyName));
+            soField.BindProperty(soProp);
+
+            soField.RegisterCallback<FocusEvent>((evt => { CreateInspector(soProp); })) ;
             
-            interactionField.BindProperty(soProp);
+            return soField;
+        }
+
+        private void CreateInspector(SerializedProperty soProp)
+        {
+            InspectorElement inspector;
             
-            return interactionField;
+            inspector = soProp != null ? new InspectorElement(soProp.objectReferenceValue) : new InspectorElement();
+            
+            // inspector.BindProperty(soProp);
+            inspectorContainer.Clear();
+            inspectorContainer.Add(inspector);
         }
 
         private Foldout CreateInspectorFoldout()
@@ -281,7 +414,8 @@ namespace Editor
                 style =
                 {
                     marginLeft = 20,
-                    width = 250
+                    // width = 250
+                    flexGrow = 1 
                 }
             };
 
@@ -306,6 +440,9 @@ namespace Editor
             }
             else
             {
+                if (interactionData == null)
+                    return;
+                
                 if(interactionData.name == interactionName + "Interaction")
                     interactionData = null;
             }
@@ -315,11 +452,23 @@ namespace Editor
         {
             if (evt.newValue)
             {
-                interactableState = CreateInstance<InteractableState>();
-                interactableState.name = interactionName;
+                switch (dropDownValue)
+                {
+                    case "Interaction":
+                        interactableState = CreateInstance<InteractableState>();
+                        break;
+                    case "Toggleable":
+                        interactableState = CreateInstance<Toggleable>();
+                        break;
+                }
+                
+                interactableState.name = interactionName + "Interactable";
             }
             else
             {
+                if(interactableState == null)
+                    return;
+
                 if(interactableState.name == interactionName)
                     interactableState = null;
             }
@@ -334,70 +483,66 @@ namespace Editor
             }
             else
             {
+                if(dialogTree == null)
+                    return;
+
                 if(dialogTree.name == interactionName + "Dialog")
                     dialogTree = null;
             }
         }
 
-        private void HandleCreateReactionToggled(ChangeEvent<bool> evt)
+        private void HandleCreateSuccessReactionToggled(ChangeEvent<bool> evt)
         {
             if (evt.newValue)
             {
                 successReaction = CreateInstance<Reaction>();
-                successReaction.name = interactionName + "Reaction";
+                successReaction.name = interactionName + "SuccessReaction";
             }
             else
             {
-                if(successReaction.name == interactionName + "Reaction")
+                if(successReaction == null)
+                    return;
+                
+                if(successReaction.name == interactionName + "SuccessReaction")
                     successReaction = null;
             }
         }
-
-        private void HandleSoFieldChanged(Type type, ChangeEvent<Object> evt, Foldout inspectorFoldout,
-            string propertyName)
+        
+        private void HandleCreateFailureReactionToggled(ChangeEvent<bool> evt)
         {
-            if (evt.newValue == null)
+            if (evt.newValue)
             {
-                if (type == typeof(InteractionData))
-                    interactionData = null;
-                else if (type == typeof(InteractableState))
-                    interactableState = null;
-                else if (type == typeof(DialogTree))
-                    dialogTree = null;
-                else if (type == typeof(Reaction))
-                    successReaction = null;
-                return;
+                failureReaction = CreateInstance<Reaction>();
+                failureReaction.name = interactionName + "FailureReaction";
             }
-
-            switch (evt.newValue)
+            else
             {
-                case InteractionData data:
-                    interactionData = data;
-                    break;
-                case InteractableState state:
-                    interactableState = state;
-                    break;
-                case DialogTree tree:
-                    dialogTree = tree;
-                    break;
-                case Reaction react:
-                    successReaction = react;
-                    break;
+                if(failureReaction == null)
+                    return;
+                
+                if(failureReaction.name == interactionName + "FailureReaction")
+                    failureReaction = null;
             }
-
-            
-            if(inspectorFoldout != null)
-            {
-                inspectorFoldout.Clear();
-                inspectorFoldout.Add(CreateSoInspector(propertyName));
-                inspectorFoldout.value = false;
-            }
-
-            // EditorUtility.SetDirty(interactionData);
-            // editor.ApplyModifiedProperties();
-            // Repaint();
         }
-
+        
         #endregion
+
+        private List<string> GetInteractableTypeNames()
+        {
+            List<string> names = new();
+            
+            names.Add("Interaction");
+            names.Add("Toggleable");
+            
+            // var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            // var interactableTypes = assembly.GetTypes().Where(t => typeof(InteractableState).IsAssignableFrom(t));
+            // foreach (var type in interactableTypes)
+            // {
+            //     names.Add(type == typeof(InteractableState) ? "Interactable" : type.ToString());
+            // }
+            
+            return names;
+
+        }
     }
 }

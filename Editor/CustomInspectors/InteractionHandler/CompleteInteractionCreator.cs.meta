@@ -1,3 +1,20 @@
 fileFormatVersion: 2
 guid: 66341741766d4047b1ff182ae2bd292f
-timeCreated: 1762530983
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - interactionData: {instanceID: 0}
+  - interactableState: {instanceID: 0}
+  - successReaction: {instanceID: 0}
+  - failureReaction: {instanceID: 0}
+  - dialogTree: {instanceID: 0}
+  - interactionToExecute: {instanceID: 0}
+  - triggeringInteractable: {instanceID: 0}
+  - viewer: {fileID: 11400000, guid: 4455d36fc78104a33834ae22785169d4, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

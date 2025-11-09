@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Runtime.Scripts.Core
 {
     [Serializable]
-    public record PrerequisiteRecord()
+    public record PrerequisiteRecord ()
     {
         public InteractionData InteractionToExecute;
         public DialogOptionNode DialogOptionToUnlock;
