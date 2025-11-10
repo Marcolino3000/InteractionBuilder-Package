@@ -59,12 +59,26 @@ namespace Editor.CustomInspectors
                 // triggeringInteractableField.style.width = 150;
                 triggeringInteractableField.BindProperty(trigger.FindPropertyRelative("TriggeringInteractable"));
                 
+                var currentIndex = i;
+                var deleteButton = new Button(() =>
+                {
+                    triggerToPrerequisites.DeleteArrayElementAtIndex(currentIndex);
+                    serializedObject.ApplyModifiedProperties();
+                    // Recreate the inspector GUI
+                    root.Clear();
+                    var newInspector = CreateInspectorGUI();
+                    root.Add(newInspector);
+                });
+                deleteButton.style.height = 25;
+                deleteButton.text = "Delete";
+                
                 var triggerFoldout = new Foldout();
                 triggerFoldout.text = "Interactions: ";
                 triggerFoldout.style.marginLeft = 20;
                 
                 triggerContainer.Add(triggerTypeLabel);
                 triggerContainer.Add(triggeringInteractableField);
+                triggerContainer.Add(deleteButton);
                 
                 triggerFoldoutContainer.Add(triggerContainer);
                 triggerFoldoutContainer.Add(triggerFoldout);

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3644008479422618554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: 3dfbbe565112248a49893369a32397a1
+  Position: {x: 816.8572, y: 611.1429}
+  Blackboard:
+    CharacterData: {fileID: 0}
+  DialogLine: AAAAAAAAAAAAA
+  TextPreview: AAAAAAAAAAAAA
+  Children: []
+  FallThrough: 0
+  IsAvailable: 1
+  RequiredNodes: []
+  BlockerNodes: []
+  answerVibe: 0
+  _popularityModifier: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86e6013fb5415d9fc88ab06a37cd42, type: 3}
+  m_Name: AAAAAADialog
+  m_EditorClassIdentifier: DialogBuilder::Tree.DialogTree
+  StartNodes:
+  - {fileID: -3644008479422618554}
+  nodes:
+  - {fileID: -3644008479422618554}
+  Blackboard:
+    CharacterData: {fileID: 0}

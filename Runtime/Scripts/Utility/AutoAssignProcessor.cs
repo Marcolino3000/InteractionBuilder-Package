@@ -11,6 +11,7 @@ namespace Runtime.Scripts.Utility
         static AutoAssignProcessor()
         {
             EditorApplication.delayCall += AssignReferences;
+            EditorApplication.projectChanged += AssignReferences;
         }
 
         [InitializeOnLoadMethod]

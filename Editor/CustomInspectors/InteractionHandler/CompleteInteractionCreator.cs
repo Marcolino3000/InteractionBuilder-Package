@@ -44,6 +44,7 @@ namespace Editor
         private string nameOfLastCreatedInteraction;
         private Button deleteButton;
         private string dropDownValue;
+        private string nameOfLastCreatedInteractable;
 
         [MenuItem("Tools/Interaction Creator")]
         public static void ShowWindow()
@@ -74,10 +75,10 @@ namespace Editor
                 AssetDatabase.CreateAsset(interactionData, assetPath + "InteractionData/" + interactionName + "Data.asset");
             }
             
-            if (interactableState != null)
-            {
-                AssetDatabase.CreateAsset(interactableState, assetPath + "Interactables/" + interactionName + "Interactable.asset");
-            }
+            // if (interactableState != null)
+            // {
+            //     AssetDatabase.CreateAsset(interactableState, assetPath + "Interactables/" + interactionName + "Interactable.asset");
+            // }
             
             if (successReaction != null)
             {
@@ -172,6 +173,11 @@ namespace Editor
             root.Add(container);
 
             root.Add(CreateInspectorContainer(null));
+            
+            foreach (var element in InteractionPrerequisiteElements)
+            {
+                element.SetEnabled(false);
+            }
         }
 
         private VisualElement CreateDeleteButton()
@@ -316,6 +322,7 @@ namespace Editor
             
             interactionToExecute = interactionData;
             triggeringInteractable = interactableState;
+            conditions = new List<OwnerWithSettings>();
         }
 
         private VisualElement CreateScriptableObjectFields()
@@ -507,10 +514,15 @@ namespace Editor
                         break;
                 }
                 
+                
+                AssetDatabase.CreateAsset(interactableState, assetPath + "Interactables/" + interactionName + "Interactable.asset");
+                nameOfLastCreatedInteractable = interactionName;
                 interactableState.name = interactionName + "Interactable";
             }
             else
             {
+                AssetDatabase.DeleteAsset(assetPath + "Interactables/" + nameOfLastCreatedInteractable + "Interactable.asset");
+                
                 if(interactableState == null)
                     return;
 

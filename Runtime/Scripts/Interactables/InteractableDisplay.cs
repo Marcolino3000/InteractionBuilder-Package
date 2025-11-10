@@ -19,8 +19,11 @@ namespace Runtime.Scripts.Interactables
         {
             root = GetComponent<UIDocument>().rootVisualElement;
             
-            backgroundImage = new StyleBackground(interactable.Data.Sprite);
-            root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
+            if(interactable.Data.Sprite != null)
+            {
+                backgroundImage = new StyleBackground(interactable.Data.Sprite);
+                root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
+            }
 
             // triggerArea.OnPlayerEntered += (PlayerController) => 
             // {
