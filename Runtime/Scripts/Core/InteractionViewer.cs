@@ -46,6 +46,7 @@ namespace Runtime.Scripts.Core
             // interactions.Add(new Interaction(interactionName, highPriority, trigger, record));
             
             AddToList(trigger, record, interactionName, highPriority);
+            
         }
 
         private void AddToList(Trigger newTrigger, PrerequisiteRecord record, string interactionName, bool highPriority)

@@ -2,6 +2,7 @@ using System;
 using Runtime.Scripts.Core;
 using Runtime.Scripts.PlayerInput;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Runtime.Scripts.Interactables
 {
@@ -14,6 +15,8 @@ namespace Runtime.Scripts.Interactables
 
         [SerializeField] private float triggerAreaRadius = 0.5f;
         public InteractableState Data;
+        
+        public bool Found;
         
         [SerializeField] private SphereCollider _collider;
         
@@ -89,6 +92,15 @@ namespace Runtime.Scripts.Interactables
             if(_interactableDiscoveredCallback != null)
                 _interactableDisplay.MarkAsFound();
             
+            _interactableDiscoveredCallback = null;
+        }
+
+        public void Interact()
+        {
+            OnInteractionStarted?.Invoke(InteractionTriggerVia.ButtonPress, Data);
+            _interactableDiscoveredCallback?.Invoke(Data);
+            if (_interactableDiscoveredCallback != null)
+                _interactableDisplay.MarkAsFound();
             _interactableDiscoveredCallback = null;
         }
 

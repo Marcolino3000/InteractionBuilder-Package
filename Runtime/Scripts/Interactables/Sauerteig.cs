@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using Nodes.Decorator;
+using Tree;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
@@ -9,7 +11,7 @@ namespace Runtime.Scripts.Interactables
         public AwarenessLevel awarenessLevel;
         public int Activity = 1;
         
-        // [SerializeField] private float radarRadius;
+        [SerializeField] private DialogTreeRunner treeRunner;
         
         private SphereCollider radarCollider;
         
@@ -17,6 +19,29 @@ namespace Runtime.Scripts.Interactables
         private void Awake()
         {
             radarCollider = GetComponent<SphereCollider>();
+            treeRunner.DialogNodeSelected += HandleDialogNodeSelected;
+        }
+
+        private void HandleDialogNodeSelected(DialogOptionNode node)
+        {
+            if (node is PlayerDialogOption playerOption)
+            {
+                switch (playerOption.Type)
+                {
+                    case AnswerType.SmallTalk:
+                        Activity -= 1;
+                        break;
+                    case AnswerType.DeepTalk:
+                        Activity -= 2;
+                        break;
+                    case AnswerType.TrashTalk:
+                        Activity += 1;
+                        break;
+                    case AnswerType.BusinessTalk:
+                        Activity -= 3;
+                        break;
+                }
+            }
         }
 
 
@@ -42,10 +67,10 @@ namespace Runtime.Scripts.Interactables
             switch (interactable.AwarenessLevel)
             {
                 case AwarenessLevel.Basic:
-                    SetActivity(1);
+                    SetActivity(2);
                     break;
                 case AwarenessLevel.Super:
-                    SetActivity(2);
+                    SetActivity(5);
                     break;
             }
         }

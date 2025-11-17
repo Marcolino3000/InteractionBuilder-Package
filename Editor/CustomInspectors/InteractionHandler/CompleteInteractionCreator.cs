@@ -40,6 +40,13 @@ namespace Editor
         [SerializeField] private List<VisualElement> InteractionPrerequisiteElements = new ();
         
         [SerializeField] private InteractionViewer viewer;
+
+        private bool createInteractionData;
+        private bool createInteractable;
+        private bool createDialogTree;
+        private bool createSuccessReaction;
+        private bool createFailureReaction;
+        
         private string assetPath = "Packages/com.marc.interactionbuilder/Resources/ScriptableObjects/";
         private string nameOfLastCreatedInteraction;
         private Button deleteButton;
@@ -70,9 +77,9 @@ namespace Editor
                 successReaction.DialogTree = dialogTree;
             }
             
-            if (interactionData != null)
+            if (interactionData != null && createInteractionData)
             {
-                AssetDatabase.CreateAsset(interactionData, assetPath + "InteractionData/" + interactionName + "Data.asset");
+                AssetDatabase.CreateAsset(interactionData, assetPath + "InteractionData/" + interactionName + "InteractionData.asset");
             }
             
             // if (interactableState != null)
@@ -80,17 +87,17 @@ namespace Editor
             //     AssetDatabase.CreateAsset(interactableState, assetPath + "Interactables/" + interactionName + "Interactable.asset");
             // }
             
-            if (successReaction != null)
+            if (successReaction != null && createSuccessReaction)
             {
                 AssetDatabase.CreateAsset(successReaction, assetPath + "Reactions/" + interactionName + "SuccessReaction.asset");
             }
             
-            if (failureReaction != null)
+            if (failureReaction != null && createFailureReaction)
             {
                 AssetDatabase.CreateAsset(failureReaction, assetPath + "Reactions/" + interactionName + "FailureReaction.asset");
             }
             
-            if (dialogTree != null)
+            if (dialogTree != null && createDialogTree)
             {
                 AssetDatabase.CreateAsset(dialogTree, assetPath + "Dialog/" + interactionName + "Dialog.asset");
             }
@@ -126,16 +133,30 @@ namespace Editor
             }
                 
             var trigger = new Trigger(triggerType, triggeringInteractable);
-            
-            viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
-            
+
+            // viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
+            SerializedObject viewerSerializedObject = new SerializedObject(viewer);
+
+            var list = viewerSerializedObject.FindProperty("triggerToPrerequisites");
+            var field = new PropertyField();
+            field.BindProperty(list);
+            list.InsertArrayElementAtIndex(list.arraySize);
+            list.GetArrayElementAtIndex(list.arraySize - 1).boxedValue =
+                new TriggerToPrereqs(trigger, new List<PrereqNamePriority> { new (record, interactionName, false) });
+
+            viewerSerializedObject.ApplyModifiedProperties();
+            viewerSerializedObject.Update();
+
+            EditorUtility.SetDirty(viewer);
+            AssetDatabase.SaveAssets();
+
             nameOfLastCreatedInteraction = interactionName;
             deleteButton.SetEnabled(true);
         }
 
         private void DeleteNewlyCreatedAssets()
         {
-            AssetDatabase.DeleteAsset(assetPath + "InteractionData/" + nameOfLastCreatedInteraction + "Data.asset");
+            AssetDatabase.DeleteAsset(assetPath + "InteractionData/" + nameOfLastCreatedInteraction + "InteractionData.asset");
             AssetDatabase.DeleteAsset(assetPath + "Interactables/" + nameOfLastCreatedInteraction + "Interactable.asset");
             AssetDatabase.DeleteAsset(assetPath + "Reactions/" + nameOfLastCreatedInteraction + "SuccessReaction.asset");
             AssetDatabase.DeleteAsset(assetPath + "Reactions/" + nameOfLastCreatedInteraction + "FailureReaction.asset");
@@ -485,6 +506,8 @@ namespace Editor
 
         private void HandleCreateInteractionDataToggled(ChangeEvent<bool> evt)
         {
+            createInteractionData = evt.newValue;
+            
             if (evt.newValue)
             {
                 interactionData = CreateInstance<InteractionData>();
@@ -502,6 +525,8 @@ namespace Editor
 
         private void HandleCreateInteractableDataToggled(ChangeEvent<bool> evt)
         {
+            createInteractable = evt.newValue;
+            
             if (evt.newValue)
             {
                 switch (dropDownValue)
@@ -533,6 +558,8 @@ namespace Editor
 
         private void HandleCreateDialogTreeToggled(ChangeEvent<bool> evt)
         {
+            createDialogTree = evt.newValue;
+            
             if (evt.newValue)
             {
                 dialogTree = CreateInstance<DialogTree>();
@@ -550,6 +577,8 @@ namespace Editor
 
         private void HandleCreateSuccessReactionToggled(ChangeEvent<bool> evt)
         {
+            createSuccessReaction = evt.newValue;
+            
             if (evt.newValue)
             {
                 successReaction = CreateInstance<Reaction>();
@@ -567,6 +596,8 @@ namespace Editor
         
         private void HandleCreateFailureReactionToggled(ChangeEvent<bool> evt)
         {
+            createFailureReaction = evt.newValue;
+            
             if (evt.newValue)
             {
                 failureReaction = CreateInstance<Reaction>();

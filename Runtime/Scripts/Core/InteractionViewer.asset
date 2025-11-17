@@ -23,8 +23,11 @@ MonoBehaviour:
         DialogOptionToUnlock: {fileID: 0}
         TriggerType: 2
         TriggeringInteractable: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
-        Conditions: []
-      Name: KeyInteractionData
+        Conditions:
+        - RecordedState:
+            rid: 7734685230184530355
+          IsHardCondition: 0
+      Name: Key
       HighPriority: 0
   - Trigger:
       TriggerType: 2
@@ -37,16 +40,46 @@ MonoBehaviour:
         TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
         Conditions:
         - RecordedState:
-            rid: 7734685136613802505
+            rid: 7734685230184530367
           IsHardCondition: 0
-      Name: DoorInteractionData
+      Name: Door
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
+        Conditions: []
+      Name: Scene2-Paul
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 88b3f975295dc49359d9e5681490041c, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: da159c790547c467bba8889760a0adc4, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 88b3f975295dc49359d9e5681490041c, type: 2}
+        Conditions: []
+      Name: SpawnPaul
       HighPriority: 0
   references:
     version: 2
     RefIds:
-    - rid: 7734685136613802505
+    - rid: 7734685230184530355
       type: {class: Toggleable/ToggleableStateDate, ns: Runtime.Scripts.Interactables, asm: InteractionBuilder}
       data:
         Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
         Name: Key
         ToggleState: 0
+    - rid: 7734685230184530367
+      type: {class: Toggleable/ToggleableStateDate, ns: Runtime.Scripts.Interactables, asm: InteractionBuilder}
+      data:
+        Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
+        Name: Key
+        ToggleState: 1

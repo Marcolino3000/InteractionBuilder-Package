@@ -1,25 +1,29 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 namespace Runtime.Scripts.Interactables
 {
-    public class InteractableDisplay : MonoBehaviour
+    public class InteractableDisplay : MonoBehaviour, IPointerEnterHandler
     {
         [SerializeField] private Interactable interactable;
         [SerializeField] private TriggerArea triggerArea;
         [SerializeField] private float fadeDuration = 0.5f;
         [SerializeField] private float opacity = 0.7f;
+        [SerializeField] private float cooldownBetweenHovers = 3f;
 
         private float currentFadeTime;
         private StyleBackground backgroundImage;
         private VisualElement root;
+        private bool cooldownActive;
 
         private void Awake()
         {
             root = GetComponent<UIDocument>().rootVisualElement;
-            
-            if(interactable.Data.Sprite != null)
+
+            if (interactable.Data.Sprite != null)
             {
                 backgroundImage = new StyleBackground(interactable.Data.Sprite);
                 root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
@@ -32,7 +36,29 @@ namespace Runtime.Scripts.Interactables
             //
             // triggerArea.OnPlayerExited += Hide;
 
-            StartCoroutine(FadeIcon(false));
+            Hide();
+        }
+        
+        public void TriggerHoverEffect()
+        {
+            if (cooldownActive) 
+                return;
+            
+            StartCoroutine(StartCooldownCoroutine());
+            StartCoroutine(QuickFadeInAndOut());
+        }
+        
+        private IEnumerator StartCooldownCoroutine()
+        {
+            cooldownActive = true;
+            yield return new WaitForSeconds(cooldownBetweenHovers);
+            cooldownActive = false;
+        }
+
+        public IEnumerator QuickFadeInAndOut()
+        {
+            yield return FadeIcon(true);
+            yield return FadeIcon(false);
         }
 
         public void Hide()
@@ -82,5 +108,10 @@ namespace Runtime.Scripts.Interactables
         {
             root.Query<VisualElement>("icon").First().style.backgroundColor = Color.green; 
         }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            UnityEngine.Debug.Log("pointer");
+        }    
     }
 }

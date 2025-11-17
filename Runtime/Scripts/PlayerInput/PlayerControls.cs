@@ -127,6 +127,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClickObject"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4d5435c-d05d-4a1d-9a1b-73ba629a616c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -272,6 +281,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ActivateRadar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""758932ec-8cd8-4ea0-8dfd-68d566c47de0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -302,6 +322,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_ToggleMap = m_Gameplay.FindAction("ToggleMap", throwIfNotFound: true);
         m_Gameplay_ActivateRadar = m_Gameplay.FindAction("ActivateRadar", throwIfNotFound: true);
+        m_Gameplay_ClickObject = m_Gameplay.FindAction("ClickObject", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -389,6 +410,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_ToggleMap;
     private readonly InputAction m_Gameplay_ActivateRadar;
+    private readonly InputAction m_Gameplay_ClickObject;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -416,6 +438,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/ActivateRadar".
         /// </summary>
         public InputAction @ActivateRadar => m_Wrapper.m_Gameplay_ActivateRadar;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/ClickObject".
+        /// </summary>
+        public InputAction @ClickObject => m_Wrapper.m_Gameplay_ClickObject;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -454,6 +480,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ActivateRadar.started += instance.OnActivateRadar;
             @ActivateRadar.performed += instance.OnActivateRadar;
             @ActivateRadar.canceled += instance.OnActivateRadar;
+            @ClickObject.started += instance.OnClickObject;
+            @ClickObject.performed += instance.OnClickObject;
+            @ClickObject.canceled += instance.OnClickObject;
         }
 
         /// <summary>
@@ -477,6 +506,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ActivateRadar.started -= instance.OnActivateRadar;
             @ActivateRadar.performed -= instance.OnActivateRadar;
             @ActivateRadar.canceled -= instance.OnActivateRadar;
+            @ClickObject.started -= instance.OnClickObject;
+            @ClickObject.performed -= instance.OnClickObject;
+            @ClickObject.canceled -= instance.OnClickObject;
         }
 
         /// <summary>
@@ -643,6 +675,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnActivateRadar(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ClickObject" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClickObject(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

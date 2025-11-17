@@ -8,6 +8,7 @@ namespace Runtime.Scripts.PlayerInput
     {
         [SerializeField] private PlayerController playerController;
         [SerializeField] private Sauerteig sauerteig;
+        [SerializeField] private Raycaster raycaster;
         // [SerializeField] private MapHandler mapHandler;
         
         private void OnMove(InputValue value)
@@ -28,6 +29,11 @@ namespace Runtime.Scripts.PlayerInput
         private void OnActivateRadar()
         {
             sauerteig.ActivateRadar();
+        }
+
+        private void OnClickObject()
+        {
+            raycaster.HandleMouseClick();
         }
     }
 }

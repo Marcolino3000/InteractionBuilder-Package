@@ -18,6 +18,7 @@ namespace Editor.CustomInspectors
 
         public override VisualElement CreateInspectorGUI()
         {
+            EditorApplication.projectChanged += TriggerRepaint;
             var root = new VisualElement();
 
             var viewer = (InteractionViewer)target;
@@ -32,10 +33,12 @@ namespace Editor.CustomInspectors
 
             string triggerToPrereqsName = nameof(viewer.triggerToPrerequisites);
             SerializedProperty triggerToPrerequisites = serializedObject.FindProperty(triggerToPrereqsName);
-            var triggerToPrereqsField = new ObjectField();
+            var triggerToPrereqsField = new PropertyField();
             triggerToPrereqsField.BindProperty(triggerToPrerequisites);
-            triggerToPrereqsField.RegisterValueChangedCallback(TriggerRepaint);
-
+            // triggerToPrereqsField.RegisterValueChangeCallback(TriggerRepaint);
+            
+            root.Add(triggerToPrereqsField);
+            
             for (int i = 0; i < triggerToPrerequisites.arraySize; i++)
             {
                 var triggerFoldoutContainer = new VisualElement();
@@ -89,7 +92,7 @@ namespace Editor.CustomInspectors
                 
                 for (int j = 0; j < prereqs.arraySize; j++)
                 {
-                    var row =AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.marc.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();
+                    var row = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.marc.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();
                     row.style.marginBottom = 15;
                     
                     SerializedProperty prereq = prereqs.GetArrayElementAtIndex(j);
@@ -117,7 +120,7 @@ namespace Editor.CustomInspectors
                     SerializedProperty conditions = prereq.FindPropertyRelative("Record").FindPropertyRelative("Conditions");
                     
                     conditionsField.BindProperty(conditions);
-                    conditionsField.RegisterValueChangeCallback(TriggerRepaint);
+                    // conditionsField.RegisterValueChangeCallback(TriggerRepaint);
 
                     var conditionsFoldout = new Foldout();
                     
@@ -157,11 +160,12 @@ namespace Editor.CustomInspectors
             return root ;
         }
 
-        private void TriggerRepaint(Object evt)
+        private void TriggerRepaint()
         {
-            // EditorUtility.SetDirty(this);
-            // Repaint();
-            // serializedObject.Update();
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(target);
+            Repaint();
+            // Debug.Log("repaint called");
         }
 
         private VisualElement CreateHandlerObjectField()
@@ -186,25 +190,5 @@ namespace Editor.CustomInspectors
             separator.style.borderTopRightRadius = 2;
             return separator;
         }
-
-//         protected void OnEnable()
-//         {
-// #if UNITY_2021_1_OR_NEWER
-//             UnityEditor.EditorApplication.projectChanged += OnProjectChanged;
-// #endif
-//         }
-//
-//         protected void OnDisable()
-//         {
-// #if UNITY_2021_1_OR_NEWER
-//             UnityEditor.EditorApplication.projectChanged -= OnProjectChanged;
-// #endif
-//         }
-//
-//         private void OnProjectChanged()
-//         {
-//             // Repaint if the asset is reimported/changed externally
-//             Repaint();
-//         }
     }
 }
