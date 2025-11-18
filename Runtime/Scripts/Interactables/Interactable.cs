@@ -79,6 +79,9 @@ namespace Runtime.Scripts.Interactables
 
         private void UnsubscribeFromPlayerInteraction()
         {
+            if(_player == null)
+                return;
+            
             _player.OnInteractionTriggered -= HandlePlayerTriggeredInteraction;
             _player = null;
         }
@@ -92,15 +95,6 @@ namespace Runtime.Scripts.Interactables
             if(_interactableDiscoveredCallback != null)
                 _interactableDisplay.MarkAsFound();
             
-            _interactableDiscoveredCallback = null;
-        }
-
-        public void Interact()
-        {
-            OnInteractionStarted?.Invoke(InteractionTriggerVia.ButtonPress, Data);
-            _interactableDiscoveredCallback?.Invoke(Data);
-            if (_interactableDiscoveredCallback != null)
-                _interactableDisplay.MarkAsFound();
             _interactableDiscoveredCallback = null;
         }
 

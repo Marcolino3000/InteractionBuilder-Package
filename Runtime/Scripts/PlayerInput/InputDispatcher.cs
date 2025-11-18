@@ -11,6 +11,19 @@ namespace Runtime.Scripts.PlayerInput
         [SerializeField] private Raycaster raycaster;
         // [SerializeField] private MapHandler mapHandler;
         
+        // private InputAction leftMouseClick;
+        //
+        // private void Awake() 
+        // {
+        //     leftMouseClick = new InputAction(binding: "<Mouse>/leftButton");
+        //     leftMouseClick.performed += ctx => LeftMouseClicked();
+        //     leftMouseClick.Enable();
+        // }
+        //
+        // private void LeftMouseClicked() 
+        // {
+        //     raycaster.HandleMouseClick();
+        // }
         private void OnMove(InputValue value)
         {
             playerController.OnMove(value);
@@ -33,6 +46,7 @@ namespace Runtime.Scripts.PlayerInput
 
         private void OnClickObject()
         {
+            Debug.Log("OnClick");
             raycaster.HandleMouseClick();
         }
     }

@@ -68,6 +68,18 @@ MonoBehaviour:
         Conditions: []
       Name: SpawnPaul
       HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 3cccce6c0c50e4ae2abf5322f6c19ce6, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 366b07b77a02849438126c8695c2064e, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 3cccce6c0c50e4ae2abf5322f6c19ce6, type: 2}
+        Conditions: []
+      Name: TalkToHilde
+      HighPriority: 0
   references:
     version: 2
     RefIds:

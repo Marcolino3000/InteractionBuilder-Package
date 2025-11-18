@@ -22,9 +22,36 @@ MonoBehaviour:
   - {fileID: 6149938990970406345}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
+--- !u!114 &-6193938620315138434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
+  m_Name: '*SAUERTEIG MIT H...'
+  m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
+  Guid: aed0f77ee88124d238f5270aade4616c
+  Position: {x: 1693.1997, y: 860.00006}
+  Blackboard:
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
+  DialogLine: '*SAUERTEIG MIT HILDE TEILEN*'
+  TextPreview: '*SAUERTEIG MIT H...'
+  Children: []
+  FallThrough: 0
+  IsAvailable: 1
+  IsTrustOption: 0
+  RequiredNodes: []
+  BlockerNodes: []
+  answerType: 0
+  _popularityModifier: 0
 --- !u!114 &-5552093274568481724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,21 +62,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: PlayerDialogOption
+  m_Name: "*T\xFCr zumachen* h..."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: e65381316552041fc905d3067debfa83
   Position: {x: 1674, y: 220}
   Blackboard:
-    CharacterData: {fileID: 0}
-  DialogLine: "*T\xFCr zumachen*"
-  TextPreview: "*T\xFCr zumachen*"
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
+  DialogLine: "*T\xFCr zumachen* hilde"
+  TextPreview: "*T\xFCr zumachen* h..."
   Children:
   - {fileID: 1915434644692900419}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-5429559887749138470
 MonoBehaviour:
@@ -74,6 +102,7 @@ MonoBehaviour:
   Children: []
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -92,17 +121,18 @@ MonoBehaviour:
   Guid: 54602903f2f6e4cbfa4d6bdf6e9f31d2
   Position: {x: 1364.0001, y: 542}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Woher kennst du meine Mutter?
   TextPreview: Woher kennst du ...
   Children:
   - {fileID: 6672911882890037600}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 1
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 2
-  _popularityModifier: -5
+  answerType: 0
+  _popularityModifier: 0
 --- !u!114 &-3274434093672825564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,22 +143,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: PlayerDialogOption
+  m_Name: Wer bist duu?
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: abc8470ed206b40cfa362257c32acf20
   Position: {x: 1054.2858, y: 220}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Wer bist duu?
   TextPreview: Wer bist duu?
   Children:
   - {fileID: 1915434644692900419}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
-  _popularityModifier: 0
+  answerType: 1
+  _popularityModifier: 5
 --- !u!114 &-2936574265893300219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,9 +182,10 @@ MonoBehaviour:
   - {fileID: -6320785389069112557}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-1504807962209174944
 MonoBehaviour:
@@ -177,9 +209,10 @@ MonoBehaviour:
   - {fileID: -5429559887749138470}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -214,6 +247,7 @@ MonoBehaviour:
   - {fileID: -2936574265893300219}
   - {fileID: -6320785389069112557}
   - {fileID: 6149938990970406345}
+  - {fileID: -6193938620315138434}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
 --- !u!114 &1915434644692900419
@@ -231,7 +265,7 @@ MonoBehaviour:
   Guid: 92f30844cabea4a9dbcb51b5cfd8d51b
   Position: {x: 1364, y: 371.7506}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: 'Ahhhhh dahana hedd sich der kloi Ganove verschdeggd!
 
     Vo dainr
@@ -243,6 +277,7 @@ MonoBehaviour:
   - {fileID: 3002424332067101770}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -256,12 +291,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
-  m_Name: NpcDialogOption
+  m_Name: Ah wie foi, dess...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 5cd6c37eac3fa480891c87004d42048d
   Position: {x: 1363.7142, y: 74.85715}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "Ah wie foi, dess i di dreff! Du, i muss dir unbedingd was geba.\nDa
     heb mol.\nAlso was wichdich isch, isch dess du ihn jeda Dag f\xFCdderschd - wo
     isch er noh jedzd??"
@@ -272,6 +307,7 @@ MonoBehaviour:
   - {fileID: -5552093274568481724}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -290,16 +326,17 @@ MonoBehaviour:
   Guid: 09a84881cd5464238a28256bb8dba87e
   Position: {x: 1674, y: 542}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "*T\xFCr zumachen*"
   TextPreview: "*T\xFCr zumachen*"
   Children:
   - {fileID: 6672911882890037600}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &5610354696499689273
 MonoBehaviour:
@@ -316,17 +353,18 @@ MonoBehaviour:
   Guid: b5652b70c667b401589cfbd8d0f46af5
   Position: {x: 1054, y: 542}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Wer bist duu?
   TextPreview: Wer bist duu?
   Children:
   - {fileID: 6672911882890037600}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 1
-  _popularityModifier: 5
+  answerType: 0
+  _popularityModifier: 0
 --- !u!114 &5805510002860701490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,9 +387,10 @@ MonoBehaviour:
   - {fileID: 6114419220264409788}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &6114419220264409788
 MonoBehaviour:
@@ -368,7 +407,7 @@ MonoBehaviour:
   Guid: a142a0bff974f471987bc96e5065de93
   Position: {x: 1364, y: 995}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "Achso, dai Muadr, die isch dod. \nNa gnau, gibschd hald druffachd,
     dess ned zu warm, ned zu kaldisch d\xE4m Sauerdeig\u2026"
   TextPreview: Achso, dai Muadr...
@@ -377,6 +416,7 @@ MonoBehaviour:
   - {fileID: -2936574265893300219}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes:
   - {fileID: -3792276879913639869}
   BlockerNodes: []
@@ -403,9 +443,10 @@ MonoBehaviour:
   - {fileID: -5429559887749138470}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &6572589700257331057
 MonoBehaviour:
@@ -429,9 +470,10 @@ MonoBehaviour:
   - {fileID: 7345349763600981903}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &6672911882890037600
 MonoBehaviour:
@@ -448,14 +490,16 @@ MonoBehaviour:
   Guid: 8ad8f68af2f1c4d558470bfec2e0c95f
   Position: {x: 1363.9999, y: 718.7143}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Also wie gsagd.... Soll i's dir lieber ufschreiba?
   TextPreview: Also wie gsagd.....
   Children:
   - {fileID: 6572589700257331057}
   - {fileID: 5805510002860701490}
+  - {fileID: -6193938620315138434}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -474,7 +518,7 @@ MonoBehaviour:
   Guid: dc0288f54023c4ec49f9bb80b030c8e0
   Position: {x: 1054, y: 994.99994}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: 'I bin die Hild! Kennsch mi nemme?
 
     Die beschde Freindin vo dainr
@@ -483,6 +527,7 @@ MonoBehaviour:
   Children: []
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes:
   - {fileID: 5610354696499689273}
   BlockerNodes: []
@@ -502,14 +547,15 @@ MonoBehaviour:
   Guid: eb4f287d67f4546f68b4054c507f8133
   Position: {x: 1364.0001, y: 220.2857}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Wo ist meine Mutter?
   TextPreview: Wo ist meine Mut...
   Children:
   - {fileID: 1915434644692900419}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0

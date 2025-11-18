@@ -71,12 +71,16 @@ namespace Runtime.Scripts.Interactables
                 if(interactable == null)
                     continue;
                 
+                if(interactable.Found)
+                    continue;
+                
                 if(display == null)
                     continue;
                 
                 if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel)
                 {
                     sauerteig.HandleInteractableDiscovered(interactable.Data);
+                    interactable.Found = true;
                 }
             }
         }

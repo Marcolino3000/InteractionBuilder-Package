@@ -24,6 +24,17 @@ namespace Runtime.Scripts.Interactables
 
         private void HandleDialogNodeSelected(DialogOptionNode node)
         {
+            if (node.Blackboard == null)
+            {
+                Debug.LogWarning("Node-Blackboard was null. Bonding-status was not checked.");
+            }
+
+            else
+            {
+                if(node.Blackboard.CharacterData.BondedWithPlayer)
+                    return;    
+            }
+            
             if (node is PlayerDialogOption playerOption)
             {
                 switch (playerOption.Type)

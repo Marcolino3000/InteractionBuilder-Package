@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using Runtime.Scripts.Interactables;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -57,6 +59,21 @@ namespace Runtime.Scripts.Core
                 interactable.OnInteractionStarted += HandleInteractionTrigger;
                 interactable.OnExitedTriggerArea += HandleInteractionTrigger;
             }
+            
+            // List<CharacterData> characters = new List<CharacterData>();
+            var characterPaths = AssetDatabase.FindAssets("t:CharacterData")
+                .Select(AssetDatabase.GUIDToAssetPath).ToList();
+            
+            foreach (var path in characterPaths)
+            {
+                var character = AssetDatabase.LoadAssetAtPath<CharacterData>(path);
+                character.OnPopularityThresholdReached += () => { HandlePopularityThresholdReached(character); };
+            }
+        }
+
+        private void HandlePopularityThresholdReached(CharacterData characterData)
+        {
+            throw new NotImplementedException();
         }
 
         private void FindEventSystem()
@@ -113,8 +130,7 @@ namespace Runtime.Scripts.Core
                 }
             }
         }
-
-
+        
         public void AddPrerequisite(bool highPriority, Trigger trigger, PrerequisiteRecord prereq)
         {
             if (triggersToPrerequisitesHighPrio == null)

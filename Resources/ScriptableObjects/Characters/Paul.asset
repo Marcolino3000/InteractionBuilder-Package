@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Paul
   m_EditorClassIdentifier: DialogBuilder::Core.CharacterData
   Icon: {fileID: 229522924, guid: 857082fb73f7e452f984ce1ddf98ef26, type: 3}
+  CurrentPopularity: 0
+  TrustThreshold: 1
   BasePopularity: 0
   Influenceability: 0
