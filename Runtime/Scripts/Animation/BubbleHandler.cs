@@ -24,7 +24,11 @@ namespace Runtime.Scripts.Animation
         {
             _currentOptions = options;
             
-            Debug.Log("show dialog options");
+            if (options[0] is PlayerDialogOption { Type: AnswerType.SelfTalk })
+            {
+                OnOptionSelected(0);
+                return;
+            }
             
             for (int i = 0; i < _bubbles.Count && i < options.Length; i++)
             {

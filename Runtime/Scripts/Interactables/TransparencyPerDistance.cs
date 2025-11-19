@@ -11,11 +11,11 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private float colliderRadius;
         [SerializeField] private PlayerController player;
         [SerializeField] private bool playerIsNear;
-        [SerializeField] private Renderer renderer;
+        [SerializeField] private Renderer doorRenderer;
 
         private void OnEnable()
         {
-            renderer = GetComponent<Renderer>();
+            doorRenderer = GetComponent<Renderer>();
             
             triggerArea = gameObject.GetComponentInChildren<TriggerArea>();
             colliderRadius = triggerArea.GetComponent<SphereCollider>().radius;
@@ -66,9 +66,9 @@ namespace Runtime.Scripts.Interactables
 
             float transparency = distance / (colliderRadius * 4f);
 
-            var color = renderer.material.color;
+            var color = doorRenderer.material.color;
             color.a = transparency;
-            renderer.material.color = color;
+            doorRenderer.material.color = color;
         }
     }
 }

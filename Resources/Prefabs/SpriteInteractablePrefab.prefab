@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8561112727511955749}
   - component: {fileID: 9104774367556662495}
   - component: {fileID: 6772914947027453193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 354559813689868856}
   - component: {fileID: 2872073155054400692}
   - component: {fileID: 1617824163739068085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2459043860723191969}
   - component: {fileID: 6223779332585130471}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpriteInteractablePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,4 +245,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable.Interactable
   triggerAreaRadius: 0.5
   Data: {fileID: 0}
+  Found: 0
   _collider: {fileID: 2872073155054400692}

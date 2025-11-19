@@ -9,7 +9,7 @@ namespace Runtime.Scripts.Interactables
     public class Interactable : MonoBehaviour
     {
         public event Action<InteractionTriggerVia, InteractableState> OnEnteredTriggerArea;
-        public event Action<InteractionTriggerVia, InteractableState> OnInteractionStarted;
+        public Action<InteractionTriggerVia, InteractableState> OnInteractionStarted;
         public event Action<InteractionTriggerVia, InteractableState> OnExitedTriggerArea;
         public event Action OnInteractionSuccessful;
 

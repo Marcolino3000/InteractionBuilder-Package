@@ -60,21 +60,20 @@ namespace Runtime.Scripts.Core
                 interactable.OnExitedTriggerArea += HandleInteractionTrigger;
             }
             
-            // List<CharacterData> characters = new List<CharacterData>();
-            var characterPaths = AssetDatabase.FindAssets("t:CharacterData")
-                .Select(AssetDatabase.GUIDToAssetPath).ToList();
-            
-            foreach (var path in characterPaths)
-            {
-                var character = AssetDatabase.LoadAssetAtPath<CharacterData>(path);
-                character.OnPopularityThresholdReached += () => { HandlePopularityThresholdReached(character); };
-            }
+            // var characterPaths = AssetDatabase.FindAssets("t:CharacterData")
+            //     .Select(AssetDatabase.GUIDToAssetPath).ToList();
+            //
+            // foreach (var path in characterPaths)
+            // {
+            //     var character = AssetDatabase.LoadAssetAtPath<CharacterData>(path);
+            //     character.OnPopularityThresholdReached += () => { HandlePopularityThresholdReached(character); };
+            // }
         }
 
-        private void HandlePopularityThresholdReached(CharacterData characterData)
-        {
-            throw new NotImplementedException();
-        }
+        // private void HandlePopularityThresholdReached(CharacterData characterData)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
         private void FindEventSystem()
         {
@@ -97,18 +96,6 @@ namespace Runtime.Scripts.Core
             FindEventSystem();
             SetDialogOptionsAvailability();
         }
-
-        // private void OnEnable()
-        // {
-        //     EditorApplication.playModeStateChanged += mode =>
-        //     {
-        //         if (mode == PlayModeStateChange.EnteredPlayMode)
-        //         {
-        //             Setup();
-        //             
-        //         }
-        //     };
-        // }
 
         private void SetDialogOptionsAvailability()
         {
@@ -166,7 +153,8 @@ namespace Runtime.Scripts.Core
     {
         EnteringTriggerArea,
         ExitingTriggerArea,
-        ButtonPress
+        ButtonPress,
+        TrustThresholdReached
     }
 
     [Serializable]

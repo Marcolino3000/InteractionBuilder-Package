@@ -23,6 +23,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -48,10 +49,11 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 1
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 1
+  _popularityModifier: 5
 --- !u!114 &-5552093274568481724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +77,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -103,6 +106,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -129,6 +133,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 1
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -156,6 +161,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 1
@@ -183,6 +189,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -210,6 +217,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -263,7 +271,7 @@ MonoBehaviour:
   m_Name: Ahhhhh dahana he...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 92f30844cabea4a9dbcb51b5cfd8d51b
-  Position: {x: 1364, y: 371.7506}
+  Position: {x: 1364, y: 373.90005}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: 'Ahhhhh dahana hedd sich der kloi Ganove verschdeggd!
@@ -278,6 +286,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -308,6 +317,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -334,6 +344,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -361,6 +372,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -388,6 +400,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -417,6 +430,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes:
   - {fileID: -3792276879913639869}
   BlockerNodes: []
@@ -444,6 +458,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -471,6 +486,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0
@@ -500,6 +516,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -528,6 +545,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes:
   - {fileID: 5610354696499689273}
   BlockerNodes: []
@@ -555,6 +573,7 @@ MonoBehaviour:
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   answerType: 0

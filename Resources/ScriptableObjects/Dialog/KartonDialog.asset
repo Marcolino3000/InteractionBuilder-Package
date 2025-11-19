@@ -31,7 +31,7 @@ MonoBehaviour:
   m_Name: Oha die sind all...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: e249ee29e843b450fbe7eb42b89fc46c
-  Position: {x: 495.71423, y: 382.2857}
+  Position: {x: 495.5, y: 382.5}
   Blackboard:
     CharacterData: {fileID: 0}
   DialogLine: 'Oha die sind alle an mich adressiert.
@@ -42,7 +42,9 @@ MonoBehaviour:
   Children: []
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 4
   _popularityModifier: 0

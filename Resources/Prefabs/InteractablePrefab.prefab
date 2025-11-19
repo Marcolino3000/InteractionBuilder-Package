@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8561112727511955749}
   - component: {fileID: 9104774367556662495}
   - component: {fileID: 6772914947027453193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   triggerArea: {fileID: 1617824163739068085}
   fadeDuration: 0.15
   opacity: 0.8
-  cooldownBetweenHovers: 2
+  cooldownBetweenHovers: 1
 --- !u!1 &3184193633181000552
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 354559813689868856}
   - component: {fileID: 2872073155054400692}
   - component: {fileID: 1617824163739068085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 8288025705888361070}
   - component: {fileID: 6223779332585130471}
   - component: {fileID: 8733635335697952633}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InteractablePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable.Interactable
   triggerAreaRadius: 0.5
   Data: {fileID: 0}
+  Found: 0
   _collider: {fileID: 2872073155054400692}
 --- !u!64 &8733635335697952633
 MeshCollider:

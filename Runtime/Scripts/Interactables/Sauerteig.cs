@@ -12,9 +12,9 @@ namespace Runtime.Scripts.Interactables
         public int Activity = 1;
         
         [SerializeField] private DialogTreeRunner treeRunner;
+        [SerializeField] private SauerteigStatusDisplay statusDisplay;
         
         private SphereCollider radarCollider;
-        
          
         private void Awake()
         {
@@ -24,9 +24,9 @@ namespace Runtime.Scripts.Interactables
 
         private void HandleDialogNodeSelected(DialogOptionNode node)
         {
-            if (node.Blackboard == null)
+            if (node.Blackboard == null || node.Blackboard.CharacterData == null)
             {
-                Debug.LogWarning("Node-Blackboard was null. Bonding-status was not checked.");
+                Debug.LogWarning("Node-Blackboard or CharacterData was null. Bonding-status was not checked.");
             }
 
             else
@@ -40,16 +40,16 @@ namespace Runtime.Scripts.Interactables
                 switch (playerOption.Type)
                 {
                     case AnswerType.SmallTalk:
-                        Activity -= 1;
+                        SetActivity(-1);
                         break;
                     case AnswerType.DeepTalk:
-                        Activity -= 2;
+                        SetActivity(-2);
                         break;
                     case AnswerType.TrashTalk:
-                        Activity += 1;
+                        SetActivity(1);
                         break;
                     case AnswerType.BusinessTalk:
-                        Activity -= 3;
+                        SetActivity(-3);
                         break;
                 }
             }
@@ -102,11 +102,13 @@ namespace Runtime.Scripts.Interactables
                     awarenessLevel = AwarenessLevel.Super;
                     break;
             }
+            
+            statusDisplay.SetStatusSprite(awarenessLevel);
         }
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(1400, 550, 200, 30), $"Activity: {Activity} | Level: {awarenessLevel}");
+            GUI.Label(new Rect(200, 100, 200, 30), $"Activity: {Activity} | Level: {awarenessLevel}");
         }
     }
     
