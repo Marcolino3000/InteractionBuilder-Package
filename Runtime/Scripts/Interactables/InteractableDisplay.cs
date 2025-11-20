@@ -12,33 +12,62 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private TriggerArea triggerArea;
         [SerializeField] private float fadeDuration = 0.5f;
         [SerializeField] private float opacity = 0.7f;
-        [SerializeField] private float cooldownBetweenHovers = 3f;
+        [SerializeField] private float cooldownBetweenHovers = 1f;
+        public bool cooldownActive;
 
         private float currentFadeTime;
         private StyleBackground backgroundImage;
         private VisualElement root;
-        private bool cooldownActive;
 
-        private void Awake()
+        private void OnEnable()
         {
+            cooldownActive = false;
+            currentFadeTime = 0f;
+            
             root = GetComponent<UIDocument>().rootVisualElement;
-
+            
             if (interactable.Data.Sprite != null)
             {
                 backgroundImage = new StyleBackground(interactable.Data.Sprite);
                 root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
             }
-
-            // triggerArea.OnPlayerEntered += (PlayerController) => 
-            // {
-            //     Show();
-            // };
-            //
-            // triggerArea.OnPlayerExited += Hide;
-
-            Hide();
+            
+            if (root != null)
+                HideIcon();
         }
-        
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
+        // private void Awake()
+        // {
+        //     root = GetComponent<UIDocument>().rootVisualElement;
+        //
+        //     if (interactable.Data.Sprite != null)
+        //     {
+        //         backgroundImage = new StyleBackground(interactable.Data.Sprite);
+        //         root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
+        //     }
+        //
+        //     HideIcon();
+        // }
+
+        private void ShowIcon()
+        {
+            var icon = root.Query<VisualElement>("icon").First();
+            if (icon != null)
+                icon.style.opacity = opacity;
+        }
+
+        private void HideIcon()
+        {
+            var icon = root.Query<VisualElement>("icon").First();
+            if (icon != null)
+                icon.style.opacity = 0f;
+        }
+
         public void TriggerHoverEffect()
         {
             if (cooldownActive) 
@@ -55,7 +84,7 @@ namespace Runtime.Scripts.Interactables
             cooldownActive = false;
         }
 
-        public IEnumerator QuickFadeInAndOut()
+        private IEnumerator QuickFadeInAndOut()
         {
             yield return FadeIcon(true);
             yield return FadeIcon(false);

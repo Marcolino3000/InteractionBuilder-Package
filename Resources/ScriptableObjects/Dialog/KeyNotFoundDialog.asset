@@ -21,9 +21,11 @@ MonoBehaviour:
   Children: []
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 4
   _popularityModifier: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -66,7 +68,9 @@ MonoBehaviour:
   Children: []
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 4
   _popularityModifier: 0

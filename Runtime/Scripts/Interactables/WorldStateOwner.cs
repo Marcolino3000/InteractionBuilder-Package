@@ -7,7 +7,7 @@ namespace Runtime.Scripts.Interactables
 {
     public class WorldStateOwner : ScriptableObject 
     {
-        public virtual StateData CurrentState => new() { Owner = this, Name = name };
+        public virtual StateData CurrentState => new() { Owner = this};
         
         [InspectorButton("SaveStateToCurrentScene")]
         public bool _SaveStateToCurrentScene; 
@@ -28,7 +28,7 @@ namespace Runtime.Scripts.Interactables
         public record StateData
         {
             public WorldStateOwner Owner;
-            public string Name;
+            // public string Name;
         }
         
         public void SaveStateToCurrentScene()

@@ -35,12 +35,12 @@ namespace Runtime.Scripts.Core
 
             if (ObjectToMoveIn != null)
             {
-                ObjectToMoveIn.Interactable.transform.position += new Vector3(0,3,0);
+                ObjectToMoveIn.Interactable.transform.position += new Vector3(14,0,0);
             }
             
             if (ObjectToMoveOut != null)
             {
-                ObjectToMoveOut.Interactable.transform.position += new Vector3(0,-3,0);
+                ObjectToMoveOut.Interactable.transform.position += new Vector3(-14,0,0);
             }
 
             if (CancelCurrentDialog)

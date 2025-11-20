@@ -98,8 +98,11 @@ namespace Runtime.Scripts.Interactables
                 case 0 or 1:   
                     awarenessLevel = AwarenessLevel.Basic;
                     break;
-                case >= 2:
+                case >= 2 and <= 6:
                     awarenessLevel = AwarenessLevel.Super;
+                    break;
+                case > 6:
+                    awarenessLevel = AwarenessLevel.Overflow;
                     break;
             }
             
@@ -108,7 +111,7 @@ namespace Runtime.Scripts.Interactables
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(200, 100, 200, 30), $"Activity: {Activity} | Level: {awarenessLevel}");
+            GUI.Label(new Rect(50, 100, 200, 30), $"Activity: {Activity} | Level: {awarenessLevel}");
         }
     }
     
@@ -116,6 +119,7 @@ namespace Runtime.Scripts.Interactables
     {
         NotSet,
         Basic,
-        Super
+        Super,
+        Overflow
     }
 }

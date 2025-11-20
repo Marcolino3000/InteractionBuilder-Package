@@ -21,6 +21,8 @@ MonoBehaviour:
   Children: []
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0

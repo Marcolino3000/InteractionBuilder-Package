@@ -150,17 +150,14 @@ MonoBehaviour:
       type: {class: Toggleable/ToggleableStateDate, ns: Runtime.Scripts.Interactables, asm: InteractionBuilder}
       data:
         Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
-        Name: Key
         ToggleState: 0
     - rid: 7734685230184530367
       type: {class: Toggleable/ToggleableStateDate, ns: Runtime.Scripts.Interactables, asm: InteractionBuilder}
       data:
         Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
-        Name: Key
         ToggleState: 1
     - rid: 7734685344204063563
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: InteractionBuilder}
       data:
         Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
-        Name: 
         ThresholdReached: 1

@@ -15,34 +15,44 @@ namespace Runtime.Scripts.Interactables
         
         private Camera cam;
         private Sauerteig sauerteig;
+        [SerializeField] private bool isDialogRunning;
         // [SerializeField] private float cooldownBetweenHovers;
 
         private void OnEnable()
         {
             cam = Camera.main;
             sauerteig = GetComponent<Sauerteig>();
+            dialogTreeRunner.OnDialogRunningStatusChanged += status =>
+            {
+                isDialogRunning = status;
+            };
         }
 
         void Update()
         {
-            DoRaycast();
+            DoHoverRaycast();
         }
 
-        private void DoRaycast()
+        private void DoHoverRaycast()
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(ray);
+            
+            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            
             foreach (var hit in hits)
             {
                 var col = hit.collider;
                 if (col is MeshCollider meshCollider)
                 {
                     var display = meshCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                    // display?.TriggerHoverEffect();
 
                     var interactable = meshCollider.gameObject.GetComponentInChildren<Interactable>();
 
                     if(interactable == null)
+                        continue;
+                    
+                    if(interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                         continue;
                     
                     if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel)
@@ -53,56 +63,38 @@ namespace Runtime.Scripts.Interactables
                 }
             }
             
-            // var hits2D = Physics2D.RaycastAll(ray.origin, ray.direction);
-            // foreach (var hit in hits2D)
-            // {
-            //     var col = hit.collider;
-            //     if (col is PolygonCollider2D polygonCollider)
-            //     {
-            //         var display = polygonCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-            //         display?.TriggerHoverEffect();
-            //     }
-            // }
+            var hits2D = Physics2D.RaycastAll(ray.origin, ray.direction);
+            foreach (var hit in hits2D)
+            {
+                var col = hit.collider;
+                if (col is PolygonCollider2D polygonCollider)
+                {
+                    var display = polygonCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
+                    var interactable = polygonCollider.gameObject.GetComponentInChildren<Interactable>();
+                    
+                    if(interactable == null)
+                        continue;
+                    
+                    if(interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
+                        continue;
+                    
+                    display?.TriggerHoverEffect();
+                }
+            }
         }
 
         public void HandleMouseClick()
         {
-            if(dialogTreeRunner.IsDialogRunning)
+            // if(dialogTreeRunner.IsDialogRunning)
+            if(isDialogRunning)
                 return;
             
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << 6);
-            
-            foreach (var hit in hits)
-            {
-                var col = hit.collider;
-            
-                var interactable = col.gameObject.GetComponentInChildren<Interactable>();
-                var display = col.gameObject.GetComponentInChildren<InteractableDisplay>();
-            
-                if(interactable == null)
-                    interactable = col.gameObject.GetComponentInParent<Interactable>();
-            
-                if(interactable == null)
-                    continue;
-            
-                if(interactable.Found)
-                    continue;
-            
-                interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
-            
-                if(display == null)
-                    continue;
-            
-                if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel)
-                {
-                    sauerteig.HandleInteractableDiscovered(interactable.Data);
-                    interactable.Found = true;
-                }
-            }
+            Do3DRaycast(ray);
+            Do2DRaycast(ray);
 
 
-        //     Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+            //     Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         //     RaycastHit hit;
         //     if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 6))
         //     {
@@ -132,6 +124,88 @@ namespace Runtime.Scripts.Interactables
         //             interactable.Found = true;
         //         }
         //     }
+        }
+
+        private void Do3DRaycast(Ray ray)
+        {
+            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << 6);
+            
+            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            Debug.Log("3D-Raycast: //////////////////////////////////////");
+            
+            for (int i = 0; i < hits.Length; i++)
+            {
+                Debug.Log(hits[i].collider.gameObject.name);
+            }
+            
+            foreach (var hit in hits)
+            {
+                var col = hit.collider;
+            
+                var interactable = col.gameObject.GetComponentInChildren<Interactable>();
+                // var display = col.gameObject.GetComponentInChildren<InteractableDisplay>();
+            
+                // if(interactable == null)
+                //     interactable = col.gameObject.GetComponentInParent<Interactable>();
+            
+                if(interactable == null)
+                    continue;
+            
+                if(interactable.Found)
+                    continue;
+            
+                interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
+            
+                if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel &&
+                    interactable.Data.AwarenessLevel != AwarenessLevel.NotSet)
+                {
+                    sauerteig.HandleInteractableDiscovered(interactable.Data);
+                    interactable.Found = true;
+                }
+            }
+        }
+        
+        private void Do2DRaycast(Ray ray)
+        {
+            var hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity, 1 << 6);
+            
+            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            Debug.Log("2D-Raycast: //////////////////////////////////////");
+            
+            for (int i = 0; i < hits.Length; i++)
+            {
+                Debug.Log(hits[i].collider.gameObject.name);
+            }
+            
+            foreach (var hit in hits)
+            {
+                var col = hit.collider;
+            
+                var interactable = col.gameObject.GetComponentInChildren<Interactable>();
+                // var display = col.gameObject.GetComponentInChildren<InteractableDisplay>();
+            
+                // if(interactable == null)
+                //     interactable = col.gameObject.GetComponentInParent<Interactable>();
+            
+                if(interactable == null)
+                    continue;
+            
+                if(interactable.Found)
+                    continue;
+            
+                interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
+            
+                // if(display == null)
+                //     continue;
+            
+                if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel)
+                {
+                    sauerteig.HandleInteractableDiscovered(interactable.Data);
+                    interactable.Found = true;
+                }
+            }
         }
     }
 }

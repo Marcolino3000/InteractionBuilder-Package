@@ -14,7 +14,7 @@ namespace Runtime.Scripts.Interactables
         public string StatusOn;
         public string StatusOff;
         
-        public override StateData CurrentState => new ToggleableStateDate { Owner = this, Name = name, ToggleState = ToggleState };
+        public override StateData CurrentState => new ToggleableStateDate { Owner = this, ToggleState = ToggleState };
     
         public override void HandleInteraction()
         {
