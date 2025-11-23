@@ -73,6 +73,7 @@ MonoBehaviour:
   fadeDuration: 0.5
   opacity: 0.8
   cooldownBetweenHovers: 3
+  cooldownActive: 0
 --- !u!1 &3184193633181000552
 GameObject:
   m_ObjectHideFlags: 0

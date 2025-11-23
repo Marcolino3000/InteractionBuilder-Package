@@ -15,7 +15,7 @@ MonoBehaviour:
   Guid: e51ac47178af241b483d4280c17bc17c
   Position: {x: 704, y: 515}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "\xC4h also jetzt hab ich schon die Bettina gefragt und die hat \"ja\"
     gesagt... Oh mannnn, du tust mir sooo leid, ey. "
   TextPreview: "\xC4h also jetzt ha..."
@@ -23,6 +23,8 @@ MonoBehaviour:
   - {fileID: 8085212009698060535}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -36,7 +38,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: Also ja oderja?
+  m_Name: Also ja oder ja?...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 785f33f714db34f4faec22029cd9e4ef
   Position: {x: 983, y: 1360.5}
@@ -48,9 +50,11 @@ MonoBehaviour:
   - {fileID: -4060168214706072488}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-8048188151878612785
 MonoBehaviour:
@@ -67,16 +71,18 @@ MonoBehaviour:
   Guid: 38efc634ea7c9437f9376e9f3e7a8842
   Position: {x: 363.99985, y: 1393.7596}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "\xC4h, geht schon."
   TextPreview: "\xC4h, geht schon."
   Children:
   - {fileID: 2808233927382367910}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-7585718207666709163
 MonoBehaviour:
@@ -100,9 +106,11 @@ MonoBehaviour:
   - {fileID: 4775721121082114731}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-7333344779732859433
 MonoBehaviour:
@@ -119,7 +127,7 @@ MonoBehaviour:
   Guid: 0d33c274007004e9d943895ae06b05f3
   Position: {x: 363.99994, y: 1228}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Du kannst \xFCbrigens immer zu mir kommen, das wei\xDFt du. Wir haben
     \xFCbrigens ne S\xE4ngerin engagiert - ich darf noch nicht verraten wer. Nur
     so viel: es wir Schlager!"
@@ -128,6 +136,8 @@ MonoBehaviour:
   - {fileID: -8048188151878612785}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -144,9 +154,9 @@ MonoBehaviour:
   m_Name: ..........
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 03b2e755808af4be2a11cc7641d46335
-  Position: {x: 663.99994, y: 1228}
+  Position: {x: 675, y: 1228}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: '..........
 
     Ha haha.'
@@ -155,6 +165,8 @@ MonoBehaviour:
   - {fileID: 3763332025459159164}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -173,16 +185,18 @@ MonoBehaviour:
   Guid: f1e18b875eb654b4291bafd5343c7e80
   Position: {x: 363.99994, y: 644}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Wow.
   TextPreview: Wow.
   Children:
   - {fileID: 2222438248265898299}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-5698017459747491426
 MonoBehaviour:
@@ -199,16 +213,18 @@ MonoBehaviour:
   Guid: 474a8b1a5c3b0496c9e4338d5995b258
   Position: {x: 363.9999, y: 1063.9999}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "N\xE4."
   TextPreview: "N\xE4."
   Children:
   - {fileID: -7333344779732859433}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-4060168214706072488
 MonoBehaviour:
@@ -235,6 +251,8 @@ MonoBehaviour:
   Children: []
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -253,7 +271,7 @@ MonoBehaviour:
   Guid: da2c3b83e8b8e4f4d9bd515c7aa4e725
   Position: {x: 704, y: 771}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Wenn ich irgendetwas f\xFCr dich tun kann, sag Bescheid. Du kannst
     ja trotzdem zur Hochzeit kommen wenn du eh schon da bist. Der Pastor fragt ja
     immer ob jemand Einw\xE4nde hat. (zwinkert)"
@@ -263,6 +281,8 @@ MonoBehaviour:
   - {fileID: -1841288247479553364}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -290,6 +310,8 @@ MonoBehaviour:
   - {fileID: 44116864480115097}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -308,16 +330,18 @@ MonoBehaviour:
   Guid: e85476316f76549bc84f6e39c9cc32d0
   Position: {x: 982.5714, y: 1064}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Willst du Bettina jetzt abmurksen oder soll ich?
   TextPreview: Willst du Bettin...
   Children:
   - {fileID: 7292865212971121757}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-1684802565267805722
 MonoBehaviour:
@@ -332,18 +356,20 @@ MonoBehaviour:
   m_Name: "(W\xFCrrrrg)"
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 9978ffcd41b814e63b7ca215346b255d
-  Position: {x: 664, y: 1064.1428}
+  Position: {x: 675.24365, y: 1064}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "(W\xFCrrrrg)"
   TextPreview: "(W\xFCrrrrg)"
   Children:
   - {fileID: -6803145621671451528}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &-1423573845504466739
 MonoBehaviour:
@@ -366,9 +392,11 @@ MonoBehaviour:
   Children: []
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -436,9 +464,11 @@ MonoBehaviour:
   - {fileID: 4775721121082114731}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &301512098433764171
 MonoBehaviour:
@@ -455,16 +485,18 @@ MonoBehaviour:
   Guid: cfc3b86de9b264dcca1c78899fb0e6dd
   Position: {x: 703.71436, y: 385}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Bitte gib mir noch eine Chance!
   TextPreview: Bitte gib mir no...
   Children:
   - {fileID: -8988139489344893849}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &2222438248265898299
 MonoBehaviour:
@@ -481,7 +513,7 @@ MonoBehaviour:
   Guid: 0d9ba584893ff4758a0be770f5fcebde
   Position: {x: 364, y: 771}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Ich wollte dich einladen.
   TextPreview: Ich wollte dich ...
   Children:
@@ -489,6 +521,8 @@ MonoBehaviour:
   - {fileID: -5698017459747491426}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -514,9 +548,11 @@ MonoBehaviour:
   - {fileID: -2282044182001695174}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &2341995984515022322
 MonoBehaviour:
@@ -533,16 +569,18 @@ MonoBehaviour:
   Guid: 6c1fa4285005842b194a23df691e6333
   Position: {x: 364, y: 385.42856}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Ne.
   TextPreview: Ne.
   Children:
   - {fileID: 7063686440716729322}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &2808233927382367910
 MonoBehaviour:
@@ -559,7 +597,7 @@ MonoBehaviour:
   Guid: b8c00f28e8cd542bfb28a67a8c9943b9
   Position: {x: 363.99985, y: 1562.375}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Bist du dir sicher? Ich war immer f\xFCr dich da, auch wenn du es
     nicht wusstest. Du erinnerst mich so an deine Mutter... Ich hatte immer ein Auge
     auf sie."
@@ -568,6 +606,8 @@ MonoBehaviour:
   - {fileID: 3763332025459159164}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -586,16 +626,18 @@ MonoBehaviour:
   Guid: ef96b783defc54717831a9346b02194a
   Position: {x: -295.32147, y: 1677.8932}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Woher wei\xDFt du eigentlich, dass ich in der Stadt bin?"
   TextPreview: "Woher wei\xDFt du e..."
   Children:
   - {fileID: 6800994452100073450}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0
 --- !u!114 &4775721121082114731
 MonoBehaviour:
@@ -621,6 +663,8 @@ MonoBehaviour:
   - {fileID: -1423573845504466739}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -639,7 +683,7 @@ MonoBehaviour:
   Guid: ee61cc8fbb8b64acb844d19096812133
   Position: {x: 564, y: 226.57141}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Hey Marlene, sch\xF6n dich zu sehen. Ist es nicht schade, dass es
     mit uns damals nicht geklappt hat?"
   TextPreview: Hey Marlene, sch...
@@ -648,6 +692,8 @@ MonoBehaviour:
   - {fileID: 301512098433764171}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -674,6 +720,8 @@ MonoBehaviour:
   - {fileID: 2289955944869358627}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -692,13 +740,15 @@ MonoBehaviour:
   Guid: c708b0c26a4424cb2b99d70603ca9dfe
   Position: {x: 364, y: 515.1429}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Ich heirate jetzt die Bettina.
   TextPreview: Ich heirate jetz...
   Children:
   - {fileID: -6513156832186138597}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -725,6 +775,8 @@ MonoBehaviour:
   - {fileID: -8516185644013324826}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
   PopularityValue: 0
@@ -743,14 +795,16 @@ MonoBehaviour:
   Guid: 95a09a325dc774e69ba2aa8352a44e4a
   Position: {x: 704, y: 643.5}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Das war nur ironisch... also das...
   TextPreview: Das war nur iron...
   Children:
   - {fileID: -2688511531172365443}
   FallThrough: 0
   IsAvailable: 1
+  IsTrustOption: 0
+  IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerVibe: 0
+  answerType: 0
   _popularityModifier: 0

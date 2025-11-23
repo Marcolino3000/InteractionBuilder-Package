@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using Runtime.Scripts.Core;
 using Tree;
+using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
 
 namespace Runtime.Scripts.Interactables
 {
@@ -14,6 +11,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
         
         private Camera cam;
+        [SerializeField] private CinemachineCamera cinemachineCam;
         private Sauerteig sauerteig;
         [SerializeField] private bool isDialogRunning;
         // [SerializeField] private float cooldownBetweenHovers;
@@ -36,39 +34,45 @@ namespace Runtime.Scripts.Interactables
         private void DoHoverRaycast()
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit[] hits = Physics.RaycastAll(ray);
+            // RaycastHit[] hits = Physics.RaycastAll(ray);
+            //
+            // Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            //
+            // foreach (var hit in hits)
+            // {
+            //     var col = hit.collider;
+            //     if (col is MeshCollider meshCollider)
+            //     {
+            //         var display = meshCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
+            //
+            //         var interactable = meshCollider.gameObject.GetComponentInChildren<Interactable>();
+            //
+            //         if(interactable == null)
+            //             continue;
+            //         
+            //         if(interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
+            //             continue;
+            //         
+            //         if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel)
+            //         {
+            //             display.TriggerHoverEffect();
+            //         }
+            //         
+            //     }
+            // }
             
-            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            // var hits2D = Physics2D.RaycastAll(ray.origin, ray.direction);
+            var hits2D = Physics2D.GetRayIntersectionAll(ray, Mathf.Infinity);
             
-            foreach (var hit in hits)
-            {
-                var col = hit.collider;
-                if (col is MeshCollider meshCollider)
-                {
-                    var display = meshCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-
-                    var interactable = meshCollider.gameObject.GetComponentInChildren<Interactable>();
-
-                    if(interactable == null)
-                        continue;
-                    
-                    if(interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
-                        continue;
-                    
-                    if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel)
-                    {
-                        display.TriggerHoverEffect();
-                    }
-                    
-                }
-            }
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.red);
             
-            var hits2D = Physics2D.RaycastAll(ray.origin, ray.direction);
             foreach (var hit in hits2D)
             {
                 var col = hit.collider;
                 if (col is PolygonCollider2D polygonCollider)
                 {
+                    Debug.DrawLine(ray.origin, hit.point, Color.green);
+                    
                     var display = polygonCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
                     var interactable = polygonCollider.gameObject.GetComponentInChildren<Interactable>();
                     
@@ -79,6 +83,8 @@ namespace Runtime.Scripts.Interactables
                         continue;
                     
                     display?.TriggerHoverEffect();
+                    
+                    Debug.Log(col.gameObject.name);
                 }
             }
         }
@@ -90,8 +96,9 @@ namespace Runtime.Scripts.Interactables
                 return;
             
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            Do3DRaycast(ray);
+            // Do3DRaycast(ray);
             Do2DRaycast(ray);
+            // DoPointOverlap(ray);
 
 
             //     Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -124,6 +131,18 @@ namespace Runtime.Scripts.Interactables
         //             interactable.Found = true;
         //         }
         //     }
+        }
+
+        private void DoPointOverlap(Ray ray)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = -cam.transform.position.z;
+            Vector3 worldPoint = cam.ScreenToWorldPoint(mousePos);
+            Vector2 worldPoint2D = new Vector2(worldPoint.x, worldPoint.y);
+            var hit = Physics2D.OverlapPoint(worldPoint2D);
+
+            if (hit != null)
+                Debug.Log(hit.gameObject.name);
         }
 
         private void Do3DRaycast(Ray ray)

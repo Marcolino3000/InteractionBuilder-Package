@@ -143,6 +143,18 @@ MonoBehaviour:
         Conditions: []
       Name: 
       HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: f9afb1753248f494aa5d5acfd32def78, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: ca2f829e0bc0c4b2799b00c87b9bea91, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 0}
+        Conditions: []
+      Name: Bike
+      HighPriority: 0
   references:
     version: 2
     RefIds:
