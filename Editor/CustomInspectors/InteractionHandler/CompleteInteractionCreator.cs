@@ -205,7 +205,7 @@ namespace Editor
 
         private void GetPrefabReferences()
         {
-            interactablePrefab = AssetDatabase.LoadAssetAtPath("Packages/com.marc.interactionbuilder/Resources/Prefabs/SpriteInteractablePrefab.prefab", typeof(GameObject)) as GameObject;
+            interactablePrefab = AssetDatabase.LoadAssetAtPath("Packages/com.cod.interactionbuilder/Resources/Prefabs/SpriteInteractablePrefab.prefab", typeof(GameObject)) as GameObject;
             var interactable = Instantiate(interactablePrefab);
             interactable.name = interactionName;
         }

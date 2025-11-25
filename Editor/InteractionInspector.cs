@@ -87,7 +87,7 @@ namespace Editor.CustomInspectors
                 
                 for (int j = 0; j < prereqs.arraySize; j++)
                 {
-                    var row = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.marc.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();
+                    var row = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();
                     row.style.marginBottom = 15;
                     
                     SerializedProperty prereq = prereqs.GetArrayElementAtIndex(j);
