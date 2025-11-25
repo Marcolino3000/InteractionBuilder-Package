@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Runtime.Scripts.Core;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
@@ -13,8 +14,9 @@ namespace Runtime.Scripts.Interactables
         
         public void SetupScene()
         {
+            var loaded = Resources.LoadAll<ScriptableObject>("");
             var monobehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None).OfType<ISceneSetupCallbackReceiver>().ToArray();
-            var scriptables = Resources.FindObjectsOfTypeAll<ScriptableObject>().OfType<ISceneSetupCallbackReceiver>().ToArray();
+            var scriptables = loaded.OfType<ISceneSetupCallbackReceiver>().ToArray();
             
             var receivers = monobehaviours.Concat(scriptables).ToArray();
             

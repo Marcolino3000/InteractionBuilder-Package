@@ -1,7 +1,8 @@
+#if UNITY_EDITOR
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
 namespace Runtime.Scripts.Utility   
 {
@@ -44,3 +45,4 @@ namespace Runtime.Scripts.Utility
         }
     }
 }
+#endif

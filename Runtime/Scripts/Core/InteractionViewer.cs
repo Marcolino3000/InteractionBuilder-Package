@@ -13,13 +13,18 @@ namespace Runtime.Scripts.Core
     {
         [SerializeField] private InteractionHandler interactionHandler;
         public List<TriggerToPrereqs> triggerToPrerequisites;
+        
+        // private void OnEnable()
+        // {
+        //     SetupInteractionHandler();
+        // }
 
-        [ContextMenu("Reset Interactions")]
         private void OnValidate()
         {
             SetupInteractionHandler();
         }
 
+        [ContextMenu("Reset Interactions")]
         private void ResetInteractions()
         {
             triggerToPrerequisites = new List<TriggerToPrereqs>();

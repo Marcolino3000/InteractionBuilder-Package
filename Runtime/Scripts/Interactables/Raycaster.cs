@@ -70,7 +70,7 @@ namespace Runtime.Scripts.Interactables
                     
                     if (interactable.Found)
                         continue;
-
+                    
                     interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
 
                     if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel &&
