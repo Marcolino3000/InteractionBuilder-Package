@@ -5,27 +5,24 @@ using Nodes.Decorator;
 using Runtime.Scripts.Core;
 using Runtime.Scripts.Interactables;
 using Tree;
-using UnityEditor;
-using UnityEditor.Compilation;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
+#endif
 
 namespace Editor
 {
     public class CompleteInteractionCreator : EditorWindow
     {
-        private SerializedObject editor;
-        
         [SerializeField] private string interactionName;
         [SerializeField] private InteractionData interactionData;
         [SerializeField] private InteractableState interactableState;
         [SerializeField] private Reaction successReaction;
         [SerializeField] private Reaction failureReaction;
         [SerializeField] private DialogTree dialogTree;
-        
-        [SerializeField] private Toggle interactableToggle;
 
         [SerializeField] private InteractionData interactionToExecute;
         [SerializeField] private DialogOptionNode dialogOptionToUnlock;
@@ -33,23 +30,26 @@ namespace Editor
         [SerializeField] private InteractionTriggerVia triggerType;
         [SerializeField] private bool isHighPriority;
         [SerializeField] private List<OwnerWithSettings> conditions = new();
-        
-        [SerializeField] private VisualElement inspectorContainer;
-        
-        [SerializeField] private bool createInteractionWithPrerequisites;
-        [SerializeField] private List<VisualElement> InteractionPrerequisiteElements = new ();
-        
+
         [SerializeField] private InteractionViewer viewer;
+        private GameObject interactablePrefab;
+        
+        private bool createInteractionWithPrerequisites;
+        private List<VisualElement> InteractionPrerequisiteElements = new ();
 
         private bool createInteractionData;
         private bool createInteractable;
         private bool createDialogTree;
         private bool createSuccessReaction;
         private bool createFailureReaction;
+
+        private SerializedObject editor;
+        private VisualElement inspectorContainer;
+        private Toggle interactableToggle;
+        private Button deleteButton;
         
         private string assetPath = "Packages/com.marc.interactionbuilder/Resources/ScriptableObjects/";
         private string nameOfLastCreatedInteraction;
-        private Button deleteButton;
         private string dropDownValue;
         private string nameOfLastCreatedInteractable;
 
@@ -199,6 +199,15 @@ namespace Editor
             {
                 element.SetEnabled(false);
             }
+
+            // GetPrefabReferences();
+        }
+
+        private void GetPrefabReferences()
+        {
+            interactablePrefab = AssetDatabase.LoadAssetAtPath("Packages/com.marc.interactionbuilder/Resources/Prefabs/SpriteInteractablePrefab.prefab", typeof(GameObject)) as GameObject;
+            var interactable = Instantiate(interactablePrefab);
+            interactable.name = interactionName;
         }
 
         private VisualElement CreateDeleteButton()
@@ -456,16 +465,30 @@ namespace Editor
             };
             
             var soProp = editor.FindProperty(propertyName);
-            soField.RegisterValueChangedCallback(evt => CreateInspector(soProp));
+            // soField.RegisterValueChangedCallback(evt => CreateInspector(soProp));
 
             if (toggle != null)
-                soField.RegisterValueChangedCallback(evt => { toggle.value = evt.newValue != null; });
+                soField.RegisterValueChangedCallback(evt =>
+                {
+                    if(CheckIfExistingObjectWasSelected(evt))
+                    {
+                        toggle.value = false;
+                        return;
+                    }
+                    
+                    toggle.value = evt.newValue != null;
+                });
             
             soField.BindProperty(soProp);
 
             soField.RegisterCallback<FocusEvent>((evt => { CreateInspector(soProp); })) ;
             
             return soField;
+        }
+
+        private bool CheckIfExistingObjectWasSelected(ChangeEvent<Object> evt)
+        {
+            return evt.newValue != null && !evt.newValue.name.Contains(interactionName);
         }
 
         private void CreateInspector(SerializedProperty soProp)
@@ -507,9 +530,12 @@ namespace Editor
         private void HandleCreateInteractionDataToggled(ChangeEvent<bool> evt)
         {
             createInteractionData = evt.newValue;
-            
+                
             if (evt.newValue)
             {
+                // if(interactionData != null && interactionData.name != interactionName + "Interaction")
+                //     return;
+                
                 interactionData = CreateInstance<InteractionData>();
                 interactionData.name = interactionName + "Interaction";
             }

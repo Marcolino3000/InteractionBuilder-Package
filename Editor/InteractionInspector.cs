@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using Codice.CM.Common.Merge;
-using Codice.CM.Triggers;
 using Runtime.Scripts.Core;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Object = System.Object;
 
 namespace Editor.CustomInspectors
 {

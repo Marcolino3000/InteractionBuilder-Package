@@ -47,7 +47,7 @@ namespace Runtime.Scripts.PlayerInput
         private void OnClickObject()
         {
             // Debug.Log("Click");
-            // raycaster.HandleMouseClick();
+            raycaster.HandleMouseClick();
         }
     }
 }

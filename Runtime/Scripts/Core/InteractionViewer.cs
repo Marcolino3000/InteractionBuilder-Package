@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Runtime.Scripts.Interactables;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine;
 namespace Runtime.Scripts.Core
 {
     [CreateAssetMenu(menuName = "Managers/InteractionViewer")]
-    public class InteractionViewer : ScriptableObject
+    public class InteractionViewer : ScriptableObject, ISceneSetupCallbackReceiver
     {
         [SerializeField] private InteractionHandler interactionHandler;
         public List<TriggerToPrereqs> triggerToPrerequisites;
@@ -64,15 +65,20 @@ namespace Runtime.Scripts.Core
             }
         }
 
-        private void OnEnable()
+        // private void OnEnable()
+        // {
+        //     EditorApplication.playModeStateChanged += mode =>
+        //     {
+        //         if (mode == PlayModeStateChange.EnteredPlayMode)
+        //         {
+        //             SetupInteractionHandler();
+        //         } 
+        //     };
+        // }
+
+        public void OnSceneSetup()
         {
-            EditorApplication.playModeStateChanged += mode =>
-            {
-                if (mode == PlayModeStateChange.EnteredPlayMode)
-                {
-                    SetupInteractionHandler();
-                } 
-            };
+            SetupInteractionHandler();
         }
     }
 

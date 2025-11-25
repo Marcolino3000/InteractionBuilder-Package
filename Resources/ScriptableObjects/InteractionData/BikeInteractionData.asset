@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: InteractionBuilder::Runtime.Scripts.Core.InteractionData
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
-  Count: 0
+  Count: 9
   Threshold: 0
   OneTimeUse: 0
-  successReaction: {fileID: 0}
+  successReaction: {fileID: 11400000, guid: 13b6e5bb5eada4a7bbc73f719f0d81ca, type: 2}
   failureReaction: {fileID: 0}
-  ThresholdReached: 0
+  ThresholdReached: 1

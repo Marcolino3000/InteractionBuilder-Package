@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Runtime.Scripts.Core
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Scriptable Object/Scene State Saver")]
-    public class SceneStateSaver :  ScriptableObject
+    public class SceneStateSaver :  ScriptableObject, ISceneSetupCallbackReceiver
     {
         [InspectorButton("LoadCurrentSceneStates")]
         public bool LoadState;
@@ -33,15 +33,20 @@ namespace Runtime.Scripts.Core
             states.Add(state);
         }
         
-        private void OnEnable()
+        // private void OnEnable()
+        // {
+        //     EditorApplication.playModeStateChanged += mode =>
+        //     {
+        //         if (mode == PlayModeStateChange.EnteredPlayMode)
+        //         {
+        //             LoadCurrentSceneStates();
+        //         }
+        //     };
+        // }
+
+        public void OnSceneSetup()
         {
-            EditorApplication.playModeStateChanged += mode =>
-            {
-                if (mode == PlayModeStateChange.EnteredPlayMode)
-                {
-                    LoadCurrentSceneStates();
-                }
-            };
+            LoadCurrentSceneStates();
         }
     }
 }

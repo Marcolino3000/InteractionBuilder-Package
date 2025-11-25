@@ -11,8 +11,10 @@ MonoImporter:
   - failureReaction: {instanceID: 0}
   - dialogTree: {instanceID: 0}
   - interactionToExecute: {instanceID: 0}
+  - dialogOptionToUnlock: {instanceID: 0}
   - triggeringInteractable: {instanceID: 0}
   - viewer: {fileID: 11400000, guid: 4455d36fc78104a33834ae22785169d4, type: 2}
+  - interactablePrefab: {fileID: 6223779332585130471, guid: 4f2b232c34cfd40589141cfa1efbdf3b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
