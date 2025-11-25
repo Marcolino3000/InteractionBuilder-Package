@@ -1,0 +1,19 @@
+{
+    "name": "cod.interactionbuilder.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:11d5565bb176849b19fb1032c923c927",
+        "GUID:f5dd6c16f1be54a6caa0ab5517712590"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

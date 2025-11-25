@@ -1,9 +1,9 @@
 {
-    "name": "InteractionBuilder",
+    "name": "cod.interactionbuilder",
     "rootNamespace": "",
     "references": [
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:11d5565bb176849b19fb1032c923c927",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:4307f53044263cf4b835bd812fc161a4",
         "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
