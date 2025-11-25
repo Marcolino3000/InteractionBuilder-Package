@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <ui:Template name="InRowSeparator" src="project://database/Packages/com.marc.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InRowSeparator.uxml?fileID=9197481963319205126&amp;guid=8566b6e1a8054439883ac5db5172e549&amp;type=3#InRowSeparator" />
-    <Style src="project://database/Packages/com.marc.interactionbuilder/Editor/CustomInspectors/InteractionHandler/EnumFieldAdjustments.uss?fileID=7433441132597879392&amp;guid=9fe057763851943168277eeaca512134&amp;type=3#EnumFieldAdjustments" />
-    <Style src="project://database/Packages/com.marc.interactionbuilder/Editor/CustomInspectors/InteractionHandler/ObjectFieldAdjustments.uss?fileID=7433441132597879392&amp;guid=677b2408cdd33467199c3e9ccfdb65bc&amp;type=3#ObjectFieldAdjustments" />
+    <ui:Template name="InRowSeparator" src="project://database/Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InRowSeparator.uxml?fileID=9197481963319205126&amp;guid=8566b6e1a8054439883ac5db5172e549&amp;type=3#InRowSeparator" />
+    <Style src="project://database/Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/EnumFieldAdjustments.uss?fileID=7433441132597879392&amp;guid=9fe057763851943168277eeaca512134&amp;type=3#EnumFieldAdjustments" />
+    <Style src="project://database/Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/ObjectFieldAdjustments.uss?fileID=7433441132597879392&amp;guid=677b2408cdd33467199c3e9ccfdb65bc&amp;type=3#ObjectFieldAdjustments" />
     <ui:VisualElement name="row" style="flex-grow: 1; flex-direction: row; align-items: flex-start;">
         <ui:VisualElement name="stayOnTopContainer" style="flex-grow: 1; overflow: hidden; flex-direction: row; align-items: center;">
             <ui:VisualElement name="triggerContainer" style="flex-grow: 1; flex-direction: column; flex-shrink: 1; overflow: hidden; display: none; visibility: hidden;">
