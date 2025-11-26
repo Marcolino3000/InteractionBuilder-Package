@@ -95,10 +95,13 @@ namespace Runtime.Scripts.Interactables
             
             switch (Activity)
             {
-                case 0 or 1:   
+                case 0:
+                    awarenessLevel = AwarenessLevel.NotSet;
+                    break;
+                case 1 or 2:   
                     awarenessLevel = AwarenessLevel.Basic;
                     break;
-                case >= 2 and <= 6:
+                case >= 3 and <= 6:
                     awarenessLevel = AwarenessLevel.Super;
                     break;
                 case > 6:
@@ -111,7 +114,11 @@ namespace Runtime.Scripts.Interactables
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(50, 100, 200, 30), $"Activity: {Activity} | Level: {awarenessLevel}");
+            GUI.Label(new Rect(0, 120, 200, 20), $"Activity: {Activity} | Level: {awarenessLevel}");
+            if(GUI.Button(new Rect(0, 90, 100, 20), "Reset Sauerteig", GUI.skin.button))
+            {
+                SetActivity(-Activity);
+            }
         }
     }
     

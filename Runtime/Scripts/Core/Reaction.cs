@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Core;
 using Runtime.Scripts.Interactables;
 using Tree;
@@ -18,6 +19,7 @@ namespace Runtime.Scripts.Core
         public InteractableState ObjectToMoveIn;
         public InteractableState ObjectToMoveOut;
         public bool CancelCurrentDialog;
+        public List<GameObject> ObjectsToSetActive;
 
         public void Execute()
         {
@@ -46,6 +48,11 @@ namespace Runtime.Scripts.Core
             if (CancelCurrentDialog)
             {
                 OnStopDialog?.Invoke();
+            }
+
+            foreach (var gameObject in ObjectsToSetActive)
+            {
+                gameObject.SetActive(true);
             }
         }
     }

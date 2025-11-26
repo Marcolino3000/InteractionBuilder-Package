@@ -115,6 +115,7 @@ namespace Runtime.Scripts.Interactables
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 30, Color.red);
             var hits = Physics2D.GetRayIntersectionAll(ray, Mathf.Infinity);
 
             // interactables = new List<Tuple<Interactable, InteractableDisplay>>();

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace Runtime.Scripts.Interactables
 {
-    public class Interactable : MonoBehaviour
+    public class Interactable : MonoBehaviour, ISceneSetupCallbackReceiver
     {
         public event Action<InteractionTriggerVia, InteractableState> OnEnteredTriggerArea;
         public Action<InteractionTriggerVia, InteractableState> OnInteractionStarted;
@@ -109,6 +109,11 @@ namespace Runtime.Scripts.Interactables
             {
                 _collider.radius = triggerAreaRadius;
             }
+        }
+
+        public void OnSceneSetup()
+        {
+            Found = false;
         }
     }
 }

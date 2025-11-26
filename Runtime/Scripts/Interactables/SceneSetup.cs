@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Runtime.Scripts.Core;
+using Runtime.Scripts.Utility;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
@@ -28,7 +29,7 @@ namespace Runtime.Scripts.Interactables
 
         private void OnGUI()
         {
-            if(GUILayout.Button("Reset Scene"))
+            if(GUI.Button(new Rect(0,70,80,20), "Reset Scene", GuiStyleSettings.GetSkin().GetStyle("button")))
             {
                 SetupScene();
             }
