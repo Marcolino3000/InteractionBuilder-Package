@@ -19,8 +19,7 @@ namespace Runtime.Scripts.Core
         public InteractableState ObjectToMoveIn;
         public InteractableState ObjectToMoveOut;
         public bool CancelCurrentDialog;
-        public List<GameObject> ObjectsToSetActive;
-
+        
         public void Execute()
         {
             if(DialogTree != null)
@@ -48,11 +47,6 @@ namespace Runtime.Scripts.Core
             if (CancelCurrentDialog)
             {
                 OnStopDialog?.Invoke();
-            }
-
-            foreach (var gameObject in ObjectsToSetActive)
-            {
-                gameObject.SetActive(true);
             }
         }
     }

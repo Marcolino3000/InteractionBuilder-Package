@@ -12,11 +12,12 @@ public class SauerteigStatusDisplay : MonoBehaviour
 
     private void Start()
     {
-        statusImage.sprite = statusSprites[0];
+        statusImage.enabled = false;
     }
 
     public void SetStatusSprite(AwarenessLevel awareness)
     {
+        statusImage.enabled = true;
         statusImage.sprite = statusSprites[(int)awareness];
     }
 }

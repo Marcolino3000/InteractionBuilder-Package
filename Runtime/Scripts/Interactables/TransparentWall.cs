@@ -8,7 +8,7 @@ namespace Runtime.Scripts.Interactables
 {
     public class TransparentWall : MonoBehaviour
     {
-        public Action OnPlayerEnter;
+        public event Action OnPlayerEnter;
         private void OnTriggerEnter(Collider other)
         {
             if(other.GetComponent<PlayerController>() == null)

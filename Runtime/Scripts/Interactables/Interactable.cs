@@ -17,6 +17,7 @@ namespace Runtime.Scripts.Interactables
         public InteractableState Data;
         
         public bool Found;
+        public bool MarkAsFoundWhenClicked;
         
         [SerializeField] private SphereCollider _collider;
         

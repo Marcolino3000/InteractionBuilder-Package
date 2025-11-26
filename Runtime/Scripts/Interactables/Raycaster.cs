@@ -12,18 +12,27 @@ namespace Runtime.Scripts.Interactables
     public class Raycaster : MonoBehaviour
     {
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
+
+        [SerializeField] private Sauerteig sauerteig;
+        [SerializeField] private bool isDialogRunning;
+        [SerializeField] private TransparentWall transparentWall;
         
         private Camera cam;
-        private Sauerteig sauerteig;
-        [SerializeField] private bool isDialogRunning;
+        private bool clickedWall;
+        private bool playerIsInside;
 
         private void OnEnable()
         {
             cam = Camera.main;
-            sauerteig = GetComponent<Sauerteig>();
+            
             dialogTreeRunner.OnDialogRunningStatusChanged += status =>
             {
                 isDialogRunning = status;
+            };
+            
+            transparentWall.OnPlayerEnter += () =>
+            {
+                 playerIsInside = !playerIsInside;
             };
         }
 
@@ -44,45 +53,58 @@ namespace Runtime.Scripts.Interactables
         {
             var interactables = new List<Tuple<Interactable, InteractableDisplay>>();
 
-            if (GetHitsFrom3DRaycast(interactables) || GetHitsFrom2DRaycast(interactables))
+            bool hits3D = GetHitsFrom3DRaycast(interactables);
+            bool hits2D = GetHitsFrom2DRaycast(interactables);
+            
+            if(!hits3D && !hits2D) 
+                return;
+            
+            foreach (var (interactable, display) in interactables)
             {
-                foreach (var (interactable, display) in interactables)
-                {
-                    // Debug.Log(interactable.gameObject.name);
-                    
-                    if (interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
-                        continue;
+                // Debug.Log(interactable.gameObject.name);
+                
+                if (interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
+                    continue;
 
-                    display?.TriggerHoverEffect();
-                }
+                display?.TriggerHoverEffect();
             }
         }
 
         private void HandleClickOnInteractables()
         {
             var interactables = new List<Tuple<Interactable, InteractableDisplay>>();
+
+            bool hits3D = GetHitsFrom3DRaycast(interactables);
+            bool hits2D = GetHitsFrom2DRaycast(interactables);
             
-            if(GetHitsFrom3DRaycast(interactables) || GetHitsFrom2DRaycast(interactables))
+            if(!hits3D && !hits2D) 
+                return;
+            
+            if (clickedWall && !playerIsInside)
             {
-                foreach (var (interactable, display) in interactables)
+                clickedWall = false;
+                return;
+            }
+                
+            foreach (var (interactable, display) in interactables)
+            {
+                // Debug.Log(interactable.Data.name);
+                    
+                if (interactable.Found)
+                    continue;
+                    
+                interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
+
+                if (interactable.MarkAsFoundWhenClicked &&
+                    sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel &&
+                    interactable.Data.AwarenessLevel != AwarenessLevel.NotSet)
                 {
-                    // Debug.Log(interactable.Data.name);
-                    
-                    if (interactable.Found)
-                        continue;
-                    
-                    interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
-
-                    if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel &&
-                        interactable.Data.AwarenessLevel != AwarenessLevel.NotSet)
-                    {
-                        sauerteig.HandleInteractableDiscovered(interactable.Data);
-                        interactable.Found = true;
-                    }
-
-                    //only process the interactable closest to camera
-                    return;
+                    sauerteig.HandleInteractableDiscovered(interactable.Data);
+                    interactable.Found = true;
                 }
+
+                //only process the interactable closest to camera
+                return;
             }
         }
 
@@ -91,6 +113,12 @@ namespace Runtime.Scripts.Interactables
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << 6);
             Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            
+            if (hits.Length > 0 && hits[0].collider.gameObject.name == "Wall")
+            {
+                clickedWall = true;
+                return false;
+            }
             
             foreach (var hit in hits)
             {

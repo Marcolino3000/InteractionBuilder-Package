@@ -118,33 +118,6 @@ MonoBehaviour:
       HighPriority: 0
   - Trigger:
       TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 0b524a0c0dbe44756b23523e0acca0f7, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 11400000, guid: f02efa3331e97424fba40e1db527ac8f, type: 2}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 0b524a0c0dbe44756b23523e0acca0f7, type: 2}
-        Conditions:
-        - RecordedState:
-            rid: 7734685344204063563
-          IsHardCondition: 1
-      Name: 
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 0b524a0c0dbe44756b23523e0acca0f7, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 11400000, guid: 3196b0e41505040d78829b5aee0163c9, type: 2}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 0b524a0c0dbe44756b23523e0acca0f7, type: 2}
-        Conditions: []
-      Name: 
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
       TriggeringInteractable: {fileID: 11400000, guid: f9afb1753248f494aa5d5acfd32def78, type: 2}
     Prerequisites:
     - Record:
@@ -154,6 +127,21 @@ MonoBehaviour:
         TriggeringInteractable: {fileID: 0}
         Conditions: []
       Name: Bike
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 0
+      TriggeringInteractable: {fileID: 11400000, guid: 0b524a0c0dbe44756b23523e0acca0f7, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: f02efa3331e97424fba40e1db527ac8f, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: 0b524a0c0dbe44756b23523e0acca0f7, type: 2}
+        Conditions:
+        - RecordedState:
+            rid: 7734685576750694616
+          IsHardCondition: 0
+      Name: SpawnHilde
       HighPriority: 0
   references:
     version: 2
@@ -168,7 +156,7 @@ MonoBehaviour:
       data:
         Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
         ToggleState: 1
-    - rid: 7734685344204063563
+    - rid: 7734685576750694616
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
         Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}

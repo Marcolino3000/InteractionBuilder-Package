@@ -8,5 +8,6 @@
   },
   "author": {
     "name": "Marc"
-  }
+  },
+  "hideInEditor": false
 }
