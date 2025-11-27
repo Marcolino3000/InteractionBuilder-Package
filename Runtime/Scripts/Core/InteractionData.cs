@@ -18,10 +18,16 @@ namespace Runtime.Scripts.Core
         public override StateData CurrentState => new InteractionStateData { Owner = this, ThresholdReached = ThresholdReached };
         public bool ThresholdReached;
 
-        public void HandleInteraction(bool succeeded = false)
+        public void IncrementCount()
         {
             Count++;
             SetThresholdBool();
+        }
+        
+        public void HandleInteraction(bool succeeded = false)
+        {
+            // Count++;
+            // SetThresholdBool();
 
             switch (succeeded)
             {

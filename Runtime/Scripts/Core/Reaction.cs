@@ -46,6 +46,7 @@ namespace Runtime.Scripts.Core
 
             if (CancelCurrentDialog)
             {
+                Debug.Log("Cancel Dialog called");
                 OnStopDialog?.Invoke();
             }
         }

@@ -16,18 +16,19 @@ namespace Runtime.Scripts.Core
         public InteractableState TriggeringInteractable;
         public List<StateWithSettings> Conditions;
         
-        public void Execute()
+        public InteractionData Execute()
         {
             if (InteractionToExecute == null && DialogOptionToUnlock == null)
             {
                 Debug.LogWarning("Interaction and DialogOption are null! Returning early.");
-                return;
+                return null;
             }
             
             ExecutionStatus status = CheckConditions();     
             
             if (InteractionToExecute != null)
-                TryExecuteInteraction(status);
+                if (!TryExecuteInteraction(status))
+                    return null;
             
             if(DialogOptionToUnlock != null)
             {
@@ -36,21 +37,27 @@ namespace Runtime.Scripts.Core
                     DialogOptionToUnlock.IsAvailable = true;
                 }
             }
+            
+            return InteractionToExecute;
         }
 
-        private void TryExecuteInteraction(ExecutionStatus status)
+        private bool TryExecuteInteraction(ExecutionStatus status)
         {
             if(InteractionToExecute.OneTimeUse && InteractionToExecute.Count > 0)
-                return;
+                return false;
             
-            if(status == ExecutionStatus.Cancelled)
-                return;
-            
-            if(status == ExecutionStatus.Failed)
-                InteractionToExecute?.HandleInteraction(false);
-            if(status == ExecutionStatus.Succeeded)
+            switch (status)
             {
-                InteractionToExecute?.HandleInteraction(true);
+                case ExecutionStatus.Cancelled:
+                    return false;
+                case ExecutionStatus.Failed:
+                    InteractionToExecute?.HandleInteraction(false);
+                    return true;
+                case ExecutionStatus.Succeeded:
+                    InteractionToExecute?.HandleInteraction(true);
+                    return true;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(status), status, null);
             }
         }
 

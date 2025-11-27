@@ -18,10 +18,15 @@ namespace Runtime.Scripts.Core
         [SerializeField] public Dictionary<Trigger, List<PrerequisiteRecord>> triggersToPrerequisitesLowPrio;
 
         [HideInInspector] [SerializeField] private PrerequisitesGenerator PrerequisitesGenerator;
+        
+        [SerializeField] private List<InteractionData> lastInteractions;
 
         private void HandleInteractionTrigger(InteractionTriggerVia triggerType,
             InteractableState triggeringInteractable)
         {
+            lastInteractions.ForEach(i => i.IncrementCount());
+            lastInteractions = new List<InteractionData>();
+            
             var trigger = new Trigger(triggerType, triggeringInteractable);
 
             if (triggersToPrerequisitesHighPrio.TryGetValue(trigger, out List<PrerequisiteRecord> prereqsHighPrio))
@@ -38,7 +43,9 @@ namespace Runtime.Scripts.Core
             {
                 foreach (var prereqLowPrio in prereqsLowPrio)
                 {
-                    prereqLowPrio.Execute();
+                    var interactionData = prereqLowPrio.Execute();
+                    if(interactionData != null)
+                        lastInteractions.Add(interactionData);
                 }
             }
         }
@@ -95,6 +102,12 @@ namespace Runtime.Scripts.Core
             FindClients();
             FindEventSystem();
             SetDialogOptionsAvailability();
+            ResetLastInteractions();
+        }
+
+        private void ResetLastInteractions()
+        {
+            lastInteractions = new List<InteractionData>();
         }
 
         private void SetDialogOptionsAvailability()

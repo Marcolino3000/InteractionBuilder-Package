@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e32a255760647d79c9e712cbffa0e42, type: 3}
-  m_Name: "Scene 2\_-\_DialogWithPaul"
-  m_EditorClassIdentifier: Assembly-CSharp::Core.InteractionData
+  m_Name: Scene 2 - ThirdDialogWithPaulInteractionData
+  m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Core.InteractionData
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
   Count: 0
-  Threshold: 1
-  OneTimeUse: 1
-  successReaction: {fileID: 11400000, guid: b522947b0e08844728c7ee4018298299, type: 2}
+  Threshold: 0
+  OneTimeUse: 0
+  successReaction: {fileID: 11400000, guid: 6f33606d6e5d34c2e8cc28ce5269afb2, type: 2}
   failureReaction: {fileID: 0}
   ThresholdReached: 0
