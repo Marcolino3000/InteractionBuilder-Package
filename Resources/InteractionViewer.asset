@@ -182,6 +182,30 @@ MonoBehaviour:
           IsHardCondition: 1
       Name: Scene 2 - ThirdDialogWithHilde
       HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 7b87c47c8b1924c2f8f38e4df5b52c0c, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 9a21579d7d6484660980d917cff667a8, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 0}
+        Conditions: []
+      Name: FlyerInManteltasche
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: ac5e0186876554065b9b611e8efc7f22, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: e341fd663eb364673842fb9b424fb861, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 0}
+        Conditions: []
+      Name: Pakete
+      HighPriority: 0
   references:
     version: 2
     RefIds:

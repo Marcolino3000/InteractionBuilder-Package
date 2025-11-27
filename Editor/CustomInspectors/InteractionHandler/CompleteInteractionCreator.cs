@@ -102,6 +102,8 @@ namespace Editor
                 AssetDatabase.CreateAsset(dialogTree, assetPath + "Dialog/" + interactionName + "Dialog.asset");
             }
 
+            interactableState = null;
+
             if (!createInteractionWithPrerequisites) 
                 return;
             
@@ -152,6 +154,8 @@ namespace Editor
 
             nameOfLastCreatedInteraction = interactionName;
             deleteButton.SetEnabled(true);
+            
+            
         }
 
         private void DeleteNewlyCreatedAssets()

@@ -249,6 +249,7 @@ MonoBehaviour:
   triggerAreaRadius: 0.5
   Data: {fileID: 0}
   Found: 0
+  MarkAsFoundWhenClicked: 0
   _collider: {fileID: 2872073155054400692}
 --- !u!60 &5281386518824306908
 PolygonCollider2D:
@@ -327,7 +328,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 8199f35df8d8948c4ae1e5f30de0ba76, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
