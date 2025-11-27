@@ -140,9 +140,9 @@ namespace Runtime.Scripts.Interactables
         {
             GUILayout.BeginArea(new  Rect(0, 80,300 ,300));
             
-            GUI.Label(new Rect(0, 120, 200, 20), $"Activity: {Activity} | Level: {awarenessLevel}");
+            GUI.Label(new Rect(0, 30, 200, 20), $"Activity: {Activity} | Level: {awarenessLevel}");
             
-            if(GUI.Button(new Rect(0, 90, 100, 20), "Reset Sauerteig", GUI.skin.button))
+            if(GUI.Button(new Rect(0, 0, 100, 20), "Reset Sauerteig", GUI.skin.button))
             {
                 SetActivity(-Activity);
             }

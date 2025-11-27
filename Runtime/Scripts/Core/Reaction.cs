@@ -22,13 +22,19 @@ namespace Runtime.Scripts.Core
         
         public void Execute()
         {
+            if (CancelCurrentDialog)
+            {
+                Debug.Log("Cancel Dialog called");
+                OnStopDialog?.Invoke();
+            }
+
             if(DialogTree != null)
             {
                 OnSetDialogTree?.Invoke(DialogTree);
                 OnStopDialog?.Invoke();
                 OnStartDialog?.Invoke();
             }
-            
+
             if(Interactable != null)
             {
                 Interactable?.HandleInteraction();
@@ -38,16 +44,10 @@ namespace Runtime.Scripts.Core
             {
                 ObjectToMoveIn.Interactable.transform.position += new Vector3(14,0,0);
             }
-            
+
             if (ObjectToMoveOut != null)
             {
                 ObjectToMoveOut.Interactable.transform.position += new Vector3(-14,0,0);
-            }
-
-            if (CancelCurrentDialog)
-            {
-                Debug.Log("Cancel Dialog called");
-                OnStopDialog?.Invoke();
             }
         }
     }

@@ -29,7 +29,7 @@ namespace Runtime.Scripts.Interactables
 
         private void OnGUI()
         {
-            if(GUI.Button(new Rect(0,70,80,20), "Reset Scene", GuiStyleSettings.GetSkin().GetStyle("button")))
+            if(GUI.Button(new Rect(0,100,80,20), "Reset Scene", GuiStyleSettings.GetSkin().GetStyle("button")))
             {
                 SetupScene();
             }

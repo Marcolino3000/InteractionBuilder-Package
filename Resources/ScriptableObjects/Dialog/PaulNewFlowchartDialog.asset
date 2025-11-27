@@ -54,7 +54,7 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
+  answerType: 4
   _popularityModifier: 0
 --- !u!114 &-8048188151878612785
 MonoBehaviour:
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: "\xC4h, geht schon."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 38efc634ea7c9437f9376e9f3e7a8842
-  Position: {x: 363.99985, y: 1393.7596}
+  Position: {x: 364.00003, y: 1361.0001}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "\xC4h, geht schon."
@@ -82,7 +82,7 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
+  answerType: 4
   _popularityModifier: 0
 --- !u!114 &-7585718207666709163
 MonoBehaviour:
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: "Ich wei\xDF gar nic..."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 378db561054754440a3a88fbe4210054
-  Position: {x: -495, y: 2610.2856}
+  Position: {x: -495.00006, y: 2236.2646}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Ich wei\xDF gar nicht warum ich dich damals so unangenehm fand."
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: "Du kannst \xFCbrige..."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 0d33c274007004e9d943895ae06b05f3
-  Position: {x: 363.99994, y: 1228}
+  Position: {x: 364.00003, y: 1228}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Du kannst \xFCbrigens immer zu mir kommen, das wei\xDFt du. Wir haben
@@ -196,7 +196,7 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
+  answerType: 4
   _popularityModifier: 0
 --- !u!114 &-5698017459747491426
 MonoBehaviour:
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: "N\xE4."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 474a8b1a5c3b0496c9e4338d5995b258
-  Position: {x: 363.9999, y: 1063.9999}
+  Position: {x: 364.00003, y: 1092.4053}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "N\xE4."
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: Bist du jetzt Au...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 653a78698769a469dafb09187f0dedc6
-  Position: {x: -295, y: 2294.3223}
+  Position: {x: -295.0001, y: 2080.2646}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Bist du jetzt Autorin geworden wie du immer gesagt hast? Das intellektuelle
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: Willst du Bettin...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: e85476316f76549bc84f6e39c9cc32d0
-  Position: {x: 982.5714, y: 1064}
+  Position: {x: 982.99994, y: 1092.4053}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Willst du Bettina jetzt abmurksen oder soll ich?
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: "(W\xFCrrrrg)"
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 9978ffcd41b814e63b7ca215346b255d
-  Position: {x: 675.24365, y: 1064}
+  Position: {x: 675, y: 1092.4053}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "(W\xFCrrrrg)"
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: "Die T\xFCr langsam ..."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: b70d5174ae7304a22a004a398990d82f
-  Position: {x: -295.00012, y: 3268.2148}
+  Position: {x: -295.0001, y: 2526.2646}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Die T\xFCr langsam wortlos schlie\xDFen"
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Name: Genau, ja, Autor...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 672652390f8d5470280aab6e9e495c12
-  Position: {x: -95, y: 2610}
+  Position: {x: -95.00004, y: 2236.2646}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Genau, ja, Autorin, genau.
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Name: O-kay
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: c2369e4cb381b472fb03eafb32ee614d
-  Position: {x: -295, y: 2068.072}
+  Position: {x: -295.0001, y: 1948.2645}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: O-kay
@@ -552,7 +552,7 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
+  answerType: 4
   _popularityModifier: 0
 --- !u!114 &2341995984515022322
 MonoBehaviour:
@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Name: Bist du dir sich...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: b8c00f28e8cd542bfb28a67a8c9943b9
-  Position: {x: 363.99985, y: 1562.375}
+  Position: {x: 364.00003, y: 1502.9999}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Bist du dir sicher? Ich war immer f\xFCr dich da, auch wenn du es
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Name: Meine Cousine is...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: cb03469873fe445f69d34df46d8337df
-  Position: {x: -295, y: 2953}
+  Position: {x: -295.0001, y: 2403.2646}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Meine Cousine ist ja auch Autorin. \"Verloren im Kuss der Sehnsucht\",
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_Name: Ja also ich hab ...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 97d1bff9a2ff74d9fbfaceee9d463597
-  Position: {x: -295, y: 1876.4647}
+  Position: {x: -295.0001, y: 1808.2645}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Ja also ich hab so'n \xDCberwachungsprogramm geschrieben. Das erkennt
@@ -806,5 +806,5 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
+  answerType: 4
   _popularityModifier: 0
