@@ -10,12 +10,12 @@ namespace Runtime.Scripts.Interactables
     {
         public AwarenessLevel awarenessLevel = AwarenessLevel.NotSet;
         public int Activity = 0;
-        
+        public bool IsUnlocked;
+
         [SerializeField] private DialogTreeRunner treeRunner;
         [SerializeField] private SauerteigStatusDisplay statusDisplay;
         [SerializeField] private DialogOptionNode unlockDialogOption;
-        [SerializeField] private bool isUnlocked;
-        
+
         private SphereCollider radarCollider;
          
         private void Awake()
@@ -26,7 +26,7 @@ namespace Runtime.Scripts.Interactables
 
         private void HandleDialogNodeSelected(DialogOptionNode node)
         {
-            if (!isUnlocked)
+            if (!IsUnlocked)
                 CheckIfSauerteigsGetsUnlocked(node);
             else
                 return;
@@ -39,7 +39,7 @@ namespace Runtime.Scripts.Interactables
             if (node != unlockDialogOption)
                 return;
             
-            isUnlocked = true;
+            IsUnlocked = true;
             statusDisplay.SetStatusSprite(awarenessLevel);
         }
 
@@ -96,7 +96,7 @@ namespace Runtime.Scripts.Interactables
 
         public void HandleInteractableDiscovered(InteractableState interactable)
         {
-            if(!isUnlocked)
+            if(!IsUnlocked)
                 return;
             
             switch (interactable.AwarenessLevel)

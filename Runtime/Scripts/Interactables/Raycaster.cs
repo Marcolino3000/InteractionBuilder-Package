@@ -61,7 +61,8 @@ namespace Runtime.Scripts.Interactables
             
             foreach (var (interactable, display) in interactables)
             {
-                // Debug.Log(interactable.gameObject.name);
+                if (!sauerteig.IsUnlocked)
+                    return;
                 
                 if (interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     continue;

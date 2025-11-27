@@ -140,6 +140,18 @@ MonoBehaviour:
           IsHardCondition: 1
       Name: Scene 2 - ThirdDialogWithPaul
       HighPriority: 0
+  - Trigger:
+      TriggerType: 0
+      TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: da159c790547c467bba8889760a0adc4, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 0}
+        Conditions: []
+      Name: TriggerPaul
+      HighPriority: 0
   references:
     version: 2
     RefIds:
