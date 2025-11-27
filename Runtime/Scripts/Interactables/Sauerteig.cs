@@ -27,20 +27,20 @@ namespace Runtime.Scripts.Interactables
         private void HandleDialogNodeSelected(DialogOptionNode node)
         {
             if (!IsUnlocked)
-                CheckIfSauerteigsGetsUnlocked(node);
-            else
-                return;
+                if (!CheckIfSauerteigsGetsUnlocked(node))
+                    return;
             
             SetActivityBasedOnDialog(node);
         }
 
-        private void CheckIfSauerteigsGetsUnlocked(DialogOptionNode node)
+        private bool CheckIfSauerteigsGetsUnlocked(DialogOptionNode node)
         {
             if (node != unlockDialogOption)
-                return;
+                return false;
             
             IsUnlocked = true;
             statusDisplay.SetStatusSprite(awarenessLevel);
+            return true;
         }
 
         private void SetActivityBasedOnDialog(DialogOptionNode node)
@@ -133,16 +133,17 @@ namespace Runtime.Scripts.Interactables
                     break;
             }
             
-            statusDisplay.SetStatusSprite(awarenessLevel);
+            if(IsUnlocked)
+                statusDisplay.SetStatusSprite(awarenessLevel);
         }
 
         private void OnGUI()
         {
-            GUILayout.BeginArea(new  Rect(0, 80,300 ,300));
+            GUILayout.BeginArea(new  Rect(0, 160,300 ,300));
             
-            GUI.Label(new Rect(0, 30, 200, 20), $"Activity: {Activity} | Level: {awarenessLevel}");
+            GUI.Label(new Rect(0, 40, 200, 25), $"Activity: {Activity} | Level: {awarenessLevel}");
             
-            if(GUI.Button(new Rect(0, 0, 100, 20), "Reset Sauerteig", GUI.skin.button))
+            if(GUI.Button(new Rect(0, 0, 130, 25), "Reset Sauerteig", GUI.skin.button))
             {
                 SetActivity(-Activity);
             }

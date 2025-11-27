@@ -8,7 +8,7 @@ namespace Runtime.Scripts.Interactables
     {
         // [SerializeField] private SphereCollider collider;
         [SerializeField] private TriggerArea triggerArea;
-        [SerializeField] private float colliderRadius;
+        private float colliderRadius = 1f;
         [SerializeField] private PlayerController player;
         [SerializeField] private bool playerIsNear;
         [SerializeField] private Renderer doorRenderer;
@@ -64,7 +64,7 @@ namespace Runtime.Scripts.Interactables
         {
             float distance = Vector3.Distance(player.transform.position, transform.position);
 
-            float transparency = distance / (colliderRadius * 4f);
+            float transparency = distance / (colliderRadius * 12f);
 
             var color = doorRenderer.material.color;
             color.a = transparency;
