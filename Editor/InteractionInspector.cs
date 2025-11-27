@@ -7,7 +7,8 @@ using UnityEngine.UIElements;
 namespace Editor.CustomInspectors
 {
     [CustomEditor(typeof(InteractionViewer), true)]
-    public class InteractionInspector : UnityEditor.Editor
+    public class 
+        InteractionInspector : UnityEditor.Editor
     {
         [SerializeField] private VisualTreeAsset rowUxml;
 

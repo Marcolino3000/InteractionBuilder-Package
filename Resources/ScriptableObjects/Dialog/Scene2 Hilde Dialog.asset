@@ -306,7 +306,7 @@ MonoBehaviour:
   Position: {x: 1363.7142, y: 74.85715}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
-  DialogLine: "Ah wie foi, dess i di dreff! Du, i muss dir unbedingd was geba.\nDa
+  DialogLine: "Ah wie foi, dess i di dreff!\nDu, i muss dir unbedingd was geba.\nDa
     heb mol.\nAlso was wichdich isch, isch dess du ihn jeda Dag f\xFCdderschd - wo
     isch er noh jedzd??"
   TextPreview: Ah wie foi, dess...

@@ -16,10 +16,10 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private Sauerteig sauerteig;
         [SerializeField] private bool isDialogRunning;
         [SerializeField] private TransparentWall transparentWall;
-        
+        [SerializeField] private bool playerIsInside;
+
         private Camera cam;
         private bool clickedWall;
-        private bool playerIsInside;
 
         private void OnEnable()
         {
@@ -77,8 +77,11 @@ namespace Runtime.Scripts.Interactables
             bool hits3D = GetHitsFrom3DRaycast(interactables);
             bool hits2D = GetHitsFrom2DRaycast(interactables);
             
-            if(!hits3D && !hits2D) 
+            if(!hits3D && !hits2D)
+            {
+                clickedWall = false;
                 return;
+            }
             
             if (clickedWall && !playerIsInside)
             {
@@ -95,17 +98,19 @@ namespace Runtime.Scripts.Interactables
                     
                 interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
 
-                if (interactable.MarkAsFoundWhenClicked &&
-                    sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel &&
+                if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel &&
                     interactable.Data.AwarenessLevel != AwarenessLevel.NotSet)
                 {
                     sauerteig.HandleInteractableDiscovered(interactable.Data);
-                    interactable.Found = true;
+                    
+                    if(interactable.MarkAsFoundWhenClicked)
+                        interactable.Found = true;
                 }
 
                 //only process the interactable closest to camera
                 return;
             }
+            clickedWall = false;
         }
 
         private bool GetHitsFrom3DRaycast(List<Tuple<Interactable, InteractableDisplay>> interactables)
@@ -129,7 +134,7 @@ namespace Runtime.Scripts.Interactables
                 
                 if(interactable == null || display == null)
                 {
-                    Debug.LogWarning("Interactable or Display was null - ignoring Raycast hit.");
+                    // Debug.LogWarning("Interactable or Display was null - ignoring Raycast hit.");
                     continue;
                 }
                 

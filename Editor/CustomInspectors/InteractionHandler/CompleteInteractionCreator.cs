@@ -48,7 +48,7 @@ namespace Editor
         private Toggle interactableToggle;
         private Button deleteButton;
         
-        private string assetPath = "Packages/com.marc.interactionbuilder/Resources/ScriptableObjects/";
+        private string assetPath = "Packages/com.cod.interactionbuilder/Resources/ScriptableObjects/";
         private string nameOfLastCreatedInteraction;
         private string dropDownValue;
         private string nameOfLastCreatedInteractable;
