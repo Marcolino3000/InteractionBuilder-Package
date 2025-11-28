@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623fa79c384042e3bb49a575d178c3c0, type: 3}
   m_Name: PaketeSuccessReaction
   m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Core.Reaction
-  DialogTree: {fileID: 0}
+  DialogTree: {fileID: 11400000, guid: e15e86ac1554e480390b907f03becffd, type: 2}
   Interactable: {fileID: 0}
   ObjectToMoveIn: {fileID: 0}
   ObjectToMoveOut: {fileID: 0}

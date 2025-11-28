@@ -18,6 +18,7 @@ namespace Runtime.Scripts.Interactables
         private float currentFadeTime;
         private StyleBackground backgroundImage;
         private VisualElement root;
+        [SerializeField] private float currentOpacity;
 
         private void OnEnable()
         {
@@ -107,9 +108,17 @@ namespace Runtime.Scripts.Interactables
                 currentFadeTime += Time.deltaTime;
                 
                 if(fadeIn)
-                    root.Query<VisualElement>("icon").First().style.opacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
+                {
+                    currentOpacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
+                    root.Query<VisualElement>("icon").First().style.opacity = currentOpacity;
+
+                }
                 else
-                    root.Query<VisualElement>("icon").First().style.opacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
+                {
+                    currentOpacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
+                    root.Query<VisualElement>("icon").First().style.opacity = currentOpacity;
+
+                }
                 
                 yield return null;
             }

@@ -25,7 +25,7 @@ namespace Runtime.Scripts.Interactables
         {
             cam = Camera.main;
             
-            dialogTreeRunner.OnDialogRunningStatusChanged += status =>
+            DialogTreeRunner.OnDialogRunningStatusChanged += status =>
             {
                 isDialogRunning = status;
             };
@@ -84,11 +84,11 @@ namespace Runtime.Scripts.Interactables
                 return;
             }
             
-            if (clickedWall && !playerIsInside)
-            {
-                clickedWall = false;
-                return;
-            }
+            // if (clickedWall && !playerIsInside)
+            // {
+            //     clickedWall = false;
+            //     return;
+            // }
                 
             foreach (var (interactable, display) in interactables)
             {

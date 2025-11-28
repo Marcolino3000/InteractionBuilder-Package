@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2818dd0c5b404dfe8aedaf83b49ab7b1, type: 3}
-  m_Name: "\xC4h lao jetzt hab..."
+  m_Name: "\xC4h also jetzt ha..."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: e51ac47178af241b483d4280c17bc17c
   Position: {x: 704, y: 515}
@@ -101,7 +101,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Ich wei\xDF gar nicht warum ich dich damals so unangenehm fand."
-  TextPreview: "Ich wei\xDF gar nic..."
+  TextPreview: '.......     '
   Children:
   - {fileID: 4775721121082114731}
   FallThrough: 0
@@ -328,11 +328,11 @@ MonoBehaviour:
   m_Name: Willst du Bettin...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: e85476316f76549bc84f6e39c9cc32d0
-  Position: {x: 982.99994, y: 1092.4053}
+  Position: {x: 983, y: 1092}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Willst du Bettina jetzt abmurksen oder soll ich?
-  TextPreview: Willst du Bettin...
+  TextPreview: Betina muss weg.
   Children:
   - {fileID: 7292865212971121757}
   FallThrough: 0
@@ -483,11 +483,11 @@ MonoBehaviour:
   m_Name: Bitte gib mir no...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: cfc3b86de9b264dcca1c78899fb0e6dd
-  Position: {x: 703.71436, y: 385}
+  Position: {x: 704, y: 385}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Bitte gib mir noch eine Chance!
-  TextPreview: Bitte gib mir no...
+  TextPreview: Gib mir noch ne Chance!
   Children:
   - {fileID: -8988139489344893849}
   FallThrough: 0
@@ -628,7 +628,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Woher wei\xDFt du eigentlich, dass ich in der Stadt bin?"
-  TextPreview: "Woher wei\xDFt du e..."
+  TextPreview: "Woher wei\xDFt du dass ich hier bin?"
   Children:
   - {fileID: 6800994452100073450}
   FallThrough: 0
@@ -797,7 +797,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Das war nur ironisch... also das...
-  TextPreview: Das war nur iron...
+  TextPreview: Ironie?!
   Children:
   - {fileID: -2688511531172365443}
   FallThrough: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623fa79c384042e3bb49a575d178c3c0, type: 3}
   m_Name: FlyerInManteltascheSuccessReaction
   m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Core.Reaction
-  DialogTree: {fileID: 0}
+  DialogTree: {fileID: 11400000, guid: 9ab3d5ebd98de4cd884258cdb09764a8, type: 2}
   Interactable: {fileID: 0}
   ObjectToMoveIn: {fileID: 0}
   ObjectToMoveOut: {fileID: 0}

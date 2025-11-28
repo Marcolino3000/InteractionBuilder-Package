@@ -49,6 +49,7 @@ namespace Runtime.Scripts.Animation
             foreach (var bubble in _bubbles)
             {
                 bubble.gameObject.SetActive(false);
+                bubble.OptionSelected -= OnOptionSelected;
             }
         }
 

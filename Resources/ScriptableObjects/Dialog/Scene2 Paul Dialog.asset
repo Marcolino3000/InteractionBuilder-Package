@@ -131,7 +131,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Das war nur ironisch... also das...
-  TextPreview: Das war nur iron...
+  TextPreview: Ironie?!
   Children:
   - {fileID: -6846182487938745993}
   FallThrough: 0
@@ -479,7 +479,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Bitte gib mir noch eine Chance!
-  TextPreview: Bitte gib mir no...
+  TextPreview: Gib mir noch ne Chance!
   Children:
   - {fileID: 8214506094242630894}
   FallThrough: 0

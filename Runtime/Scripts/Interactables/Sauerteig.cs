@@ -45,6 +45,7 @@ namespace Runtime.Scripts.Interactables
 
         private void SetActivityBasedOnDialog(DialogOptionNode node)
         {
+            
             if (node.Blackboard == null || node.Blackboard.CharacterData == null)
             {
                 Debug.LogWarning("Node-Blackboard or CharacterData was null. Bonding-status was not checked.");
@@ -58,6 +59,9 @@ namespace Runtime.Scripts.Interactables
 
             if (node is PlayerDialogOption playerOption)
             {
+                if (playerOption.Type == AnswerType.SelfTalk)
+                    return;
+                
                 switch (playerOption.Type)
                 {
                     case AnswerType.SmallTalk:

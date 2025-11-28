@@ -102,7 +102,10 @@ namespace Editor
                 AssetDatabase.CreateAsset(dialogTree, assetPath + "Dialog/" + interactionName + "Dialog.asset");
             }
 
+            interactionData = null;
             interactableState = null;
+            successReaction = null;
+            failureReaction = null;
 
             if (!createInteractionWithPrerequisites) 
                 return;
