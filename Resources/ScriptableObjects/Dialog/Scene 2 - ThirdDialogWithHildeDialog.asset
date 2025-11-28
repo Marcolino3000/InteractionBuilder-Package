@@ -38,7 +38,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: 
+  m_Name: '*Weggehen*'
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 33564488c01cd482b87f4f3c7001390e
   Position: {x: 1150.7142, y: 651}
@@ -322,7 +322,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "Joa, der chillt mit mir\u2026\nHat Mama irgendwas zu dem Ding erz\xE4hlt?"
-  TextPreview: Joa, der chillt ...
+  TextPreview: Joa, der chillt.
   Children:
   - {fileID: -8664938040736004517}
   FallThrough: 0
@@ -331,5 +331,5 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
+  answerType: 3
   _popularityModifier: 0

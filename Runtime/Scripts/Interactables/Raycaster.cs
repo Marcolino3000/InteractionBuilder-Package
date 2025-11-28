@@ -66,6 +66,9 @@ namespace Runtime.Scripts.Interactables
                 
                 if (interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     continue;
+                
+                if(sauerteig.awarenessLevel < interactable.Data.AwarenessLevel)
+                    continue;
 
                 display?.TriggerHoverEffect();
             }
@@ -92,7 +95,7 @@ namespace Runtime.Scripts.Interactables
                 
             foreach (var (interactable, display) in interactables)
             {
-                // Debug.Log(interactable.Data.name);
+                // Debug.Log(interactable.Data.name + " ");
                     
                 if (interactable.Found)
                     continue;
@@ -120,11 +123,12 @@ namespace Runtime.Scripts.Interactables
             RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << 6);
             Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
             
-            if (hits.Length > 0 && hits[0].collider.gameObject.name == "Wall")
-            {
-                clickedWall = true;
-                return false;
-            }
+            // if (hits.Length > 0 && hits[0].collider.gameObject.name == "Wall")
+            // {
+            //     clickedWall = true;
+            //     return false;
+            // }
+            
             
             foreach (var hit in hits)
             {

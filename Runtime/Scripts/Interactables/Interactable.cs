@@ -52,7 +52,7 @@ namespace Runtime.Scripts.Interactables
                 
                 if(Data.AwarenessLevel <= sauerteig.awarenessLevel)
                 {
-                    _interactableDiscoveredCallback = sauerteig.HandleInteractableDiscovered;
+                    // _interactableDiscoveredCallback = sauerteig.HandleInteractableDiscovered;
                     _interactableDisplay.Show();
                 }
             };

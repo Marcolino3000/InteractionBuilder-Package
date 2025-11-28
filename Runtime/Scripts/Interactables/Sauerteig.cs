@@ -8,8 +8,8 @@ namespace Runtime.Scripts.Interactables
 {
     public class Sauerteig : MonoBehaviour
     {
-        public AwarenessLevel awarenessLevel = AwarenessLevel.NotSet;
-        public int Activity = 0;
+        public AwarenessLevel awarenessLevel = AwarenessLevel.Basic;
+        public int Activity = 1;
         public bool IsUnlocked;
 
         [SerializeField] private DialogTreeRunner treeRunner;
@@ -71,7 +71,7 @@ namespace Runtime.Scripts.Interactables
                         SetActivity(-2);
                         break;
                     case AnswerType.TrashTalk:
-                        SetActivity(1);
+                        SetActivity(-1);
                         break;
                     case AnswerType.BusinessTalk:
                         SetActivity(-3);
@@ -109,7 +109,7 @@ namespace Runtime.Scripts.Interactables
                     SetActivity(2);
                     break;
                 case AwarenessLevel.Super:
-                    SetActivity(5);
+                    SetActivity(4);
                     break;
             }
         }
@@ -129,10 +129,10 @@ namespace Runtime.Scripts.Interactables
                 case 1 or 2:   
                     awarenessLevel = AwarenessLevel.Basic;
                     break;
-                case >= 3 and <= 6:
+                case >= 3 and <= 10:
                     awarenessLevel = AwarenessLevel.Super;
                     break;
-                case > 6:
+                case > 10:
                     awarenessLevel = AwarenessLevel.Overflow;
                     break;
             }

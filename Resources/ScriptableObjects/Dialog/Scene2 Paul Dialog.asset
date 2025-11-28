@@ -217,16 +217,15 @@ MonoBehaviour:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "*Die T\xFCr zuknallen*"
   TextPreview: "*Die T\xFCr zuknall..."
-  Children:
-  - {fileID: -6846182487938745993}
+  Children: []
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 2
+  _popularityModifier: -5
 --- !u!114 &-4663519145765460523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,16 +244,15 @@ MonoBehaviour:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "*Die T\xFCr zuknallen*"
   TextPreview: "*Die T\xFCr zuknall..."
-  Children:
-  - {fileID: 8214506094242630894}
+  Children: []
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 2
+  _popularityModifier: -5
 --- !u!114 &-4340736748771555055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,16 +677,15 @@ MonoBehaviour:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "*T\xFCr schlie\xDFen.*"
   TextPreview: "*T\xFCr schlie\xDFen.*..."
-  Children:
-  - {fileID: 4947966587424837287}
+  Children: []
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 2
+  _popularityModifier: -5
 --- !u!114 &8214506094242630894
 MonoBehaviour:
   m_ObjectHideFlags: 0

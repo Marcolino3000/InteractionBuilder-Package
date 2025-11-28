@@ -184,8 +184,7 @@ MonoBehaviour:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "*T\xFCr zumachen* hilde"
   TextPreview: "*T\xFCr zumachen* h..."
-  Children:
-  - {fileID: 1915434644692900419}
+  Children: []
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
@@ -551,7 +550,6 @@ MonoBehaviour:
   Children:
   - {fileID: 5610354696499689273}
   - {fileID: -3792276879913639869}
-  - {fileID: 3002424332067101770}
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
@@ -613,7 +611,6 @@ MonoBehaviour:
   Children:
   - {fileID: -3274434093672825564}
   - {fileID: 7790654144729022355}
-  - {fileID: -5552093274568481724}
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0
@@ -639,8 +636,7 @@ MonoBehaviour:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "*T\xFCr zumachen*"
   TextPreview: "*T\xFCr zumachen*"
-  Children:
-  - {fileID: 6672911882890037600}
+  Children: []
   FallThrough: 0
   IsAvailable: 1
   IsTrustOption: 0

@@ -58,18 +58,6 @@ MonoBehaviour:
       HighPriority: 0
   - Trigger:
       TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 88b3f975295dc49359d9e5681490041c, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 11400000, guid: da159c790547c467bba8889760a0adc4, type: 2}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 88b3f975295dc49359d9e5681490041c, type: 2}
-        Conditions: []
-      Name: 
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
       TriggeringInteractable: {fileID: 11400000, guid: f9afb1753248f494aa5d5acfd32def78, type: 2}
     Prerequisites:
     - Record:

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: 
+  m_Name: "\xC4hm, mach ich."
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 567951aaa5e5d48e1a34c0a7de53564e
   Position: {x: 769, y: 893}
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: 
+  m_Name: '*Weggehen*'
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 2856cfe501c0746ee9a191557580eddd
   Position: {x: 1104, y: 601}
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: 
+  m_Name: Wieder was dazug...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 99bd09f23b3c74673943089df578fd1f
   Position: {x: 429, y: 893.1429}
@@ -261,10 +261,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: 
+  m_Name: '*SAUERTEIG MIT H...'
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: a96f8fc15e8344af4856599304d3c4d8
-  Position: {x: 1440.8572, y: 601}
+  Position: {x: 1441, y: 601}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: '*SAUERTEIG MIT HILDE TEILEN*'
@@ -295,7 +295,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Warst du nach Mamas Beerdigung nochmal im Haus?
-  TextPreview: Warst du nach Ma...
+  TextPreview: Warst du im Haus?
   Children:
   - {fileID: 7401670588916880505}
   FallThrough: 0
