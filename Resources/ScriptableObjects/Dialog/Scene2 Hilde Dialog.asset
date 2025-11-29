@@ -241,7 +241,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Woher kennst du meine Mutter?
-  TextPreview: Woher kennst du ...
+  TextPreview: Woher kennst du sie?
   Children:
   - {fileID: 6672911882890037600}
   FallThrough: 0
@@ -250,8 +250,8 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 1
+  _popularityModifier: 5
 --- !u!114 &-3274434093672825564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Wie viel Grad soll der Sauerteig haben?
-  TextPreview: Wie viel Grad so...
+  TextPreview: Wie viel Grad?
   Children:
   - {fileID: -6320785389069112557}
   FallThrough: 0
@@ -325,7 +325,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Wie meine Mutter ist tot??
-  TextPreview: Wie meine Mutter...
+  TextPreview: Tot????
   Children:
   - {fileID: -5429559887749138470}
   FallThrough: 0
@@ -373,14 +373,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: 
+  m_Name: HILDE.
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 651aa10099be0490e9e14ac1f8494846
   Position: {x: 1054, y: 1634.4996}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: HILDE.
-  TextPreview: HILDE.
+  TextPreview: Hilde
   Children:
   - {fileID: 7345349763600981903}
   FallThrough: 0
@@ -459,7 +459,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: WIESO HAT MIR NIEMAND BESCHEID GESAGT?????
-  TextPreview: WIESO HAT MIR NI...
+  TextPreview: WIESO???
   Children:
   - {fileID: -7667402577899209179}
   FallThrough: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "WARTE MAL\u2026 JEMAND DER DIE GANZE ZEIT OHNE PUNKT UND KOMMA LABERT\u2026"
-  TextPreview: "WARTE MAL\u2026 JEMAN..."
+  TextPreview: Ich kenne dich doch
   Children:
   - {fileID: -129894050756352437}
   FallThrough: 0
@@ -574,7 +574,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "AH, DIE, DIE IMMER UNF\xC4LLE BAUT."
-  TextPreview: AH, DIE, DIE IMM...
+  TextPreview: "Die immer Unf\xE4llw baut"
   Children:
   - {fileID: 7359079574592028728}
   FallThrough: 0
@@ -728,8 +728,8 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 1
+  _popularityModifier: 5
 --- !u!114 &5805510002860701490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +747,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Wo ist denn meine Mutter?
-  TextPreview: Wo ist denn mein...
+  TextPreview: Wo ist Mutter?
   Children:
   - {fileID: -7043915096710217953}
   FallThrough: 0
@@ -756,8 +756,8 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 1
+  _popularityModifier: 5
 --- !u!114 &6114419220264409788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +804,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Hast du Lack gesoffen?? Wie, meine Mutter ist tot??
-  TextPreview: Hast du Lack ges...
+  TextPreview: ?!?!??!?!
   Children:
   - {fileID: -5429559887749138470}
   FallThrough: 0
@@ -841,8 +841,8 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 1
+  _popularityModifier: 5
 --- !u!114 &6672911882890037600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,7 +944,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: Wo ist meine Mutter?
-  TextPreview: Wo ist meine Mut...
+  TextPreview: Wo ist Mutter?
   Children:
   - {fileID: 1915434644692900419}
   FallThrough: 0
@@ -953,8 +953,8 @@ MonoBehaviour:
   IsBondingOption: 0
   RequiredNodes: []
   BlockerNodes: []
-  answerType: 0
-  _popularityModifier: 0
+  answerType: 1
+  _popularityModifier: 5
 --- !u!114 &8942976654853822453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,7 +972,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: WAS IST PASSIERT??
-  TextPreview: WAS IST PASSIERT...
+  TextPreview: WAS???
   Children:
   - {fileID: 4377158121581819798}
   FallThrough: 0

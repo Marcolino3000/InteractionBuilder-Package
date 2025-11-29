@@ -187,7 +187,6 @@ MonoBehaviour:
   Children:
   - {fileID: -2798511180074774367}
   - {fileID: 3653713577633115095}
-  - {fileID: 2412949410125263133}
   - {fileID: 3194057363990460527}
   FallThrough: 0
   IsAvailable: 1

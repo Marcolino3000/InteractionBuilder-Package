@@ -209,7 +209,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 62b539070ac644f6eb8e8be906c4d929, type: 2}
   DialogLine: "Uhh\u2026 wird der nicht nach Jahrzehnten mal schlecht?"
-  TextPreview: "Uhh\u2026 wird der ni..."
+  TextPreview: "Uhh\u2026 "
   Children:
   - {fileID: -7128458790130261070}
   FallThrough: 0

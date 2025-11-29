@@ -194,6 +194,18 @@ MonoBehaviour:
         Conditions: []
       Name: Pakete
       HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 88b3f975295dc49359d9e5681490041c, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: cb623e9ae54d945c1bb32c5aac54c52a, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 88b3f975295dc49359d9e5681490041c, type: 2}
+        Conditions: []
+      Name: CloseDoor
+      HighPriority: 0
   references:
     version: 2
     RefIds:

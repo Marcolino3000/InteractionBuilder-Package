@@ -148,7 +148,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Welcher Schlager-Star kommt nochmal zur Hochzeit?
-  TextPreview: Welcher Schlager...
+  TextPreview: Wer singt gleich nochmal?
   Children:
   - {fileID: 1832519594718489573}
   FallThrough: 0

@@ -91,14 +91,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0bd1f85e094e118b634ba4dd916b80, type: 3}
-  m_Name: Wann hast du das...
+  m_Name: Hast du sie gese...
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: e4c1efd15703a4d41b289768f719237c
   Position: {x: 1228, y: 616}
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
-  DialogLine: Wann hast du das letzte Mal meine Mutter gesehen?
-  TextPreview: Wann hast du das...
+  DialogLine: Hast du sie gesehen?
+  TextPreview: Hast du sie gese...
   Children:
   - {fileID: -8170033552934632613}
   FallThrough: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Welcher Schlager-Star kommt nochmal zur Hochzeit?
-  TextPreview: Welcher Schlager...
+  TextPreview: Wer singt gleich nochmal?
   Children:
   - {fileID: -8574979270476268072}
   FallThrough: 0
