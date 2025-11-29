@@ -51,130 +51,126 @@ namespace Runtime.Scripts.Interactables
 
         private void HandleHoverOnInteractables()
         {
-            var interactables = new List<Tuple<Interactable, InteractableDisplay>>();
-
-            bool hits3D = GetHitsFrom3DRaycast(interactables);
-            bool hits2D = GetHitsFrom2DRaycast(interactables);
+            var hits = GetAllSortedRaycastHits();
             
-            if(!hits3D && !hits2D) 
-                return;
-            
-            foreach (var (interactable, display) in interactables)
+            foreach (var hit in hits)
             {
+                if (hit.interactable == null)
+                {
+                    continue;
+                }
+                
                 if (!sauerteig.IsUnlocked)
                     return;
-                
-                if (interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
-                    continue;
-                
-                if(sauerteig.awarenessLevel < interactable.Data.AwarenessLevel)
+
+                if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     continue;
 
-                display?.TriggerHoverEffect();
+                if(sauerteig.awarenessLevel < hit.interactable.Data.AwarenessLevel)
+                    continue;
+
+                hit.display?.TriggerHoverEffect();
             }
         }
 
         private void HandleClickOnInteractables()
         {
-            var interactables = new List<Tuple<Interactable, InteractableDisplay>>();
+            var hits = GetAllSortedRaycastHits();
 
-            bool hits3D = GetHitsFrom3DRaycast(interactables);
-            bool hits2D = GetHitsFrom2DRaycast(interactables);
+            Debug.Log("//////HITS///////////////////");
             
-            if(!hits3D && !hits2D)
+            foreach (var hit in hits)
             {
-                clickedWall = false;
+                Debug.Log(hit.target.name + ": " + hit.distance);
+            }
+
+            if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall" || hits[0].interactable == null))
+            {
+                Debug.Log("click raycast early return");
                 return;
             }
-            
-            // if (clickedWall && !playerIsInside)
-            // {
-            //     clickedWall = false;
-            //     return;
-            // }
-                
-            foreach (var (interactable, display) in interactables)
-            {
-                // Debug.Log(interactable.Data.name + " ");
-                    
-                if (interactable.Found)
-                    continue;
-                    
-                interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
 
-                if (sauerteig.awarenessLevel >= interactable.Data.AwarenessLevel &&
-                    interactable.Data.AwarenessLevel != AwarenessLevel.NotSet)
+            foreach (var hit in hits)
+            {
+                if(hit.target.name == "Wall")
+                    continue;
+                
+                if (hit.interactable.Found)
+                    continue;
+
+                hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
+
+                if (sauerteig.awarenessLevel >= hit.interactable.Data.AwarenessLevel &&
+                    hit.interactable.Data.AwarenessLevel != AwarenessLevel.NotSet)
                 {
-                    sauerteig.HandleInteractableDiscovered(interactable.Data);
-                    
-                    if(interactable.MarkAsFoundWhenClicked)
-                        interactable.Found = true;
+                    sauerteig.HandleInteractableDiscovered(hit.interactable.Data);
+
+                    if(hit.interactable.MarkAsFoundWhenClicked)
+                        hit.interactable.Found = true;
                 }
 
                 //only process the interactable closest to camera
                 return;
             }
-            clickedWall = false;
         }
 
-        private bool GetHitsFrom3DRaycast(List<Tuple<Interactable, InteractableDisplay>> interactables)
+        private struct RaycastInteractableHit
+        {
+            public Interactable interactable;
+            public InteractableDisplay display;
+            public float distance;
+            public GameObject target;
+            public RaycastInteractableHit(Interactable interactable, InteractableDisplay display, float distance, GameObject target)
+            {
+                this.interactable = interactable;
+                this.display = display;
+                this.distance = distance;
+                this.target = target;
+            }
+        }
+
+        private bool GetHitsFrom3DRaycast(List<RaycastInteractableHit> interactables)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << 6);
-            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-            
-            // if (hits.Length > 0 && hits[0].collider.gameObject.name == "Wall")
-            // {
-            //     clickedWall = true;
-            //     return false;
-            // }
-            
-            
             foreach (var hit in hits)
             {
                 var hitCollider = hit.collider;
-            
                 var interactable = hitCollider.gameObject.GetComponentInChildren<Interactable>();
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                
-                if(interactable == null || display == null)
-                {
-                    // Debug.LogWarning("Interactable or Display was null - ignoring Raycast hit.");
-                    continue;
-                }
-                
-                interactables.Add(new Tuple<Interactable, InteractableDisplay>(interactable, display));
+                // if(interactable == null || display == null)
+                //     continue;
+                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hit.collider.gameObject));
             }
-
             return interactables.Count > 0;
         }
 
-        private bool GetHitsFrom2DRaycast(List<Tuple<Interactable, InteractableDisplay>> interactables)
+        private bool GetHitsFrom2DRaycast(List<RaycastInteractableHit> interactables)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            
-            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 30, Color.red);
             var hits = Physics2D.GetRayIntersectionAll(ray, Mathf.Infinity);
-
-            // interactables = new List<Tuple<Interactable, InteractableDisplay>>();
-            
             foreach (var hit in hits)
             {
                 var hitCollider = hit.collider;
-            
                 var interactable = hitCollider.gameObject.GetComponentInChildren<Interactable>();
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                
-                if(interactable == null || display == null)
-                {
-                    Debug.LogWarning("Interactable or Display was null - ignoring Raycast hit.");
-                    continue;
-                }
-                
-                interactables.Add(new Tuple<Interactable, InteractableDisplay>(interactable, display));
+                // if(interactable == null || display == null)
+                //     continue;
+                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject));
             }
-
             return interactables.Count > 0;
+        }
+
+        private List<RaycastInteractableHit> GetAllSortedRaycastHits()
+        {
+            var interactables3D = new List<RaycastInteractableHit>();
+            var interactables2D = new List<RaycastInteractableHit>();
+            GetHitsFrom3DRaycast(interactables3D);
+            GetHitsFrom2DRaycast(interactables2D);
+            var allInteractables = new List<RaycastInteractableHit>(interactables3D);
+            allInteractables.AddRange(interactables2D);
+            allInteractables.Sort((a, b) => a.distance.CompareTo(b.distance));
+            return allInteractables;
         }
     }
 }
