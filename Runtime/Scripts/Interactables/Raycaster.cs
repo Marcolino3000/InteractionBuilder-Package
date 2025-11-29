@@ -30,7 +30,7 @@ namespace Runtime.Scripts.Interactables
                 isDialogRunning = status;
             };
             
-            transparentWall.OnPlayerEnter += () =>
+            transparentWall.OnPlayerTrigger += (wall) =>
             {
                  playerIsInside = !playerIsInside;
             };

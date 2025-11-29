@@ -8,7 +8,7 @@ namespace Runtime.Scripts.Interactables
 {
     public class TransparentWall : MonoBehaviour
     {
-        public event Action OnPlayerEnter;
+        public event Action<TransparentWall> OnPlayerTrigger;
         private void OnTriggerEnter(Collider other)
         {
             if(other.GetComponent<PlayerController>() == null)
@@ -19,7 +19,7 @@ namespace Runtime.Scripts.Interactables
 
         private IEnumerator StartPlayerEnteredCooldown()
         {
-            OnPlayerEnter?.Invoke();
+            OnPlayerTrigger?.Invoke(this);
             // Debug.Log("player triggered wall");
 
             yield return new WaitForSeconds(1f);
