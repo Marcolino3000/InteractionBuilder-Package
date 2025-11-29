@@ -25,10 +25,10 @@ namespace Runtime.Scripts.Interactables
         {
             cam = Camera.main;
             
-            DialogTreeRunner.OnDialogRunningStatusChanged += status =>
-            {
-                isDialogRunning = status;
-            };
+            // DialogTreeRunner.OnDialogRunningStatusChanged += status =>
+            // {
+            //     isDialogRunning = status;
+            // };
             
             transparentWall.OnPlayerTrigger += (wall) =>
             {

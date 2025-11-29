@@ -206,6 +206,21 @@ MonoBehaviour:
         Conditions: []
       Name: CloseDoor
       HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 11400000, guid: 0da0d0da5081e459c890c4d75f9945a2, type: 2}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+        Conditions:
+        - RecordedState:
+            rid: 7734685640481308874
+          IsHardCondition: 0
+      Name: PaulTalksThroughDoor
+      HighPriority: 0
   references:
     version: 2
     RefIds:
@@ -224,28 +239,40 @@ MonoBehaviour:
       data:
         Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
         ThresholdReached: 1
+        IsRunning: 0
     - rid: 7734685591399825408
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
         Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
         ThresholdReached: 1
+        IsRunning: 0
     - rid: 7734685591399826067
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
         Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
         ThresholdReached: 1
+        IsRunning: 0
     - rid: 7734685591399826222
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
         Owner: {fileID: 11400000, guid: c2e8167266c1941f1b2811c37d0ee03d, type: 2}
         ThresholdReached: 1
+        IsRunning: 0
     - rid: 7734685593366430162
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
         Owner: {fileID: 11400000, guid: 366b07b77a02849438126c8695c2064e, type: 2}
         ThresholdReached: 1
+        IsRunning: 0
     - rid: 7734685593366430163
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
         Owner: {fileID: 11400000, guid: 59378320ecb1e4faebe57eab6f8d7936, type: 2}
         ThresholdReached: 1
+        IsRunning: 0
+    - rid: 7734685640481308874
+      type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
+      data:
+        Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
+        ThresholdReached: 0
+        IsRunning: 1

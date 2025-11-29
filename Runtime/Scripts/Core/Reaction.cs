@@ -18,20 +18,20 @@ namespace Runtime.Scripts.Core
         public InteractableState Interactable;
         public InteractableState ObjectToMoveIn;
         public InteractableState ObjectToMoveOut;
-        public bool CancelCurrentDialog;
+        public bool CancelCurrentInteraction;
         
         public void Execute()
         {
-            if (CancelCurrentDialog)
+            if (CancelCurrentInteraction)
             {
-                Debug.Log("Cancel Dialog called");
-                OnStopDialog?.Invoke();
+                // Debug.Log("Cancel Interaction called");
+                // OnStopDialog?.Invoke();
             }
 
             if(DialogTree != null)
             {
-                OnSetDialogTree?.Invoke(DialogTree);
                 OnStopDialog?.Invoke();
+                OnSetDialogTree?.Invoke(DialogTree);
                 OnStartDialog?.Invoke();
             }
 

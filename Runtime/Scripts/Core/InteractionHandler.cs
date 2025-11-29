@@ -5,6 +5,7 @@ using Core;
 using Runtime.Scripts.Interactables;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using Tree;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,7 +25,6 @@ namespace Runtime.Scripts.Core
         private void HandleInteractionTrigger(InteractionTriggerVia triggerType,
             InteractableState triggeringInteractable)
         {
-            lastInteractions.ForEach(i => i.IncrementCount());
             lastInteractions = new List<InteractionData>();
             
             var trigger = new Trigger(triggerType, triggeringInteractable);
@@ -66,22 +66,8 @@ namespace Runtime.Scripts.Core
                 interactable.OnInteractionStarted += HandleInteractionTrigger;
                 interactable.OnExitedTriggerArea += HandleInteractionTrigger;
             }
-            
-            // var characterPaths = AssetDatabase.FindAssets("t:CharacterData")
-            //     .Select(AssetDatabase.GUIDToAssetPath).ToList();
-            //
-            // foreach (var path in characterPaths)
-            // {
-            //     var character = AssetDatabase.LoadAssetAtPath<CharacterData>(path);
-            //     character.OnPopularityThresholdReached += () => { HandlePopularityThresholdReached(character); };
-            // }
         }
-
-        // private void HandlePopularityThresholdReached(CharacterData characterData)
-        // {
-        //     throw new NotImplementedException();
-        // }
-
+        
         private void FindEventSystem()
         {
             if (Application.isPlaying)
@@ -103,6 +89,26 @@ namespace Runtime.Scripts.Core
             FindEventSystem();
             SetDialogOptionsAvailability();
             ResetLastInteractions();
+            SubscribeToDialogEvents();
+        }
+
+        private void SubscribeToDialogEvents()
+        {
+            DialogTreeRunner.OnDialogRunningStatusChanged += HandleDialogStatusChanged;
+        }
+
+        private void HandleDialogStatusChanged(bool isRunning, DialogTree dialogTree)
+        {
+            lastInteractions
+                .Where(i => 
+                    (i.successReaction.DialogTree == dialogTree) ||
+                    (i.failureReaction.DialogTree == dialogTree))
+                .ForEach(i => 
+                {
+                    i.IsRunning = isRunning;
+                    if(!isRunning)
+                        i.IncrementCount();
+                });
         }
 
         private void ResetLastInteractions()

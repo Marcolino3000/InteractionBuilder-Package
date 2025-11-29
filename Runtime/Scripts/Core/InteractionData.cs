@@ -15,9 +15,10 @@ namespace Runtime.Scripts.Core
         [SerializeField] public Reaction successReaction;
         [SerializeField] public Reaction failureReaction;
 
-        public override StateData CurrentState => new InteractionStateData { Owner = this, ThresholdReached = ThresholdReached };
+        public override StateData CurrentState => new InteractionStateData { Owner = this, ThresholdReached = ThresholdReached, IsRunning = IsRunning };
         public bool ThresholdReached;
-
+        public bool IsRunning;
+        
         public void IncrementCount()
         {
             Count++;
@@ -60,6 +61,7 @@ namespace Runtime.Scripts.Core
         public record InteractionStateData : StateData
         {
             public bool ThresholdReached;
+            public bool IsRunning;
         }
 
         public override void SetState(StateData state)
