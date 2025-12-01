@@ -101,8 +101,8 @@ namespace Runtime.Scripts.Core
         {
             lastInteractions
                 .Where(i => 
-                    (i.successReaction.DialogTree == dialogTree) ||
-                    (i.failureReaction.DialogTree == dialogTree))
+                    (i?.successReaction?.DialogTree == dialogTree) ||
+                    (i?.failureReaction?.DialogTree == dialogTree))
                 .ForEach(i => 
                 {
                     i.IsRunning = isRunning;

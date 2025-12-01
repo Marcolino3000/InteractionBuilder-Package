@@ -54,10 +54,14 @@ public class LocationTrigger : MonoBehaviour
 
     public void ToggleObjectColliders(bool enable)
     {
-        var colliders = GetComponentsInChildren<PolygonCollider2D>();
-        foreach (var col in colliders)
+        foreach (Transform child in transform)
         {
-            col.enabled = enable;
+            child.gameObject.SetActive(enable);
         }
+        // var colliders = GetComponentsInChildren<PolygonCollider2D>();
+        // foreach (var col in colliders)
+        // {
+        //     col.enabled = enable;
+        // }
     }
 }
