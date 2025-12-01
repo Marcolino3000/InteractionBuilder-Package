@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using Runtime.Scripts.Core;
-using Sirenix.Utilities;
 using Tree;
-using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables

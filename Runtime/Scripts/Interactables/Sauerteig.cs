@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using Nodes.Decorator;
+using Runtime.Scripts.PlayerInput;
 using Tree;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
 {
-    public class Sauerteig : MonoBehaviour
+    public class Sauerteig : MonoBehaviour, IPlayerInputReceiver
     {
         public AwarenessLevel awarenessLevel = AwarenessLevel.Basic;
         public int Activity = 1;
@@ -153,6 +154,11 @@ namespace Runtime.Scripts.Interactables
             }
             
             GUILayout.EndArea();
+        }
+
+        public void HandleTrigger()
+        {
+            throw new NotImplementedException();
         }
     }
     
