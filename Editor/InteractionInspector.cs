@@ -37,12 +37,12 @@ namespace Editor.CustomInspectors
             // Add default inspector for debugging
             root.Add(triggerToPrereqsField);
             
-            AddInteractionFields(triggerToPrerequisites);
+            AddTriggerFields(triggerToPrerequisites);
             
             return root ;
         }
 
-        private void AddInteractionFields(SerializedProperty triggerToPrerequisites)
+        private void AddTriggerFields(SerializedProperty triggerToPrerequisites)
         {
             for (int i = 0; i < triggerToPrerequisites.arraySize; i++)
             {
@@ -66,7 +66,7 @@ namespace Editor.CustomInspectors
 
                 triggerContainer.Add(triggerTypeLabel);
                 triggerContainer.Add(triggeringInteractableField);
-                triggerContainer.Add(AddDeleteButton(i, triggerToPrerequisites));
+                // triggerContainer.Add(AddDeleteButton(i, triggerToPrerequisites));
                 
                 triggerFoldoutContainer.Add(triggerContainer);
                 triggerFoldoutContainer.Add(triggerFoldout);
@@ -124,6 +124,9 @@ namespace Editor.CustomInspectors
                         conditionsFoldout.Add(stateWithSettingsField);
                     }
                 }
+                row.style.flexDirection = FlexDirection.Row;
+                
+                row.Add(AddDeleteButton(j, prereqs));
 
                 triggerFoldout.Add(row);
             }
@@ -153,9 +156,14 @@ namespace Editor.CustomInspectors
             {
                 triggerToPrerequisites.DeleteArrayElementAtIndex(currentIndex);
                 serializedObject.ApplyModifiedProperties();
-                ForceRedraw();
+                var viewer = serializedObject.targetObject as InteractionViewer;
+                viewer?.DeleteTriggersWithNoPrerequisites();
+                
+                // ForceRedraw();
             });
+            
             deleteButton.style.height = 25;
+            deleteButton.style.marginLeft = 15;
             deleteButton.text = "Delete";
 
             return deleteButton;

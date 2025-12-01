@@ -45,6 +45,12 @@ namespace Runtime.Scripts.Core
             
             AddToList(trigger, record, interactionName, highPriority);
             
+            DeleteTriggersWithNoPrerequisites();
+        }
+
+        public void DeleteTriggersWithNoPrerequisites()
+        {
+            triggerToPrerequisites.RemoveAll(t => t.Prerequisites.Count == 0 || t.Prerequisites == null);
         }
 
         private void AddToList(Trigger newTrigger, PrerequisiteRecord record, string interactionName, bool highPriority)

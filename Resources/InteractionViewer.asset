@@ -229,66 +229,6 @@ MonoBehaviour:
           IsHardCondition: 0
       Name: PaulTalksThroughDoor
       HighPriority: 0
-  - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 0}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-        Conditions: []
-      Name: PaulTalksThroughDoor
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 0}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-        Conditions: []
-      Name: PaulTalksThroughDoor
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 0}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-        Conditions: []
-      Name: PaulTalksThroughDoor
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 0}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-        Conditions: []
-      Name: PaulTalksThroughDoor
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 0}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
-        Conditions: []
-      Name: PaulTalksThroughDoor
-      HighPriority: 0
   references:
     version: 2
     RefIds:
