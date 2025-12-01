@@ -29,6 +29,14 @@ MonoBehaviour:
           IsHardCondition: 0
       Name: Key
       HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
+        Conditions: []
+      Name: PaulTalksThroughDoor
+      HighPriority: 0
   - Trigger:
       TriggerType: 2
       TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
@@ -219,6 +227,66 @@ MonoBehaviour:
         - RecordedState:
             rid: 7734685640481308874
           IsHardCondition: 0
+      Name: PaulTalksThroughDoor
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+        Conditions: []
+      Name: PaulTalksThroughDoor
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+        Conditions: []
+      Name: PaulTalksThroughDoor
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+        Conditions: []
+      Name: PaulTalksThroughDoor
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+        Conditions: []
+      Name: PaulTalksThroughDoor
+      HighPriority: 0
+  - Trigger:
+      TriggerType: 2
+      TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+    Prerequisites:
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 2
+        TriggeringInteractable: {fileID: 11400000, guid: 8d4f2d6aed1c849529d827ebbbc7256a, type: 2}
+        Conditions: []
       Name: PaulTalksThroughDoor
       HighPriority: 0
   references:

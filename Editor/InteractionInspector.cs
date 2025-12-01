@@ -12,10 +12,12 @@ namespace Editor.CustomInspectors
     {
         [SerializeField] private VisualTreeAsset rowUxml;
 
+        private VisualElement root;
+
         public override VisualElement CreateInspectorGUI()
         {
             EditorApplication.projectChanged += TriggerRepaint;
-            var root = new VisualElement();
+            root = new VisualElement();
 
             var viewer = (InteractionViewer)target;
             
@@ -31,53 +33,40 @@ namespace Editor.CustomInspectors
             SerializedProperty triggerToPrerequisites = serializedObject.FindProperty(triggerToPrereqsName);
             var triggerToPrereqsField = new PropertyField();
             triggerToPrereqsField.BindProperty(triggerToPrerequisites);
-            // triggerToPrereqsField.RegisterValueChangeCallback(TriggerRepaint);
             
+            // Add default inspector for debugging
             root.Add(triggerToPrereqsField);
             
+            AddInteractionFields(triggerToPrerequisites);
+            
+            return root ;
+        }
+
+        private void AddInteractionFields(SerializedProperty triggerToPrerequisites)
+        {
             for (int i = 0; i < triggerToPrerequisites.arraySize; i++)
             {
                 var triggerFoldoutContainer = new VisualElement();
                 triggerFoldoutContainer.style.flexDirection = FlexDirection.Row;
-                // triggerFoldoutContainer.style.marginBottom = 20;
-                
-                var triggerContainer = new VisualElement();
-                triggerContainer.style.flexDirection = FlexDirection.Column;
-                triggerContainer.style.flexGrow = 0f;
-                triggerContainer.style.flexShrink = 0f;
-                triggerContainer.style.width = 150;
-                triggerContainer.style.marginLeft = 10f;
-                
+
                 SerializedProperty trigger = triggerToPrerequisites.GetArrayElementAtIndex(i).FindPropertyRelative("Trigger");
-                
+
                 string triggerType = trigger.FindPropertyRelative("TriggerType").enumNames[trigger.FindPropertyRelative("TriggerType").enumValueIndex];
                 var triggerTypeLabel = new Label("Trigger Type: " + triggerType);
                 triggerTypeLabel.style.marginBottom = 5;
 
                 var triggeringInteractableField = new ObjectField();
-                // triggeringInteractableField.style.width = 150;
                 triggeringInteractableField.BindProperty(trigger.FindPropertyRelative("TriggeringInteractable"));
-                
-                var currentIndex = i;
-                var deleteButton = new Button(() =>
-                {
-                    triggerToPrerequisites.DeleteArrayElementAtIndex(currentIndex);
-                    serializedObject.ApplyModifiedProperties();
-                    // Recreate the inspector GUI
-                    root.Clear();
-                    var newInspector = CreateInspectorGUI();
-                    root.Add(newInspector);
-                });
-                deleteButton.style.height = 25;
-                deleteButton.text = "Delete";
-                
+
                 var triggerFoldout = new Foldout();
                 triggerFoldout.text = "Interactions: ";
                 triggerFoldout.style.marginLeft = 20;
-                
+
+                var triggerContainer = CreateTriggerContainer();
+
                 triggerContainer.Add(triggerTypeLabel);
                 triggerContainer.Add(triggeringInteractableField);
-                triggerContainer.Add(deleteButton);
+                triggerContainer.Add(AddDeleteButton(i, triggerToPrerequisites));
                 
                 triggerFoldoutContainer.Add(triggerContainer);
                 triggerFoldoutContainer.Add(triggerFoldout);
@@ -86,74 +75,97 @@ namespace Editor.CustomInspectors
                 
                 SerializedProperty prereqs = triggerToPrerequisites.GetArrayElementAtIndex(i).FindPropertyRelative("Prerequisites");
                 
-                for (int j = 0; j < prereqs.arraySize; j++)
-                {
-                    var row = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();
-                    row.style.marginBottom = 15;
-                    
-                    SerializedProperty prereq = prereqs.GetArrayElementAtIndex(j);
-
-                    // var enumField = row.Q<EnumField>();
-                    // if (enumField != null)
-                    // {
-                    //     enumField.BindProperty(prereq.FindPropertyRelative("Record").FindPropertyRelative("TriggerType"));
-                    // }
-                    
-                    var interactionToExecuteField = row.Q<ObjectField>("interactionToExecute");
-                    if (interactionToExecuteField != null)
-                    {
-                        interactionToExecuteField.BindProperty(prereq.FindPropertyRelative("Record").FindPropertyRelative("InteractionToExecute"));
-                    }
-                    
-                    var optionToUnlock = row.Q<ObjectField>("dialogOptionNode");
-                    if (optionToUnlock != null)
-                    {
-                        optionToUnlock.BindProperty(prereq.FindPropertyRelative("Record").FindPropertyRelative("DialogOptionToUnlock"));
-                    }
-                    
-                    var conditionsField = row.Q<PropertyField>("conditions");
-                    
-                    SerializedProperty conditions = prereq.FindPropertyRelative("Record").FindPropertyRelative("Conditions");
-                    
-                    conditionsField.BindProperty(conditions);
-                    // conditionsField.RegisterValueChangeCallback(TriggerRepaint);
-
-                    var conditionsFoldout = new Foldout();
-                    
-                    if (conditions.propertyType == SerializedPropertyType.Generic)
-                    {
-                        
-                        // conditionsField.BindProperty(conditions);
-                        for(int w = 0; w < conditions.arraySize; w++)
-                        {
-                            // var obj = conditions.GetArrayElementAtIndex(i).FindPropertyRelative("RecordedState").objectReferenceValue;
-                            var obj = conditions.GetArrayElementAtIndex(w);
-                            var value = obj.boxedValue;
-                            // var hardCondition = obj.FindPropertyRelative("IsHardCondition");
-                            var stateWithSettingsField = new PropertyField();
-                            stateWithSettingsField.BindProperty(obj);
-                            conditionsFoldout.Add(stateWithSettingsField);
-                            
-                            // var recordedState = obj.FindPropertyRelative("RecordedState");
-                            // var recordedStateField = new PropertyField(recordedState);
-                            // recordedStateField.BindProperty(recordedState);
-                            // conditionsFoldout.Add(recordedStateField);
-                        }
-                    }
-                    
-                    // row.Add(conditionsFoldout);
-                    
-                    triggerFoldout.Add(row);
-                }
+                CreatePrerequisiteFields(prereqs, triggerFoldout);
                 
                 root.Add(triggerFoldoutContainer);
-                
                 root.Add(CreateRowSeparator());
             }
+        }
 
-            // InspectorElement.FillDefaultInspector(root , serializedObject, this);
+        private void CreatePrerequisiteFields(SerializedProperty prereqs, Foldout triggerFoldout)
+        {
+            for (int j = 0; j < prereqs.arraySize; j++)
+            {
+                var row = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>
+                    ("Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();
+                row.style.marginBottom = 15;
+                    
+                SerializedProperty prereq = prereqs.GetArrayElementAtIndex(j);
+                    
+                var interactionToExecuteField = row.Q<ObjectField>("interactionToExecute");
+                if (interactionToExecuteField != null)
+                {
+                    interactionToExecuteField.BindProperty(prereq.FindPropertyRelative("Record").FindPropertyRelative("InteractionToExecute"));
+                }
+                    
+                var optionToUnlock = row.Q<ObjectField>("dialogOptionNode");
+                if (optionToUnlock != null)
+                {
+                    optionToUnlock.BindProperty(prereq.FindPropertyRelative("Record").FindPropertyRelative("DialogOptionToUnlock"));
+                }
+                    
+                var conditionsField = row.Q<PropertyField>("conditions");
+                    
+                SerializedProperty conditions = prereq.FindPropertyRelative("Record").FindPropertyRelative("Conditions");
+                    
+                conditionsField.BindProperty(conditions);
 
-            return root ;
+                var conditionsFoldout = new Foldout();
+                    
+                if (conditions.propertyType == SerializedPropertyType.Generic)
+                {
+                        
+                    for(int w = 0; w < conditions.arraySize; w++)
+                    {
+                        var obj = conditions.GetArrayElementAtIndex(w);
+                        var value = obj.boxedValue;
+                        var stateWithSettingsField = new PropertyField();
+                        stateWithSettingsField.BindProperty(obj);
+                        conditionsFoldout.Add(stateWithSettingsField);
+                    }
+                }
+
+                triggerFoldout.Add(row);
+            }
+        }
+
+        private VisualElement CreateTriggerContainer()
+        {
+            var triggerContainer = new VisualElement
+            {
+                style =
+                {
+                    flexDirection = FlexDirection.Column,
+                    flexGrow = 0f,
+                    flexShrink = 0f,
+                    width = 150,
+                    marginLeft = 10f
+                }
+            };
+            
+            return triggerContainer;
+        }
+
+        private Button AddDeleteButton(int index, SerializedProperty triggerToPrerequisites)
+        {
+            var currentIndex = index;
+            var deleteButton = new Button(() =>
+            {
+                triggerToPrerequisites.DeleteArrayElementAtIndex(currentIndex);
+                serializedObject.ApplyModifiedProperties();
+                ForceRedraw();
+            });
+            deleteButton.style.height = 25;
+            deleteButton.text = "Delete";
+
+            return deleteButton;
+        }
+
+        private void ForceRedraw()
+        {
+            root.Clear();
+            var newInspector = CreateInspectorGUI();
+            // root.Add(newInspector);
         }
 
         private void TriggerRepaint()

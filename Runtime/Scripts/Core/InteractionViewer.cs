@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Runtime.Scripts.Interactables;
-using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 
 namespace Runtime.Scripts.Core
@@ -13,11 +10,6 @@ namespace Runtime.Scripts.Core
     {
         [SerializeField] private InteractionHandler interactionHandler;
         public List<TriggerToPrereqs> triggerToPrerequisites;
-        
-        // private void OnEnable()
-        // {
-        //     SetupInteractionHandler();
-        // }
 
         private void OnValidate()
         {
@@ -57,7 +49,7 @@ namespace Runtime.Scripts.Core
 
         private void AddToList(Trigger newTrigger, PrerequisiteRecord record, string interactionName, bool highPriority)
         {
-            var trigger = triggerToPrerequisites.Find(t => t.Trigger.Equals(newTrigger));
+            var trigger = triggerToPrerequisites.Find(t => t.Trigger == newTrigger);
 
             if (trigger != null)
             {
@@ -70,17 +62,6 @@ namespace Runtime.Scripts.Core
             }
         }
 
-        // private void OnEnable()
-        // {
-        //     EditorApplication.playModeStateChanged += mode =>
-        //     {
-        //         if (mode == PlayModeStateChange.EnteredPlayMode)
-        //         {
-        //             SetupInteractionHandler();
-        //         } 
-        //     };
-        // }
-
         public void OnSceneSetup()
         {
             SetupInteractionHandler();
@@ -89,7 +70,7 @@ namespace Runtime.Scripts.Core
 
 
     [Serializable]
-    public class TriggerToPrereqs
+    public record TriggerToPrereqs
     {
         public TriggerToPrereqs(Trigger trigger, List<PrereqNamePriority> record)
         {

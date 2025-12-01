@@ -139,18 +139,19 @@ namespace Editor
                 
             var trigger = new Trigger(triggerType, triggeringInteractable);
 
-            // viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
-            SerializedObject viewerSerializedObject = new SerializedObject(viewer);
+            viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
+            
+            // SerializedObject viewerSerializedObject = new SerializedObject(viewer);
+            //
+            // var list = viewerSerializedObject.FindProperty("triggerToPrerequisites");
+            // var field = new PropertyField();
+            // field.BindProperty(list);
+            // list.InsertArrayElementAtIndex(list.arraySize);
+            // list.GetArrayElementAtIndex(list.arraySize - 1).boxedValue =
+            //     new TriggerToPrereqs(trigger, new List<PrereqNamePriority> { new (record, interactionName, false) });
 
-            var list = viewerSerializedObject.FindProperty("triggerToPrerequisites");
-            var field = new PropertyField();
-            field.BindProperty(list);
-            list.InsertArrayElementAtIndex(list.arraySize);
-            list.GetArrayElementAtIndex(list.arraySize - 1).boxedValue =
-                new TriggerToPrereqs(trigger, new List<PrereqNamePriority> { new (record, interactionName, false) });
-
-            viewerSerializedObject.ApplyModifiedProperties();
-            viewerSerializedObject.Update();
+            // viewerSerializedObject.ApplyModifiedProperties();
+            // viewerSerializedObject.Update();
 
             EditorUtility.SetDirty(viewer);
             AssetDatabase.SaveAssets();
