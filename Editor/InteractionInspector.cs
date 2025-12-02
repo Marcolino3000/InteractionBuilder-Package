@@ -1,4 +1,5 @@
 using Runtime.Scripts.Core;
+using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -126,10 +127,71 @@ namespace Editor.CustomInspectors
                 }
                 row.style.flexDirection = FlexDirection.Row;
                 
-                row.Add(AddDeleteButton(j, prereqs));
+                CreateActiveAndDeleteButtons(prereqs, row, j, prereq);
 
                 triggerFoldout.Add(row);
             }
+        }
+
+        private void CreateActiveAndDeleteButtons(SerializedProperty prereqs, TemplateContainer row, int j,
+            SerializedProperty prereq)
+        {
+            var container = new VisualElement
+            {
+                style =
+                {
+                    flexDirection = FlexDirection.Column,
+                    marginLeft = 15,
+                    width = 90
+                }
+            };
+
+            container.Add(AddDeleteButton(j, prereqs));
+            container.Add(CreateIsActiveToggle(prereq));
+            
+            row.Add(container);
+        }
+
+        private VisualElement AddIsActiveButton(SerializedProperty prereq)
+        {
+            var interactionProp = prereq.FindPropertyRelative("Record").FindPropertyRelative("InteractionToExecute");
+            if (interactionProp == null || interactionProp.objectReferenceValue == null)
+                return new Label("InteractionToExecute is null");
+
+            var interactionDataSO = new SerializedObject(interactionProp.objectReferenceValue);
+            var isActiveProp = interactionDataSO.FindProperty("IsActive");
+            if (isActiveProp == null)
+                return new Label("IsActive is null");
+
+            var isActiveButton = new Button(() =>
+            {
+                isActiveProp.boolValue = !isActiveProp.boolValue;
+                interactionDataSO.ApplyModifiedProperties();
+            })
+            {
+                text = isActiveProp.boolValue ? "Active" : "Inactive"
+            };
+
+
+            return isActiveButton;
+        }
+        private VisualElement CreateIsActiveToggle(SerializedProperty prereq)
+        {
+            var interactionProp = prereq.FindPropertyRelative("Record").FindPropertyRelative("InteractionToExecute");
+            if (interactionProp == null || interactionProp.objectReferenceValue == null)
+                return new Label("InteractionToExecute is null");
+
+            var interactionDataSO = new SerializedObject(interactionProp.objectReferenceValue);
+            var isActiveProp = interactionDataSO.FindProperty("IsActive");
+            if (isActiveProp == null)
+                return new Label("IsActive is null");
+
+            var toggle = new Toggle("Is Active");
+            toggle.labelElement.style.minWidth = 10;
+            toggle.labelElement.style.marginLeft = 5;
+            toggle.labelElement.style.flexGrow = 1;
+            toggle.BindProperty(isActiveProp);
+            return toggle;
         }
 
         private VisualElement CreateTriggerContainer()
@@ -148,7 +210,6 @@ namespace Editor.CustomInspectors
             
             return triggerContainer;
         }
-
         private Button AddDeleteButton(int index, SerializedProperty triggerToPrerequisites)
         {
             var currentIndex = index;
@@ -163,11 +224,13 @@ namespace Editor.CustomInspectors
             });
             
             deleteButton.style.height = 25;
-            deleteButton.style.marginLeft = 15;
+            // deleteButton.style.marginLeft = 15;
             deleteButton.text = "Delete";
 
             return deleteButton;
         }
+        
+        
 
         private void ForceRedraw()
         {

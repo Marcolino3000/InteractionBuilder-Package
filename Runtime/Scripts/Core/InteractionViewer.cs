@@ -15,7 +15,7 @@ namespace Runtime.Scripts.Core
         {
             SetupInteractionHandler();
         }
-
+ 
         [ContextMenu("Reset Interactions")]
         private void ResetInteractions()
         {
@@ -46,6 +46,7 @@ namespace Runtime.Scripts.Core
             AddToList(trigger, record, interactionName, highPriority);
             
             DeleteTriggersWithNoPrerequisites();
+            SortByInteractableAndTriggerType();
         }
 
         public void DeleteTriggersWithNoPrerequisites()
@@ -71,6 +72,23 @@ namespace Runtime.Scripts.Core
         public void OnSceneSetup()
         {
             SetupInteractionHandler();
+        }
+
+        public void SortByInteractableAndTriggerType()
+        {
+            triggerToPrerequisites.Sort((a, b) =>
+            {
+                // Get Interactable names (null-safe)
+                string nameA = a.Trigger.TriggeringInteractable?.Interactable?.name ?? string.Empty;
+                string nameB = b.Trigger.TriggeringInteractable?.Interactable?.name ?? string.Empty;
+                
+                int nameCompare = string.Compare(nameA, nameB, StringComparison.Ordinal);
+                if (nameCompare != 0)
+                    return nameCompare;
+                
+                // Compare TriggerType
+                return a.Trigger.TriggerType.CompareTo(b.Trigger.TriggerType);
+            });
         }
     }
 

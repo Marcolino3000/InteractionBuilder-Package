@@ -18,9 +18,13 @@ namespace Runtime.Scripts.Core
         public override StateData CurrentState => new InteractionStateData { Owner = this, ThresholdReached = ThresholdReached, IsRunning = IsRunning };
         public bool ThresholdReached;
         public bool IsRunning;
+        public bool IsActive = true;
         
         public void IncrementCount()
         {
+            if(!IsActive) 
+                return;
+            
             Count++;
             SetThresholdBool();
         }
@@ -30,6 +34,9 @@ namespace Runtime.Scripts.Core
             // Count++;
             // SetThresholdBool();
 
+            if(!IsActive) 
+                return;
+            
             switch (succeeded)
             {
                 case true when successReaction != null:
