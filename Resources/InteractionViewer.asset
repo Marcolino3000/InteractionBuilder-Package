@@ -15,16 +15,64 @@ MonoBehaviour:
   interactionHandler: {fileID: 11400000, guid: 7ee7f6559697b45d09c05394a0f5ecce, type: 2}
   triggerToPrerequisites:
   - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 88b3f975295dc49359d9e5681490041c, type: 2}
+      TriggerType: 0
+      TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
     Prerequisites:
     - Record:
-        InteractionToExecute: {fileID: 11400000, guid: cb623e9ae54d945c1bb32c5aac54c52a, type: 2}
+        InteractionToExecute: {fileID: 11400000, guid: da159c790547c467bba8889760a0adc4, type: 2}
         DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 88b3f975295dc49359d9e5681490041c, type: 2}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 0}
         Conditions: []
-      Name: CloseDoor
+      Name: TriggerPaul
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
+        Conditions: []
+      Name: Scene 2 - FirstDialogWithHilde
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
+        Conditions: []
+      Name: Scene 2 - FirstDialogWithHilde
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
+        Conditions: []
+      Name: Scene 2 - FirstDialogWithHilde
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
+        Conditions: []
+      Name: Scene 2 - FirstDialogWithHilde
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
+        Conditions: []
+      Name: Scene 2 - FirstDialogWithHilde
+      HighPriority: 0
+    - Record:
+        InteractionToExecute: {fileID: 0}
+        DialogOptionToUnlock: {fileID: 0}
+        TriggerType: 0
+        TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
+        Conditions: []
+      Name: Scene 2 - FirstDialogWithHilde
       HighPriority: 0
   - Trigger:
       TriggerType: 2
@@ -115,18 +163,6 @@ MonoBehaviour:
       HighPriority: 0
   - Trigger:
       TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 7b87c47c8b1924c2f8f38e4df5b52c0c, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 0}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 7b87c47c8b1924c2f8f38e4df5b52c0c, type: 2}
-        Conditions: []
-      Name: PaulTalksThroughDoor
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
       TriggeringInteractable: {fileID: 11400000, guid: ac5e0186876554065b9b611e8efc7f22, type: 2}
     Prerequisites:
     - Record:
@@ -136,18 +172,6 @@ MonoBehaviour:
         TriggeringInteractable: {fileID: 0}
         Conditions: []
       Name: Pakete
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 2
-        TriggeringInteractable: {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
-        Conditions: []
-      Name: Scene2-Paul
       HighPriority: 0
   - Trigger:
       TriggerType: 2
@@ -164,10 +188,6 @@ MonoBehaviour:
           IsHardCondition: 1
       Name: Scene 2 - SecondDialogWithPaul
       HighPriority: 0
-  - Trigger:
-      TriggerType: 2
-      TriggeringInteractable: {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
-    Prerequisites:
     - Record:
         InteractionToExecute: {fileID: 11400000, guid: 7126467d7428e4d41a57b8f813e5f666, type: 2}
         DialogOptionToUnlock: {fileID: 0}
@@ -175,36 +195,9 @@ MonoBehaviour:
         TriggeringInteractable: {fileID: 11400000, guid: 39113deee2da14ef980feadf3041ab39, type: 2}
         Conditions:
         - RecordedState:
-            rid: 7734685591399826222
+            rid: 7734685640481310726
           IsHardCondition: 1
       Name: Scene 2 - ThirdDialogWithPaul
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 0
-      TriggeringInteractable: {fileID: 11400000, guid: ddc53cfdf069d42579ca66de8e3a08e9, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 11400000, guid: da159c790547c467bba8889760a0adc4, type: 2}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 0
-        TriggeringInteractable: {fileID: 0}
-        Conditions: []
-      Name: TriggerPaul
-      HighPriority: 0
-  - Trigger:
-      TriggerType: 0
-      TriggeringInteractable: {fileID: 11400000, guid: 0b524a0c0dbe44756b23523e0acca0f7, type: 2}
-    Prerequisites:
-    - Record:
-        InteractionToExecute: {fileID: 11400000, guid: f02efa3331e97424fba40e1db527ac8f, type: 2}
-        DialogOptionToUnlock: {fileID: 0}
-        TriggerType: 0
-        TriggeringInteractable: {fileID: 11400000, guid: 0b524a0c0dbe44756b23523e0acca0f7, type: 2}
-        Conditions:
-        - RecordedState:
-            rid: 7734685576750694616
-          IsHardCondition: 1
-      Name: SpawnHilde
       HighPriority: 0
   references:
     version: 2
@@ -219,12 +212,6 @@ MonoBehaviour:
       data:
         Owner: {fileID: 11400000, guid: cd65d02928ae34289a4830c8f72b6446, type: 2}
         ToggleState: 1
-    - rid: 7734685576750694616
-      type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
-      data:
-        Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
-        ThresholdReached: 1
-        IsRunning: 0
     - rid: 7734685591399825408
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
@@ -237,12 +224,6 @@ MonoBehaviour:
         Owner: {fileID: 11400000, guid: 051377556450546dd9756f2d3fb66dd2, type: 2}
         ThresholdReached: 1
         IsRunning: 0
-    - rid: 7734685591399826222
-      type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
-      data:
-        Owner: {fileID: 11400000, guid: c2e8167266c1941f1b2811c37d0ee03d, type: 2}
-        ThresholdReached: 1
-        IsRunning: 0
     - rid: 7734685593366430162
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
@@ -253,5 +234,11 @@ MonoBehaviour:
       type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
       data:
         Owner: {fileID: 11400000, guid: 59378320ecb1e4faebe57eab6f8d7936, type: 2}
+        ThresholdReached: 1
+        IsRunning: 0
+    - rid: 7734685640481310726
+      type: {class: InteractionData/InteractionStateData, ns: Runtime.Scripts.Core, asm: cod.interactionbuilder}
+      data:
+        Owner: {fileID: 11400000, guid: c2e8167266c1941f1b2811c37d0ee03d, type: 2}
         ThresholdReached: 1
         IsRunning: 0

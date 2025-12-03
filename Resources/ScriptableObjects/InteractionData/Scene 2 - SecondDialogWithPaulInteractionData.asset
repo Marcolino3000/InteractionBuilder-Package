@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Core.InteractionData
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
-  Count: 0
+  Count: 1
   Threshold: 1
   OneTimeUse: 1
   successReaction: {fileID: 11400000, guid: 527915ede7d534831b2228649f2ca9c5, type: 2}
   failureReaction: {fileID: 0}
-  ThresholdReached: 0
+  ThresholdReached: 1
+  IsRunning: 0
+  IsActive: 1

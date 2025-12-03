@@ -74,6 +74,31 @@ namespace Runtime.Scripts.Core
             SetupInteractionHandler();
         }
 
+        public void DeletePrereq(PrerequisiteRecord prerequisite)
+        {
+            foreach (var triggerToPrerequisite in triggerToPrerequisites)
+            {
+                // PrerequisiteRecord toRemove;
+
+                foreach (var prereq in triggerToPrerequisite.Prerequisites)
+                {
+                    if(prereq.Record == prerequisite)
+                    {
+                        var toRemove = prereq;
+                        triggerToPrerequisite.Prerequisites.Remove(toRemove);
+                        return;                     
+                    }
+                }
+                // if (toRemove != null)
+                    
+            }
+            
+            // foreach (var triggerToPrerequisite in triggerToPrerequisites)
+            // {
+            //     triggerToPrerequisite.Prerequisites.RemoveAll(p => p.Record == prerequisite);
+            // }
+        }
+
         public void SortByInteractableAndTriggerType()
         {
             triggerToPrerequisites.Sort((a, b) =>

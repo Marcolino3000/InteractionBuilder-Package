@@ -8,16 +8,15 @@ using UnityEngine.UIElements;
 namespace Editor.CustomInspectors
 {
     [CustomEditor(typeof(InteractionViewer), true)]
-    public class 
-        InteractionInspector : UnityEditor.Editor
+    public class InteractionInspector : UnityEditor.Editor
     {
         [SerializeField] private VisualTreeAsset rowUxml;
 
         private VisualElement root;
-
+        private VisualElement propertyUpdateContainer;
         public override VisualElement CreateInspectorGUI()
         {
-            EditorApplication.projectChanged += TriggerRepaint;
+            // EditorApplication.projectChanged += TriggerRepaint;
             root = new VisualElement();
 
             var viewer = (InteractionViewer)target;
@@ -33,10 +32,16 @@ namespace Editor.CustomInspectors
             string triggerToPrereqsName = nameof(viewer.triggerToPrerequisites);
             SerializedProperty triggerToPrerequisites = serializedObject.FindProperty(triggerToPrereqsName);
             var triggerToPrereqsField = new PropertyField();
-            triggerToPrereqsField.BindProperty(triggerToPrerequisites);
-            
+            // triggerToPrereqsField.TrackPropertyValue(triggerToPrerequisites, AddTriggerFields);
+
             // Add default inspector for debugging
+            triggerToPrereqsField.BindProperty(triggerToPrerequisites);
+
             root.Add(triggerToPrereqsField);
+            
+            propertyUpdateContainer = new VisualElement();
+            propertyUpdateContainer.TrackPropertyValue(triggerToPrerequisites, AddTriggerFields);
+            root.Add(propertyUpdateContainer);
             
             AddTriggerFields(triggerToPrerequisites);
             
@@ -45,6 +50,8 @@ namespace Editor.CustomInspectors
 
         private void AddTriggerFields(SerializedProperty triggerToPrerequisites)
         {
+            propertyUpdateContainer.Clear();
+            
             for (int i = 0; i < triggerToPrerequisites.arraySize; i++)
             {
                 var triggerFoldoutContainer = new VisualElement();
@@ -67,23 +74,25 @@ namespace Editor.CustomInspectors
 
                 triggerContainer.Add(triggerTypeLabel);
                 triggerContainer.Add(triggeringInteractableField);
-                // triggerContainer.Add(AddDeleteButton(i, triggerToPrerequisites));
                 
                 triggerFoldoutContainer.Add(triggerContainer);
                 triggerFoldoutContainer.Add(triggerFoldout);
                 
-                root.Add(triggerFoldoutContainer);
+                propertyUpdateContainer.Add(triggerFoldoutContainer);
                 
                 SerializedProperty prereqs = triggerToPrerequisites.GetArrayElementAtIndex(i).FindPropertyRelative("Prerequisites");
                 
-                CreatePrerequisiteFields(prereqs, triggerFoldout);
+                var viewer = serializedObject.targetObject as InteractionViewer;    
+                var triggerToPrereq = viewer.triggerToPrerequisites[i];
+                CreatePrerequisiteFields(prereqs, triggerFoldout, triggerToPrereq);
                 
-                root.Add(triggerFoldoutContainer);
-                root.Add(CreateRowSeparator());
+                propertyUpdateContainer.Add(triggerFoldoutContainer);
+                propertyUpdateContainer.Add(CreateRowSeparator());
             }
         }
 
-        private void CreatePrerequisiteFields(SerializedProperty prereqs, Foldout triggerFoldout)
+        private void CreatePrerequisiteFields(SerializedProperty prereqs, Foldout triggerFoldout,
+            TriggerToPrereqs triggerToPrereq)
         {
             for (int j = 0; j < prereqs.arraySize; j++)
             {
@@ -127,14 +136,14 @@ namespace Editor.CustomInspectors
                 }
                 row.style.flexDirection = FlexDirection.Row;
                 
-                CreateActiveAndDeleteButtons(prereqs, row, j, prereq);
+                CreateActiveAndDeleteButtons(prereqs, row, j, prereq, triggerToPrereq);
 
                 triggerFoldout.Add(row);
             }
         }
 
         private void CreateActiveAndDeleteButtons(SerializedProperty prereqs, TemplateContainer row, int j,
-            SerializedProperty prereq)
+            SerializedProperty prereq, TriggerToPrereqs triggerToPrereq)
         {
             var container = new VisualElement
             {
@@ -146,7 +155,7 @@ namespace Editor.CustomInspectors
                 }
             };
 
-            container.Add(AddDeleteButton(j, prereqs));
+            container.Add(AddDeleteButton(j, prereqs, triggerToPrereq));
             container.Add(CreateIsActiveToggle(prereq));
             
             row.Add(container);
@@ -210,21 +219,28 @@ namespace Editor.CustomInspectors
             
             return triggerContainer;
         }
-        private Button AddDeleteButton(int index, SerializedProperty triggerToPrerequisites)
+        private Button AddDeleteButton(int index, SerializedProperty triggerToPrerequisites,
+            TriggerToPrereqs triggerToPrereq)
         {
+            var prereq = triggerToPrereq.Prerequisites[index];
+            
             var currentIndex = index;
             var deleteButton = new Button(() =>
             {
-                triggerToPrerequisites.DeleteArrayElementAtIndex(currentIndex);
-                serializedObject.ApplyModifiedProperties();
-                var viewer = serializedObject.targetObject as InteractionViewer;
-                viewer?.DeleteTriggersWithNoPrerequisites();
                 
+                // triggerToPrerequisites.DeleteArrayElementAtIndex(currentIndex);
+                // serializedObject.ApplyModifiedProperties();
+                var viewer = serializedObject.targetObject as InteractionViewer;
+                // var prereq = (PrereqNamePriority) triggerToPrerequisites.GetArrayElementAtIndex(currentIndex).boxedValue;
+                // PrerequisiteRecord rec = prereq.Record;
+                viewer.DeletePrereq(prereq.Record);
+                viewer.DeleteTriggersWithNoPrerequisites();
+                serializedObject.ApplyModifiedProperties();
+                // Repaint();
                 // ForceRedraw();
             });
             
             deleteButton.style.height = 25;
-            // deleteButton.style.marginLeft = 15;
             deleteButton.text = "Delete";
 
             return deleteButton;
@@ -232,20 +248,13 @@ namespace Editor.CustomInspectors
         
         
 
-        private void ForceRedraw()
-        {
-            root.Clear();
-            var newInspector = CreateInspectorGUI();
-            // root.Add(newInspector);
-        }
-
-        private void TriggerRepaint()
-        {
-            serializedObject.ApplyModifiedProperties();
-            EditorUtility.SetDirty(target);
-            Repaint();
-            // Debug.Log("repaint called");
-        }
+        // private void TriggerRepaint()
+        // {
+        //     serializedObject.ApplyModifiedProperties();
+        //     EditorUtility.SetDirty(target);
+        //     Repaint();
+        //     Debug.Log("repaint called");
+        // }
 
         private VisualElement CreateHandlerObjectField()
         {

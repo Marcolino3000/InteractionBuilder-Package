@@ -20,3 +20,5 @@ MonoBehaviour:
   successReaction: {fileID: 11400000, guid: 9a7b7ee2a2d924c33b55ed3c28095a02, type: 2}
   failureReaction: {fileID: 0}
   ThresholdReached: 0
+  IsRunning: 0
+  IsActive: 1
