@@ -52,10 +52,10 @@ namespace Runtime.Scripts.Core
                 case ExecutionStatus.Cancelled:
                     return false;
                 case ExecutionStatus.Failed:
-                    InteractionToExecute?.HandleInteraction(false);
+                    InteractionToExecute?.HandleInteractionStart(false);
                     return true;
                 case ExecutionStatus.Succeeded:
-                    InteractionToExecute?.HandleInteraction(true);
+                    InteractionToExecute?.HandleInteractionStart(true);
                     return true;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(status), status, null);

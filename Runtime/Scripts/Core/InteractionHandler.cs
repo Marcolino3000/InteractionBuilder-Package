@@ -21,7 +21,7 @@ namespace Runtime.Scripts.Core
 
         [HideInInspector] [SerializeField] private PrerequisitesGenerator PrerequisitesGenerator;
         
-        [SerializeField] private List<InteractionData> lastInteractions;
+        [SerializeField] private List<InteractionData> currentInteractions;
 
         private void HandleTriggerViaInteractable(InteractionTriggerVia triggerType,
             InteractableState triggeringInteractable)
@@ -40,8 +40,8 @@ namespace Runtime.Scripts.Core
 
         private void FindInteractions(Trigger trigger)
         {
-            lastInteractions = new List<InteractionData>();
-
+            var newInteractions = new List<InteractionData>();
+            
             if (triggersToPrerequisitesHighPrio.TryGetValue(trigger, out List<PrerequisiteRecord> prereqsHighPrio))
             {
                 foreach (var prereqHighPrio in prereqsHighPrio)
@@ -56,11 +56,27 @@ namespace Runtime.Scripts.Core
             {
                 foreach (var prereqLowPrio in prereqsLowPrio)
                 {
-                    var interactionData = prereqLowPrio.Execute();
-                    if(interactionData != null)
-                        lastInteractions.Add(interactionData);
+                    var interaction = prereqLowPrio.Execute();
+                    
+                    if(interaction != null)
+                        newInteractions.Add(interaction);
                 }
             }
+            
+            ResetCurrentInteractions(newInteractions);
+        }
+
+        private void ResetCurrentInteractions(List<InteractionData> newInteractions)
+        {
+            if(newInteractions.Count  == 0)
+                return;
+            
+            foreach (var currentInteraction in currentInteractions)
+            {
+                currentInteraction.HandleInteractionStop();
+            }
+            
+            currentInteractions = newInteractions;
         }
 
         private void FindClients()
@@ -113,21 +129,21 @@ namespace Runtime.Scripts.Core
 
         private void HandleDialogStatusChanged(bool isRunning, DialogTree dialogTree)
         {
-            lastInteractions
+            currentInteractions
                 .Where(i => 
                     (i?.successReaction?.DialogTree == dialogTree) ||
                     (i?.failureReaction?.DialogTree == dialogTree))
                 .ForEach(i => 
                 {
-                    i.IsRunning = isRunning;
+                    // i.IsRunning = isRunning;
                     if(!isRunning)
-                        i.IncrementCount();
+                        i.HandleInteractionStop();
                 });
         }
 
         private void ResetLastInteractions()
         {
-            lastInteractions = new List<InteractionData>();
+            currentInteractions = new List<InteractionData>();
         }
 
         private void SetDialogOptionsAvailability()

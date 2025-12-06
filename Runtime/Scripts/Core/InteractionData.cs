@@ -20,16 +20,33 @@ namespace Runtime.Scripts.Core
         public bool IsRunning;
         public bool IsActive = true;
         
-        public void IncrementCount()
+        public void HandleInteractionStop()
         {
-            if(!IsActive) 
+            if(!IsActive)
+            {
+                Debug.LogWarning("Interaction was stopped even though is was not active, this should not happen");
                 return;
+            }
             
+            IsRunning = false;
             Count++;
             SetThresholdBool();
         }
         
-        public void HandleInteraction(bool succeeded = false)
+        public void HandleInteractionStop(bool ranToCompletion)
+        {
+            if(!IsActive)
+            {
+                Debug.LogWarning("Interaction was stopped even though is was not active, this should not happen");
+                return;
+            }
+            
+            IsRunning = false;
+            Count++;
+            SetThresholdBool();
+        }
+        
+        public void HandleInteractionStart(bool succeeded = false)
         {
             // Count++;
             // SetThresholdBool();
@@ -40,10 +57,13 @@ namespace Runtime.Scripts.Core
             switch (succeeded)
             {
                 case true when successReaction != null:
+                    successReaction.OnReactionFinished += HandleInteractionStop;
                     successReaction.Execute();
+                    IsRunning = true;
                     break;
                 case false when failureReaction != null:
                     failureReaction.Execute();
+                    IsRunning = true;
                     break;
                 case true when successReaction == null:
                     Debug.LogWarning($"No reaction assigned for success in interaction {name}");

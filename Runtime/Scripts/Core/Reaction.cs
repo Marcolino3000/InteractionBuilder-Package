@@ -14,18 +14,20 @@ namespace Runtime.Scripts.Core
         public event Action OnStopDialog;
         public event Action<DialogTree> OnSetDialogTree;
 
+        public event Action<bool> OnReactionFinished; 
+
         public DialogTree DialogTree;
         public InteractableState Interactable;
         public InteractableState ObjectToMoveIn;
         public InteractableState ObjectToMoveOut;
-        public bool CancelCurrentInteraction;
+        public bool CancelCurrentDialog;
         
         public void Execute()
         {
-            if (CancelCurrentInteraction)
+            if (CancelCurrentDialog)
             {
-                // Debug.Log("Cancel Interaction called");
-                // OnStopDialog?.Invoke();
+                Debug.Log("Cancel Dialog called");
+                OnStopDialog?.Invoke();
             }
 
             if(DialogTree != null)
@@ -47,8 +49,16 @@ namespace Runtime.Scripts.Core
 
             if (ObjectToMoveOut != null)
             {
-                // ObjectToMoveOut.Interactable.transform.position += new Vector3(-14,0,0);
+                ObjectToMoveOut.Interactable.transform.position += new Vector3(-14,0,0);
             }
+            
+            if(DialogTree == null)
+                OnReactionFinished?.Invoke(true);
+        }
+
+        private void DialogFinishedCallback(bool ranToCompletion)
+        {
+            OnReactionFinished?.Invoke(ranToCompletion);
         }
     }
 }
