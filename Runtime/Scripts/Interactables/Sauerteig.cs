@@ -22,7 +22,7 @@ namespace Runtime.Scripts.Interactables
         private void Awake()
         {
             radarCollider = GetComponent<SphereCollider>();
-            treeRunner.DialogNodeSelected += HandleDialogNodeSelected;
+            DialogTreeRunner.DialogNodeSelected += HandleDialogNodeSelected;
         }
 
         private void HandleDialogNodeSelected(DialogOptionNode node)

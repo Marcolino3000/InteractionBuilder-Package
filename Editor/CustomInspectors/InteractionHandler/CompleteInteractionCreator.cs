@@ -28,6 +28,7 @@ namespace Editor
         [SerializeField] private DialogOptionNode dialogOptionToUnlock;
         [SerializeField] private InteractableState triggeringInteractable;
         [SerializeField] private InteractionTriggerVia triggerType;
+        [SerializeField] private DialogOptionNode triggeringDialogOption;
         [SerializeField] private bool isHighPriority;
         [SerializeField] private List<OwnerWithSettings> conditions = new();
 
@@ -114,7 +115,8 @@ namespace Editor
             {
                 InteractionToExecute = interactionToExecute,
                 TriggerType = triggerType,
-                TriggeringInteractable = triggeringInteractable
+                TriggeringInteractable = triggeringInteractable,
+                // TriggeringDialogOption= triggeringDialogOption
             };
             
             if (dialogOptionToUnlock != null)
@@ -136,9 +138,24 @@ namespace Editor
                     });
                 }
             }
-                
-            var trigger = new Trigger(triggerType, triggeringInteractable);
 
+            var trigger = new Trigger();
+            if (triggeringInteractable != null)
+            {
+                trigger.TriggeringInteractable = triggeringInteractable;
+                trigger.TriggerType = triggerType;
+            }
+            else if (triggeringDialogOption != null)
+            {
+                trigger.TriggeringDialogOption = triggeringDialogOption;
+                trigger.TriggerType = InteractionTriggerVia.DialogOptionSelected;
+            }
+            else
+            {
+                Debug.LogError("triggering interactable and dialog were null. returning early");
+                return;
+            }
+            
             viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
             
             // SerializedObject viewerSerializedObject = new SerializedObject(viewer);
@@ -334,6 +351,9 @@ namespace Editor
             
             container.Add(CreateScriptableObjectFields(
                 "Dialog Option to Unlock", null, typeof(DialogOptionNode), nameof(dialogOptionToUnlock)));
+            
+            container.Add(CreateScriptableObjectFields(
+                "Triggering Dialog Option", null, typeof(DialogOptionNode), nameof(triggeringDialogOption)));
         }
 
         private VisualElement CreateInteractionToggle()

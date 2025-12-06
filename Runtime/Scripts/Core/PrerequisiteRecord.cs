@@ -14,6 +14,7 @@ namespace Runtime.Scripts.Core
         public DialogOptionNode DialogOptionToUnlock;
         public InteractionTriggerVia TriggerType;
         public InteractableState TriggeringInteractable;
+        // public DialogOptionNode TriggeringDialogOption;
         public List<StateWithSettings> Conditions;
         
         public InteractionData Execute()

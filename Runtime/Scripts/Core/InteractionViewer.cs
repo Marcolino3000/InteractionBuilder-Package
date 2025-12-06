@@ -103,7 +103,7 @@ namespace Runtime.Scripts.Core
         {
             triggerToPrerequisites.Sort((a, b) =>
             {
-                // Get Interactable names (null-safe)
+                // if(a.Trigger.TriggeringInteractable != null )
                 string nameA = a.Trigger.TriggeringInteractable?.Interactable?.name ?? string.Empty;
                 string nameB = b.Trigger.TriggeringInteractable?.Interactable?.name ?? string.Empty;
                 

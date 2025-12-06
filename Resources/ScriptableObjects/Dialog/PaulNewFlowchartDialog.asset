@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: e51ac47178af241b483d4280c17bc17c
   Position: {x: 704, y: 515}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "\xC4h also jetzt hab ich schon die Bettina gefragt und die hat \"ja\"
@@ -42,6 +43,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 785f33f714db34f4faec22029cd9e4ef
   Position: {x: 983, y: 1360.5}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Also ja oder ja?
@@ -70,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 38efc634ea7c9437f9376e9f3e7a8842
   Position: {x: 364.00003, y: 1361.0001}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "\xC4h, geht schon."
@@ -98,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 378db561054754440a3a88fbe4210054
   Position: {x: -495.00006, y: 2236.2646}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Ich wei\xDF gar nicht warum ich dich damals so unangenehm fand."
@@ -126,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 0d33c274007004e9d943895ae06b05f3
   Position: {x: 364.00003, y: 1228}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Du kannst \xFCbrigens immer zu mir kommen, das wei\xDFt du. Wir haben
@@ -155,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 03b2e755808af4be2a11cc7641d46335
   Position: {x: 675, y: 1228}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: '..........
@@ -184,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: f1e18b875eb654b4291bafd5343c7e80
   Position: {x: 363.99994, y: 644}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Wow.
@@ -212,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 474a8b1a5c3b0496c9e4338d5995b258
   Position: {x: 364.00003, y: 1092.4053}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "N\xE4."
@@ -240,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 148af7451eb0a47d7a57cdd2f41ad9e7
   Position: {x: 983.0001, y: 1503.3215}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: 'Haha
@@ -270,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: da2c3b83e8b8e4f4d9bd515c7aa4e725
   Position: {x: 704, y: 771}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Wenn ich irgendetwas f\xFCr dich tun kann, sag Bescheid. Du kannst
@@ -300,6 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 653a78698769a469dafb09187f0dedc6
   Position: {x: -295.0001, y: 2080.2646}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Bist du jetzt Autorin geworden wie du immer gesagt hast? Das intellektuelle
@@ -329,6 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: e85476316f76549bc84f6e39c9cc32d0
   Position: {x: 983, y: 1092}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Willst du Bettina jetzt abmurksen oder soll ich?
@@ -357,6 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 9978ffcd41b814e63b7ca215346b255d
   Position: {x: 675, y: 1092.4053}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "(W\xFCrrrrg)"
@@ -385,6 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: b70d5174ae7304a22a004a398990d82f
   Position: {x: -295.0001, y: 2526.2646}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Die T\xFCr langsam wortlos schlie\xDFen"
@@ -456,6 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 672652390f8d5470280aab6e9e495c12
   Position: {x: -95.00004, y: 2236.2646}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Genau, ja, Autorin, genau.
@@ -484,6 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: cfc3b86de9b264dcca1c78899fb0e6dd
   Position: {x: 704, y: 385}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Bitte gib mir noch eine Chance!
@@ -512,6 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 0d9ba584893ff4758a0be770f5fcebde
   Position: {x: 364, y: 771}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Ich wollte dich einladen.
@@ -540,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: c2369e4cb381b472fb03eafb32ee614d
   Position: {x: -295.0001, y: 1948.2645}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: O-kay
@@ -568,6 +586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 6c1fa4285005842b194a23df691e6333
   Position: {x: 364, y: 385.42856}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Ne.
@@ -596,6 +615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: b8c00f28e8cd542bfb28a67a8c9943b9
   Position: {x: 364.00003, y: 1502.9999}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Bist du dir sicher? Ich war immer f\xFCr dich da, auch wenn du es
@@ -625,6 +645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: ef96b783defc54717831a9346b02194a
   Position: {x: -295.32147, y: 1677.8932}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Woher wei\xDFt du eigentlich, dass ich in der Stadt bin?"
@@ -653,6 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: cb03469873fe445f69d34df46d8337df
   Position: {x: -295.0001, y: 2403.2646}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Meine Cousine ist ja auch Autorin. \"Verloren im Kuss der Sehnsucht\",
@@ -682,6 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: ee61cc8fbb8b64acb844d19096812133
   Position: {x: 564, y: 226.57141}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Hey Marlene, sch\xF6n dich zu sehen. Ist es nicht schade, dass es
@@ -711,6 +734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 97d1bff9a2ff74d9fbfaceee9d463597
   Position: {x: -295.0001, y: 1808.2645}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Ja also ich hab so'n \xDCberwachungsprogramm geschrieben. Das erkennt
@@ -739,6 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: c708b0c26a4424cb2b99d70603ca9dfe
   Position: {x: 364, y: 515.1429}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Ich heirate jetzt die Bettina.
@@ -766,6 +791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.NpcDialogOption
   Guid: 3fd9cbba510264c4a80904d92cea1de3
   Position: {x: 983.0001, y: 1228}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: "Ha haha hahaha. \nDu und deine Geschichten immer. Fand ich schon immer
@@ -794,6 +820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 95a09a325dc774e69ba2aa8352a44e4a
   Position: {x: 704, y: 643.5}
+  customPreview: 0
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Das war nur ironisch... also das...

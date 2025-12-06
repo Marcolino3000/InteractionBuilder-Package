@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core;
+using Nodes.Decorator;
 using Runtime.Scripts.Interactables;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
@@ -22,12 +23,24 @@ namespace Runtime.Scripts.Core
         
         [SerializeField] private List<InteractionData> lastInteractions;
 
-        private void HandleInteractionTrigger(InteractionTriggerVia triggerType,
+        private void HandleTriggerViaInteractable(InteractionTriggerVia triggerType,
             InteractableState triggeringInteractable)
         {
-            lastInteractions = new List<InteractionData>();
-            
             var trigger = new Trigger(triggerType, triggeringInteractable);
+
+            FindInteractions(trigger);
+        }
+
+        private void HandleTriggerViaDialog(DialogOptionNode option)
+        {
+            var trigger = new Trigger(option);
+            
+            FindInteractions(trigger);
+        }
+
+        private void FindInteractions(Trigger trigger)
+        {
+            lastInteractions = new List<InteractionData>();
 
             if (triggersToPrerequisitesHighPrio.TryGetValue(trigger, out List<PrerequisiteRecord> prereqsHighPrio))
             {
@@ -62,12 +75,12 @@ namespace Runtime.Scripts.Core
 
             foreach (var interactable in interactables)
             {
-                interactable.OnEnteredTriggerArea += HandleInteractionTrigger;
-                interactable.OnInteractionStarted += HandleInteractionTrigger;
-                interactable.OnExitedTriggerArea += HandleInteractionTrigger;
+                interactable.OnEnteredTriggerArea += HandleTriggerViaInteractable;
+                interactable.OnInteractionStarted += HandleTriggerViaInteractable;
+                interactable.OnExitedTriggerArea += HandleTriggerViaInteractable;
             }
         }
-        
+
         private void FindEventSystem()
         {
             if (Application.isPlaying)
@@ -95,6 +108,7 @@ namespace Runtime.Scripts.Core
         private void SubscribeToDialogEvents()
         {
             DialogTreeRunner.OnDialogRunningStatusChanged += HandleDialogStatusChanged;
+            DialogTreeRunner.DialogNodeSelected += HandleTriggerViaDialog;
         }
 
         private void HandleDialogStatusChanged(bool isRunning, DialogTree dialogTree)
@@ -173,7 +187,8 @@ namespace Runtime.Scripts.Core
         EnteringTriggerArea,
         ExitingTriggerArea,
         ButtonPress,
-        TrustThresholdReached
+        TrustThresholdReached, 
+        DialogOptionSelected
     }
 
     [Serializable]
@@ -185,7 +200,14 @@ namespace Runtime.Scripts.Core
             TriggeringInteractable = triggeringInteractable;
         }
 
+        public Trigger(DialogOptionNode dialogOptionNode) : this()
+        {
+            TriggeringDialogOption = dialogOptionNode;
+            TriggerType = InteractionTriggerVia.DialogOptionSelected;
+        }
+
         public InteractionTriggerVia TriggerType;
         public InteractableState TriggeringInteractable;
+        public DialogOptionNode TriggeringDialogOption;
     }
 }

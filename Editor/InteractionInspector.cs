@@ -190,7 +190,7 @@ namespace Editor.CustomInspectors
                 // if(foldout is Foldout foldout2)
                 //     conditionFoldouts.Add(foldout2);
                 
-                // CreateActiveAndDeleteButtons(prereqs, row, j, prereq, triggerToPrereq);
+                CreateActiveAndDeleteButtons(prereqs, row, j, prereq, triggerToPrereq);
 
                 triggerFoldout.Add(row);
                 
