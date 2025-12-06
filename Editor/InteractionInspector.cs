@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using NUnit.Framework;
 using Runtime.Scripts.Core;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
@@ -14,11 +17,14 @@ namespace Editor.CustomInspectors
 
         private VisualElement root;
         private VisualElement propertyUpdateContainer;
+        private List<Foldout> conditionFoldouts = new();
+        
         public override VisualElement CreateInspectorGUI()
         {
             // EditorApplication.projectChanged += TriggerRepaint;
             root = new VisualElement();
-
+            conditionFoldouts.Clear();
+            
             var viewer = (InteractionViewer)target;
             
             if (viewer == null)
@@ -36,8 +42,9 @@ namespace Editor.CustomInspectors
 
             // Add default inspector for debugging
             triggerToPrereqsField.BindProperty(triggerToPrerequisites);
-
             root.Add(triggerToPrereqsField);
+            
+            root.Add(AddShowConditionsButton());
             
             propertyUpdateContainer = new VisualElement();
             propertyUpdateContainer.TrackPropertyValue(triggerToPrerequisites, AddTriggerFields);
@@ -46,6 +53,24 @@ namespace Editor.CustomInspectors
             AddTriggerFields(triggerToPrerequisites);
             
             return root ;
+        }
+
+        private Button AddShowConditionsButton()
+        {
+            
+            
+            bool isExpanded = false;
+            var button = new Button(() =>
+            {
+                foreach (var foldout in conditionFoldouts)
+                {
+                    foldout.value = !foldout.value;
+                    // foldout.SetValueWithoutNotify(!foldout.value);
+                    isExpanded = foldout.value;
+                }
+            });
+            button.text = isExpanded ? "Hide Conditions" : "Show Conditions";
+            return button;
         }
 
         private void AddTriggerFields(SerializedProperty triggerToPrerequisites)
@@ -99,7 +124,14 @@ namespace Editor.CustomInspectors
                 var row = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>
                     ("Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();
                 row.style.marginBottom = 15;
+                foreach (var child  in row.hierarchy.Children())
+                {
                     
+                    foreach (var ch in child.Children())
+                    {
+                        Debug.Log(ch.name);    
+                    }
+                }
                 SerializedProperty prereq = prereqs.GetArrayElementAtIndex(j);
                     
                 var interactionToExecuteField = row.Q<ObjectField>("interactionToExecute");
@@ -115,30 +147,57 @@ namespace Editor.CustomInspectors
                 }
                     
                 var conditionsField = row.Q<PropertyField>("conditions");
-                    
+                //     
+                //
                 SerializedProperty conditions = prereq.FindPropertyRelative("Record").FindPropertyRelative("Conditions");
-                    
+                //     
                 conditionsField.BindProperty(conditions);
-
-                var conditionsFoldout = new Foldout();
-                    
-                if (conditions.propertyType == SerializedPropertyType.Generic)
+                conditionsField.OnPopulated(() =>
                 {
-                        
-                    for(int w = 0; w < conditions.arraySize; w++)
+                    Debug.Log("Conditions field populated");
+                    var foldout = conditionsField.Q<Foldout>();
+                    if (foldout != null)
                     {
-                        var obj = conditions.GetArrayElementAtIndex(w);
-                        var value = obj.boxedValue;
-                        var stateWithSettingsField = new PropertyField();
-                        stateWithSettingsField.BindProperty(obj);
-                        conditionsFoldout.Add(stateWithSettingsField);
+                        foldout.value = false;
+                        conditionFoldouts.Add(foldout);
                     }
-                }
-                row.style.flexDirection = FlexDirection.Row;
+                });
+
                 
-                CreateActiveAndDeleteButtons(prereqs, row, j, prereq, triggerToPrereq);
+
+                foreach (var child in conditionsField.Children())
+                {
+                    Debug.Log($"Child element: {child.GetType()} - Name: {child.name}");
+                }
+
+
+
+                // if (conditions.propertyType == SerializedPropertyType.Generic)
+                // {//
+                //     for(int w = 0; w < conditions.arraySize; w++)
+                //     {
+                //         var obj = conditions.GetArrayElementAtIndex(w);
+                //         var value = obj.boxedValue;
+                //         var stateWithSettingsField = new PropertyField();
+                //         stateWithSettingsField.BindProperty(obj);
+                //         // conditionsFoldout.Add(stateWithSettingsField);
+                //     }
+                // }
+                // row.Add(conditionsFoldout);
+                row.style.flexDirection = FlexDirection.Row;
+
+                // var foldout = conditionsField.Q("unity-list-view__foldout-header");
+                // if(foldout is Foldout foldout2)
+                //     conditionFoldouts.Add(foldout2);
+                
+                // CreateActiveAndDeleteButtons(prereqs, row, j, prereq, triggerToPrereq);
 
                 triggerFoldout.Add(row);
+                
+                foreach (var child in conditionsField.Children())
+                {
+                    Debug.Log($"Child element: {child.GetType()} - Name: {child.name}");
+                }
             }
         }
 
@@ -277,6 +336,24 @@ namespace Editor.CustomInspectors
             separator.style.borderTopLeftRadius = 2;
             separator.style.borderTopRightRadius = 2;
             return separator;
+        }
+        
+    }
+    
+   
+}
+
+public static class PropertyFieldExtensions
+{ 
+    public static void OnPopulated(this PropertyField propertyField, Action callback)
+    {
+        if (propertyField.childCount > 0)
+        {
+            callback?.Invoke();
+        }
+        else
+        {
+            propertyField.schedule.Execute(() => OnPopulated(propertyField, callback));
         }
     }
 }
