@@ -88,8 +88,7 @@ namespace Editor.CustomInspectors
                 var triggerTypeLabel = new Label("Trigger Type: " + triggerType);
                 triggerTypeLabel.style.marginBottom = 5;
 
-                var triggeringInteractableField = new ObjectField();
-                triggeringInteractableField.BindProperty(trigger.FindPropertyRelative("TriggeringInteractable"));
+                var triggerField = AddTriggerField(trigger, triggerType);
 
                 var triggerFoldout = new Foldout();
                 triggerFoldout.text = "Interactions: ";
@@ -98,7 +97,7 @@ namespace Editor.CustomInspectors
                 var triggerContainer = CreateTriggerContainer();
 
                 triggerContainer.Add(triggerTypeLabel);
-                triggerContainer.Add(triggeringInteractableField);
+                triggerContainer.Add(triggerField);
                 
                 triggerFoldoutContainer.Add(triggerContainer);
                 triggerFoldoutContainer.Add(triggerFoldout);
@@ -114,6 +113,16 @@ namespace Editor.CustomInspectors
                 propertyUpdateContainer.Add(triggerFoldoutContainer);
                 propertyUpdateContainer.Add(CreateRowSeparator());
             }
+        }
+
+        private static ObjectField AddTriggerField(SerializedProperty trigger, string triggerType)
+        {
+            var triggerField = new ObjectField();
+
+            triggerField.BindProperty(triggerType == "DialogOptionSelected"
+                ? trigger.FindPropertyRelative("TriggeringDialogOption")
+                : trigger.FindPropertyRelative("TriggeringInteractable"));
+            return triggerField;
         }
 
         private void CreatePrerequisiteFields(SerializedProperty prereqs, Foldout triggerFoldout,

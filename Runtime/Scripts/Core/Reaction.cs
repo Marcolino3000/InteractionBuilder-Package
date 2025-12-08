@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Core;
 using Runtime.Scripts.Interactables;
 using Tree;
@@ -12,8 +11,7 @@ namespace Runtime.Scripts.Core
     {
         public event Action OnStartDialog;
         public event Action OnStopDialog;
-        public event Action<DialogTree> OnSetDialogTree;
-
+        public event Action<DialogTree, Action<bool>> OnSetDialogTree;
         public event Action<bool> OnReactionFinished; 
 
         public DialogTree DialogTree;
@@ -33,7 +31,7 @@ namespace Runtime.Scripts.Core
             if(DialogTree != null)
             {
                 OnStopDialog?.Invoke();
-                OnSetDialogTree?.Invoke(DialogTree);
+                OnSetDialogTree?.Invoke(DialogTree, DialogFinishedCallback);
                 OnStartDialog?.Invoke();
             }
 
@@ -58,6 +56,7 @@ namespace Runtime.Scripts.Core
 
         private void DialogFinishedCallback(bool ranToCompletion)
         {
+            Debug.Log("Dialog Finished Callback called with ranToCompletion: " + ranToCompletion);
             OnReactionFinished?.Invoke(ranToCompletion);
         }
     }

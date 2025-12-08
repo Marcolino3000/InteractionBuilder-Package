@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Runtime.Scripts.Interactables;
 using UnityEngine;
 
@@ -32,8 +31,8 @@ namespace Runtime.Scripts.Core
             Count++;
             SetThresholdBool();
         }
-        
-        public void HandleInteractionStop(bool ranToCompletion)
+
+        private void HandleInteractionStop(bool ranToCompletion)
         {
             if(!IsActive)
             {
@@ -57,11 +56,12 @@ namespace Runtime.Scripts.Core
             switch (succeeded)
             {
                 case true when successReaction != null:
-                    successReaction.OnReactionFinished += HandleInteractionStop;
+                    // successReaction.OnReactionFinished += HandleInteractionStop;
                     successReaction.Execute();
                     IsRunning = true;
                     break;
                 case false when failureReaction != null:
+                    // failureReaction.OnReactionFinished += HandleInteractionStop;
                     failureReaction.Execute();
                     IsRunning = true;
                     break;
@@ -82,6 +82,12 @@ namespace Runtime.Scripts.Core
         private void OnValidate()
         {
             SetThresholdBool();
+        }
+
+        private void OnEnable()
+        {
+            successReaction.OnReactionFinished += HandleInteractionStop;
+            failureReaction.OnReactionFinished += HandleInteractionStop;
         }
 
         [Serializable]

@@ -73,16 +73,16 @@ namespace Runtime.Scripts.Interactables
         {
             var hits = GetAllSortedRaycastHits();
 
-            Debug.Log("//////HITS///////////////////");
+            // Debug.Log("//////HITS///////////////////");
             
             foreach (var hit in hits)
             {
-                Debug.Log(hit.target.name + ": " + hit.distance);
+                // Debug.Log(hit.target.name + ": " + hit.distance);
             }
 
             if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall" || hits[0].interactable == null))
             {
-                Debug.Log("click raycast early return");
+                // Debug.Log("click raycast early return");
                 return;
             }
 

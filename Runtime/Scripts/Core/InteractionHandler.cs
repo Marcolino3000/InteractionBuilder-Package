@@ -63,7 +63,7 @@ namespace Runtime.Scripts.Core
                 }
             }
             
-            ResetCurrentInteractions(newInteractions);
+            // ResetCurrentInteractions(newInteractions);
         }
 
         private void ResetCurrentInteractions(List<InteractionData> newInteractions)
@@ -73,7 +73,7 @@ namespace Runtime.Scripts.Core
             
             foreach (var currentInteraction in currentInteractions)
             {
-                currentInteraction.HandleInteractionStop();
+                // currentInteraction.HandleInteractionStop();
             }
             
             currentInteractions = newInteractions;
@@ -123,7 +123,7 @@ namespace Runtime.Scripts.Core
 
         private void SubscribeToDialogEvents()
         {
-            DialogTreeRunner.OnDialogRunningStatusChanged += HandleDialogStatusChanged;
+            // DialogTreeRunner.OnDialogRunningStatusChanged += HandleDialogStatusChanged;
             DialogTreeRunner.DialogNodeSelected += HandleTriggerViaDialog;
         }
 
@@ -136,8 +136,8 @@ namespace Runtime.Scripts.Core
                 .ForEach(i => 
                 {
                     // i.IsRunning = isRunning;
-                    if(!isRunning)
-                        i.HandleInteractionStop();
+                    // if(!isRunning)
+                        // i.HandleInteractionStop();
                 });
         }
 
