@@ -16,4 +16,5 @@ MonoBehaviour:
   Interactable: {fileID: 0}
   ObjectToMoveIn: {fileID: 0}
   ObjectToMoveOut: {fileID: 0}
-  CancelCurrentDialog: 0
+  CancelCurrentDialog: 1
+  DebugMessage: called

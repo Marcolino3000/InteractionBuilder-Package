@@ -12,16 +12,25 @@ namespace Runtime.Scripts.Core
         public event Action OnStartDialog;
         public event Action OnStopDialog;
         public event Action<DialogTree, Action<bool>> OnSetDialogTree;
-        public event Action<bool> OnReactionFinished; 
+        public event Action<bool> OnReactionFinished;
+        public event Action<Waypoints> OnStartSequence;
 
         public DialogTree DialogTree;
         public InteractableState Interactable;
         public InteractableState ObjectToMoveIn;
         public InteractableState ObjectToMoveOut;
         public bool CancelCurrentDialog;
-        
+        public string DebugMessage;
+        public Waypoints Waypoints;
+
+
         public void Execute()
         {
+            if (!string.IsNullOrEmpty(DebugMessage))
+            {
+                Debug.Log(name + " " + DebugMessage);
+            }
+            
             if (CancelCurrentDialog)
             {
                 Debug.Log("Cancel Dialog called");
@@ -49,6 +58,11 @@ namespace Runtime.Scripts.Core
             {
                 ObjectToMoveOut.Interactable.transform.position += new Vector3(-14,0,0);
             }
+
+            if (Waypoints != null)
+            {
+                OnStartSequence?.Invoke(Waypoints);
+            }
             
             if(DialogTree == null)
                 OnReactionFinished?.Invoke(true);
@@ -56,8 +70,13 @@ namespace Runtime.Scripts.Core
 
         private void DialogFinishedCallback(bool ranToCompletion)
         {
-            Debug.Log("Dialog Finished Callback called with ranToCompletion: " + ranToCompletion);
+            Debug.Log(name + " Dialog Finished Callback, ranToCompletion: " + ranToCompletion);
             OnReactionFinished?.Invoke(ranToCompletion);
+        }
+
+        public void SetWaypoints(Waypoints waypoints)
+        {
+            Waypoints = waypoints;
         }
     }
 }

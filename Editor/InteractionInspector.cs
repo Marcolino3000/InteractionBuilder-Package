@@ -133,14 +133,7 @@ namespace Editor.CustomInspectors
                 var row = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>
                     ("Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();
                 row.style.marginBottom = 15;
-                foreach (var child  in row.hierarchy.Children())
-                {
-                    
-                    foreach (var ch in child.Children())
-                    {
-                        Debug.Log(ch.name);    
-                    }
-                }
+                
                 SerializedProperty prereq = prereqs.GetArrayElementAtIndex(j);
                     
                 var interactionToExecuteField = row.Q<ObjectField>("interactionToExecute");
@@ -163,7 +156,7 @@ namespace Editor.CustomInspectors
                 conditionsField.BindProperty(conditions);
                 conditionsField.OnPopulated(() =>
                 {
-                    Debug.Log("Conditions field populated");
+                    // Debug.Log("Conditions field populated");
                     var foldout = conditionsField.Q<Foldout>();
                     if (foldout != null)
                     {

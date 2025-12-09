@@ -21,3 +21,4 @@ MonoBehaviour:
   failureReaction: {fileID: 0}
   ThresholdReached: 1
   IsRunning: 0
+  IsActive: 0

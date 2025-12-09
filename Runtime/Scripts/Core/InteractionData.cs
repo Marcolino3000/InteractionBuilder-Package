@@ -86,8 +86,10 @@ namespace Runtime.Scripts.Core
 
         private void OnEnable()
         {
-            successReaction.OnReactionFinished += HandleInteractionStop;
-            failureReaction.OnReactionFinished += HandleInteractionStop;
+            if(successReaction != null)
+                successReaction.OnReactionFinished += HandleInteractionStop;
+            if(failureReaction != null)
+                failureReaction.OnReactionFinished += HandleInteractionStop;
         }
 
         [Serializable]

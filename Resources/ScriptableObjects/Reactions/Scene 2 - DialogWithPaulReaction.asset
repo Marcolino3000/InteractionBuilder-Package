@@ -17,3 +17,4 @@ MonoBehaviour:
   ObjectToMoveIn: {fileID: 0}
   ObjectToMoveOut: {fileID: 0}
   CancelCurrentDialog: 0
+  DebugMessage: called

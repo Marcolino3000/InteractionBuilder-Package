@@ -12,7 +12,6 @@ namespace Runtime.Scripts.Interactables
         public Interactable Interactable;
 
         public Texture2D Sprite;
-        public Vector2 LocationOnMap;
         public AwarenessLevel AwarenessLevel;
                 
         public virtual void HandleInteraction()
@@ -20,7 +19,7 @@ namespace Runtime.Scripts.Interactables
             OnInteractionFeedback?.Invoke();
         }
 
-        public override void SetState(InteractionData.StateData state)
+        public override void SetState(StateData state)
         {
             base.SetState(state);
 
