@@ -40,7 +40,7 @@ namespace Runtime.Scripts.Interactables
             {
                 _player = player;
                 
-                OnEnteredTriggerArea?.Invoke(InteractionTriggerVia.EnteringTriggerArea, Data);
+                OnEnteredTriggerArea?.Invoke(InteractionTriggerVia.EnterTrigger, Data);
                 
                 SubscribeToPlayerInteraction(player);
             };
@@ -61,7 +61,7 @@ namespace Runtime.Scripts.Interactables
             {
                 UnsubscribeFromPlayerInteraction();
 
-                OnExitedTriggerArea?.Invoke(InteractionTriggerVia.ExitingTriggerArea, Data);
+                OnExitedTriggerArea?.Invoke(InteractionTriggerVia.ExitTrigger, Data);
             };
 
             Data.OnInteractionFeedback += HandleInteractionFeedback;

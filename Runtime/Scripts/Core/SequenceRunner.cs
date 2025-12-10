@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Runtime.Scripts.Core
 {
-    public class SequenceOutputDispatcher : MonoBehaviour
+    public class SequenceRunner : MonoBehaviour
     {
         [SerializeField] private PlayerController playerController;
         [SerializeField] private BoxCollider boxCollider;
@@ -15,13 +15,13 @@ namespace Runtime.Scripts.Core
         [SerializeField] private float waypointThreshold = 0.2f;
 
         private Coroutine moveCoroutine;
-        private List<Reaction> reactions;
+        private List<Reaction> allReactions;
 
         private void OnEnable()
         {
-            reactions = new List<Reaction>(Resources.FindObjectsOfTypeAll<Reaction>());
+            allReactions = new List<Reaction>(Resources.FindObjectsOfTypeAll<Reaction>());
 
-            foreach (var reaction in reactions)
+            foreach (var reaction in allReactions)
             {
                 reaction.OnStartSequence += StartMovingPlayer;
             }
@@ -51,7 +51,12 @@ namespace Runtime.Scripts.Core
             var waypoints = Waypoints.GetWaypoints();
             while (currentWaypointIndex < waypoints.Count)
             {
-                var target = waypoints[currentWaypointIndex].position;
+                var waypoint = waypoints[currentWaypointIndex];
+                var target = waypoint.Transform.position;
+                
+                if(waypoint.ReactionAtStart != null)
+                    waypoint.ReactionAtStart.Execute ();
+                
                 while (Vector2.Distance(new Vector2(playerController.transform.position.x, playerController.transform.position.z),
                                        new Vector2(target.x, target.z)) > waypointThreshold)
                 {
@@ -60,6 +65,16 @@ namespace Runtime.Scripts.Core
                     playerController.OnMove(moveInput);
                     yield return null;
                 }
+                
+                if(waypoint.ReactionAtStop != null)
+                    waypoint.ReactionAtStop.Execute();
+                
+                if (waypoint.WaitTime > 0f)
+                {
+                    playerController.OnMove(Vector2.zero);
+                    yield return new WaitForSeconds(waypoint.WaitTime);
+                }
+                
                 currentWaypointIndex++;
             }
             playerController.OnMove(Vector2.zero);

@@ -124,6 +124,7 @@ namespace Runtime.Scripts.Core
         private void SubscribeToDialogEvents()
         {
             // DialogTreeRunner.OnDialogRunningStatusChanged += HandleDialogStatusChanged;
+            DialogTreeRunner.DialogNodeSelected -= HandleTriggerViaDialog;
             DialogTreeRunner.DialogNodeSelected += HandleTriggerViaDialog;
         }
 
@@ -200,11 +201,11 @@ namespace Runtime.Scripts.Core
 
     public enum InteractionTriggerVia
     {
-        EnteringTriggerArea,
-        ExitingTriggerArea,
+        EnterTrigger,
+        ExitTrigger,
         ButtonPress,
         TrustThresholdReached, 
-        DialogOptionSelected
+        DialogOption
     }
 
     [Serializable]
@@ -219,7 +220,7 @@ namespace Runtime.Scripts.Core
         public Trigger(DialogOptionNode dialogOptionNode) : this()
         {
             TriggeringDialogOption = dialogOptionNode;
-            TriggerType = InteractionTriggerVia.DialogOptionSelected;
+            TriggerType = InteractionTriggerVia.DialogOption;
         }
 
         public InteractionTriggerVia TriggerType;

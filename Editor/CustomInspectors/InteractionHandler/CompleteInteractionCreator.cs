@@ -148,7 +148,7 @@ namespace Editor
             else if (triggeringDialogOption != null)
             {
                 trigger.TriggeringDialogOption = triggeringDialogOption;
-                trigger.TriggerType = InteractionTriggerVia.DialogOptionSelected;
+                trigger.TriggerType = InteractionTriggerVia.DialogOption;
             }
             else
             {
