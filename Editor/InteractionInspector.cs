@@ -149,10 +149,9 @@ namespace Editor.CustomInspectors
                 }
                     
                 var conditionsField = row.Q<PropertyField>("conditions");
-                //     
-                //
+               
                 SerializedProperty conditions = prereq.FindPropertyRelative("Record").FindPropertyRelative("Conditions");
-                //     
+                 
                 conditionsField.BindProperty(conditions);
                 conditionsField.OnPopulated(() =>
                 {
@@ -162,6 +161,7 @@ namespace Editor.CustomInspectors
                     {
                         foldout.value = false;
                         conditionFoldouts.Add(foldout);
+                        foldout.RegisterValueChangedCallback((evt) => { LogValue(evt, foldout); });
                     }
                 });
 
@@ -201,6 +201,12 @@ namespace Editor.CustomInspectors
                     Debug.Log($"Child element: {child.GetType()} - Name: {child.name}");
                 }
             }
+        }
+
+        private void LogValue(ChangeEvent<bool> evt, Foldout foldout)
+        {
+            if (!evt.newValue) return;
+            SetMinWidthForLabels(foldout, 120);
         }
 
         private void CreateActiveAndDeleteButtons(SerializedProperty prereqs, TemplateContainer row, int j,
@@ -339,7 +345,22 @@ namespace Editor.CustomInspectors
             separator.style.borderTopRightRadius = 2;
             return separator;
         }
-        
+
+        private void SetMinWidthForLabels(VisualElement element, int minWidth)
+        {
+            foreach (var child in element.Children())
+            {
+                if (child is Label label)
+                {
+                    Debug.Log(label.text);
+                    label.style.minWidth = minWidth;
+                    label.style.width = minWidth;
+                    label.style.overflow = Overflow.Visible;
+                    Debug.Log("set child minwidth");
+                }
+                SetMinWidthForLabels(child, minWidth);
+            }
+        }
     }
     
    
