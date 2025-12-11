@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a450906dd34a441e8f7094457bbb7546, type: 3}
   m_Name: TestScripted Sequence
   m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Core.ScriptedSequence
-  Waypoints:
-  - {x: -1.31, y: 0, z: -7.45}
-  - {x: 0, y: 0, z: 1}
-  PlayerController: {fileID: 0}
-  moveSpeed: 1
+  Waypoints: {fileID: 0}
+  waypoints:
+  - Transform: {fileID: 0}
+    WaitTime: 0
+    ReactionAtStart: {fileID: 0}
+    ReactionAtStop: {fileID: 0}
+  - Transform: {fileID: 0}
+    WaitTime: 2
+    ReactionAtStart: {fileID: 0}
+    ReactionAtStop: {fileID: 11400000, guid: 99b2901db596a46c29ebb00e795ce847, type: 2}
+  - Transform: {fileID: 0}
+    WaitTime: 0
+    ReactionAtStart: {fileID: 0}
+    ReactionAtStop: {fileID: 0}

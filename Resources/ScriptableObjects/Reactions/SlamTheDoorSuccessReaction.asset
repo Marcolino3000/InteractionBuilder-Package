@@ -18,3 +18,4 @@ MonoBehaviour:
   ObjectToMoveOut: {fileID: 0}
   CancelCurrentDialog: 1
   DebugMessage: called
+  ScriptedSequence: {fileID: 11400000, guid: 840450afbb18d43a7a420745640d29dd, type: 2}

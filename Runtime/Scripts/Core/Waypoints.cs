@@ -6,44 +6,37 @@ namespace Runtime.Scripts.Core
 {
     public class Waypoints : MonoBehaviour
     {
-        public List<Waypoint> waypoints;
-        public Reaction TriggeringReaction;
-
+        public List<Transform> waypoints;
+        public ScriptedSequence sequence;
         private void OnEnable()
         {
-            TriggeringReaction.SetWaypoints(this);
+            UpdateSequene();
         }
-        
+
+        private void OnValidate()
+        {
+            UpdateSequene();
+        }
+
+        private void UpdateSequene()
+        {
+            if (sequence != null)
+                sequence.UpdateTransforms(waypoints);
+        }
+
         [ContextMenu("Set Waypoints")]
         private void Setup()
         {
-            waypoints = new List<Waypoint>();
+            waypoints = new List<Transform>();
 
             foreach (Transform child in transform)
             {
-                waypoints.Add(new Waypoint(child, 0f));
+                waypoints.Add(child);
             }
         }
 
-        public List<Waypoint> GetWaypoints()
-        {
-            return waypoints;
-        }
+  
 
-        [Serializable]
-        public struct Waypoint
-        {
-            public Waypoint(Transform transform, float waitTime, Reaction reactionAtStart = null, Reaction reactionAtStop = null)
-            {
-                Transform = transform;
-                WaitTime = waitTime;
-                ReactionAtStart = reactionAtStart;
-                ReactionAtStop = reactionAtStop;
-            }
-            public Transform Transform;
-            public float WaitTime;
-            public Reaction ReactionAtStart;
-            public Reaction ReactionAtStop;
-        }
+     
     }
 }

@@ -503,7 +503,7 @@ MonoBehaviour:
   Blackboard:
     CharacterData: {fileID: 11400000, guid: 67e6c4e2e200e4e43a4811bd56319965, type: 2}
   DialogLine: Bitte gib mir noch eine Chance!
-  TextPreview: Gib mir noch ne Chance!
+  TextPreview: Bitte gib mir no...
   Children:
   - {fileID: -8988139489344893849}
   FallThrough: 0

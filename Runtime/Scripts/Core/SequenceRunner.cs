@@ -10,7 +10,7 @@ namespace Runtime.Scripts.Core
     {
         [SerializeField] private PlayerController playerController;
         [SerializeField] private BoxCollider boxCollider;
-        [SerializeField] private Waypoints Waypoints;
+        [SerializeField] private List<Waypoint> Waypoints;
         [SerializeField] private float moveSpeed = 1f;
         [SerializeField] private float waypointThreshold = 0.2f;
 
@@ -28,7 +28,7 @@ namespace Runtime.Scripts.Core
         }
         
         [ContextMenu("start sequence")]
-        public void StartMovingPlayer(Waypoints waypoints)
+        public void StartMovingPlayer(List<Waypoint> waypoints)
         {
             Waypoints = waypoints;
             
@@ -42,16 +42,16 @@ namespace Runtime.Scripts.Core
         {
             if (boxCollider != null)
                 boxCollider.enabled = false;
-            if (Waypoints == null || Waypoints.GetWaypoints() == null || Waypoints.GetWaypoints().Count == 0)
+            if (Waypoints == null || Waypoints == null || Waypoints.Count == 0)
             {
                 Debug.LogWarning("No waypoints set.");
                 yield break;
             }
             int currentWaypointIndex = 0;
-            var waypoints = Waypoints.GetWaypoints();
-            while (currentWaypointIndex < waypoints.Count)
+            // var waypoints = Waypoints;
+            while (currentWaypointIndex < Waypoints.Count)
             {
-                var waypoint = waypoints[currentWaypointIndex];
+                var waypoint = Waypoints[currentWaypointIndex];
                 var target = waypoint.Transform.position;
                 
                 if(waypoint.ReactionAtStart != null)

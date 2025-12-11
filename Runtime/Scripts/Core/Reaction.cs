@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Core;
 using Runtime.Scripts.Interactables;
 using Tree;
@@ -13,7 +14,7 @@ namespace Runtime.Scripts.Core
         public event Action OnStopDialog;
         public event Action<DialogTree, Action<bool>> OnSetDialogTree;
         public event Action<bool> OnReactionFinished;
-        public event Action<Waypoints> OnStartSequence;
+        public event Action<List<Waypoint>> OnStartSequence;
 
         public DialogTree DialogTree;
         public InteractableState Interactable;
@@ -21,7 +22,7 @@ namespace Runtime.Scripts.Core
         public InteractableState ObjectToMoveOut;
         public bool CancelCurrentDialog;
         public string DebugMessage;
-        public Waypoints Waypoints;
+        public ScriptedSequence ScriptedSequence;
 
 
         public void Execute()
@@ -59,9 +60,9 @@ namespace Runtime.Scripts.Core
                 ObjectToMoveOut.Interactable.transform.position += new Vector3(-14,0,0);
             }
 
-            if (Waypoints != null)
+            if (ScriptedSequence != null)
             {
-                OnStartSequence?.Invoke(Waypoints);
+                OnStartSequence?.Invoke(ScriptedSequence.waypoints);
             }
             
             if(DialogTree == null)
@@ -73,10 +74,7 @@ namespace Runtime.Scripts.Core
             Debug.Log(name + " Dialog Finished Callback, ranToCompletion: " + ranToCompletion);
             OnReactionFinished?.Invoke(ranToCompletion);
         }
-
-        public void SetWaypoints(Waypoints waypoints)
-        {
-            Waypoints = waypoints;
-        }
+        
+        
     }
 }
