@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623fa79c384042e3bb49a575d178c3c0, type: 3}
   m_Name: Scene 2 - DialogWithPaulReaction
   m_EditorClassIdentifier: Assembly-CSharp::Core.Reaction
-  DialogTree: {fileID: 11400000, guid: 215229c350b7347958c48a100f9b68d9, type: 2}
+  DialogTree: {fileID: 11400000, guid: a36626f8320174c4d90b2388492a6a9a, type: 2}
   Interactable: {fileID: 0}
   ObjectToMoveIn: {fileID: 0}
   ObjectToMoveOut: {fileID: 0}
   CancelCurrentDialog: 0
   DebugMessage: called
+  ScriptedSequence: {fileID: 0}

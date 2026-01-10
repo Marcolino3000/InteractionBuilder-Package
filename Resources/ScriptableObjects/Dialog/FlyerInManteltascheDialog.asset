@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: DialogBuilder::Nodes.Decorator.PlayerDialogOption
   Guid: 0d983bfe42de048d7ad5eaba5efb6ed7
   Position: {x: 934.43414, y: 552.78235}
+  customPreview: 0
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 388485b41120844eca5d0b4a8585948d, type: 2}
   DialogLine: "Flyer zum Bergfest \u201CDie Mitte des Jahres\u201D \n\u201CHalb rum\u201D
     mit Datum"
   TextPreview: Flyer zum Bergfe...
@@ -45,4 +46,4 @@ MonoBehaviour:
   nodes:
   - {fileID: -7939465526274262105}
   Blackboard:
-    CharacterData: {fileID: 0}
+    CharacterData: {fileID: 11400000, guid: 388485b41120844eca5d0b4a8585948d, type: 2}

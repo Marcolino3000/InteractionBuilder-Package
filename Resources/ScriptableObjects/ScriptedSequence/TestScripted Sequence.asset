@@ -19,9 +19,9 @@ MonoBehaviour:
     ReactionAtStart: {fileID: 0}
     ReactionAtStop: {fileID: 0}
   - Transform: {fileID: 0}
-    WaitTime: 2
+    WaitTime: 0
     ReactionAtStart: {fileID: 0}
-    ReactionAtStop: {fileID: 11400000, guid: 99b2901db596a46c29ebb00e795ce847, type: 2}
+    ReactionAtStop: {fileID: 0}
   - Transform: {fileID: 0}
     WaitTime: 0
     ReactionAtStart: {fileID: 0}
