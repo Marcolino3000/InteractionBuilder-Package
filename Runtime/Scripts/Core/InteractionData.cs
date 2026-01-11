@@ -23,7 +23,7 @@ namespace Runtime.Scripts.Core
         {
             if(!IsActive)
             {
-                Debug.LogWarning("Interaction was stopped even though is was not active, this should not happen");
+                Debug.LogWarning("Interaction was stopped even though is was not active, this should not happen!");
                 return;
             }
             

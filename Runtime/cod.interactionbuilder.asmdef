@@ -2,9 +2,9 @@
     "name": "cod.interactionbuilder",
     "rootNamespace": "",
     "references": [
-        "GUID:11d5565bb176849b19fb1032c923c927",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:955ee5ca4fb6e4c249621eb29b868688"
+        "GUID:955ee5ca4fb6e4c249621eb29b868688",
+        "GUID:c8e885647745d4962b6fcf77f0da4f22"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
