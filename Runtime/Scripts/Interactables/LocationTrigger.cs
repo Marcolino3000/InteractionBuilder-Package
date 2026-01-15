@@ -34,9 +34,9 @@ public class LocationTrigger : MonoBehaviour
 
     private void ToggleEntrance(TransparentWall wall)
     {
-        wall.GetComponent<Renderer>().enabled = PlayerInLocation;
         PlayerInLocation = !PlayerInLocation;
-        
+        wall.GetComponent<Renderer>().enabled = PlayerInLocation;
+
         if(PlayerInLocation)
             PlayerEntered?.Invoke(this);
     }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 799bdc7289364c2b97004e28c80a81c6, type: 3}
-  m_Name: TasseMitTeebeutel
+  m_Name: TriggerPaul
   m_EditorClassIdentifier: InteractionBuilder::Runtime.Scripts.Interactables.Toggleable
   _SaveStateToCurrentScene: 0
   _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}

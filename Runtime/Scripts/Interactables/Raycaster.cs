@@ -56,6 +56,9 @@ namespace Runtime.Scripts.Interactables
                     continue;
                 }
                 
+                if(sauerteig == null)
+                    Debug.LogWarning("sauerteig is null");
+                
                 if (!sauerteig.IsUnlocked)
                     return;
 
@@ -75,10 +78,10 @@ namespace Runtime.Scripts.Interactables
 
             // Debug.Log("//////HITS///////////////////");
             
-            foreach (var hit in hits)
-            {
-                // Debug.Log(hit.target.name + ": " + hit.distance);
-            }
+            // foreach (var hit in hits)
+            // {
+            //     Debug.Log(hit.target.name + ": " + hit.distance);
+            // }
 
             if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall" || hits[0].interactable == null))
             {
