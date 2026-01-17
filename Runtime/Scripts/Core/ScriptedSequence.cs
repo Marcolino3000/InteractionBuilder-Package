@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Runtime.Scripts.PlayerInput;
+using Runtime.Scripts.Utility;
+using UnityEditor;
 using UnityEngine;
 
 namespace Runtime.Scripts.Core
@@ -9,8 +9,7 @@ namespace Runtime.Scripts.Core
     [CreateAssetMenu(menuName = "InteractionBuilder/ScriptedSequence")]
     public class ScriptedSequence : ScriptableObject
     {
-        public Waypoints Waypoints;
-        public List<Waypoint> waypoints;
+        [SerializeReference] public List<Waypoint> waypoints;
         
         public void UpdateTransforms(List<Transform> transforms)
         {
@@ -18,32 +17,36 @@ namespace Runtime.Scripts.Core
 
             foreach (var transform in transforms)
             {
-                var waypointToUpdate = waypoints.Find(waypoint => waypoint.Transform == transform);
+                var id = GlobalObjectId.GetGlobalObjectIdSlow(transform);
+                var waypointToUpdate = waypoints.Find(waypoint => waypoint.ID.Equals(id));
                 
                 if (waypointToUpdate != null)
                 {
-                    waypointToUpdate.Transform = transform;
+                    waypointToUpdate.Position = transform.position;
                 }                
                 else
                 {
-                    waypoints.Add(new Waypoint(transform, 0f));
+                    waypoints.Add(new Waypoint(id, transform.position, 0f));
                 }
             }
+            
+            EditorUtility.SetDirty(this);
         }
     }
     
     [Serializable]
     public class Waypoint
     {
-        public Waypoint(Transform transform, float waitTime, Reaction reactionAtStart = null, Reaction reactionAtStop = null)
+        public Waypoint(GlobalObjectId id, Vector3 transform, float waitTime, Reaction reactionAtStart = null, Reaction reactionAtStop = null)
         {
-            Transform = transform;
+            Position = transform;
             WaitTime = waitTime;
             ReactionAtStart = reactionAtStart;
             ReactionAtStop = reactionAtStop;
         }
-            
-        public Transform Transform;
+
+        public GlobalObjectId ID;
+        public Vector3 Position;
         public float WaitTime;
         public Reaction ReactionAtStart;
         public Reaction ReactionAtStop;

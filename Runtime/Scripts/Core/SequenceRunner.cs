@@ -52,7 +52,7 @@ namespace Runtime.Scripts.Core
             while (currentWaypointIndex < Waypoints.Count)
             {
                 var waypoint = Waypoints[currentWaypointIndex];
-                var target = waypoint.Transform.position;
+                var target = waypoint.Position;
                 
                 if(waypoint.ReactionAtStart != null)
                     waypoint.ReactionAtStart.Execute ();
