@@ -13,6 +13,8 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private float fadeDuration = 0.5f;
         [SerializeField] private float opacity = 0.7f;
         [SerializeField] private float cooldownBetweenHovers = 1f;
+        // [SerializeField] private Material outlineMaterial;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         public bool cooldownActive;
 
         private float currentFadeTime;
@@ -87,20 +89,50 @@ namespace Runtime.Scripts.Interactables
 
         private IEnumerator QuickFadeInAndOut()
         {
-            yield return FadeIcon(true);
-            yield return FadeIcon(false);
+            yield return FadeOutline(true);
+            yield return FadeOutline(false);
         }
 
         public void Hide()
         {
-            StartCoroutine(FadeIcon(false));
+            StartCoroutine(FadeOutline(false));
         }
 
         public void Show()
         {
-            StartCoroutine(FadeIcon(true));
+            StartCoroutine(FadeOutline(true));
         }
 
+        private IEnumerator FadeOutline(bool fadeIn)
+        {
+            // Color color = outlineMaterial.GetColor("_SolidOutline");
+            Material outlineMaterial = spriteRenderer.material;
+            Color color = outlineMaterial.GetColor("_SolidOutline");
+            while (currentFadeTime < fadeDuration)
+            {
+                currentFadeTime += Time.deltaTime;
+                
+                if(fadeIn)
+                {
+                    currentOpacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
+                    color.a = currentOpacity;
+                    outlineMaterial.SetColor("_SolidOutline", color);
+
+                }
+                else
+                {
+                    currentOpacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
+                    color.a = currentOpacity;
+                    outlineMaterial.SetColor("_SolidOutline", color);
+
+                }
+                
+                yield return null;
+            }
+
+            currentFadeTime = 0f;
+        }
+        
         private IEnumerator FadeIcon(bool fadeIn)
         {
             while (currentFadeTime < fadeDuration)
