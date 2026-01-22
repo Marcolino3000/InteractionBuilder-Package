@@ -109,11 +109,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2872073155054400692, guid: 103fff18e44c343b090b4928e416cd4a, type: 3}
       propertyPath: m_Radius
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6223779332585130471, guid: 103fff18e44c343b090b4928e416cd4a, type: 3}
       propertyPath: triggerAreaRadius
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8873758076070795167, guid: 103fff18e44c343b090b4928e416cd4a, type: 3}
       propertyPath: m_Name
@@ -153,6 +153,7 @@ MonoBehaviour:
   interactable: {fileID: 0}
   isOpen: 0
   _progress: 0
+  _isRunning: 0
 --- !u!4 &5721676862055115558 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2459043860723191969, guid: 103fff18e44c343b090b4928e416cd4a, type: 3}

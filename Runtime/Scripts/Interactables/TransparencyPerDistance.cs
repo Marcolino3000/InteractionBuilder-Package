@@ -12,6 +12,8 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private PlayerController player;
         [SerializeField] private bool playerIsNear;
         [SerializeField] private Renderer doorRenderer;
+        [SerializeField] private float currentTransparency;
+        [SerializeField] private float distanceMultiplier;
 
         private void OnEnable()
         {
@@ -64,11 +66,18 @@ namespace Runtime.Scripts.Interactables
         {
             float distance = Vector3.Distance(player.transform.position, transform.position);
 
-            float transparency = distance / (colliderRadius * 12f);
+            float maxDistance = colliderRadius * transform.lossyScale.x;
+            float transparency = Mathf.Clamp01((distance / maxDistance));
+            
+            // float transparency = distance / (colliderRadius) * distanceMultiplier;
+            transparency = Mathf.Clamp01(transparency);
 
-            var color = doorRenderer.material.color;
+            // var color = doorRenderer.material.color;
+            var color = doorRenderer.sharedMaterial.GetColor("_Color");
             color.a = transparency;
-            doorRenderer.material.color = color;
+            currentTransparency = transparency;
+            // doorRenderer.material.color = color;
+            doorRenderer.material.SetColor("_Color", color);
         }
     }
 }
