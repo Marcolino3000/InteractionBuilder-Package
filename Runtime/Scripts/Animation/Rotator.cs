@@ -14,14 +14,20 @@ namespace Runtime.Scripts.Animation
         [Header("Debug")] 
         [SerializeField] private bool isOpen;
         [SerializeField] private float _progress;
+        [SerializeField] private bool _isRunning;
 
         private void StartRotation()
         {
+            if(_isRunning)
+                return;
+            
             StartCoroutine(DoProgress());
         }
         
         private IEnumerator DoProgress()
         {
+            _isRunning = true;
+            
             while (_progress < 1f)
             {
                 float deltaAngle = Time.deltaTime / duration * angle;
@@ -38,6 +44,7 @@ namespace Runtime.Scripts.Animation
 
             _progress = 0f;
             isOpen = !isOpen;
+            _isRunning = false;
         }
 
         // private void OnGUI()
