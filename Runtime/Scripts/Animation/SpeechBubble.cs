@@ -14,8 +14,7 @@ namespace Runtime.Scripts.Animation
         [AutoAssign] [SerializeField] private TextMeshProUGUI text;
         
         private int _index;
-
-
+        
         public void Show(string paragraph, int index)
         {
             _index = index;

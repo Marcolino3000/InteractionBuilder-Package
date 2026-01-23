@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Runtime.Scripts.Interactables;
 using UnityEditor;
@@ -12,6 +13,7 @@ public class SauerteigStatusDisplay : MonoBehaviour
     [SerializeField] private Image sauerteigImage;
     [SerializeField] private float baseSize;
     [SerializeField] private float scaleFactor;
+    [SerializeField] private float animationDuration;
 
     private void Start()
     {
@@ -26,10 +28,26 @@ public class SauerteigStatusDisplay : MonoBehaviour
 
     public void UpdateStatus(int status)
     {
-        
+        float targetScale = baseSize + status / 10f * scaleFactor;
+        StartCoroutine(AnimateScale(targetScale, animationDuration)); // 0.5 seconds duration
+    }
+
+    private IEnumerator AnimateScale(float targetY, float duration)
+    {
         var size = sauerteigImage.transform.localScale;
-        size.y = baseSize + status / 10f * scaleFactor;
-        sauerteigImage.transform.localScale = size;
+        float startY = size.y;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            size.y = Mathf.Lerp(startY, targetY, t);
+            sauerteigImage.transform.localScale = size;
+            yield return null;
+        }
         
+        size.y = targetY;
+        sauerteigImage.transform.localScale = size;
     }
 }
