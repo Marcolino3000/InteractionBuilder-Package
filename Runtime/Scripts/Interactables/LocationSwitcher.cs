@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Runtime.Scripts.PlayerInput;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Runtime.Scripts.Interactables
 {
@@ -11,8 +12,8 @@ namespace Runtime.Scripts.Interactables
         public event Action OnPlayerTrigger;
 
         [SerializeField] private bool toggle;
-        [SerializeField] private List<GameObject> firstLocation;
-        [SerializeField] private List<GameObject> secondLocation;
+        [FormerlySerializedAs("firstLocation")] [SerializeField] private List<GameObject> objectsToHide;
+        [SerializeField] private List<GameObject> objectsToMakeTransparent;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -34,14 +35,14 @@ namespace Runtime.Scripts.Interactables
 
         private void SwitchLocations()
         {
-            foreach (var location in firstLocation)
+            foreach (var location in objectsToHide)
             {
                 ToggleExpeptTrigger(location, toggle);
             }
             
-            foreach (var location in secondLocation)
+            foreach (var location in objectsToMakeTransparent)
             {
-                ToggleExpeptTrigger(location, !toggle);
+                SetTransparencyExceptTrigger(location, toggle);
             }
             
             toggle = !toggle;
@@ -65,6 +66,21 @@ namespace Runtime.Scripts.Interactables
                 var rend = child.GetComponent<Renderer>();
                 if (rend != null)
                     rend.enabled = show;
+            }
+        }
+        
+        private void SetTransparencyExceptTrigger(GameObject obj, bool show)
+        {
+            var allChildren = GetAllChildrenExceptTrigger(obj);
+            foreach (var child in allChildren)
+            {
+                var rend = child.GetComponent<Renderer>();
+                if (rend == null)
+                    return;
+                
+                var color = rend.sharedMaterial.GetColor("_Color");
+                color.a = show ? 0.5f : 0.1f;
+                rend.material.SetColor("_Color", color);
             }
         }
 
