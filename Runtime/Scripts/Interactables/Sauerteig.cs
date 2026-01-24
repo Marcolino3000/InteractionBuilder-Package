@@ -30,10 +30,12 @@ namespace Runtime.Scripts.Interactables
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.GetComponentInParent<Interactable>() == null) 
+            var interactable = other.GetComponentInParent<Interactable>();
+            
+            if(interactable == null) 
                 return;
             
-            wackler.Wiggle();
+            wackler.Wiggle(interactable);
         }
 
         private void HandleDialogNodeSelected(DialogOptionNode node)

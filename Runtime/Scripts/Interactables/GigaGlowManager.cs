@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
@@ -7,6 +6,7 @@ namespace Runtime.Scripts.Interactables
 {
     public class GigaGlowManager : MonoBehaviour
     {
+        [SerializeField] private bool activateGlow = true;
         [SerializeField] private float duration;
         [SerializeField] private float maxOpacity;
         [SerializeField] private bool cooldownActive;
@@ -16,7 +16,7 @@ namespace Runtime.Scripts.Interactables
 
         public void Glow()
         {
-            if(cooldownActive)
+            if(cooldownActive || !activateGlow)
                 return;
             
             StartCoroutine(StartCooldown());

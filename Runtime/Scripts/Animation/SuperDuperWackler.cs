@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Runtime.Scripts.Interactables;
 using UnityEngine;
 
 namespace Runtime.Scripts.Animation
@@ -7,10 +9,19 @@ namespace Runtime.Scripts.Animation
         [SerializeField] private float wiggleAmount = 10f;
         [SerializeField] private float wiggleDuration = 0.3f;
         [SerializeField] private int wiggleCount = 3;
+        [SerializeField] private List<Interactable> interactablesThatDontTriggerWiggle;
 
-        public void Wiggle()
+        public void Wiggle(Interactable interactable)
         {
+            if(!InteractableTriggersWiggle(interactable))
+                return;
+            
             StartCoroutine(WiggleCoroutine());
+        }
+
+        private bool InteractableTriggersWiggle(Interactable interactable)
+        {
+            return !interactablesThatDontTriggerWiggle.Contains(interactable);
         }
 
         private System.Collections.IEnumerator WiggleCoroutine()
