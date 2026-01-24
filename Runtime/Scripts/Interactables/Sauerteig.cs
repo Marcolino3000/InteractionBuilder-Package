@@ -18,6 +18,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private SauerteigStatusDisplay statusDisplay;
         [SerializeField] private DialogOptionNode unlockDialogOption;
         [SerializeField] private SuperDuperWackler wackler;
+        [SerializeField] private GigaGlowManager glowManager;
 
         private SphereCollider radarCollider;
          
@@ -92,6 +93,10 @@ namespace Runtime.Scripts.Interactables
             }
         }
 
+        public GigaGlowManager GetGlowManager()
+        {
+            return glowManager;
+        }
 
         public void ActivateRadar()
         {

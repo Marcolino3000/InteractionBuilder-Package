@@ -69,6 +69,7 @@ namespace Runtime.Scripts.Interactables
                     continue;
 
                 hit.display?.TriggerHoverEffect();
+                sauerteig.GetGlowManager().Glow();
             }
         }
 

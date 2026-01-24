@@ -70,9 +70,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable.InteractableDisplay
   interactable: {fileID: 6223779332585130471}
   triggerArea: {fileID: 1617824163739068085}
-  fadeDuration: 0.5
+  fadeDuration: 0.7
   opacity: 0.8
-  cooldownBetweenHovers: 1.3
+  cooldownBetweenHovers: 0.5
   spriteRenderer: {fileID: -189824404144706576}
   cooldownActive: 0
   currentOpacity: 0

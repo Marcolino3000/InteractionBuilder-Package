@@ -83,7 +83,7 @@ namespace Runtime.Scripts.Interactables
         private IEnumerator StartCooldownCoroutine()
         {
             cooldownActive = true;
-            yield return new WaitForSeconds(cooldownBetweenHovers);
+            yield return new WaitForSeconds(fadeDuration * 2 + cooldownBetweenHovers);
             cooldownActive = false;
         }
 
