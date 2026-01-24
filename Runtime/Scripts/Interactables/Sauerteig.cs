@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Nodes.Decorator;
+using Runtime.Scripts.Animation;
 using Runtime.Scripts.PlayerInput;
 using Tree;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private DialogTreeRunner treeRunner;
         [SerializeField] private SauerteigStatusDisplay statusDisplay;
         [SerializeField] private DialogOptionNode unlockDialogOption;
+        [SerializeField] private SuperDuperWackler wackler;
 
         private SphereCollider radarCollider;
          
@@ -23,6 +25,14 @@ namespace Runtime.Scripts.Interactables
         {
             radarCollider = GetComponent<SphereCollider>();
             DialogTreeRunner.DialogNodeSelected += HandleDialogNodeSelected;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.GetComponentInParent<Interactable>() == null) 
+                return;
+            
+            wackler.Wiggle();
         }
 
         private void HandleDialogNodeSelected(DialogOptionNode node)

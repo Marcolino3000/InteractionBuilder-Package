@@ -83,7 +83,7 @@ namespace Runtime.Scripts.Interactables
             //     Debug.Log(hit.target.name + ": " + hit.distance);
             // }
 
-            if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall" || hits[0].interactable == null))
+            if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall"))
             {
                 // Debug.Log("click raycast early return");
                 return;
@@ -92,6 +92,9 @@ namespace Runtime.Scripts.Interactables
             foreach (var hit in hits)
             {
                 if(hit.target.name == "Wall")
+                    continue;
+                
+                if (hit.interactable == null)
                     continue;
                 
                 if (hit.interactable.Found)

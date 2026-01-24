@@ -22,7 +22,8 @@ namespace Runtime.Scripts.Interactables
             if (sauerteig != null)
             {
                 OnSauerteigEntered?.Invoke(sauerteig);
-                Debug.Log("sauerteig entered");
+                var interactable = GetComponentInParent<Interactable>();
+                Debug.Log("sauerteig entered: " + interactable.name);
             }
         }
 
