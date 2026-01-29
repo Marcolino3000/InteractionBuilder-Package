@@ -49,7 +49,7 @@ namespace Editor
         private Toggle interactableToggle;
         private Button deleteButton;
         
-        private string assetPath = "Packages/com.cod.interactionbuilder/Resources/ScriptableObjects/";
+        [SerializeField] private string assetPath;
         private string nameOfLastCreatedInteraction;
         private string dropDownValue;
         private string nameOfLastCreatedInteractable;
@@ -60,6 +60,41 @@ namespace Editor
             CompleteInteractionCreator wnd = GetWindow<CompleteInteractionCreator>();
             wnd.titleContent = new GUIContent("Interaction Creator");
         }
+
+        [MenuItem("Tools/Set as Interaction Creator Path")]
+          private static void SetAssetPath()
+         {
+              string selectedPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+              
+              if (string.IsNullOrEmpty(selectedPath) || !AssetDatabase.IsValidFolder(selectedPath))
+              {
+                  Debug.LogError("Please select a folder in the Project window");
+                  return;
+              }
+              
+              if (!selectedPath.EndsWith("/"))
+                  selectedPath += "/";
+              
+              EditorPrefs.SetString("CompleteInteractionCreator_AssetPath", selectedPath);
+              
+              Debug.Log($"Asset path set to: {selectedPath}");
+         }
+      
+         [MenuItem("Tools/Set as Interaction Creator Path", true)]
+         private static bool ValidateSetAssetPath()
+         {
+             return Selection.activeObject != null && 
+                 AssetDatabase.IsValidFolder(AssetDatabase.GetAssetPath(Selection.activeObject));
+         }
+      
+         private void OnEnable()
+         {
+             string savedPath = EditorPrefs.GetString("CompleteInteractionCreator_AssetPath", "");
+             if (!string.IsNullOrEmpty(savedPath)) 
+                 assetPath = savedPath;
+             else
+                 Debug.LogError("EditorPrefs do not have a path set for adding Interactions from InteractionCreator");
+         }
 
         private void OnCreateInteractionClicked()
         {
@@ -80,26 +115,25 @@ namespace Editor
             
             if (interactionData != null && createInteractionData)
             {
+                EnsureFolderExists(assetPath + "InteractionData/");
                 AssetDatabase.CreateAsset(interactionData, assetPath + "InteractionData/" + interactionName + "InteractionData.asset");
             }
-            
-            // if (interactableState != null)
-            // {
-            //     AssetDatabase.CreateAsset(interactableState, assetPath + "Interactables/" + interactionName + "Interactable.asset");
-            // }
-            
+
             if (successReaction != null && createSuccessReaction)
             {
+                EnsureFolderExists(assetPath + "Reactions/");
                 AssetDatabase.CreateAsset(successReaction, assetPath + "Reactions/" + interactionName + "SuccessReaction.asset");
             }
-            
+
             if (failureReaction != null && createFailureReaction)
             {
+                EnsureFolderExists(assetPath + "Reactions/");
                 AssetDatabase.CreateAsset(failureReaction, assetPath + "Reactions/" + interactionName + "FailureReaction.asset");
             }
-            
+
             if (dialogTree != null && createDialogTree)
             {
+                EnsureFolderExists(assetPath + "Dialog/");
                 AssetDatabase.CreateAsset(dialogTree, assetPath + "Dialog/" + interactionName + "Dialog.asset");
             }
 
@@ -155,8 +189,9 @@ namespace Editor
                 Debug.LogError("triggering interactable and dialog were null. returning early");
                 return;
             }
-            
-            viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
+
+            if(AssignViewer())
+                viewer.AddInteraction(interactionName, isHighPriority, trigger, record);
             
             // SerializedObject viewerSerializedObject = new SerializedObject(viewer);
             //
@@ -177,6 +212,53 @@ namespace Editor
             deleteButton.SetEnabled(true);
             
             
+        }
+        
+        private void EnsureFolderExists(string folderPath)
+        {
+            if (!AssetDatabase.IsValidFolder(folderPath.TrimEnd('/')))
+            {
+                string[] folders = folderPath.Split('/');
+                string currentPath = folders[0];
+
+                for (int i = 1; i < folders.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(folders[i]))
+                        continue;
+
+                    string newPath = currentPath + "/" + folders[i];
+                    if (!AssetDatabase.IsValidFolder(newPath))
+                    {
+                        AssetDatabase.CreateFolder(currentPath, folders[i]);
+                    }
+                    currentPath = newPath;
+                }
+            }
+        }
+
+        private bool AssignViewer()
+        {
+            string[] guids = AssetDatabase.FindAssets("t:InteractionViewer");
+
+            if (guids.Length == 0)
+            {
+                Debug.LogError("No InteractionViewer found in project");
+                return false;
+            }
+
+            if (guids.Length > 1)
+            {
+                Debug.LogError($"Multiple InteractionViewers found ({guids.Length}). Please");
+                return false;
+            }
+            
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+            viewer = AssetDatabase.LoadAssetAtPath<InteractionViewer>(path);
+
+            if(viewer == null)
+                Debug.LogError("Failed to load InteractionViewer at path: " + path);
+            
+            return true;
         }
 
         private void DeleteNewlyCreatedAssets()
