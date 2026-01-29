@@ -53,8 +53,8 @@ namespace Runtime.Scripts.Interactables
                 return false;
             
             IsUnlocked = true;
-            // statusDisplay.SetStatusSprite(awarenessLevel);
-            // statusDisplay.UpdateStatus((int)awarenessLevel);
+            statusDisplay.UpdateStatus((int)awarenessLevel);
+            
             return true;
         }
 
@@ -156,9 +156,8 @@ namespace Runtime.Scripts.Interactables
                     break;
             }
             
-            // if(IsUnlocked)
-            //     statusDisplay.UpdateStatus(Activity);
-                // statusDisplay.SetStatusSprite(awarenessLevel);
+            if(IsUnlocked)
+                statusDisplay.UpdateStatus(Activity);
         }
 
         private void OnGUI()

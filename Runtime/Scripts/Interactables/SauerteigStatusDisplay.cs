@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class SauerteigStatusDisplay : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> statusSprites;
-    [SerializeField] private Image statusImage;
     [SerializeField] private Image sauerteigImage;
     [SerializeField] private float baseSize;
     [SerializeField] private float scaleFactor;
@@ -17,19 +15,18 @@ public class SauerteigStatusDisplay : MonoBehaviour
 
     private void Start()
     {
-        statusImage.enabled = false;
+        // sauerteigImage.enabled = false;
     }
 
-    public void SetStatusSprite(AwarenessLevel awareness)
+    public void ShowSauerteig()
     {
-        statusImage.enabled = true;
-        statusImage.sprite = statusSprites[(int)awareness];
+        sauerteigImage.enabled = true;
     }
 
     public void UpdateStatus(int status)
     {
         float targetScale = baseSize + status / 10f * scaleFactor;
-        StartCoroutine(AnimateScale(targetScale, animationDuration)); // 0.5 seconds duration
+        StartCoroutine(AnimateScale(targetScale, animationDuration));
     }
 
     private IEnumerator AnimateScale(float targetY, float duration)
