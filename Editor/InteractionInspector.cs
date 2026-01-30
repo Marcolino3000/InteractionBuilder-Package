@@ -119,7 +119,7 @@ namespace Editor.CustomInspectors
         {
             var triggerField = new ObjectField();
 
-            triggerField.BindProperty(triggerType == "DialogOptionSelected"
+            triggerField.BindProperty(triggerType == "DialogOption"
                 ? trigger.FindPropertyRelative("TriggeringDialogOption")
                 : trigger.FindPropertyRelative("TriggeringInteractable"));
             return triggerField;
