@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class SauerteigStatusDisplay : MonoBehaviour
 {
+    [SerializeField] private GameObject Sauerteig;
     [SerializeField] private Image sauerteigImage;
     [SerializeField] private float baseSize;
     [SerializeField] private float scaleFactor;
@@ -20,7 +21,7 @@ public class SauerteigStatusDisplay : MonoBehaviour
 
     public void ShowSauerteig()
     {
-        sauerteigImage.enabled = true;
+        Sauerteig.SetActive(true);
     }
 
     public void UpdateStatus(int status)

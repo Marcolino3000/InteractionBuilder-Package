@@ -35,7 +35,7 @@ namespace Runtime.Scripts.Interactables
             if(interactable == null) 
                 return;
             
-            wackler.Wiggle(interactable);
+            wackler?.Wiggle(interactable);
         }
 
         private void HandleDialogNodeSelected(DialogOptionNode node)
@@ -53,6 +53,7 @@ namespace Runtime.Scripts.Interactables
                 return false;
             
             IsUnlocked = true;
+            statusDisplay.ShowSauerteig();
             statusDisplay.UpdateStatus((int)awarenessLevel);
             
             return true;
