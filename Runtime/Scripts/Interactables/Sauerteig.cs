@@ -17,6 +17,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private DialogTreeRunner treeRunner;
         [SerializeField] private SauerteigStatusDisplay statusDisplay;
         [SerializeField] private DialogOptionNode unlockDialogOption;
+        [SerializeField] private DialogOptionNode emotionalReactionDialogOption;
         [SerializeField] private SuperDuperWackler wackler;
         [SerializeField] private GigaGlowManager glowManager;
 
@@ -42,10 +43,23 @@ namespace Runtime.Scripts.Interactables
         private void HandleDialogNodeSelected(DialogOptionNode node)
         {
             if (!IsUnlocked)
+            {
                 if (!CheckIfSauerteigsGetsUnlocked(node))
                     return;
+            }
+            
+            CheckForEmotionalReaction(node);
             
             SetActivityBasedOnDialog(node);
+        }
+
+        private void CheckForEmotionalReaction(DialogOptionNode node)
+        {
+            if (node != emotionalReactionDialogOption)
+                return;
+            
+            glowManager.Glow();
+            wackler.Wiggle();
         }
 
         private bool CheckIfSauerteigsGetsUnlocked(DialogOptionNode node)

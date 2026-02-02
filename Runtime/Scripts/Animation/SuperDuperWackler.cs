@@ -11,7 +11,7 @@ namespace Runtime.Scripts.Animation
         [SerializeField] private int wiggleCount = 3;
         [SerializeField] private List<Interactable> interactablesThatDontTriggerWiggle;
 
-        public void Wiggle(Interactable interactable)
+        public void Wiggle(Interactable interactable = null)
         {
             if(!InteractableTriggersWiggle(interactable))
                 return;
@@ -21,6 +21,9 @@ namespace Runtime.Scripts.Animation
 
         private bool InteractableTriggersWiggle(Interactable interactable)
         {
+            if(interactable == null)
+                return true;
+            
             return !interactablesThatDontTriggerWiggle.Contains(interactable);
         }
 
