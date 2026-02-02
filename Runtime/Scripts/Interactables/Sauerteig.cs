@@ -35,7 +35,8 @@ namespace Runtime.Scripts.Interactables
             if(interactable == null) 
                 return;
             
-            wackler?.Wiggle(interactable);
+            if(IsUnlocked)
+                wackler.Wiggle(interactable);
         }
 
         private void HandleDialogNodeSelected(DialogOptionNode node)
