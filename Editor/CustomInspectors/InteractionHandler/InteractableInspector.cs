@@ -8,7 +8,7 @@ namespace Editor
     {
         private bool showStaticData = true;
         private SerializedProperty spriteProp;
-        private SerializedProperty locationOnMapProp;
+        // private SerializedProperty locationOnMapProp;
         private SerializedProperty discoveryTypeProp;
 
         protected override void OnEnable()
@@ -16,7 +16,7 @@ namespace Editor
             base.OnEnable();
             
             spriteProp = serializedObject.FindProperty("Sprite");
-            locationOnMapProp = serializedObject.FindProperty("LocationOnMap");
+            // locationOnMapProp = serializedObject.FindProperty("LocationOnMap");
             discoveryTypeProp = serializedObject.FindProperty("AwarenessLevel");
         }
 
@@ -29,7 +29,7 @@ namespace Editor
             if (showStaticData)
             {
                 EditorGUILayout.PropertyField(spriteProp);
-                EditorGUILayout.PropertyField(locationOnMapProp);
+                // EditorGUILayout.PropertyField(locationOnMapProp);
                 EditorGUILayout.PropertyField(discoveryTypeProp);
             }
         
