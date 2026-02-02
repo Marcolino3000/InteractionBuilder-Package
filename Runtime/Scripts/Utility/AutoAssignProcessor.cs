@@ -29,7 +29,8 @@ namespace Runtime.Scripts.Utility
                 foreach (var field in fields)
                 {
                     var autoAssignAttribute = field.GetCustomAttribute<AutoAssignAttribute>();
-                    if (autoAssignAttribute == null || field.GetValue(obj) != null) continue;
+                    var value = field.GetValue(obj) as Object;
+                    if (autoAssignAttribute == null || value) continue;
                 
                     var sceneObjects = Object.FindObjectsByType(field.FieldType, FindObjectsInactive.Exclude, FindObjectsSortMode.None);
                     var resourcesObjects = Resources.FindObjectsOfTypeAll(field.FieldType);
