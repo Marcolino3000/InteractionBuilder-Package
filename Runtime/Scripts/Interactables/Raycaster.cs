@@ -100,12 +100,14 @@ namespace Runtime.Scripts.Interactables
                 
                 if (hit.interactable.Found)
                     continue;
-
-                hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
-
-                if (sauerteig.awarenessLevel >= hit.interactable.Data.AwarenessLevel &&
-                    hit.interactable.Data.AwarenessLevel != AwarenessLevel.NotSet)
+                
+                if(hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
+                    hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
+                
+                else if(hit.interactable.Data.AwarenessLevel != AwarenessLevel.NotSet && sauerteig.awarenessLevel >= hit.interactable.Data.AwarenessLevel)
                 {
+                    hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
+                    
                     sauerteig.HandleInteractableDiscovered(hit.interactable.Data);
 
                     if(hit.interactable.MarkAsFoundWhenClicked)
