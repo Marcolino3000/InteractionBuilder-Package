@@ -16,6 +16,7 @@ namespace Runtime.Scripts.Core
 
         private Coroutine moveCoroutine;
         private List<Reaction> allReactions;
+        private Action ReactionFinishedCallback;
 
         private void OnEnable()
         {
@@ -28,14 +29,16 @@ namespace Runtime.Scripts.Core
         }
         
         [ContextMenu("start sequence")]
-        public void StartMovingPlayer(List<Waypoint> waypoints)
+        public void StartMovingPlayer(List<Waypoint> waypoints, Action action)
         {
             Waypoints = waypoints;
+            ReactionFinishedCallback = action;
             
             if (moveCoroutine != null)
                 StopCoroutine(moveCoroutine);
             
             moveCoroutine = StartCoroutine(MoveToWaypoints());
+            
         }
 
         private IEnumerator MoveToWaypoints()
@@ -77,9 +80,13 @@ namespace Runtime.Scripts.Core
                 
                 currentWaypointIndex++;
             }
+            
             playerController.OnMove(Vector2.zero);
+            
             if (boxCollider != null)
                 boxCollider.enabled = true;
+            
+            ReactionFinishedCallback?.Invoke();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Runtime.Scripts.Core
         public event Action OnStopDialog;
         public event Action<DialogTree, Action<bool>> OnSetDialogTree;
         public event Action<bool> OnReactionFinished;
-        public event Action<List<Waypoint>> OnStartSequence;
+        public event Action<List<Waypoint>, Action> OnStartSequence;
 
         public DialogTree DialogTree;
         public InteractableState Interactable;
@@ -62,11 +62,17 @@ namespace Runtime.Scripts.Core
 
             if (ScriptedSequence != null)
             {
-                OnStartSequence?.Invoke(ScriptedSequence.waypoints);
+                OnStartSequence?.Invoke(ScriptedSequence.waypoints, SequenceFinishedCallback);
             }
             
-            if(DialogTree == null)
+            if(DialogTree == null && ScriptedSequence == null)
                 OnReactionFinished?.Invoke(true);
+        }
+
+        private void SequenceFinishedCallback()
+        {
+            Debug.Log(name + " Sequence Finished Callback");
+            OnReactionFinished?.Invoke(true);
         }
 
         private void DialogFinishedCallback(bool ranToCompletion)
