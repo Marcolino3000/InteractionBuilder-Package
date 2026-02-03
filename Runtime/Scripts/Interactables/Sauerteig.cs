@@ -68,6 +68,7 @@ namespace Runtime.Scripts.Interactables
                 return false;
             
             IsUnlocked = true;
+            awarenessLevel = AwarenessLevel.Basic;
             statusDisplay.ShowSauerteig();
             statusDisplay.UpdateStatus((int)awarenessLevel);
             

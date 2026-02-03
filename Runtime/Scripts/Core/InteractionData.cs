@@ -57,13 +57,13 @@ namespace Runtime.Scripts.Core
             {
                 case true when successReaction != null:
                     // successReaction.OnReactionFinished += HandleInteractionStop;
-                    successReaction.Execute();
                     IsRunning = true;
+                    successReaction.Execute();
                     break;
                 case false when failureReaction != null:
                     // failureReaction.OnReactionFinished += HandleInteractionStop;
-                    failureReaction.Execute();
                     IsRunning = true;
+                    failureReaction.Execute();
                     break;
                 case true when successReaction == null:
                     Debug.LogWarning($"No reaction assigned for success in interaction {name}");
