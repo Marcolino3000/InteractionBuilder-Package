@@ -62,7 +62,7 @@ namespace Runtime.Scripts.Core
                 ObjectToMoveOut.Interactable.transform.position += new Vector3(0,-5,0);
             }
             
-            if (ObjectToMoveIn != null)
+            if (ObjectToMove != null)
             {
                 ObjectToMove.Interactable.transform.position += TargetPosition;
             }
