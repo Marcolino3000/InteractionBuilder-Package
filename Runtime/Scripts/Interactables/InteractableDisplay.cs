@@ -27,7 +27,11 @@ namespace Runtime.Scripts.Interactables
             cooldownActive = false;
             currentFadeTime = 0f;
             
-            root = GetComponent<UIDocument>().rootVisualElement;
+            var uiDocument = GetComponent<UIDocument>();
+            if (uiDocument == null)
+                return;
+            
+            root = uiDocument.rootVisualElement;
             
             if (interactable.Data.Sprite != null)
             {
