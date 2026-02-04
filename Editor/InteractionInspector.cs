@@ -303,6 +303,8 @@ namespace Editor.CustomInspectors
                 viewer.DeletePrereq(prereq.Record);
                 viewer.DeleteTriggersWithNoPrerequisites();
                 serializedObject.ApplyModifiedProperties();
+                // EditorUtility.SetDirty(this);
+                EditorUtility.SetDirty(viewer);
                 // Repaint();
                 // ForceRedraw();
             });

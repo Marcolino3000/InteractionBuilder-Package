@@ -103,9 +103,15 @@ namespace Runtime.Scripts.Core
         {
             triggerToPrerequisites.Sort((a, b) =>
             {
-                // if(a.Trigger.TriggeringInteractable != null )
-                string nameA = a.Trigger.TriggeringInteractable?.Interactable?.name ?? string.Empty;
-                string nameB = b.Trigger.TriggeringInteractable?.Interactable?.name ?? string.Empty;
+                bool aValid = a?.Trigger?.TriggeringInteractable?.Interactable != null;
+                bool bValid = b?.Trigger?.TriggeringInteractable?.Interactable != null;
+
+                if (!aValid && !bValid) return 0;
+                if (!aValid) return 1;
+                if (!bValid) return -1;
+                
+                string nameA = a?.Trigger?.TriggeringInteractable?.Interactable?.name ?? string.Empty;
+                string nameB = b?.Trigger?.TriggeringInteractable?.Interactable?.name ?? string.Empty;
                 
                 int nameCompare = string.Compare(nameA, nameB, StringComparison.Ordinal);
                 if (nameCompare != 0)
