@@ -111,6 +111,7 @@ namespace Editor
             if (successReaction != null && dialogTree != null)
             {
                 successReaction.DialogTree = dialogTree;
+                EditorUtility.SetDirty(successReaction);
             }
             
             if (interactionData != null && createInteractionData)
