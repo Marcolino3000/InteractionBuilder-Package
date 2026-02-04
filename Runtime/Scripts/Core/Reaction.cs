@@ -20,6 +20,8 @@ namespace Runtime.Scripts.Core
         public InteractableState Interactable;
         public InteractableState ObjectToMoveIn;
         public InteractableState ObjectToMoveOut;
+        public InteractableState ObjectToMove;
+        public Vector3 TargetPosition;
         public bool CancelCurrentDialog;
         public string DebugMessage;
         public ScriptedSequence ScriptedSequence;
@@ -58,6 +60,11 @@ namespace Runtime.Scripts.Core
             if (ObjectToMoveOut != null)
             {
                 ObjectToMoveOut.Interactable.transform.position += new Vector3(0,-5,0);
+            }
+            
+            if (ObjectToMoveIn != null)
+            {
+                ObjectToMove.Interactable.transform.position += TargetPosition;
             }
 
             if (ScriptedSequence != null)
