@@ -17,17 +17,17 @@ namespace Runtime.Scripts.Core
 
             foreach (var transform in transforms)
             {
-                var id = GlobalObjectId.GetGlobalObjectIdSlow(transform);
-                var waypointToUpdate = waypoints.Find(waypoint => waypoint.ID.Equals(id));
-                
-                if (waypointToUpdate != null)
-                {
-                    waypointToUpdate.Position = transform.position;
-                }                
-                else
-                {
-                    waypoints.Add(new Waypoint(id, transform.position, 0f));
-                }
+                // var id = GlobalObjectId.GetGlobalObjectIdSlow(transform);
+                // var waypointToUpdate = waypoints.Find(waypoint => waypoint.ID.Equals(id));
+                //
+                // if (waypointToUpdate != null)
+                // {
+                //     waypointToUpdate.Position = transform.position;
+                // }                
+                // else
+                // {
+                    waypoints.Add(new Waypoint(transform.position, 0f));
+                // }
             }
             
             EditorUtility.SetDirty(this);
@@ -37,7 +37,7 @@ namespace Runtime.Scripts.Core
     [Serializable]
     public class Waypoint
     {
-        public Waypoint(GlobalObjectId id, Vector3 transform, float waitTime, Reaction reactionAtStart = null, Reaction reactionAtStop = null)
+        public Waypoint(Vector3 transform, float waitTime, Reaction reactionAtStart = null, Reaction reactionAtStop = null)
         {
             Position = transform;
             WaitTime = waitTime;
@@ -45,7 +45,7 @@ namespace Runtime.Scripts.Core
             ReactionAtStop = reactionAtStop;
         }
 
-        public GlobalObjectId ID;
+        // public GlobalObjectId ID;
         public Vector3 Position;
         public float WaitTime;
         public Reaction ReactionAtStart;
