@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Runtime.Scripts.Utility;
-using UnityEditor;
 using UnityEngine;
 
 namespace Runtime.Scripts.Core
@@ -29,7 +28,7 @@ namespace Runtime.Scripts.Core
             if (sequence != null)
             {
                 sequence.UpdateTransforms(waypoints);
-                EditorUtility.SetDirty(sequence);
+                // EditorUtility.SetDirty(sequence);
             }
             
         }

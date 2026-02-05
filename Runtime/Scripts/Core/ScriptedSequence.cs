@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Runtime.Scripts.Utility;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Runtime.Scripts.Core
 {
@@ -29,8 +30,9 @@ namespace Runtime.Scripts.Core
                     waypoints.Add(new Waypoint(transform.position, 0f));
                 // }
             }
-            
+            #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
+            #endif
         }
     }
     
