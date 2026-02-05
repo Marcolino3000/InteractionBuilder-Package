@@ -35,6 +35,9 @@ namespace Runtime.Scripts.Interactables
             
             if(interactable == null) 
                 return;
+
+            if (interactable.Data.AwarenessLevel <= AwarenessLevel.Basic)
+                return;
             
             if(IsUnlocked)
                 wackler.Wiggle(interactable);

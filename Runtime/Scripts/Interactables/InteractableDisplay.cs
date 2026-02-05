@@ -18,29 +18,29 @@ namespace Runtime.Scripts.Interactables
         public bool cooldownActive;
 
         private float currentFadeTime;
-        private StyleBackground backgroundImage;
-        private VisualElement root;
+        // private StyleBackground backgroundImage;
+        // private VisualElement root;
         [SerializeField] private float currentOpacity;
 
         private void OnEnable()
         {
             cooldownActive = false;
             currentFadeTime = 0f;
-            
-            var uiDocument = GetComponent<UIDocument>();
-            if (uiDocument == null)
-                return;
-            
-            root = uiDocument.rootVisualElement;
-            
-            if (interactable.Data.Sprite != null)
-            {
-                backgroundImage = new StyleBackground(interactable.Data.Sprite);
-                root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
-            }
-            
-            if (root != null)
-                HideIcon();
+            //
+            // var uiDocument = GetComponent<UIDocument>();
+            // if (uiDocument == null)
+            //     return;
+            //
+            // root = uiDocument.rootVisualElement;
+            //
+            // if (interactable.Data.Sprite != null)
+            // {
+            //     backgroundImage = new StyleBackground(interactable.Data.Sprite);
+            //     root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
+            // }
+            //
+            // if (root != null)
+            //     HideIcon();
         }
 
         private void OnDisable()
@@ -61,19 +61,19 @@ namespace Runtime.Scripts.Interactables
         //     HideIcon();
         // }
 
-        private void ShowIcon()
-        {
-            var icon = root.Query<VisualElement>("icon").First();
-            if (icon != null)
-                icon.style.opacity = opacity;
-        }
-
-        private void HideIcon()
-        {
-            var icon = root.Query<VisualElement>("icon").First();
-            if (icon != null)
-                icon.style.opacity = 0f;
-        }
+        // private void ShowIcon()
+        // {
+        //     var icon = root.Query<VisualElement>("icon").First();
+        //     if (icon != null)
+        //         icon.style.opacity = opacity;
+        // }
+        //
+        // private void HideIcon()
+        // {
+        //     var icon = root.Query<VisualElement>("icon").First();
+        //     if (icon != null)
+        //         icon.style.opacity = 0f;
+        // }
 
         public void TriggerHoverEffect()
         {
@@ -137,30 +137,30 @@ namespace Runtime.Scripts.Interactables
             currentFadeTime = 0f;
         }
         
-        private IEnumerator FadeIcon(bool fadeIn)
-        {
-            while (currentFadeTime < fadeDuration)
-            {
-                currentFadeTime += Time.deltaTime;
-                
-                if(fadeIn)
-                {
-                    currentOpacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
-                    root.Query<VisualElement>("icon").First().style.opacity = currentOpacity;
-
-                }
-                else
-                {
-                    currentOpacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
-                    root.Query<VisualElement>("icon").First().style.opacity = currentOpacity;
-
-                }
-                
-                yield return null;
-            }
-
-            currentFadeTime = 0f;
-        }
+        // private IEnumerator FadeIcon(bool fadeIn)
+        // {
+        //     while (currentFadeTime < fadeDuration)
+        //     {
+        //         currentFadeTime += Time.deltaTime;
+        //         
+        //         if(fadeIn)
+        //         {
+        //             currentOpacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
+        //             root.Query<VisualElement>("icon").First().style.opacity = currentOpacity;
+        //
+        //         }
+        //         else
+        //         {
+        //             currentOpacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
+        //             root.Query<VisualElement>("icon").First().style.opacity = currentOpacity;
+        //
+        //         }
+        //         
+        //         yield return null;
+        //     }
+        //
+        //     currentFadeTime = 0f;
+        // }
         
         private Texture2D ChangeTextureOpacity(Texture2D originalTexture, float opacity)
         {
@@ -178,10 +178,10 @@ namespace Runtime.Scripts.Interactables
             return newTexture;
         }
 
-        public void MarkAsFound()
-        {
-            root.Query<VisualElement>("icon").First().style.backgroundColor = Color.green; 
-        }
+        // public void MarkAsFound()
+        // {
+        //     root.Query<VisualElement>("icon").First().style.backgroundColor = Color.green; 
+        // }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
