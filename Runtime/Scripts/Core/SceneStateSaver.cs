@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Runtime.Scripts.Interactables;
 using Runtime.Scripts.Utility;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Runtime.Scripts.Core
 {
@@ -31,7 +33,9 @@ namespace Runtime.Scripts.Core
             
             states.Add(state);
             
-            EditorUtility.SetDirty(this);   
+            #if UNITY_EDITOR
+            EditorUtility.SetDirty(this);
+            #endif
         }
         
         
