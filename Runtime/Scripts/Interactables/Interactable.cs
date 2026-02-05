@@ -93,8 +93,8 @@ namespace Runtime.Scripts.Interactables
 
             _interactableDiscoveredCallback?.Invoke(Data);
             
-            if(_interactableDiscoveredCallback != null)
-                _interactableDisplay.MarkAsFound();
+            // if(_interactableDiscoveredCallback != null)
+            //     _interactableDisplay.MarkAsFound();
             
             _interactableDiscoveredCallback = null;
         }
