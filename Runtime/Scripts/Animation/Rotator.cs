@@ -10,11 +10,13 @@ namespace Runtime.Scripts.Animation
         [SerializeField] private float duration;
         [SerializeField] private float angle;
         [SerializeField] private Interactable interactable;
+        [SerializeField] private BoxCollider _collider;
 
         [Header("Debug")] 
         [SerializeField] private bool isOpen;
         [SerializeField] private float _progress;
         [SerializeField] private bool _isRunning;
+
 
         private void StartRotation()
         {
@@ -27,6 +29,7 @@ namespace Runtime.Scripts.Animation
         private IEnumerator DoProgress()
         {
             _isRunning = true;
+            _collider.enabled = false;
             
             while (_progress < 1f)
             {
@@ -45,6 +48,7 @@ namespace Runtime.Scripts.Animation
             _progress = 0f;
             isOpen = !isOpen;
             _isRunning = false;
+            _collider.enabled = true;
         }
 
         // private void OnGUI()
