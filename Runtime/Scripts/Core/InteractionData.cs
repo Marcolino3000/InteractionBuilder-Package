@@ -105,6 +105,7 @@ namespace Runtime.Scripts.Core
             {
                 Count = stateData.ThresholdReached ? Threshold : 0;
                 ThresholdReached = stateData.ThresholdReached;
+                IsRunning = stateData.IsRunning;
             }
                 
         }
