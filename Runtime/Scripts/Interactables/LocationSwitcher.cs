@@ -37,7 +37,7 @@ namespace Runtime.Scripts.Interactables
         {
             foreach (var location in objectsToHide)
             {
-                ToggleExpeptTrigger(location, toggle);
+                ToggleExceptTrigger(location, toggle);
             }
             
             foreach (var location in objectsToMakeTransparent)
@@ -58,17 +58,25 @@ namespace Runtime.Scripts.Interactables
             }
         }
         
-        private void ToggleExpeptTrigger(GameObject obj, bool show)
+        // private void ToggleExceptTrigger(GameObject obj, bool show)
+        // {
+        //     var allChildren = GetAllChildrenExceptTrigger(obj);
+        //     foreach (var child in allChildren)
+        //     {
+        //         var rend = child.GetComponent<Renderer>();
+        //         if (rend != null)
+        //             rend.enabled = show;
+        //     }
+        // }
+
+        private void ToggleExceptTrigger(GameObject obj, bool show)
         {
-            var allChildren = GetAllChildrenExceptTrigger(obj);
-            foreach (var child in allChildren)
+            foreach (Transform child in obj.transform)
             {
-                var rend = child.GetComponent<Renderer>();
-                if (rend != null)
-                    rend.enabled = show;
+                child.gameObject.SetActive(show);
             }
         }
-        
+
         private void SetTransparencyExceptTrigger(GameObject obj, bool show)
         {
             var allChildren = GetAllChildrenExceptTrigger(obj);

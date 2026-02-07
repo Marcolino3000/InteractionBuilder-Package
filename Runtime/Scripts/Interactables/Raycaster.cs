@@ -95,7 +95,7 @@ namespace Runtime.Scripts.Interactables
 
             foreach (var hit in hits)
             {
-                if (hit.target.layer == wallLayerMask)
+                if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     return;
                     
                 if(hit.target.name == "Wall")
