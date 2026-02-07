@@ -117,7 +117,7 @@ namespace Editor
             if (interactionData != null && createInteractionData)
             {
                 EnsureFolderExists(assetPath + "InteractionData/");
-                AssetDatabase.CreateAsset(interactionData, assetPath + "InteractionData/" + interactionName + "InteractionData.asset");
+                AssetDatabase.CreateAsset(interactionData, assetPath + "InteractionData/" + interactionName + "Interaction.asset");
             }
 
             if (successReaction != null && createSuccessReaction)
@@ -676,13 +676,14 @@ namespace Editor
                         break;
                 }
                 
-                
+                EnsureFolderExists(assetPath + "Interactables/");
                 AssetDatabase.CreateAsset(interactableState, assetPath + "Interactables/" + interactionName + "Interactable.asset");
                 nameOfLastCreatedInteractable = interactionName;
                 interactableState.name = interactionName + "Interactable";
             }
             else
             {
+                EnsureFolderExists(assetPath + "Interactables/");
                 AssetDatabase.DeleteAsset(assetPath + "Interactables/" + nameOfLastCreatedInteractable + "Interactable.asset");
                 
                 if(interactableState == null)
