@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Win32.SafeHandles;
 using Runtime.Scripts.Core;
 using Tree;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private bool isDialogRunning;
         [SerializeField] private TransparentWall transparentWall;
         [SerializeField] private bool playerIsInside;
+        [SerializeField] private LayerMask wallLayerMask;
+        [SerializeField] private LayerMask interactablesLayerMask;
 
         private Camera cam;
         private bool clickedWall;
@@ -77,21 +80,24 @@ namespace Runtime.Scripts.Interactables
         {
             var hits = GetAllSortedRaycastHits();
 
-            // Debug.Log("//////HITS///////////////////");
+            Debug.Log("//////HITS///////////////////");
             
-            // foreach (var hit in hits)
-            // {
-            //     Debug.Log(hit.target.name + ": " + hit.distance);
-            // }
-
-            if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall"))
+            foreach (var hit in hits)
             {
-                // Debug.Log("click raycast early return");
-                return;
+                Debug.Log(hit.target.name + ": " + hit.distance);
             }
+
+            // if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall"))
+            // {
+            //     // Debug.Log("click raycast early return");
+            //     return;
+            // }
 
             foreach (var hit in hits)
             {
+                if (hit.target.layer == wallLayerMask)
+                    return;
+                    
                 if(hit.target.name == "Wall")
                     continue;
                 
@@ -137,7 +143,9 @@ namespace Runtime.Scripts.Interactables
         private bool GetHitsFrom3DRaycast(List<RaycastInteractableHit> interactables)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1 << 6);
+            // var layerMask = LayerMask.GetMask("Interactables", "Wall");
+            var layerMask = wallLayerMask | interactablesLayerMask;
+            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
             foreach (var hit in hits)
             {
                 var hitCollider = hit.collider;
