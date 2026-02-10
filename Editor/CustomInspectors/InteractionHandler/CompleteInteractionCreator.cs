@@ -40,6 +40,7 @@ namespace Editor
 
         private bool createInteractionData;
         private bool createInteractable;
+        private bool InteractableShouldPersist;
         private bool createDialogTree;
         private bool createSuccessReaction;
         private bool createFailureReaction;
@@ -98,6 +99,9 @@ namespace Editor
 
         private void OnCreateInteractionClicked()
         {
+            if(createInteractable)
+                InteractableShouldPersist = true;
+            
             if (interactionData != null && successReaction != null)
             {
                 interactionData.successReaction = successReaction;
@@ -683,6 +687,12 @@ namespace Editor
             }
             else
             {
+                if (InteractableShouldPersist)
+                {
+                    InteractableShouldPersist = false;
+                    return;
+                }
+                
                 EnsureFolderExists(assetPath + "Interactables/");
                 AssetDatabase.DeleteAsset(assetPath + "Interactables/" + nameOfLastCreatedInteractable + "Interactable.asset");
                 
