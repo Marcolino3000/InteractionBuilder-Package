@@ -3104,8 +3104,7 @@ MonoBehaviour:
   - {fileID: 707221407}
   - {fileID: 1949900057}
   objectsToMakeTransparent:
-  - {fileID: 1031900729}
-  - {fileID: 1865751728}
+  - {fileID: 1577358953}
 --- !u!1 &83790598
 GameObject:
   m_ObjectHideFlags: 0

@@ -186,7 +186,7 @@ namespace Runtime.Scripts.Interactables
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
                 // if(interactable == null || display == null)
                 //     continue;
-                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject, NameContainsTrigger(interactable.gameObject)));
+                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject, NameContainsTrigger(interactable?.gameObject)));
             }
             return interactables.Count > 0;
         }

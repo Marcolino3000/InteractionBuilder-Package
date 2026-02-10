@@ -82,13 +82,17 @@ namespace Runtime.Scripts.Interactables
             var allChildren = GetAllChildrenExceptTrigger(obj);
             foreach (var child in allChildren)
             {
-                var rend = child.GetComponent<Renderer>();
+                var rend = child.GetComponent<SpriteRenderer>();
                 if (rend == null)
-                    return;
+                    continue ;
+
+                var color = rend.color;
+                color.a = show ? 1f : 0.4f;
+                rend.color= color;
                 
-                var color = rend.sharedMaterial.GetColor("_Color");
-                color.a = show ? 0.5f : 0.1f;
-                rend.material.SetColor("_Color", color);
+                // var color = rend.sharedMaterial.GetColor("_Color");
+                // color.a = show ? 0.5f : 0.1f;
+                // rend.material.SetColor("_Color", color);
             }
         }
 
