@@ -11,6 +11,9 @@ namespace Runtime.Scripts.Animation
         [SerializeField] private float angle;
         [SerializeField] private Interactable interactable;
         [SerializeField] private BoxCollider _collider;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip openSound;
+        [SerializeField] private AudioClip closeSound;
 
         [Header("Debug")] 
         [SerializeField] private bool isOpen;
@@ -23,9 +26,15 @@ namespace Runtime.Scripts.Animation
             if(_isRunning)
                 return;
             
+            PlayAudio();
             StartCoroutine(DoProgress());
         }
-        
+
+        private void PlayAudio()
+        {
+            audioSource.PlayOneShot(isOpen ? closeSound : openSound);
+        }
+
         private IEnumerator DoProgress()
         {
             _isRunning = true;
