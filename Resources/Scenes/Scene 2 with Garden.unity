@@ -7796,7 +7796,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6503401156492731513, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
   m_PrefabInstance: {fileID: 8252011832039540836}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2000810894}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de24548db7c1044e49d131a99ff20222, type: 3}
@@ -63484,6 +63484,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2000810894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5609401973365992932, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
+  m_PrefabInstance: {fileID: 8252011832039540836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2000810898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000810894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 828d41c8b85148a99b881029fda6233a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Core.MoveByClick
+  playerController: {fileID: 299239219}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  verticalPositionOffset: -2
 --- !u!1 &2010838264
 GameObject:
   m_ObjectHideFlags: 0
@@ -64526,7 +64548,7 @@ GameObject:
   - component: {fileID: 2091347229}
   - component: {fileID: 2091347228}
   - component: {fileID: 2091347227}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Scene Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65837,6 +65859,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 440715357}
     m_Modifications:
     - target: {fileID: 2195180853509313995, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
+      propertyPath: moveByClick
+      value: 
+      objectReference: {fileID: 2000810898}
+    - target: {fileID: 2195180853509313995, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
       propertyPath: transparentWall
       value: 
       objectReference: {fileID: 496652188}
@@ -65846,6 +65872,10 @@ PrefabInstance:
       objectReference: {fileID: 523111090}
     - target: {fileID: 2195180853509313995, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
       propertyPath: wallLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195180853509313995, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
+      propertyPath: groundLayerMask.m_Bits
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2195180853509313995, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
@@ -65915,7 +65945,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5609401973365992932, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2000810898}
   m_SourcePrefab: {fileID: 100100000, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

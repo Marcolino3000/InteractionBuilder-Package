@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Microsoft.Win32.SafeHandles;
 using Runtime.Scripts.Core;
+using Runtime.Scripts.PlayerInput;
 using Tree;
 using UnityEngine;
 
@@ -8,14 +8,17 @@ namespace Runtime.Scripts.Interactables
 {
     public class Raycaster : MonoBehaviour
     {
+        [SerializeField] private bool logHits;
+        
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
-
         [SerializeField] private Sauerteig sauerteig;
         [SerializeField] private bool isDialogRunning;
         [SerializeField] private TransparentWall transparentWall;
         [SerializeField] private bool playerIsInside;
         [SerializeField] private LayerMask wallLayerMask;
         [SerializeField] private LayerMask interactablesLayerMask;
+        [SerializeField] private LayerMask groundLayerMask;
+        [SerializeField] private MoveByClick moveByClick;
 
         private Camera cam;
         private bool clickedWall;
@@ -80,11 +83,14 @@ namespace Runtime.Scripts.Interactables
         {
             var hits = GetAllSortedRaycastHits();
 
-            Debug.Log("//////HITS///////////////////");
-            
-            foreach (var hit in hits)
+            if (logHits)
             {
-                Debug.Log(hit.target.name + ": " + hit.distance);
+                Debug.Log("//////HITS///////////////////");
+            
+                foreach (var hit in hits)
+                {
+                    Debug.Log(hit.target.name + ": " + hit.distance);
+                }
             }
 
             // if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall"))
@@ -123,6 +129,8 @@ namespace Runtime.Scripts.Interactables
                 //only process the interactable closest to camera
                 return;
             }
+            
+            moveByClick.HandleMouseClick();
         }
 
         private struct RaycastInteractableHit
