@@ -119,6 +119,9 @@ namespace Runtime.Scripts.Interactables
                 if (hit.interactable.Found)
                     continue;
                 
+                if(hit.isTrigger)
+                    continue;
+                
                 if(hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
                 
@@ -143,12 +146,14 @@ namespace Runtime.Scripts.Interactables
             public InteractableDisplay display;
             public float distance;
             public GameObject target;
-            public RaycastInteractableHit(Interactable interactable, InteractableDisplay display, float distance, GameObject target)
+            public bool isTrigger;
+            public RaycastInteractableHit(Interactable interactable, InteractableDisplay display, float distance, GameObject target, bool isTrigger = false)
             {
                 this.interactable = interactable;
                 this.display = display;
                 this.distance = distance;
                 this.target = target;
+                this.isTrigger = isTrigger;
             }
         }
 
@@ -181,9 +186,14 @@ namespace Runtime.Scripts.Interactables
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
                 // if(interactable == null || display == null)
                 //     continue;
-                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject));
+                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject, NameContainsTrigger(interactable.gameObject)));
             }
             return interactables.Count > 0;
+        }
+
+        private bool NameContainsTrigger(GameObject interactableGameObject)
+        {
+            return interactableGameObject.name.ToLower().Contains("trigger");
         }
 
         private List<RaycastInteractableHit> GetAllSortedRaycastHits()
