@@ -106,6 +106,12 @@ namespace Runtime.Scripts.Interactables
                     
                 if(hit.target.name == "Wall")
                     continue;
+
+                if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
+                {
+                    moveByClick.HandleMouseClick();
+                    return;
+                }            
                 
                 if (hit.interactable == null)
                     continue;
@@ -129,8 +135,6 @@ namespace Runtime.Scripts.Interactables
                 //only process the interactable closest to camera
                 return;
             }
-            
-            moveByClick.HandleMouseClick();
         }
 
         private struct RaycastInteractableHit
