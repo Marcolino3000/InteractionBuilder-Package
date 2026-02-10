@@ -156,7 +156,7 @@ namespace Runtime.Scripts.Interactables
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             // var layerMask = LayerMask.GetMask("Interactables", "Wall");
-            var layerMask = wallLayerMask | interactablesLayerMask;
+            var layerMask = wallLayerMask | interactablesLayerMask | groundLayerMask;
             RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
             foreach (var hit in hits)
             {
