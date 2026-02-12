@@ -7,7 +7,7 @@ namespace Runtime.Scripts.Interactables
     public class GigaGlowManager : MonoBehaviour
     {
         [SerializeField] private bool activateGlow = true;
-        [SerializeField] private float duration;
+        [SerializeField] private float Duration;
         [SerializeField] private float maxOpacity;
         [SerializeField] private bool cooldownActive;
         [SerializeField] private float cooldownBetweenGlows;
@@ -19,24 +19,30 @@ namespace Runtime.Scripts.Interactables
             if(cooldownActive || !activateGlow)
                 return;
             
-            StartCoroutine(StartCooldown());
-            StartCoroutine(LerpOpacityInAndOut());
+            StartCoroutine(StartCooldown(Duration));
+            StartCoroutine(LerpOpacityInAndOut(Duration));
+        }
+
+        public void GlowOneShot(float duration)
+        {
+            StartCoroutine(StartCooldown(duration));
+            StartCoroutine(LerpOpacityInAndOut(duration));
         }
         
-        private IEnumerator StartCooldown()
+        private IEnumerator StartCooldown(float duration)
         {
             cooldownActive = true;
             yield return new WaitForSeconds(duration * 2 + cooldownBetweenGlows);
             cooldownActive = false;
         }
-
-        private IEnumerator LerpOpacityInAndOut()
+        
+        private IEnumerator LerpOpacityInAndOut(float duration)
         {
-            yield return StartCoroutine(LerpOpacity(true));
-            yield return StartCoroutine(LerpOpacity(false));
+            yield return StartCoroutine(LerpOpacity(true, duration));
+            yield return StartCoroutine(LerpOpacity(false, duration));
         }
 
-        private IEnumerator LerpOpacity(bool lerpIn)
+        private IEnumerator LerpOpacity(bool lerpIn, float duration)
         {
             var elapsed = 0f;
 

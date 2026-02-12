@@ -25,7 +25,7 @@ namespace Runtime.Scripts.Core
         public bool CancelCurrentDialog;
         public string DebugMessage;
         public ScriptedSequence ScriptedSequence;
-
+        public InteractableState InteractableToShow;
 
         public void Execute()
         {
@@ -74,6 +74,11 @@ namespace Runtime.Scripts.Core
             
             if(DialogTree == null && ScriptedSequence == null)
                 OnReactionFinished?.Invoke(true);
+
+            if (InteractableToShow != null)
+            {
+                
+            }
         }
 
         private void SequenceFinishedCallback()
