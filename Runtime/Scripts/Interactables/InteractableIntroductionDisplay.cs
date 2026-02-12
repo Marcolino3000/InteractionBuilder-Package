@@ -9,7 +9,8 @@ namespace Runtime.Scripts.Interactables
     {
         [SerializeField] private Image interactableToDisplay;
         [SerializeField] private GigaGlowManager glowManager;
-        [SerializeField] private float duration;
+        [SerializeField] private float completeDuration;
+        [SerializeField] private float fadeDuration;
 
         private void Start()
         {
@@ -44,7 +45,7 @@ namespace Runtime.Scripts.Interactables
 
         private void DisplayInteractable(Sprite image)
         {
-            glowManager.GlowOneShot(duration);
+            glowManager.GlowOneShot(completeDuration * 0.5f);
 
             StartCoroutine(ShowImage(image));
         }
@@ -53,10 +54,24 @@ namespace Runtime.Scripts.Interactables
         {
             interactableToDisplay.sprite = image;
             interactableToDisplay.enabled = true;
+            
+            float holdDuration = Mathf.Max(0, completeDuration - 2 * fadeDuration);
 
-            yield return new WaitForSeconds(duration);
+            yield return StartCoroutine(Fade(true));
+            yield return new WaitForSeconds(holdDuration);
+            yield return StartCoroutine(Fade(false));
             
             interactableToDisplay.enabled = false;
+        }
+
+        private IEnumerator Fade(bool fadeIn)
+        {
+            for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+            {
+                var alpha = fadeIn ? Mathf.Lerp(0, 1, t / fadeDuration) : Mathf.Lerp(1, 0, t / fadeDuration);
+                interactableToDisplay.color = new Color(1, 1, 1, alpha);
+                yield return null;
+            }
         }
     }
 }

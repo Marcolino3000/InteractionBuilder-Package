@@ -501,9 +501,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Interactables.GigaGlowManager
   activateGlow: 1
   Duration: 0
-  maxOpacity: 1
+  maxOpacity: 0.8
   cooldownActive: 0
-  cooldownBetweenGlows: 0.5
+  cooldownBetweenGlows: 1
   glowImage: {fileID: 8759903680802848989}
 --- !u!1 &4235021266416259701
 GameObject:
@@ -640,8 +640,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4757937599896498931}
   - {fileID: 3177949547580165813}
+  - {fileID: 4757937599896498931}
   m_Father: {fileID: 8536372034226945026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -726,7 +726,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Interactables.InteractableIntroductionDisplay
   interactableToDisplay: {fileID: 5606518145898681741}
   glowManager: {fileID: 1499877377385665348}
-  duration: 2
+  completeDuration: 0
+  fadeDuration: 0
 --- !u!1 &6914467196250756619
 GameObject:
   m_ObjectHideFlags: 0

@@ -65166,6 +65166,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5606518145898681741, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5606518145898681741, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824537221849958229, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
+      propertyPath: fadeDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824537221849958229, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
+      propertyPath: completeDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8118298357940984775, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
       propertyPath: 'interactablesThatDontTriggerWiggle.Array.data[0]'
       value: 
