@@ -54,24 +54,31 @@ namespace Runtime.Scripts.Interactables
         {
             interactableToDisplay.sprite = image;
             interactableToDisplay.enabled = true;
-            
             float holdDuration = Mathf.Max(0, completeDuration - 2 * fadeDuration);
-
             yield return StartCoroutine(Fade(true));
             yield return new WaitForSeconds(holdDuration);
             yield return StartCoroutine(Fade(false));
-            
             interactableToDisplay.enabled = false;
         }
 
         private IEnumerator Fade(bool fadeIn)
         {
+            float startScale = fadeIn ? 0f : 1f;
+            float endScale = fadeIn ? 1f : 0f;
+            Vector3 initialScale = Vector3.one * startScale;
+            Vector3 targetScale = Vector3.one * endScale;
+            Color baseColor = interactableToDisplay.color;
             for (float t = 0; t < fadeDuration; t += Time.deltaTime)
             {
-                var alpha = fadeIn ? Mathf.Lerp(0, 1, t / fadeDuration) : Mathf.Lerp(1, 0, t / fadeDuration);
-                interactableToDisplay.color = new Color(1, 1, 1, alpha);
+                float progress = t / fadeDuration;
+                float alpha = fadeIn ? Mathf.Lerp(0, 1, progress) : Mathf.Lerp(1, 0, progress);
+                interactableToDisplay.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
+                interactableToDisplay.transform.localScale = Vector3.Lerp(initialScale, targetScale, progress);
                 yield return null;
             }
+            float finalAlpha = fadeIn ? 1f : 0f;
+            interactableToDisplay.color = new Color(baseColor.r, baseColor.g, baseColor.b, finalAlpha);
+            interactableToDisplay.transform.localScale = targetScale;
         }
     }
 }
