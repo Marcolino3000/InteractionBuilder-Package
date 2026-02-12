@@ -11,6 +11,8 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private GigaGlowManager glowManager;
         [SerializeField] private float completeDuration;
         [SerializeField] private float fadeDuration;
+        [SerializeField] private bool scaleUpOnFadeIn = true;
+        [SerializeField] private bool scaleDownOnFadeOut = true;
 
         private void Start()
         {
@@ -63,8 +65,18 @@ namespace Runtime.Scripts.Interactables
 
         private IEnumerator Fade(bool fadeIn)
         {
-            float startScale = fadeIn ? 0f : 1f;
-            float endScale = fadeIn ? 1f : 0f;
+            float startScale = 1f;
+            float endScale = 1f;
+            if (fadeIn && scaleUpOnFadeIn)
+            {
+                startScale = 0f;
+                endScale = 1f;
+            }
+            else if (!fadeIn && scaleDownOnFadeOut)
+            {
+                startScale = 1f;
+                endScale = 0f;
+            }
             Vector3 initialScale = Vector3.one * startScale;
             Vector3 targetScale = Vector3.one * endScale;
             Color baseColor = interactableToDisplay.color;
@@ -78,7 +90,7 @@ namespace Runtime.Scripts.Interactables
             }
             float finalAlpha = fadeIn ? 1f : 0f;
             interactableToDisplay.color = new Color(baseColor.r, baseColor.g, baseColor.b, finalAlpha);
-            interactableToDisplay.transform.localScale = targetScale;
+            interactableToDisplay.transform.localScale = Vector3.one;
         }
     }
 }

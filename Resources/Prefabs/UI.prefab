@@ -726,8 +726,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Interactables.InteractableIntroductionDisplay
   interactableToDisplay: {fileID: 5606518145898681741}
   glowManager: {fileID: 1499877377385665348}
-  completeDuration: 0
-  fadeDuration: 0
+  completeDuration: 3
+  fadeDuration: 1
+  scaleUpOnFadeIn: 1
+  scaleDownOnFadeOut: 0
 --- !u!1 &6914467196250756619
 GameObject:
   m_ObjectHideFlags: 0
