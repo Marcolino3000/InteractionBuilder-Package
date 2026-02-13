@@ -16,20 +16,49 @@ namespace Runtime.Scripts.Interactables
 
         private void Start()
         {
-            FindInteractablesInScene();
+            FindReactions();
+            // FindInteractablesInScene();
+        }
+
+        private void FindReactions()
+        {
+            var reactions = Resources.FindObjectsOfTypeAll<Core.Reaction>();
+            foreach (var reaction in reactions)
+            {
+                reaction.OnShowInteractable += OnShowInteractableFromReaction;
+            }
+        }
+
+        private void OnShowInteractableFromReaction(InteractableState state, Action callback)
+        {
+            if (state != null && state.Sprite != null)
+            {
+                var sprite = Sprite.Create(
+                    state.Sprite,
+                    new Rect(0, 0, state.Sprite.width, state.Sprite.height),
+                    new Vector2(0.5f, 0.5f)
+                );
+                DisplayInteractable(sprite);
+            }
+            else
+            {
+                Debug.LogWarning("Show Interactable: state or state sprite was null!");
+            }
+            callback?.Invoke();
         }
 
         private void FindInteractablesInScene()
         {
-            var interactables = FindObjectsByType<Interactable>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-    
-            foreach (var interactable in interactables)
-            {
-                if (interactable.Data != null)
-                {
-                    interactable.OnInteractionSuccessful += () => OnInteractableDiscovered(interactable.Data);
-                }
-            }
+            // var interactables = FindObjectsByType<Interactable>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            //
+            // foreach (var interactable in interactables)
+            // {
+            //     if (interactable.Data != null)
+            //     {
+            //         interactable.OnInteractionSuccessful += () => OnInteractableDiscovered(interactable.Data);
+            //     }
+            // }
+            
         }
 
         private void OnInteractableDiscovered(InteractableState state)
@@ -48,12 +77,13 @@ namespace Runtime.Scripts.Interactables
         private void DisplayInteractable(Sprite image)
         {
             glowManager.GlowOneShot(completeDuration * 0.5f);
-
+            
             StartCoroutine(ShowImage(image));
         }
 
         private IEnumerator ShowImage(Sprite image)
         {
+            interactableToDisplay.preserveAspect = true;
             interactableToDisplay.sprite = image;
             interactableToDisplay.enabled = true;
             float holdDuration = Mathf.Max(0, completeDuration - 2 * fadeDuration);

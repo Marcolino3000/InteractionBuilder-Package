@@ -15,6 +15,7 @@ namespace Runtime.Scripts.Core
         public event Action<DialogTree, Action<bool>> OnSetDialogTree;
         public event Action<bool> OnReactionFinished;
         public event Action<List<Waypoint>, Action> OnStartSequence;
+        public event Action<InteractableState, Action> OnShowInteractable;
 
         public DialogTree DialogTree;
         public InteractableState Interactable;
@@ -77,8 +78,14 @@ namespace Runtime.Scripts.Core
 
             if (InteractableToShow != null)
             {
-                
+                OnShowInteractable?.Invoke(InteractableToShow, ShowInteractableCallback);
             }
+        }
+
+        private void ShowInteractableCallback()
+        {
+            Debug.Log(name + " Show Interactable finished");
+            OnReactionFinished?.Invoke(true);
         }
 
         private void SequenceFinishedCallback()
