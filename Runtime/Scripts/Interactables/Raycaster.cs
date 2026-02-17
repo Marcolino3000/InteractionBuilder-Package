@@ -26,14 +26,32 @@ namespace Runtime.Scripts.Interactables
         
         private Camera cam;
         private bool clickedWall;
+        private Texture2D resizedStandardCursor;
+        private Texture2D resizedHoverCursor;
+
+        private Texture2D ResizeCursor(Texture2D original, int size)
+        {
+            if (original == null) return null;
+            Texture2D resized = new Texture2D(size, size, original.format, false);
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float u = x / (float)size;
+                    float v = y / (float)size;
+                    resized.SetPixel(x, y, original.GetPixelBilinear(u, v));
+                }
+            }
+            resized.Apply();
+            return resized;
+        }
 
         private void OnEnable()
         {
             cam = Camera.main;
-            standardCursor.width = cursorSize;
-            standardCursor.height = cursorSize;
-
-            Cursor.SetCursor(standardCursor, Vector2.zero, CursorMode.Auto);
+            resizedStandardCursor = ResizeCursor(standardCursor, cursorSize);
+            resizedHoverCursor = ResizeCursor(hoverInteractableCursor, cursorSize);
+            Cursor.SetCursor(resizedStandardCursor, Vector2.zero, CursorMode.Auto);
             
             DialogTreeRunner.OnDialogRunningStatusChanged += (status, tree) =>
             {
@@ -90,8 +108,10 @@ namespace Runtime.Scripts.Interactables
                 break;
             }
 
-            Cursor.SetCursor(hoveringInteractable ? hoverInteractableCursor
-                : standardCursor, Vector2.zero, CursorMode.Auto);
+            Debug.Log("hovering interactable: " + hoveringInteractable);
+            
+            Cursor.SetCursor(hoveringInteractable ? resizedHoverCursor : resizedStandardCursor, Vector2.zero,
+                CursorMode.Auto);
         }
 
         private void HandleClickOnInteractables()
