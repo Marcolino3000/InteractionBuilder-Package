@@ -8,7 +8,10 @@ namespace Runtime.Scripts.Interactables
 {
     public class Raycaster : MonoBehaviour
     {
+        
         [SerializeField] private bool logHits;
+        [SerializeField] private Texture2D standardCursor;
+        [SerializeField] private Texture2D hoverInteractableCursor;
         
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
         [SerializeField] private Sauerteig sauerteig;
@@ -19,13 +22,14 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private LayerMask interactablesLayerMask;
         [SerializeField] private LayerMask groundLayerMask;
         [SerializeField] private MoveByClick moveByClick;
-
+        
         private Camera cam;
         private bool clickedWall;
 
         private void OnEnable()
         {
             cam = Camera.main;
+            Cursor.SetCursor(standardCursor, Vector2.zero, CursorMode.Auto);
             
             DialogTreeRunner.OnDialogRunningStatusChanged += (status, tree) =>
             {
@@ -54,7 +58,7 @@ namespace Runtime.Scripts.Interactables
         private void HandleHoverOnInteractables()
         {
             var hits = GetAllSortedRaycastHits();
-            
+            bool hoveringInteractable = false;
             foreach (var hit in hits)
             {
                 if (hit.interactable == null)
@@ -76,7 +80,13 @@ namespace Runtime.Scripts.Interactables
 
                 hit.display?.TriggerHoverEffect();
                 sauerteig.GetGlowManager().Glow();
+                
+                hoveringInteractable = true;
+                break;
             }
+
+            Cursor.SetCursor(hoveringInteractable ? hoverInteractableCursor
+                : standardCursor, Vector2.zero, CursorMode.Auto);
         }
 
         private void HandleClickOnInteractables()

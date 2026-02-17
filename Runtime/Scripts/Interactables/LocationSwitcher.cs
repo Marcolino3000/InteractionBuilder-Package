@@ -17,7 +17,7 @@ namespace Runtime.Scripts.Interactables
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("trigger entered");
+            // Debug.Log("trigger entered");
             if(other.GetComponent<PlayerController>() == null)
                 return;
             
@@ -27,7 +27,7 @@ namespace Runtime.Scripts.Interactables
         private IEnumerator StartPlayerEnteredCooldown()
         {
             // OnPlayerTrigger?.Invoke();
-            Debug.Log("player triggered location switcher");
+            // Debug.Log("player triggered location switcher");
             SwitchLocations();
 
             yield return new WaitForSeconds(1f);
