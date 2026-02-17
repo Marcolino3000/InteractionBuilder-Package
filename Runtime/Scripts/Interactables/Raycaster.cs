@@ -12,7 +12,8 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private bool logHits;
         [SerializeField] private Texture2D standardCursor;
         [SerializeField] private Texture2D hoverInteractableCursor;
-        [SerializeField] private int cursorSize = 16;
+        [SerializeField] private int standardCursorSize = 24;
+        [SerializeField] private int interactionCursorSize = 32;
         
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
         [SerializeField] private Sauerteig sauerteig;
@@ -49,8 +50,8 @@ namespace Runtime.Scripts.Interactables
         private void OnEnable()
         {
             cam = Camera.main;
-            resizedStandardCursor = ResizeCursor(standardCursor, cursorSize);
-            resizedHoverCursor = ResizeCursor(hoverInteractableCursor, cursorSize);
+            resizedStandardCursor = ResizeCursor(standardCursor, standardCursorSize);
+            resizedHoverCursor = ResizeCursor(hoverInteractableCursor, interactionCursorSize);
             Cursor.SetCursor(resizedStandardCursor, Vector2.zero, CursorMode.Auto);
             
             DialogTreeRunner.OnDialogRunningStatusChanged += (status, tree) =>
@@ -94,7 +95,7 @@ namespace Runtime.Scripts.Interactables
                     Debug.LogWarning("sauerteig is null");
                 
                 if (!sauerteig.IsUnlocked)
-                    return;
+                    continue;
 
                 if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     continue;
