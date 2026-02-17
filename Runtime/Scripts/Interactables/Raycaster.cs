@@ -12,6 +12,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private bool logHits;
         [SerializeField] private Texture2D standardCursor;
         [SerializeField] private Texture2D hoverInteractableCursor;
+        [SerializeField] private int cursorSize = 16;
         
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
         [SerializeField] private Sauerteig sauerteig;
@@ -29,6 +30,9 @@ namespace Runtime.Scripts.Interactables
         private void OnEnable()
         {
             cam = Camera.main;
+            standardCursor.width = cursorSize;
+            standardCursor.height = cursorSize;
+
             Cursor.SetCursor(standardCursor, Vector2.zero, CursorMode.Auto);
             
             DialogTreeRunner.OnDialogRunningStatusChanged += (status, tree) =>
