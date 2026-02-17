@@ -70,6 +70,8 @@ namespace Runtime.Scripts.Interactables
                     continue;
                 }
                 
+                hoveringInteractable = true;
+                
                 if(sauerteig == null)
                     Debug.LogWarning("sauerteig is null");
                 
@@ -85,7 +87,6 @@ namespace Runtime.Scripts.Interactables
                 hit.display?.TriggerHoverEffect();
                 sauerteig.GetGlowManager().Glow();
                 
-                hoveringInteractable = true;
                 break;
             }
 
