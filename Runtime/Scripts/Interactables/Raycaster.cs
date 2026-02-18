@@ -7,7 +7,6 @@ namespace Runtime.Scripts.Interactables
 {
     public class Raycaster : MonoBehaviour
     {
-        
         [SerializeField] private bool logHits;
         [SerializeField] private Texture2D standardCursor;
         [SerializeField] private Texture2D hoverInteractableCursor;
@@ -83,6 +82,9 @@ namespace Runtime.Scripts.Interactables
             bool hoveringInteractable = false;
             foreach (var hit in hits)
             {
+                if (hit.target.layer == LayerMask.NameToLayer("Walls"))
+                    break;
+                
                 if (hit.interactable == null)
                 {
                     continue;
