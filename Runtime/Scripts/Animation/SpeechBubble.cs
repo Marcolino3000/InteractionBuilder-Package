@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using Nodes.Decorator;
 using Runtime.Scripts.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 namespace Runtime.Scripts.Animation
 {
@@ -12,6 +16,8 @@ namespace Runtime.Scripts.Animation
         
         [AutoAssign] [SerializeField] private BaseTweener tweener;
         [AutoAssign] [SerializeField] private TextMeshProUGUI text;
+        [SerializeField] private Image image;
+        [SerializeField] private List<Sprite> images;
         
         private int _index;
         
@@ -20,6 +26,14 @@ namespace Runtime.Scripts.Animation
             _index = index;
             tweener.Play();
             text.text = paragraph;
+        }
+        
+        public void Show(string paragraph, int index, AnswerType answerType)
+        {
+            _index = index;
+            tweener.Play();
+            text.text = paragraph;
+            image.sprite = images[(int)answerType];
         }
 
         private void Awake()

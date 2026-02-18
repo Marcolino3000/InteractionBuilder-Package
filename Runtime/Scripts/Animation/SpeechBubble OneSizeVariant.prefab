@@ -20,6 +20,34 @@ PrefabInstance:
       propertyPath: m_targetScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4899884952320620990, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 7504335094271204381}
+    - target: {fileID: 4899884952320620990, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+      propertyPath: images.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899884952320620990, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+      propertyPath: 'images.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 94a40813e51b4477d81cfde5df28394a, type: 3}
+    - target: {fileID: 4899884952320620990, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+      propertyPath: 'images.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 94a40813e51b4477d81cfde5df28394a, type: 3}
+    - target: {fileID: 4899884952320620990, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+      propertyPath: 'images.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 523a56ec1def44296bb3db87cebf32af, type: 3}
+    - target: {fileID: 4899884952320620990, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+      propertyPath: 'images.Array.data[3]'
+      value: 
+      objectReference: {fileID: 21300000, guid: e5f44f7eec91d4ee1946f8d3ff189c6e, type: 3}
+    - target: {fileID: 4899884952320620990, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+      propertyPath: 'images.Array.data[4]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 94a40813e51b4477d81cfde5df28394a, type: 3}
     - target: {fileID: 6941059961591026163, guid: 37d701b275f0944119c1d59439faf656, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -109,3 +137,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+--- !u!114 &7504335094271204381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8383717720599383710, guid: 37d701b275f0944119c1d59439faf656, type: 3}
+  m_PrefabInstance: {fileID: 2052572546551845507}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image

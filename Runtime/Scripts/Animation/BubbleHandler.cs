@@ -24,7 +24,15 @@ namespace Runtime.Scripts.Animation
         {
             _currentOptions = options;
             
-            if (options[0] is PlayerDialogOption { Type: AnswerType.SelfTalk })
+            var playerOption = options[0] as PlayerDialogOption;
+
+            if (playerOption == null)
+            {
+                Debug.LogError("BubbleHandler: Player Dialog Option was null!");
+                return;
+            }
+            
+            if (playerOption.Type == AnswerType.SelfTalk)
             {
                 OnOptionSelected(0);
                 return;
@@ -33,7 +41,8 @@ namespace Runtime.Scripts.Animation
             for (int i = 0; i < _bubbles.Count && i < options.Length; i++)
             {
                 _bubbles[i].gameObject.SetActive(true);
-                _bubbles[i].Show(options[i].TextPreview, i);
+                // _bubbles[i].Show(options[i].TextPreview, i);
+                _bubbles[i].Show(options[i].TextPreview, i, playerOption.Type);
                 _bubbles[i].OptionSelected += OnOptionSelected;
             }
         }

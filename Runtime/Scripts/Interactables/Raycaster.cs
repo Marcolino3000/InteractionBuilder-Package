@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Runtime.Scripts.Core;
-using Runtime.Scripts.PlayerInput;
 using Tree;
 using UnityEngine;
 
@@ -112,7 +111,7 @@ namespace Runtime.Scripts.Interactables
                 break;
             }
 
-            Debug.Log("hovering interactable: " + hoveringInteractable);
+            // Debug.Log("hovering interactable: " + hoveringInteractable);
             
             Cursor.SetCursor(hoveringInteractable ? resizedHoverCursor : resizedStandardCursor, Vector2.zero,
                 CursorMode.Auto);
