@@ -88,6 +88,9 @@ namespace Runtime.Scripts.Interactables
                     continue;
                 }
                 
+                if (hit.target.layer == LayerMask.NameToLayer("Walls"))
+                    return;
+                
                 if (hit.isTrigger)
                     continue;
 
