@@ -5,7 +5,6 @@ using Runtime.Scripts.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
 namespace Runtime.Scripts.Animation
@@ -44,6 +43,7 @@ namespace Runtime.Scripts.Animation
         private void Setup()
         {
             transform.localScale = Vector3.zero;
+            image.alphaHitTestMinimumThreshold = 0.3f;
         }
 
         public void OnPointerClick(PointerEventData eventData)
