@@ -13,7 +13,7 @@ namespace Runtime.Scripts.Animation
         public DialogOptionType DialogOptionType => DialogOptionType.Player;
 
         private List<SpeechBubble> _bubbles;
-        private DialogOptionNode[] _currentOptions;
+        private PlayerDialogOption[] _currentOptions;
 
         private void Awake()
         {
@@ -22,27 +22,29 @@ namespace Runtime.Scripts.Animation
 
         public void ShowDialogOptions(DialogOptionNode[] options)
         {
-            _currentOptions = options;
+            _currentOptions = new PlayerDialogOption[options.Length];
             
-            var playerOption = options[0] as PlayerDialogOption;
-
-            if (playerOption == null)
+            for (int i = 0; i < options.Length; i++)
             {
-                Debug.LogError("BubbleHandler: Player Dialog Option was null!");
-                return;
+                if (!(options[i] is PlayerDialogOption playerOption))
+                {
+                    Debug.LogError($"BubbleHandler: Option at index {i} is not a PlayerDialogOption!");
+                    return;
+                }
+                
+                _currentOptions[i] = playerOption;
             }
             
-            if (playerOption.Type == AnswerType.SelfTalk)
+            if (_currentOptions.Length == 1 && _currentOptions[0].Type == AnswerType.SelfTalk)
             {
                 OnOptionSelected(0);
                 return;
             }
             
-            for (int i = 0; i < _bubbles.Count && i < options.Length; i++)
+            for (int i = 0; i < _bubbles.Count && i < _currentOptions.Length; i++)
             {
                 _bubbles[i].gameObject.SetActive(true);
-                // _bubbles[i].Show(options[i].TextPreview, i);
-                _bubbles[i].Show(options[i].TextPreview, i, playerOption.Type);
+                _bubbles[i].Show(_currentOptions[i].TextPreview, i, _currentOptions[i].Type);
                 _bubbles[i].OptionSelected += OnOptionSelected;
             }
         }
