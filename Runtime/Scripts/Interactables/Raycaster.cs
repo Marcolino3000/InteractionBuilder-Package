@@ -89,6 +89,9 @@ namespace Runtime.Scripts.Interactables
                     continue;
                 }
                 
+                if (hit.isTrigger)
+                    continue;
+                
                 hoveringInteractable = true;
                 
                 if(sauerteig == null)
