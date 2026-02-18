@@ -9,16 +9,18 @@ using Image = UnityEngine.UI.Image;
 
 namespace Runtime.Scripts.Animation
 {
-    public class SpeechBubble : MonoBehaviour, IPointerClickHandler
+    public class SpeechBubble : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public event Action<int> OptionSelected; 
         
         [AutoAssign] [SerializeField] private BaseTweener tweener;
         [AutoAssign] [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private Image image;
-        [SerializeField] private List<Sprite> images;
+        [SerializeField] private List<Sprite> standardBubbles;
+        [SerializeField] private List<Sprite> hoveredBubbles;
         
         private int _index;
+        private int _currentAnswerType;
         
         public void Show(string paragraph, int index)
         {
@@ -32,7 +34,8 @@ namespace Runtime.Scripts.Animation
             _index = index;
             tweener.Play();
             text.text = paragraph;
-            image.sprite = images[(int)answerType];
+            _currentAnswerType = (int)answerType;
+            image.sprite = standardBubbles[_currentAnswerType];
         }
 
         private void Awake()
@@ -49,6 +52,16 @@ namespace Runtime.Scripts.Animation
         public void OnPointerClick(PointerEventData eventData)
         {
             OptionSelected?.Invoke(_index);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            image.sprite = hoveredBubbles[_currentAnswerType];
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            image.sprite = standardBubbles[_currentAnswerType];
         }
     }
 }

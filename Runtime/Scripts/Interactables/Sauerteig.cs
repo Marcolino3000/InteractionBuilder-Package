@@ -108,9 +108,6 @@ namespace Runtime.Scripts.Interactables
                     case AnswerType.TrashTalk:
                         SetActivity(-1);
                         break;
-                    case AnswerType.BusinessTalk:
-                        SetActivity(-3);
-                        break;
                 }
             }
         }

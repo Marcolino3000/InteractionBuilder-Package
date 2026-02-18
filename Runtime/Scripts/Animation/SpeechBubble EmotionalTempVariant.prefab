@@ -8,25 +8,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5785383879855955183, guid: 753c26929d1b1421186882c07b7714af, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7350711546638376823, guid: 753c26929d1b1421186882c07b7714af, type: 3}
       propertyPath: m_Name
       value: SpeechBubble EmotionalTempVariant
-      objectReference: {fileID: 0}
-    - target: {fileID: 7504335094271204381, guid: 753c26929d1b1421186882c07b7714af, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7504335094271204381, guid: 753c26929d1b1421186882c07b7714af, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 94a40813e51b4477d81cfde5df28394a, type: 3}
-    - target: {fileID: 7504335094271204381, guid: 753c26929d1b1421186882c07b7714af, type: 3}
-      propertyPath: m_Color.a
-      value: 0.84313726
       objectReference: {fileID: 0}
     - target: {fileID: 8948558560185336688, guid: 753c26929d1b1421186882c07b7714af, type: 3}
       propertyPath: m_Pivot.x
