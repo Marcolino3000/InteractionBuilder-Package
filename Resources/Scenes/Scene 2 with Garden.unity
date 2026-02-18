@@ -66284,6 +66284,10 @@ PrefabInstance:
       propertyPath: statusDisplay
       value: 
       objectReference: {fileID: 238622888}
+    - target: {fileID: 8758276288847713925, guid: 4015cb0b3f03c40bca7c8d7d5b7ea03b, type: 3}
+      propertyPath: levelAfterUnlock
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

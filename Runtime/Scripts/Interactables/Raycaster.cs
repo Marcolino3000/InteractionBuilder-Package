@@ -90,20 +90,21 @@ namespace Runtime.Scripts.Interactables
                 
                 if (hit.isTrigger)
                     continue;
+
+                if(sauerteig.awarenessLevel < hit.interactable.Data.AwarenessLevel)
+                    continue;
                 
                 hoveringInteractable = true;
-                
+
                 if(sauerteig == null)
                     Debug.LogWarning("sauerteig is null");
-                
+
                 if (!sauerteig.IsUnlocked)
                     continue;
 
                 if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     continue;
 
-                if(sauerteig.awarenessLevel < hit.interactable.Data.AwarenessLevel)
-                    continue;
 
                 hit.display?.TriggerHoverEffect();
                 sauerteig.GetGlowManager().Glow();

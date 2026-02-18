@@ -11,6 +11,8 @@ namespace Runtime.Scripts.Interactables
     public class Sauerteig : MonoBehaviour, IPlayerInputReceiver
     {
         public AwarenessLevel awarenessLevel = AwarenessLevel.Basic;
+        public AwarenessLevel levelBeforeUnlock;
+        public AwarenessLevel levelAfterUnlock;
         public int Activity = 1;
         public bool IsUnlocked;
 
@@ -27,6 +29,7 @@ namespace Runtime.Scripts.Interactables
         {
             radarCollider = GetComponent<SphereCollider>();
             DialogTreeRunner.DialogNodeSelected += HandleDialogNodeSelected;
+            awarenessLevel = levelBeforeUnlock;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -71,7 +74,7 @@ namespace Runtime.Scripts.Interactables
                 return false;
             
             IsUnlocked = true;
-            awarenessLevel = AwarenessLevel.Basic;
+            awarenessLevel = levelAfterUnlock;
             statusDisplay.ShowSauerteig();
             statusDisplay.UpdateStatus((int)awarenessLevel);
             
