@@ -7,8 +7,9 @@ namespace Runtime.Scripts.Interactables
     [CreateAssetMenu(menuName = "ScriptableObjects/InteractionsCounter")]
     public class InteractionsCounter : ScriptableObject
     {
-        public event Action<InteractionTriggerVia, InteractableState> OnThresholdReached; 
-        
+        public event Action<InteractionTriggerVia, InteractableState> OnThresholdReached;
+
+        [SerializeField] private bool isActive;
         [SerializeField] private InteractableState interactionBeforePaul;
         [SerializeField] private bool interactionWasTriggered;
         [SerializeField] private int interactionsCountBeforePaul;
@@ -28,8 +29,11 @@ namespace Runtime.Scripts.Interactables
 
         private void HandleInteractionStarted(InteractionTriggerVia via, InteractableState state)
         {
-            Debug.Log($"Interaction started via {via} on {state}");
+            Debug.Log($"Interaction started via {via} on {state}. isActive: {isActive}");
 
+            if (!isActive)
+                return;
+            
             if (startCountingInteraction != null && !startCountingInteraction.ThresholdReached)
                 return;
             
@@ -53,6 +57,11 @@ namespace Runtime.Scripts.Interactables
             FindInteractablesInScene();
             currentInteractionsCount = 0;
             interactionWasTriggered = false;
+        }
+
+        public void SetActive(bool toggle)
+        {
+            isActive = toggle;
         }
     }
 }
