@@ -10,7 +10,7 @@ namespace Runtime.Scripts.Interactables
         public event Action<InteractionTriggerVia, InteractableState> OnThresholdReached;
 
         [SerializeField] private bool isActive;
-        [SerializeField] private InteractableState interactionBeforePaul;
+        [SerializeField] private InteractableState requiredInteraction;
         [SerializeField] private bool interactionWasTriggered;
         [SerializeField] private int interactionsCountBeforePaul;
         [SerializeField] private int currentInteractionsCount;
@@ -40,14 +40,25 @@ namespace Runtime.Scripts.Interactables
             if (stopCountingInteraction != null && stopCountingInteraction.ThresholdReached)
                 return;
             
+            var capturedState = state;
+            Action handler = null;
+            handler = () => {
+                state.Interactable.OnInteractionSuccessful -= handler;
+                HandleSuccessfulInteraction(capturedState);
+            };
+            state.Interactable.OnInteractionSuccessful += handler;
+        }
+
+        private void HandleSuccessfulInteraction(InteractableState state)
+        {
             currentInteractionsCount++;
 
-            if(state == interactionBeforePaul)
+            if(requiredInteraction == null || state == requiredInteraction)
                 interactionWasTriggered = true;
 
             if (interactionWasTriggered && currentInteractionsCount >= interactionsCountBeforePaul)
             {
-                OnThresholdReached?.Invoke(InteractionTriggerVia.ThresholdReached, interactionBeforePaul);
+                OnThresholdReached?.Invoke(InteractionTriggerVia.ThresholdReached, requiredInteraction);
                 Debug.Log("Counter: Threshold reached");
             }
         }
