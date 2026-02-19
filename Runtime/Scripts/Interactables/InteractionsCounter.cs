@@ -14,7 +14,8 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private int interactionsCountBeforePaul;
         [SerializeField] private int currentInteractionsCount;
 
-        // [SerializeField] private InteractionData interactionToExecute;
+        [SerializeField] private InteractionData startCountingInteraction;
+        [SerializeField] private InteractionData stopCountingInteraction;
 
         private void FindInteractablesInScene()
         {
@@ -28,6 +29,12 @@ namespace Runtime.Scripts.Interactables
         private void HandleInteractionStarted(InteractionTriggerVia via, InteractableState state)
         {
             Debug.Log($"Interaction started via {via} on {state}");
+
+            if (startCountingInteraction != null && !startCountingInteraction.ThresholdReached)
+                return;
+            
+            if (stopCountingInteraction != null && stopCountingInteraction.ThresholdReached)
+                return;
             
             currentInteractionsCount++;
 
