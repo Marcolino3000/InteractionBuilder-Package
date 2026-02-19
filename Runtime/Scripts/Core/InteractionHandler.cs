@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core;
 using Nodes.Decorator;
 using Runtime.Scripts.Interactables;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Tree;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,6 +20,7 @@ namespace Runtime.Scripts.Core
         [HideInInspector] [SerializeField] private PrerequisitesGenerator PrerequisitesGenerator;
         
         [SerializeField] private List<InteractionData> currentInteractions;
+        [SerializeField] private InteractionsCounter interactionsCounter;
 
         private void HandleTriggerViaInteractable(InteractionTriggerVia triggerType,
             InteractableState triggeringInteractable)
@@ -95,6 +94,9 @@ namespace Runtime.Scripts.Core
                 interactable.OnInteractionStarted += HandleTriggerViaInteractable;
                 interactable.OnExitedTriggerArea += HandleTriggerViaInteractable;
             }
+
+            interactionsCounter.Setup();
+            interactionsCounter.OnThresholdReached += HandleTriggerViaInteractable;
         }
 
         private void FindEventSystem()
@@ -204,7 +206,7 @@ namespace Runtime.Scripts.Core
         EnterTrigger,
         ExitTrigger,
         ButtonPress,
-        TrustThresholdReached, 
+        ThresholdReached, 
         DialogOption
     }
 

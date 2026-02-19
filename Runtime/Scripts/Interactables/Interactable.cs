@@ -2,7 +2,6 @@ using System;
 using Runtime.Scripts.Core;
 using Runtime.Scripts.PlayerInput;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Runtime.Scripts.Interactables
 {
@@ -15,7 +14,8 @@ namespace Runtime.Scripts.Interactables
 
         [SerializeField] private float triggerAreaRadius = 0.5f;
         public InteractableState Data;
-        
+
+        public bool Spawned;
         public bool Found;
         public bool MarkAsFoundWhenClicked;
         

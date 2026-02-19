@@ -55,12 +55,18 @@ namespace Runtime.Scripts.Core
 
             if (ObjectToMoveIn != null)
             {
+                if (ObjectToMoveIn.Interactable.Spawned) return;
+                
                 ObjectToMoveIn.Interactable.transform.position += new Vector3(0,30,0);
+                ObjectToMoveIn.Interactable.Spawned = true;
             }
 
             if (ObjectToMoveOut != null)
             {
+                if (!ObjectToMoveIn.Interactable.Spawned) return;
+                
                 ObjectToMoveOut.Interactable.transform.position += new Vector3(0,-30,0);
+                ObjectToMoveIn.Interactable.Spawned = false;
             }
             
             if (ObjectToMove != null)

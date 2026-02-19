@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PaulTalksThroughDoorInteraction
   m_EditorClassIdentifier: InteractionBuilder::Runtime.Scripts.Core.InteractionData
   _SaveStateToCurrentScene: 0
-  _sceneStateSaver: {fileID: 11400000, guid: f3b4dfe60d1004a46b57299c7d030539, type: 2}
+  _sceneStateSaver: {fileID: 11400000, guid: 3e244c0560c63468bb3c97ac3de106ce, type: 2}
   Count: 0
   Threshold: 1
   OneTimeUse: 0
@@ -21,3 +21,4 @@ MonoBehaviour:
   failureReaction: {fileID: 0}
   ThresholdReached: 0
   IsRunning: 0
+  IsActive: 1
