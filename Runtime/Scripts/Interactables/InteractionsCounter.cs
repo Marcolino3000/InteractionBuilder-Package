@@ -17,6 +17,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private bool interactionWasTriggered;
         [SerializeField] private int interactionsCountBeforePaul;
         [SerializeField] private int currentInteractionsCount;
+        [SerializeField] private Toggleable unlockToggle;
 
         [SerializeField] private InteractionData startCountingInteraction;
         [SerializeField] private InteractionData stopCountingInteraction;
@@ -102,6 +103,7 @@ namespace Runtime.Scripts.Interactables
             if (interactionWasTriggered && currentInteractionsCount >= interactionsCountBeforePaul)
             {
                 OnThresholdReached?.Invoke(InteractionTriggerVia.ThresholdReached, requiredInteraction);
+                unlockToggle.ToggleState = true;
                 Debug.Log("Counter: Threshold reached");
             }
         }
