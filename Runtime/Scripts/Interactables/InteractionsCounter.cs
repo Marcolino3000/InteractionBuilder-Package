@@ -11,6 +11,7 @@ namespace Runtime.Scripts.Interactables
 
         [SerializeField] private bool isActive;
         [SerializeField] private InteractableState requiredInteraction;
+        // [SerializeField] private Reaction requiredReaction;
         [SerializeField] private bool interactionWasTriggered;
         [SerializeField] private int interactionsCountBeforePaul;
         [SerializeField] private int currentInteractionsCount;
@@ -18,21 +19,21 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private InteractionData startCountingInteraction;
         [SerializeField] private InteractionData stopCountingInteraction;
 
-        private void FindInteractablesInScene()
-        {
-            var interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
-            foreach (var interactable in interactables)
-            {
-                var capturedInteractable = interactable;
-                interactable.OnInteractionStarted += HandleInteractionStarted;
-                interactable.OnInteractionSuccessful += () => HandleSuccessfulInteraction(capturedInteractable.Data);
-            }
-        }
-
-        private void HandleInteractionStarted(InteractionTriggerVia via, InteractableState state)
-        {
- 
-        }
+        // private void FindInteractablesInScene()
+        // {
+        //     var interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
+        //     foreach (var interactable in interactables)
+        //     {
+        //         var capturedInteractable = interactable;
+        //         interactable.OnInteractionStarted += HandleInteractionStarted;
+        //         interactable.OnInteractionSuccessful += () => HandleSuccessfulInteraction(capturedInteractable.Data);
+        //     }
+        // }
+        //
+        // private void HandleInteractionStarted(InteractionTriggerVia via, InteractableState state)
+        // {
+        //
+        // }
 
         private void HandleSuccessfulInteraction(InteractableState state)
         {
@@ -58,9 +59,42 @@ namespace Runtime.Scripts.Interactables
 
         public void Setup()
         {
-            FindInteractablesInScene();
+            // FindInteractablesInScene();
+            FindReactions();
             currentInteractionsCount = 0;
             interactionWasTriggered = false;
+        }
+
+        private void FindReactions()
+        {
+            var reactions = Resources.FindObjectsOfTypeAll<Core.Reaction>();
+            foreach (var reaction in reactions)
+            {
+                var capturedReaction = reaction;
+                reaction.OnReactionFinished += (completed) => HandleReactionFinished(capturedReaction);
+            }
+        }
+
+        private void HandleReactionFinished(Reaction reaction)
+        {
+            if (!isActive)
+                return;
+            
+            if (startCountingInteraction != null && !startCountingInteraction.ThresholdReached)
+                return;
+            
+            if (stopCountingInteraction != null && stopCountingInteraction.ThresholdReached)
+                return;
+            currentInteractionsCount++;
+
+            if(requiredInteraction == null || reaction.Interactable == requiredInteraction)
+                interactionWasTriggered = true;
+
+            if (interactionWasTriggered && currentInteractionsCount >= interactionsCountBeforePaul)
+            {
+                OnThresholdReached?.Invoke(InteractionTriggerVia.ThresholdReached, requiredInteraction);
+                Debug.Log("Counter: Threshold reached");
+            }
         }
 
         public void SetActive(bool toggle)
