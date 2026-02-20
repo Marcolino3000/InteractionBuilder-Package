@@ -23,14 +23,19 @@ namespace Runtime.Scripts.Interactables
             var interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
             foreach (var interactable in interactables)
             {
+                var capturedInteractable = interactable;
                 interactable.OnInteractionStarted += HandleInteractionStarted;
+                interactable.OnInteractionSuccessful += () => HandleSuccessfulInteraction(capturedInteractable.Data);
             }
         }
 
         private void HandleInteractionStarted(InteractionTriggerVia via, InteractableState state)
         {
-            Debug.Log($"Interaction started via {via} on {state}. isActive: {isActive}");
+ 
+        }
 
+        private void HandleSuccessfulInteraction(InteractableState state)
+        {
             if (!isActive)
                 return;
             
@@ -39,18 +44,6 @@ namespace Runtime.Scripts.Interactables
             
             if (stopCountingInteraction != null && stopCountingInteraction.ThresholdReached)
                 return;
-            
-            var capturedState = state;
-            Action handler = null;
-            handler = () => {
-                state.Interactable.OnInteractionSuccessful -= handler;
-                HandleSuccessfulInteraction(capturedState);
-            };
-            state.Interactable.OnInteractionSuccessful += handler;
-        }
-
-        private void HandleSuccessfulInteraction(InteractableState state)
-        {
             currentInteractionsCount++;
 
             if(requiredInteraction == null || state == requiredInteraction)
