@@ -95,7 +95,7 @@ namespace Runtime.Scripts.Core
                 interactable.OnExitedTriggerArea += HandleTriggerViaInteractable;
             }
 
-            interactionsCounter.Setup();
+            // interactionsCounter.Setup();
             interactionsCounter.OnThresholdReached += HandleTriggerViaInteractable;
         }
 

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Runtime.Scripts.Interactables
 {
     [CreateAssetMenu(menuName = "ScriptableObjects/InteractionsCounter")]
-    public class InteractionsCounter : ScriptableObject
+    public class InteractionsCounter : ScriptableObject, ISceneSetupCallbackReceiver
     {
         public event Action<InteractionTriggerVia, InteractableState> OnThresholdReached;
 
@@ -61,7 +61,7 @@ namespace Runtime.Scripts.Interactables
         //     }
         // }
 
-        public void Setup()
+        private void Setup()
         {
             // FindInteractablesInScene();
             FindReactions();
@@ -104,6 +104,7 @@ namespace Runtime.Scripts.Interactables
             {
                 OnThresholdReached?.Invoke(InteractionTriggerVia.ThresholdReached, requiredInteraction);
                 unlockToggle.ToggleState = true;
+                isActive = false;
                 Debug.Log("Counter: Threshold reached");
             }
         }
@@ -111,6 +112,11 @@ namespace Runtime.Scripts.Interactables
         public void SetActive(bool toggle)
         {
             isActive = toggle;
+        }
+
+        public void OnSceneSetup()
+        {
+            Setup();
         }
     }
 }
