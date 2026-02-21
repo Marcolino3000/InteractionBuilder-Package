@@ -80,7 +80,7 @@ namespace Runtime.Scripts.Interactables
                     Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration) : 
                     Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
 
-                outlineMaterial.SetFloat(shaderColorPropertyRef, currentOpacity);
+                outlineMaterial.SetFloat(outlineAlphaRef, currentOpacity);
 
                 yield return null;
             }

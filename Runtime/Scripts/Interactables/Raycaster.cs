@@ -237,7 +237,7 @@ namespace Runtime.Scripts.Interactables
 
         private bool NameContainsTrigger(GameObject interactableGameObject)
         {
-            return interactableGameObject.name.ToLower().Contains("trigger");
+            return interactableGameObject != null && interactableGameObject.name.ToLower().Contains("trigger");
         }
 
         private List<RaycastInteractableHit> GetAllSortedRaycastHits()
