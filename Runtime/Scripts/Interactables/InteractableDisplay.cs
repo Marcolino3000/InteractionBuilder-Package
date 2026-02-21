@@ -16,6 +16,7 @@ namespace Runtime.Scripts.Interactables
         // [SerializeField] private Material outlineMaterial;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private string shaderColorPropertyRef;
+        [SerializeField] private string outlineAlphaRef;
         public bool cooldownActive;
 
         private float currentFadeTime;
@@ -65,36 +66,57 @@ namespace Runtime.Scripts.Interactables
         {
             StartCoroutine(FadeOutline(true));
         }
-
+        
         private IEnumerator FadeOutline(bool fadeIn)
         {
-            // Color color = outlineMaterial.GetColor("_SolidOutline");
             Material outlineMaterial = spriteRenderer.material;
-            Color color = outlineMaterial.GetColor(shaderColorPropertyRef);
+            // var outlineAlpha = outlineMaterial.GetFloat(outlineAlphaRef);
+            
             while (currentFadeTime < fadeDuration)
             {
                 currentFadeTime += Time.deltaTime;
                 
-                if(fadeIn)
-                {
-                    currentOpacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
-                    color.a = currentOpacity;
-                    outlineMaterial.SetColor(shaderColorPropertyRef, color);
+                currentOpacity = fadeIn ? 
+                    Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration) : 
+                    Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
 
-                }
-                else
-                {
-                    currentOpacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
-                    color.a = currentOpacity;
-                    outlineMaterial.SetColor(shaderColorPropertyRef, color);
+                outlineMaterial.SetFloat(shaderColorPropertyRef, currentOpacity);
 
-                }
-                
                 yield return null;
             }
 
             currentFadeTime = 0f;
         }
+
+        // private IEnumerator FadeOutline(bool fadeIn)
+        // {
+        //     // Color color = outlineMaterial.GetColor("_SolidOutline");
+        //     Material outlineMaterial = spriteRenderer.material;
+        //     Color color = outlineMaterial.GetColor(shaderColorPropertyRef);
+        //     while (currentFadeTime < fadeDuration)
+        //     {
+        //         currentFadeTime += Time.deltaTime;
+        //         
+        //         if(fadeIn)
+        //         {
+        //             currentOpacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
+        //             color.a = currentOpacity;
+        //             outlineMaterial.SetColor(shaderColorPropertyRef, color);
+        //
+        //         }
+        //         else
+        //         {
+        //             currentOpacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
+        //             color.a = currentOpacity;
+        //             outlineMaterial.SetColor(shaderColorPropertyRef, color);
+        //
+        //         }
+        //         
+        //         yield return null;
+        //     }
+        //
+        //     currentFadeTime = 0f;
+        // }
         
         private Texture2D ChangeTextureOpacity(Texture2D originalTexture, float opacity)
         {
