@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace Runtime.Scripts.Interactables
 {
-    public class InteractableDisplay : MonoBehaviour, IPointerEnterHandler
+    public class InteractableDisplay : MonoBehaviour
     {
         [SerializeField] private Interactable interactable;
         [SerializeField] private TriggerArea triggerArea;
@@ -15,6 +15,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private float cooldownBetweenHovers = 1f;
         // [SerializeField] private Material outlineMaterial;
         [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private string shaderColorPropertyRef;
         public bool cooldownActive;
 
         private float currentFadeTime;
@@ -26,54 +27,12 @@ namespace Runtime.Scripts.Interactables
         {
             cooldownActive = false;
             currentFadeTime = 0f;
-            //
-            // var uiDocument = GetComponent<UIDocument>();
-            // if (uiDocument == null)
-            //     return;
-            //
-            // root = uiDocument.rootVisualElement;
-            //
-            // if (interactable.Data.Sprite != null)
-            // {
-            //     backgroundImage = new StyleBackground(interactable.Data.Sprite);
-            //     root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
-            // }
-            //
-            // if (root != null)
-            //     HideIcon();
         }
 
         private void OnDisable()
         {
             StopAllCoroutines();
         }
-
-        // private void Awake()
-        // {
-        //     root = GetComponent<UIDocument>().rootVisualElement;
-        //
-        //     if (interactable.Data.Sprite != null)
-        //     {
-        //         backgroundImage = new StyleBackground(interactable.Data.Sprite);
-        //         root.Query<VisualElement>("icon").First().style.backgroundImage = backgroundImage;
-        //     }
-        //
-        //     HideIcon();
-        // }
-
-        // private void ShowIcon()
-        // {
-        //     var icon = root.Query<VisualElement>("icon").First();
-        //     if (icon != null)
-        //         icon.style.opacity = opacity;
-        // }
-        //
-        // private void HideIcon()
-        // {
-        //     var icon = root.Query<VisualElement>("icon").First();
-        //     if (icon != null)
-        //         icon.style.opacity = 0f;
-        // }
 
         public void TriggerHoverEffect()
         {
@@ -111,7 +70,7 @@ namespace Runtime.Scripts.Interactables
         {
             // Color color = outlineMaterial.GetColor("_SolidOutline");
             Material outlineMaterial = spriteRenderer.material;
-            Color color = outlineMaterial.GetColor("_SolidOutline");
+            Color color = outlineMaterial.GetColor(shaderColorPropertyRef);
             while (currentFadeTime < fadeDuration)
             {
                 currentFadeTime += Time.deltaTime;
@@ -120,14 +79,14 @@ namespace Runtime.Scripts.Interactables
                 {
                     currentOpacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
                     color.a = currentOpacity;
-                    outlineMaterial.SetColor("_SolidOutline", color);
+                    outlineMaterial.SetColor(shaderColorPropertyRef, color);
 
                 }
                 else
                 {
                     currentOpacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
                     color.a = currentOpacity;
-                    outlineMaterial.SetColor("_SolidOutline", color);
+                    outlineMaterial.SetColor(shaderColorPropertyRef, color);
 
                 }
                 
@@ -136,31 +95,6 @@ namespace Runtime.Scripts.Interactables
 
             currentFadeTime = 0f;
         }
-        
-        // private IEnumerator FadeIcon(bool fadeIn)
-        // {
-        //     while (currentFadeTime < fadeDuration)
-        //     {
-        //         currentFadeTime += Time.deltaTime;
-        //         
-        //         if(fadeIn)
-        //         {
-        //             currentOpacity = Mathf.Lerp(0f, opacity, currentFadeTime / fadeDuration);
-        //             root.Query<VisualElement>("icon").First().style.opacity = currentOpacity;
-        //
-        //         }
-        //         else
-        //         {
-        //             currentOpacity = Mathf.Lerp(opacity, 0f, currentFadeTime / fadeDuration);
-        //             root.Query<VisualElement>("icon").First().style.opacity = currentOpacity;
-        //
-        //         }
-        //         
-        //         yield return null;
-        //     }
-        //
-        //     currentFadeTime = 0f;
-        // }
         
         private Texture2D ChangeTextureOpacity(Texture2D originalTexture, float opacity)
         {
@@ -177,15 +111,5 @@ namespace Runtime.Scripts.Interactables
     
             return newTexture;
         }
-
-        // public void MarkAsFound()
-        // {
-        //     root.Query<VisualElement>("icon").First().style.backgroundColor = Color.green; 
-        // }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            UnityEngine.Debug.Log("pointer");
-        }    
     }
 }
