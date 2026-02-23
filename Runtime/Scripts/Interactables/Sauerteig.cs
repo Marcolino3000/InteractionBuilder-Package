@@ -65,7 +65,7 @@ namespace Runtime.Scripts.Interactables
                 return;
             
             glowManager.Glow();
-            wackler.Wiggle();
+            wackler.EmotionalWiggle();
         }
 
         private bool CheckIfSauerteigsGetsUnlocked(DialogOptionNode node)
