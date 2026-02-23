@@ -13,6 +13,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private float fadeDuration;
         [SerializeField] private bool scaleUpOnFadeIn = true;
         [SerializeField] private bool scaleDownOnFadeOut = true;
+        [SerializeField] private float spriteZoom = 1f;
 
         private void Start()
         {
@@ -33,9 +34,22 @@ namespace Runtime.Scripts.Interactables
         {
             if (state != null && state.Sprite != null)
             {
+                Rect rectToUse;
+                if (spriteZoom > 1f)
+                {
+                    float w = state.Sprite.width / spriteZoom;
+                    float h = state.Sprite.height / spriteZoom;
+                    float x = (state.Sprite.width - w) / 2f;
+                    float y = (state.Sprite.height - h) / 2f;
+                    rectToUse = new Rect(x, y, w, h);
+                }
+                else
+                {
+                    rectToUse = new Rect(0, 0, state.Sprite.width, state.Sprite.height);
+                }
                 var sprite = Sprite.Create(
                     state.Sprite,
-                    new Rect(0, 0, state.Sprite.width, state.Sprite.height),
+                    rectToUse,
                     new Vector2(0.5f, 0.5f)
                 );
                 DisplayInteractable(sprite);
@@ -65,9 +79,22 @@ namespace Runtime.Scripts.Interactables
         {
             if (state.Sprite != null)
             {
+                Rect rectToUse;
+                if (spriteZoom > 1f)
+                {
+                    float w = state.Sprite.width / spriteZoom;
+                    float h = state.Sprite.height / spriteZoom;
+                    float x = (state.Sprite.width - w) / 2f;
+                    float y = (state.Sprite.height - h) / 2f;
+                    rectToUse = new Rect(x, y, w, h);
+                }
+                else
+                {
+                    rectToUse = new Rect(0, 0, state.Sprite.width, state.Sprite.height);
+                }
                 var sprite = Sprite.Create(
                     state.Sprite,
-                    new Rect(0, 0, state.Sprite.width, state.Sprite.height),
+                    rectToUse,
                     new Vector2(0.5f, 0.5f)
                 );
                 DisplayInteractable(sprite);
