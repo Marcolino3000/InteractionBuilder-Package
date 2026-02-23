@@ -11,13 +11,9 @@ public class SauerteigStatusDisplay : MonoBehaviour
     [SerializeField] private GameObject Sauerteig;
     [SerializeField] private Image sauerteigImage;
     [SerializeField] private float baseSize;
+    [SerializeField] private float maxSize;
     [SerializeField] private float scaleFactor;
     [SerializeField] private float animationDuration;
-
-    private void Start()
-    {
-        // sauerteigImage.enabled = false;
-    }
 
     public void ShowSauerteig()
     {
@@ -27,6 +23,7 @@ public class SauerteigStatusDisplay : MonoBehaviour
     public void UpdateStatus(int status)
     {
         float targetScale = baseSize + status / 10f * scaleFactor;
+        targetScale = Mathf.Clamp(targetScale, baseSize, maxSize);
         StartCoroutine(AnimateScale(targetScale, animationDuration));
     }
 
