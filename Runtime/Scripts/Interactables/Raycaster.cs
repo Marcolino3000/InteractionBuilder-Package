@@ -7,15 +7,16 @@ namespace Runtime.Scripts.Interactables
 {
     public class Raycaster : MonoBehaviour
     {
+        public bool isDialogRunning;
+        
         [SerializeField] private bool logHits;
         [SerializeField] private Texture2D standardCursor;
         [SerializeField] private Texture2D hoverInteractableCursor;
         [SerializeField] private int standardCursorSize = 24;
         [SerializeField] private int interactionCursorSize = 32;
-        
+
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
         [SerializeField] private Sauerteig sauerteig;
-        [SerializeField] private bool isDialogRunning;
         [SerializeField] private TransparentWall transparentWall;
         [SerializeField] private bool playerIsInside;
         [SerializeField] private LayerMask wallLayerMask;
@@ -65,6 +66,9 @@ namespace Runtime.Scripts.Interactables
 
         void Update()
         {
+            if (isDialogRunning)
+                return; 
+            
             HandleHoverOnInteractables();
         }
 
