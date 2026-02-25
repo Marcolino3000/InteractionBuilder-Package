@@ -34,19 +34,27 @@ namespace Runtime.Scripts.Interactables
         {
             if (state != null && state.Sprite != null)
             {
-                Rect rectToUse;
-                if (spriteZoom > 1f)
-                {
-                    float w = state.Sprite.width / spriteZoom;
-                    float h = state.Sprite.height / spriteZoom;
-                    float x = (state.Sprite.width - w) / 2f;
-                    float y = (state.Sprite.height - h) / 2f;
-                    rectToUse = new Rect(x, y, w, h);
-                }
-                else
-                {
-                    rectToUse = new Rect(0, 0, state.Sprite.width, state.Sprite.height);
-                }
+                // Get canvas size
+                float canvasWidth = interactableToDisplay.rectTransform.rect.width;
+                float canvasHeight = interactableToDisplay.rectTransform.rect.height;
+                int spriteWidth = state.Sprite.width;
+                int spriteHeight = state.Sprite.height;
+
+                // Calculate scale factors
+                float scaleX = canvasWidth / spriteWidth;
+                float scaleY = canvasHeight / spriteHeight;
+                // Use the larger scale to ensure covering the canvas
+                float scale = Mathf.Max(scaleX, scaleY);
+
+                // Calculate the size of the area to crop from the sprite
+                float cropWidth = canvasWidth / scale;
+                float cropHeight = canvasHeight / scale;
+
+                // Center the crop rectangle
+                float cropX = (spriteWidth - cropWidth) / 2f;
+                float cropY = (spriteHeight - cropHeight) / 2f;
+                Rect rectToUse = new Rect(cropX, cropY, cropWidth, cropHeight);
+
                 var sprite = Sprite.Create(
                     state.Sprite,
                     rectToUse,

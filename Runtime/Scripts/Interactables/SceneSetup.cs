@@ -8,7 +8,7 @@ namespace Runtime.Scripts.Interactables
 {
     public class SceneSetup : MonoBehaviour
     {
-        private void Awake()
+        private void Start()
         {
             SetupScene();
         }
