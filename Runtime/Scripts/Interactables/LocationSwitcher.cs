@@ -14,6 +14,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private bool toggle;
         [FormerlySerializedAs("firstLocation")] [SerializeField] private List<GameObject> objectsToHide;
         [SerializeField] private List<GameObject> objectsToMakeTransparent;
+        [SerializeField] private float transparencyAlpha;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -87,7 +88,7 @@ namespace Runtime.Scripts.Interactables
                     continue ;
 
                 var color = rend.color;
-                color.a = show ? 1f : 0.4f;
+                color.a = show ? 1f : transparencyAlpha;
                 rend.color= color;
                 
                 // var color = rend.sharedMaterial.GetColor("_Color");
