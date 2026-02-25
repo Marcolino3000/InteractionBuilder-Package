@@ -58,6 +58,11 @@ namespace Runtime.Scripts.Interactables
                 isDialogRunning = status;
             };
             
+            SequenceRunner.OnSequenceRunningChanged += (status) =>
+            {
+                isDialogRunning = status;
+            };
+            
             transparentWall.OnPlayerTrigger += (wall) =>
             {
                  playerIsInside = !playerIsInside;

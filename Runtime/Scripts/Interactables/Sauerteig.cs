@@ -41,9 +41,11 @@ namespace Runtime.Scripts.Interactables
 
             if (interactable.Data.AwarenessLevel <= AwarenessLevel.Basic)
                 return;
+
+            if (!IsUnlocked) return;
             
-            if(IsUnlocked)
-                wackler.Wiggle(interactable);
+            glowManager.Glow();
+            wackler.Wiggle(interactable);
         }
 
         private void HandleDialogNodeSelected(DialogOptionNode node)

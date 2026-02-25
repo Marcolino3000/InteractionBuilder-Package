@@ -8,6 +8,9 @@ namespace Runtime.Scripts.Core
 {
     public class SequenceRunner : MonoBehaviour
     {
+        public static event Action<bool> OnSequenceRunningChanged; 
+        
+        [SerializeField] private bool isSequenceRunning;
         [SerializeField] private PlayerController playerController;
         [SerializeField] private BoxCollider boxCollider;
         [SerializeField] private List<Waypoint> Waypoints;
@@ -43,6 +46,9 @@ namespace Runtime.Scripts.Core
 
         private IEnumerator MoveToWaypoints()
         {
+            isSequenceRunning = true;
+            OnSequenceRunningChanged?.Invoke(isSequenceRunning);
+            
             if (boxCollider != null)
                 boxCollider.enabled = false;
             if (Waypoints == null || Waypoints == null || Waypoints.Count == 0)
@@ -87,6 +93,8 @@ namespace Runtime.Scripts.Core
                 boxCollider.enabled = true;
             
             ReactionFinishedCallback?.Invoke();
+            isSequenceRunning = false;
+            OnSequenceRunningChanged?.Invoke(isSequenceRunning);
         }
     }
 }
