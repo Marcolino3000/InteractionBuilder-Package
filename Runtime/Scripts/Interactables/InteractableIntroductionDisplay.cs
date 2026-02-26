@@ -44,7 +44,7 @@ namespace Runtime.Scripts.Interactables
                 float scaleX = canvasWidth / spriteWidth;
                 float scaleY = canvasHeight / spriteHeight;
                 // Use the larger scale to ensure covering the canvas
-                float scale = Mathf.Max(scaleX, scaleY);
+                float scale = Mathf.Min(scaleX, scaleY);
 
                 // Calculate the size of the area to crop from the sprite
                 float cropWidth = canvasWidth / scale;
