@@ -43,17 +43,13 @@ namespace Runtime.Scripts.Interactables
                 // Calculate scale factors
                 float scaleX = canvasWidth / spriteWidth;
                 float scaleY = canvasHeight / spriteHeight;
-                // Use the larger scale to ensure covering the canvas
+                // Use the smaller scale to fit the sprite entirely in one dimension
                 float scale = Mathf.Min(scaleX, scaleY);
 
-                // Calculate the size of the area to crop from the sprite
-                float cropWidth = canvasWidth / scale;
-                float cropHeight = canvasHeight / scale;
-
-                // Center the crop rectangle
-                float cropX = (spriteWidth - cropWidth) / 2f;
-                float cropY = (spriteHeight - cropHeight) / 2f;
-                Rect rectToUse = new Rect(cropX, cropY, cropWidth, cropHeight);
+                // Calculate the size of the area to use from the sprite (no cropping)
+                float displayWidth = spriteWidth;
+                float displayHeight = spriteHeight;
+                Rect rectToUse = new Rect(0, 0, displayWidth, displayHeight);
 
                 var sprite = Sprite.Create(
                     state.Sprite,
