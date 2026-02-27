@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Runtime.Scripts.Core;
 using Tree;
@@ -7,7 +8,10 @@ namespace Runtime.Scripts.Interactables
 {
     public class Raycaster : MonoBehaviour
     {
+        public event Action OnCancelShowInteractable; 
+        
         public bool isDialogRunning;
+        public bool isShowingInteractable;
         
         [SerializeField] private bool logHits;
         [SerializeField] private Texture2D standardCursor;
@@ -81,6 +85,12 @@ namespace Runtime.Scripts.Interactables
         {
             if(isDialogRunning)
                 return;
+
+            if (isShowingInteractable)
+            {
+                isShowingInteractable = false;
+                OnCancelShowInteractable?.Invoke();
+            }
             
             HandleClickOnInteractables();
         }
