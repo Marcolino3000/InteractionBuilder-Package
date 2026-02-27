@@ -90,6 +90,7 @@ namespace Runtime.Scripts.Interactables
             {
                 isShowingInteractable = false;
                 OnCancelShowInteractable?.Invoke();
+                return;
             }
             
             HandleClickOnInteractables();
