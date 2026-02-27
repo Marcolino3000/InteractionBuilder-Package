@@ -14,11 +14,18 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private bool scaleUpOnFadeIn = true;
         [SerializeField] private bool scaleDownOnFadeOut = true;
         [SerializeField] private float spriteZoom = 1f;
+        [SerializeField] private Raycaster raycaster;
 
         private void Start()
         {
             FindReactions();
+            raycaster.OnCancelShowInteractable += StopShowingInteractable;
             // FindInteractablesInScene();
+        }
+
+        private void StopShowingInteractable()
+        {
+            StartCoroutine(HideImageStatic());
         }
 
         private void FindReactions()
@@ -107,11 +114,27 @@ namespace Runtime.Scripts.Interactables
 
         private void DisplayInteractable(Sprite image)
         {
+            raycaster.isShowingInteractable = true;
             glowManager.GlowOneShot(completeDuration * 0.5f);
             
-            StartCoroutine(ShowImage(image));
+            // StartCoroutine(ShowImage(image));
+            StartCoroutine(ShowImageStatic(image));
         }
 
+        private IEnumerator ShowImageStatic(Sprite image)
+        {
+            interactableToDisplay.preserveAspect = true;
+            interactableToDisplay.sprite = image;
+            interactableToDisplay.enabled = true;
+            yield return StartCoroutine(Fade(true));
+        }
+        
+        private IEnumerator HideImageStatic()
+        {
+            yield return StartCoroutine(Fade(false));
+            interactableToDisplay.enabled = false;
+        }
+        
         private IEnumerator ShowImage(Sprite image)
         {
             interactableToDisplay.preserveAspect = true;
