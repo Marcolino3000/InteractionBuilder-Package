@@ -55,22 +55,34 @@ namespace Runtime.Scripts.Interactables
             cam = Camera.main;
             resizedStandardCursor = ResizeCursor(standardCursor, standardCursorSize);
             resizedHoverCursor = ResizeCursor(hoverInteractableCursor, interactionCursorSize);
-            Cursor.SetCursor(resizedStandardCursor, Vector2.zero, CursorMode.Auto);
+            SetCursor(resizedStandardCursor);
             
-            DialogTreeRunner.OnDialogRunningStatusChanged += (status, tree) =>
+            DialogTreeRunner.OnDialogRunningStatusChanged += (isRunning, tree) =>
             {
-                isDialogRunning = status;
+                isDialogRunning = isRunning;
+                
+                if(isRunning)
+                    SetCursor(resizedStandardCursor);
+                
             };
             
-            SequenceRunner.OnSequenceRunningChanged += (status) =>
+            SequenceRunner.OnSequenceRunningChanged += (isRunning) =>
             {
-                isDialogRunning = status;
+                isDialogRunning = isRunning;
+                
+                if(isRunning)
+                    SetCursor(resizedStandardCursor);
             };
             
             transparentWall.OnPlayerTrigger += (wall) =>
             {
                  playerIsInside = !playerIsInside;
             };
+        }
+
+        private void SetCursor(Texture2D texture2D)
+        {
+            Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.Auto);
         }
 
         void Update()
@@ -139,8 +151,7 @@ namespace Runtime.Scripts.Interactables
 
             // Debug.Log("hovering interactable: " + hoveringInteractable);
             
-            Cursor.SetCursor(hoveringInteractable ? resizedHoverCursor : resizedStandardCursor, Vector2.zero,
-                CursorMode.Auto);
+            SetCursor(hoveringInteractable ? resizedHoverCursor : resizedStandardCursor);
         }
 
         private void HandleClickOnInteractables()
