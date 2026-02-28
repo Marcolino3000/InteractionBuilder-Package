@@ -199,6 +199,11 @@ namespace Runtime.Scripts.Interactables
                 
                 if(hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
+
+                if (hit.interactable.Data.AwarenessLevel != AwarenessLevel.NotSet && !sauerteig.IsUnlocked)
+                {
+                    hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
+                }
                 
                 else if(hit.interactable.Data.AwarenessLevel != AwarenessLevel.NotSet && sauerteig.awarenessLevel >= hit.interactable.Data.AwarenessLevel)
                 {
