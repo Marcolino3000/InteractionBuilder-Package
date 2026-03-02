@@ -37,7 +37,7 @@ namespace Runtime.Scripts.Interactables
             }
         }
 
-        private void OnShowInteractableFromReaction(InteractableState state, Action callback)
+        private void OnShowInteractableFromReaction(InteractableState state, Action callback, bool disappearAutomatically)
         {
             if (state != null && state.Sprite != null)
             {
@@ -63,7 +63,7 @@ namespace Runtime.Scripts.Interactables
                     rectToUse,
                     new Vector2(0.5f, 0.5f)
                 );
-                DisplayInteractable(sprite);
+                DisplayInteractable(sprite, disappearAutomatically);
             }
             else
             {
@@ -108,17 +108,16 @@ namespace Runtime.Scripts.Interactables
                     rectToUse,
                     new Vector2(0.5f, 0.5f)
                 );
-                DisplayInteractable(sprite);
+                // DisplayInteractable(sprite);
             }
         }
 
-        private void DisplayInteractable(Sprite image)
+        private void DisplayInteractable(Sprite image, bool disappearsAutomatically)
         {
             raycaster.isShowingInteractable = true;
             glowManager.GlowOneShot(completeDuration * 0.5f);
-            
-            // StartCoroutine(ShowImage(image));
-            StartCoroutine(ShowImageStatic(image));
+
+            StartCoroutine(disappearsAutomatically ? ShowImage(image) : ShowImageStatic(image));
         }
 
         private IEnumerator ShowImageStatic(Sprite image)
