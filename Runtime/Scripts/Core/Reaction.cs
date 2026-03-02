@@ -64,10 +64,10 @@ namespace Runtime.Scripts.Core
 
             if (ObjectToMoveOut != null)
             {
-                if (!ObjectToMoveIn.Interactable.Spawned) return;
+                if (!ObjectToMoveOut.Interactable.Spawned) return;
                 
                 ObjectToMoveOut.Interactable.transform.position += new Vector3(0,-30,0);
-                ObjectToMoveIn.Interactable.Spawned = false;
+                ObjectToMoveOut.Interactable.Spawned = false;
             }
             
             if (ObjectToMove != null)
