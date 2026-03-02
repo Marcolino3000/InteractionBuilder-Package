@@ -9985,6 +9985,7 @@ MonoBehaviour:
   objectsToHide:
   - {fileID: 570028261}
   objectsToMakeTransparent: []
+  transparencyAlpha: 0
 --- !u!65 &464535041
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22204,6 +22205,7 @@ MonoBehaviour:
   - {fileID: 1736500318}
   - {fileID: 1577358953}
   objectsToMakeTransparent: []
+  transparencyAlpha: 0
 --- !u!65 &1089077248
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24172,6 +24174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4a0a39a15241afb5137b7a82ec46ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InteractionBuilder::Runtime.Scripts.Interactables.SceneSetup
+  countdownDuration: 5
+  UseCountdownTrigger: 0
 --- !u!1 &1192097261
 GameObject:
   m_ObjectHideFlags: 0
@@ -61800,6 +61804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc4bef034544ba6abc4175956fa2056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: cod.interactionbuilder::Runtime.Scripts.Core.SequenceOutputDispatcher
+  isSequenceRunning: 0
   playerController: {fileID: 299239219}
   boxCollider: {fileID: 2015682239}
   Waypoints:
@@ -65361,6 +65366,18 @@ PrefabInstance:
     - target: {fileID: 5824537221849958229, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
       propertyPath: completeDuration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118298357940984775, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
+      propertyPath: emotionalWiggleCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118298357940984775, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
+      propertyPath: emotionalWiggleAmount
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118298357940984775, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
+      propertyPath: emotionalWiggleDuration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8118298357940984775, guid: 6dc746a2d8ee745d591b915989764b1d, type: 3}
       propertyPath: 'interactablesThatDontTriggerWiggle.Array.data[0]'
