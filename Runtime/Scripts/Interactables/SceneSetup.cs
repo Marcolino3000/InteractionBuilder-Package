@@ -64,7 +64,7 @@ namespace Runtime.Scripts.Interactables
         {
             if(GUI.Button(new Rect(0, 120,130,25), "Reset Scene", GuiStyleSettings.GetSkin().GetStyle("button")))
             {
-                StartCountdown();
+                SetupScene();
             }
         }
     }
