@@ -9,9 +9,9 @@ namespace Runtime.Scripts.Animation
         [SerializeField] private float wiggleAmount = 10f;
         [SerializeField] private float wiggleDuration = 0.3f;
         [SerializeField] private int wiggleCount = 3;
-        [SerializeField] private float emotionalWiggleAmount = 10f;
-        [SerializeField] private float emotionalWiggleDuration = 0.3f;
-        [SerializeField] private int emotionalWiggleCount = 3;
+        [SerializeField] private float emotionalWiggleAmount;
+        [SerializeField] private float emotionalWiggleDuration;
+        [SerializeField] private int emotionalWiggleCount;
         [SerializeField] private List<Interactable> interactablesThatDontTriggerWiggle;
 
         public void EmotionalWiggle()
