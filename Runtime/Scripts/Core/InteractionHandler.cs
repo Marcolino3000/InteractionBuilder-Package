@@ -90,12 +90,16 @@ namespace Runtime.Scripts.Core
 
             foreach (var interactable in interactables)
             {
+                interactable.OnEnteredTriggerArea -= HandleTriggerViaInteractable;
+                interactable.OnInteractionStarted -= HandleTriggerViaInteractable;
+                interactable.OnExitedTriggerArea -= HandleTriggerViaInteractable;
+                
                 interactable.OnEnteredTriggerArea += HandleTriggerViaInteractable;
                 interactable.OnInteractionStarted += HandleTriggerViaInteractable;
                 interactable.OnExitedTriggerArea += HandleTriggerViaInteractable;
             }
 
-            // interactionsCounter.Setup();
+            interactionsCounter.OnThresholdReached -= HandleTriggerViaInteractable;
             interactionsCounter.OnThresholdReached += HandleTriggerViaInteractable;
         }
 

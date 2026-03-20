@@ -11,10 +11,10 @@ namespace Runtime.Scripts.Core
         [SerializeField] private InteractionHandler interactionHandler;
         public List<TriggerToPrereqs> triggerToPrerequisites;
 
-        private void OnValidate()
-        {
-            SetupInteractionHandler();
-        }
+        // private void OnValidate()
+        // {
+        //     SetupInteractionHandler();
+        // }
  
         [ContextMenu("Reset Interactions")]
         private void ResetInteractions()
