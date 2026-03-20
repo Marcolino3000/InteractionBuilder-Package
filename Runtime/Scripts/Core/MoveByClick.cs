@@ -1,3 +1,4 @@
+using System.Collections;
 using Runtime.Scripts.PlayerInput;
 using UnityEngine;
 
@@ -12,34 +13,31 @@ namespace Runtime.Scripts.Core
         private Camera cam;
         private Vector3 targetPosition;
         private bool isMoving = false;
+        private Coroutine moveCoroutine;
 
         private void Start()
         {
             cam = Camera.main;
         }
-
-        private void Update()
+       
+        private IEnumerator Move()
         {
-            Move();
-        }
-
-        private void Move()
-        {
-            if (isMoving)
+            while (true)
             {
-                Vector3 direction = (targetPosition - playerController.transform.position);
-                direction.y = 0;
-                
+                Vector3 direction = targetPosition - playerController.transform.position;
+                direction.y = 0f;
+
                 if (direction.magnitude < 0.1f)
                 {
                     playerController.OnMove(Vector2.zero);
-                    isMoving = false;
+                    moveCoroutine = null;
+                    yield break;
                 }
-                else
-                {
-                    Vector2 moveInput = new Vector2(direction.x, direction.z).normalized;
-                    playerController.OnMove(moveInput);
-                }
+
+                Vector2 moveInput = new Vector2(direction.x, direction.z).normalized;
+                playerController.OnMove(moveInput);
+
+                yield return null;
             }
         }
 
@@ -49,12 +47,18 @@ namespace Runtime.Scripts.Core
                 return;
 
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            
+
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
             {
                 targetPosition = hit.point;
                 targetPosition.z += verticalPositionOffset;
-                isMoving = true;
+
+                if (moveCoroutine != null)
+                {
+                    StopCoroutine(moveCoroutine);
+                }
+
+                moveCoroutine = StartCoroutine(Move());
             }
         }
     }
