@@ -11,9 +11,9 @@ namespace Runtime.Scripts.Interactables
     {
         public event Action<InteractionTriggerVia, InteractableState> OnThresholdReached;
 
+        [SerializeField] private bool debugLogs;
         [SerializeField] private bool isActive;
         [SerializeField] private InteractableState requiredInteraction;
-        // [SerializeField] private Reaction requiredReaction;
         [SerializeField] private bool interactionWasTriggered;
         [SerializeField] private int interactionsCountBeforePaul;
         [SerializeField] private int currentInteractionsCount;
@@ -22,48 +22,9 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private InteractionData startCountingInteraction;
         [SerializeField] private InteractionData stopCountingInteraction;
         [SerializeField] private List<Reaction> countedReactions;
-
-        // private void FindInteractablesInScene()
-        // {
-        //     var interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
-        //     foreach (var interactable in interactables)
-        //     {
-        //         var capturedInteractable = interactable;
-        //         interactable.OnInteractionStarted += HandleInteractionStarted;
-        //         interactable.OnInteractionSuccessful += () => HandleSuccessfulInteraction(capturedInteractable.Data);
-        //     }
-        // }
-        //
-        // private void HandleInteractionStarted(InteractionTriggerVia via, InteractableState state)
-        // {
-        //
-        // }
-
-        // private void HandleSuccessfulInteraction(InteractableState state)
-        // {
-        //     if (!isActive)
-        //         return;
-        //     
-        //     if (startCountingInteraction != null && !startCountingInteraction.ThresholdReached)
-        //         return;
-        //     
-        //     if (stopCountingInteraction != null && stopCountingInteraction.ThresholdReached)
-        //         return;
-        //     currentInteractionsCount++;
-        //
-        //     if(requiredInteraction == null || state == requiredInteraction)
-        //         interactionWasTriggered = true;
-        //
-        //     if (interactionWasTriggered && currentInteractionsCount >= interactionsCountBeforePaul)
-        //     {
-        //         OnThresholdReached?.Invoke(InteractionTriggerVia.ThresholdReached, requiredInteraction);
-        //         Debug.Log("Counter: Threshold reached");
-        //     }
-        // }
-
+        
         private void Setup()
         {
-            // FindInteractablesInScene();
             FindReactions();
             currentInteractionsCount = 0;
             interactionWasTriggered = false;
@@ -96,6 +57,9 @@ namespace Runtime.Scripts.Interactables
             
             currentInteractionsCount++;
             countedReactions.Add(reaction);
+            
+            if(debugLogs)
+                Debug.Log($"Counter: Reaction finished: {reaction.name}; updated count: {currentInteractionsCount}");
 
             if(requiredInteraction == null || reaction.Interactable == requiredInteraction)
                 interactionWasTriggered = true;
