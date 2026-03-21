@@ -67,31 +67,19 @@ namespace Runtime.Scripts.Core
                 
                 if(waypoint.ReactionAtStart != null)
                     waypoint.ReactionAtStart.Execute ();
-                
-                // while (Vector2.Distance(new Vector2(playerController.transform.position.x, playerController.transform.position.z),
-                //                        new Vector2(target.x, target.z)) > waypointThreshold)
-                // {
-                //     Vector3 direction = (target - playerController.transform.position);
-                //     Vector2 moveInput = new Vector2(direction.x, direction.z).normalized * moveSpeed;
-                //     playerController.OnMove(moveInput);
-                //     yield return null;
-                // }
 
-                yield return playerController.MoveToTargetPosition(new Vector2(target.x, target.z));
+                yield return playerController.MoveToTargetPositionCoroutine(new Vector2(target.x, target.z));
                 
                 if(waypoint.ReactionAtStop != null)
                     waypoint.ReactionAtStop.Execute();
                 
                 if (waypoint.WaitTime > 0f)
                 {
-                    // playerController.OnMove(Vector2.zero);
                     yield return new WaitForSeconds(waypoint.WaitTime);
                 }
                 
                 currentWaypointIndex++;
             }
-            
-            // playerController.OnMove(Vector2.zero);
             
             if (boxCollider != null)
                 boxCollider.enabled = true;
