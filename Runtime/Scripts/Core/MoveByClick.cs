@@ -18,30 +18,30 @@ namespace Runtime.Scripts.Core
             cam = Camera.main;
         }
 
-        private void Update()
-        {
-            Move();
-        }
+        // private void Update()
+        // {
+        //     Move();
+        // }
 
-        private void Move()
-        {
-            if (isMoving)
-            {
-                Vector3 direction = (targetPosition - playerController.transform.position);
-                direction.y = 0;
-                
-                if (direction.magnitude < 0.1f)
-                {
-                    playerController.OnMove(Vector2.zero);
-                    isMoving = false;
-                }
-                else
-                {
-                    Vector2 moveInput = new Vector2(direction.x, direction.z).normalized;
-                    playerController.OnMove(moveInput);
-                }
-            }
-        }
+        // private void Move()
+        // {
+        //     if (isMoving)
+        //     {
+        //         Vector3 direction = (targetPosition - playerController.transform.position);
+        //         direction.y = 0;
+        //         
+        //         if (direction.magnitude < 0.1f)
+        //         {
+        //             playerController.MoveToTargetPosition(Vector2.zero);
+        //             isMoving = false;
+        //         }
+        //         else
+        //         {
+        //             Vector2 moveInput = new Vector2(direction.x, direction.z).normalized;
+        //             playerController.OnMove(moveInput);
+        //         }
+        //     }
+        // }
 
         public void HandleMouseClick()
         {
@@ -54,8 +54,12 @@ namespace Runtime.Scripts.Core
             {
                 targetPosition = hit.point;
                 targetPosition.z += verticalPositionOffset;
-                isMoving = true;
+                Vector3 direction = (targetPosition - playerController.transform.position);
+                direction.y = 0;
+                playerController.MoveInDirection(direction);
             }
+            
+            
         }
     }
 }
