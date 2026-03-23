@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core;
 using Runtime.Scripts.Interactables;
+using SceneManagement;
 using Tree;
 using UnityEngine;
 
@@ -28,12 +29,13 @@ namespace Runtime.Scripts.Core
         public ScriptedSequence ScriptedSequence;
         public InteractableState InteractableToShow;
         public bool InteractableDisappearsAutomatically;
+        public string SceneToLoad;
 
         public void Execute()
         {
-            if (!string.IsNullOrEmpty(DebugMessage))
+            if (!string.IsNullOrEmpty(SceneToLoad))
             {
-                Debug.Log(name + " " + DebugMessage);
+                SceneSwapManager.Instance.ChangeScene(SceneToLoad);
             }
             
             if (CancelCurrentDialog)
