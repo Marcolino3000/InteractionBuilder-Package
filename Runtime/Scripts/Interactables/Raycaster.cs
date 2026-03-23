@@ -17,12 +17,10 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private Texture2D standardCursor;
         [SerializeField] private Texture2D hoverInteractableCursor;
         [SerializeField] private int standardCursorSize = 24;
-        [SerializeField] private int interactionCursorSize = 32;
+        [SerializeField] private int interactionCursorSize = 48;
 
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
         [SerializeField] private Sauerteig sauerteig;
-        [SerializeField] private TransparentWall transparentWall;
-        [SerializeField] private bool playerIsInside;
         [SerializeField] private LayerMask wallLayerMask;
         [SerializeField] private LayerMask interactablesLayerMask;
         [SerializeField] private LayerMask groundLayerMask;
@@ -63,7 +61,6 @@ namespace Runtime.Scripts.Interactables
                 
                 if(isRunning)
                     SetCursor(resizedStandardCursor);
-                
             };
             
             SequenceRunner.OnSequenceRunningChanged += (isRunning) =>
@@ -72,11 +69,6 @@ namespace Runtime.Scripts.Interactables
                 
                 if(isRunning)
                     SetCursor(resizedStandardCursor);
-            };
-            
-            transparentWall.OnPlayerTrigger += (wall) =>
-            {
-                 playerIsInside = !playerIsInside;
             };
         }
 
@@ -168,12 +160,6 @@ namespace Runtime.Scripts.Interactables
                 }
             }
 
-            // if (!playerIsInside && (hits.Count == 0 || hits[0].target == null || hits[0].target.name == "Wall"))
-            // {
-            //     // Debug.Log("click raycast early return");
-            //     return;
-            // }
-
             foreach (var hit in hits)
             {
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
@@ -240,7 +226,6 @@ namespace Runtime.Scripts.Interactables
         private bool GetHitsFrom3DRaycast(List<RaycastInteractableHit> interactables)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            // var layerMask = LayerMask.GetMask("Interactables", "Wall");
             var layerMask = wallLayerMask | interactablesLayerMask | groundLayerMask;
             RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
             foreach (var hit in hits)
@@ -248,8 +233,6 @@ namespace Runtime.Scripts.Interactables
                 var hitCollider = hit.collider;
                 var interactable = hitCollider.gameObject.GetComponentInChildren<Interactable>();
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                // if(interactable == null || display == null)
-                //     continue;
                 interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hit.collider.gameObject));
             }
             return interactables.Count > 0;
@@ -264,8 +247,6 @@ namespace Runtime.Scripts.Interactables
                 var hitCollider = hit.collider;
                 var interactable = hitCollider.gameObject.GetComponentInChildren<Interactable>();
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                // if(interactable == null || display == null)
-                //     continue;
                 interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject, NameContainsTrigger(interactable?.gameObject)));
             }
             return interactables.Count > 0;
