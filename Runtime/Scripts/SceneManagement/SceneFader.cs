@@ -8,7 +8,7 @@ namespace SceneManagement
     {
         public static SceneFader Instance { get; private set; }
         
-        [SerializeField] private Image fadeOutImage;
+        [SerializeField] private Image fadeImage;
         [Range(0.1f, 10f), SerializeField] private float fadeSpeed;
         [SerializeField] private Color fadeColor = Color.black;
         
@@ -21,16 +21,17 @@ namespace SceneManagement
                 Instance = this;
 
             fadeColor.a = 0f;
+            fadeImage.enabled = false;
         }
 
         private void Update()
         {
             if (IsFadingOut)
             {
-                if(fadeOutImage.color.a < 1f)
+                if(fadeImage.color.a < 1f)
                 {
                     fadeColor.a += Time.deltaTime * fadeSpeed;
-                    fadeOutImage.color = fadeColor;
+                    fadeImage.color = fadeColor;
                 }
                 else
                 {
@@ -40,27 +41,30 @@ namespace SceneManagement
 
             if (IsFadingIn)
             {
-                if (fadeOutImage.color.a > 0f)
+                if (fadeImage.color.a > 0f)
                 {
                     fadeColor.a -= Time.deltaTime * fadeSpeed;
-                    fadeOutImage.color = fadeColor;
+                    fadeImage.color = fadeColor;
                 }
                 else
                 {
                     IsFadingIn = false;
+                    fadeImage.enabled = false;
                 }
             }
         }
 
         public void StartFadeOut()
         {
-            fadeOutImage.color = fadeColor;
+            fadeImage.enabled = true;
+            fadeImage.color = fadeColor;
             IsFadingOut = true;
         }
 
         public void StartFadeIn()
         {
-            fadeOutImage.color = fadeColor;
+            fadeImage.enabled = true;
+            fadeImage.color = fadeColor;
             IsFadingIn = true;
         }
     }
