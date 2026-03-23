@@ -115,30 +115,33 @@ namespace Editor
             if (successReaction != null && dialogTree != null)
             {
                 successReaction.DialogTree = dialogTree;
-                EditorUtility.SetDirty(successReaction);
             }
             
             if (interactionData != null && createInteractionData)
             {
                 EnsureFolderExists(assetPath + "InteractionData/");
+                EditorUtility.SetDirty(interactionData);
                 AssetDatabase.CreateAsset(interactionData, assetPath + "InteractionData/" + interactionName + "Interaction.asset");
             }
 
             if (successReaction != null && createSuccessReaction)
             {
                 EnsureFolderExists(assetPath + "Reactions/");
+                EditorUtility.SetDirty(successReaction);
                 AssetDatabase.CreateAsset(successReaction, assetPath + "Reactions/" + interactionName + "SuccessReaction.asset");
             }
 
             if (failureReaction != null && createFailureReaction)
             {
                 EnsureFolderExists(assetPath + "Reactions/");
+                EditorUtility.SetDirty(failureReaction);
                 AssetDatabase.CreateAsset(failureReaction, assetPath + "Reactions/" + interactionName + "FailureReaction.asset");
             }
 
             if (dialogTree != null && createDialogTree)
             {
                 EnsureFolderExists(assetPath + "Dialog/");
+                EditorUtility.SetDirty(dialogTree);
                 AssetDatabase.CreateAsset(dialogTree, assetPath + "Dialog/" + interactionName + "Dialog.asset");
             }
 
