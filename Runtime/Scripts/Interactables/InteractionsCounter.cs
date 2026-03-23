@@ -28,6 +28,7 @@ namespace Runtime.Scripts.Interactables
             FindReactions();
             currentInteractionsCount = 0;
             interactionWasTriggered = false;
+            isActive = false;
             countedReactions = new List<Reaction>();
         }
 
