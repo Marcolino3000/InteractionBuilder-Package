@@ -109,6 +109,9 @@ namespace Runtime.Scripts.Interactables
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     break;
                 
+                if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
+                    return;
+                
                 if (hit.interactable == null)
                 {
                     continue;
@@ -163,6 +166,9 @@ namespace Runtime.Scripts.Interactables
             foreach (var hit in hits)
             {
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
+                    return;
+                
+                if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
                     return;
                     
                 if(hit.target.name == "Wall")
