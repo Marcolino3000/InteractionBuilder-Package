@@ -110,7 +110,7 @@ namespace Runtime.Scripts.Interactables
                     break;
                 
                 if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
-                    return;
+                    break;
                 
                 if (hit.interactable == null)
                 {
