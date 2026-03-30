@@ -37,12 +37,10 @@ namespace Editor.CustomInspectors
 
             string triggerToPrereqsName = nameof(viewer.triggerToPrerequisites);
             SerializedProperty triggerToPrerequisites = serializedObject.FindProperty(triggerToPrereqsName);
-            var triggerToPrereqsField = new PropertyField();
-            // triggerToPrereqsField.TrackPropertyValue(triggerToPrerequisites, AddTriggerFields);
 
             // Add default inspector for debugging
-            triggerToPrereqsField.BindProperty(triggerToPrerequisites);
-            root.Add(triggerToPrereqsField);
+            // triggerToPrereqsField.BindProperty(triggerToPrerequisites);
+            // root.Add(triggerToPrereqsField);
             
             root.Add(AddShowConditionsButton());
             
@@ -155,7 +153,6 @@ namespace Editor.CustomInspectors
                 conditionsField.BindProperty(conditions);
                 conditionsField.OnPopulated(() =>
                 {
-                    // Debug.Log("Conditions field populated");
                     var foldout = conditionsField.Q<Foldout>();
                     if (foldout != null)
                     {
@@ -165,32 +162,12 @@ namespace Editor.CustomInspectors
                     }
                 });
 
-                
-
                 foreach (var child in conditionsField.Children())
                 {
                     Debug.Log($"Child element: {child.GetType()} - Name: {child.name}");
                 }
-
-
-
-                // if (conditions.propertyType == SerializedPropertyType.Generic)
-                // {//
-                //     for(int w = 0; w < conditions.arraySize; w++)
-                //     {
-                //         var obj = conditions.GetArrayElementAtIndex(w);
-                //         var value = obj.boxedValue;
-                //         var stateWithSettingsField = new PropertyField();
-                //         stateWithSettingsField.BindProperty(obj);
-                //         // conditionsFoldout.Add(stateWithSettingsField);
-                //     }
-                // }
-                // row.Add(conditionsFoldout);
+                
                 row.style.flexDirection = FlexDirection.Row;
-
-                // var foldout = conditionsField.Q("unity-list-view__foldout-header");
-                // if(foldout is Foldout foldout2)
-                //     conditionFoldouts.Add(foldout2);
                 
                 CreateActiveAndDeleteButtons(prereqs, row, j, prereq, triggerToPrereq);
 
@@ -291,7 +268,6 @@ namespace Editor.CustomInspectors
         {
             var prereq = triggerToPrereq.Prerequisites[index];
             
-            var currentIndex = index;
             var deleteButton = new Button(() =>
             {
                 
@@ -303,7 +279,6 @@ namespace Editor.CustomInspectors
                 viewer.DeletePrereq(prereq.Record);
                 viewer.DeleteTriggersWithNoPrerequisites();
                 serializedObject.ApplyModifiedProperties();
-                // EditorUtility.SetDirty(this);
                 EditorUtility.SetDirty(viewer);
                 // Repaint();
                 // ForceRedraw();
@@ -315,8 +290,6 @@ namespace Editor.CustomInspectors
             return deleteButton;
         }
         
-        
-
         // private void TriggerRepaint()
         // {
         //     serializedObject.ApplyModifiedProperties();

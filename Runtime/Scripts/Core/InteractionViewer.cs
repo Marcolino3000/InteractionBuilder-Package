@@ -11,11 +11,6 @@ namespace Runtime.Scripts.Core
         [SerializeField] private InteractionHandler interactionHandler;
         public List<TriggerToPrereqs> triggerToPrerequisites;
 
-        // private void OnValidate()
-        // {
-        //     SetupInteractionHandler();
-        // }
- 
         [ContextMenu("Reset Interactions")]
         private void ResetInteractions()
         {
@@ -41,8 +36,6 @@ namespace Runtime.Scripts.Core
         
         public void AddInteraction(string interactionName, bool highPriority, Trigger trigger, PrerequisiteRecord record)
         {
-            // interactions.Add(new Interaction(interactionName, highPriority, trigger, record));
-            
             AddToList(trigger, record, interactionName, highPriority);
             
             DeleteTriggersWithNoPrerequisites();
@@ -78,8 +71,6 @@ namespace Runtime.Scripts.Core
         {
             foreach (var triggerToPrerequisite in triggerToPrerequisites)
             {
-                // PrerequisiteRecord toRemove;
-
                 foreach (var prereq in triggerToPrerequisite.Prerequisites)
                 {
                     if(prereq.Record == prerequisite)
@@ -89,17 +80,10 @@ namespace Runtime.Scripts.Core
                         return;                     
                     }
                 }
-                // if (toRemove != null)
-                    
             }
-            
-            // foreach (var triggerToPrerequisite in triggerToPrerequisites)
-            // {
-            //     triggerToPrerequisite.Prerequisites.RemoveAll(p => p.Record == prerequisite);
-            // }
         }
 
-        public void SortByInteractableAndTriggerType()
+        private void SortByInteractableAndTriggerType()
         {
             triggerToPrerequisites.Sort((a, b) =>
             {
@@ -110,8 +94,8 @@ namespace Runtime.Scripts.Core
                 if (!aValid) return 1;
                 if (!bValid) return -1;
                 
-                string nameA = a?.Trigger?.TriggeringInteractable?.Interactable?.name ?? string.Empty;
-                string nameB = b?.Trigger?.TriggeringInteractable?.Interactable?.name ?? string.Empty;
+                string nameA = a?.Trigger?.TriggeringInteractable?.name ?? string.Empty;
+                string nameB = b?.Trigger?.TriggeringInteractable?.name ?? string.Empty;
                 
                 int nameCompare = string.Compare(nameA, nameB, StringComparison.Ordinal);
                 if (nameCompare != 0)
