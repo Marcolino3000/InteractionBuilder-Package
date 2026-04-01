@@ -24,7 +24,10 @@ namespace Runtime.Scripts.Animation
         private void StartRotation()
         {
             if(_isRunning)
+            {
+                Debug.LogWarning("Door was already rotating. Ignoring new rotation request.");
                 return;
+            }
             
             PlayAudio();
             StartCoroutine(DoProgress());
@@ -38,7 +41,9 @@ namespace Runtime.Scripts.Animation
         private IEnumerator DoProgress()
         {
             _isRunning = true;
-            _collider.enabled = false;
+            
+            if(_collider != null)
+                _collider.enabled = false;
             
             while (_progress < 1f)
             {
@@ -57,17 +62,11 @@ namespace Runtime.Scripts.Animation
             _progress = 0f;
             isOpen = !isOpen;
             _isRunning = false;
-            _collider.enabled = true;
+            
+            if(_collider != null)
+                _collider.enabled = true;
         }
-
-        // private void OnGUI()
-        // {
-        //     if (GUI.Button(new Rect(10, 10, 100, 30), "Start Rotation"))
-        //     {
-        //         StartRotation();
-        //     }
-        // }
-
+        
         private void Awake()
         {
             interactable.OnInteractionSuccessful += StartRotation;

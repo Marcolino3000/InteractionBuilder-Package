@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Linq;
-using Runtime.Scripts.Core;
 using Runtime.Scripts.Utility;
 using UnityEngine;
 
@@ -32,31 +29,6 @@ namespace Runtime.Scripts.Interactables
             {
                 receiver.OnSceneSetup();
             }
-        }
-
-        private void StartCountdown()
-        {
-            if (!UseCountdownTrigger)
-                return;
-            
-            if (countdownCoroutine != null)
-                StopCoroutine(countdownCoroutine);
-            countdownCoroutine = StartCoroutine(CountdownCoroutine());
-        }
-
-        private IEnumerator CountdownCoroutine()
-        {
-            countdownActive = true;
-            countdownRemaining = countdownDuration;
-            while (countdownRemaining > 0f)
-            {
-                yield return null;
-                countdownRemaining -= Time.deltaTime;
-            }
-            countdownRemaining = 0f;
-            countdownActive = false;
-            
-            SetupScene();
         }
 
         private void OnGUI()

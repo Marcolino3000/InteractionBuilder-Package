@@ -20,12 +20,12 @@ namespace Runtime.Scripts.Core
 
         public DialogTree DialogTree;
         public InteractableState Interactable;
+        public bool TriggerInteractableAfterReactionFinished;
         public InteractableState ObjectToMoveIn;
         public InteractableState ObjectToMoveOut;
         public InteractableState ObjectToMove;
         public Vector3 TargetPosition;
         public bool CancelCurrentDialog;
-        public string DebugMessage;
         public ScriptedSequence ScriptedSequence;
         public InteractableState InteractableToShow;
         public bool InteractableDisappearsAutomatically;
@@ -51,7 +51,7 @@ namespace Runtime.Scripts.Core
                 OnStartDialog?.Invoke();
             }
 
-            if(Interactable != null)
+            if(Interactable != null && !TriggerInteractableAfterReactionFinished)
             {
                 Interactable?.HandleInteraction();
             }
@@ -108,7 +108,16 @@ namespace Runtime.Scripts.Core
             Debug.Log(name + " Dialog Finished Callback, ranToCompletion: " + ranToCompletion);
             OnReactionFinished?.Invoke(ranToCompletion);
         }
-        
-        
+
+        private void Awake()
+        {
+            OnReactionFinished += TriggerInteractable;
+        }
+
+        private void TriggerInteractable(bool rannToCompletion)
+        {
+            if(TriggerInteractableAfterReactionFinished)
+                Interactable?.HandleInteraction();
+        }
     }
 }

@@ -126,7 +126,7 @@ namespace Editor.CustomInspectors
         private void CreatePrerequisiteFields(SerializedProperty prereqs, Foldout triggerFoldout,
             TriggerToPrereqs triggerToPrereq)
         {
-            for (int j = 0; j < prereqs.arraySize; j++)
+            for (int j = 0; j < prereqs.arraySize; j++) //todo: arraysize checken -> bei addDeleteButton error nach erstellen von prereq(zweimal nach Erstellen aber davor eins gelöscht) (err kam bei Flyer)
             {
                 var row = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>
                     ("Packages/com.cod.interactionbuilder/Editor/CustomInspectors/InteractionHandler/InteractionInspectorRow.uxml").CloneTree();

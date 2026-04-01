@@ -10,12 +10,6 @@ namespace Runtime.Scripts.Core
     {
         [SerializeField] private InteractionHandler interactionHandler;
         public List<TriggerToPrereqs> triggerToPrerequisites;
-
-        [ContextMenu("Reset Interactions")]
-        private void ResetInteractions()
-        {
-            triggerToPrerequisites = new List<TriggerToPrereqs>();
-        }
         
         [ContextMenu("Write Changes to Handler")]
         private void SetupInteractionHandler()
