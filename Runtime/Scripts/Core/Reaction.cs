@@ -95,24 +95,27 @@ namespace Runtime.Scripts.Core
         {
             Debug.Log(name + " Show Interactable finished");
             OnReactionFinished?.Invoke(true);
+            TriggerInteractable(true);
         }
 
         private void SequenceFinishedCallback()
         {
             Debug.Log(name + " Sequence Finished Callback");
             OnReactionFinished?.Invoke(true);
+            TriggerInteractable(true);
         }
 
         private void DialogFinishedCallback(bool ranToCompletion)
         {
             Debug.Log(name + " Dialog Finished Callback, ranToCompletion: " + ranToCompletion);
             OnReactionFinished?.Invoke(ranToCompletion);
+            TriggerInteractable(ranToCompletion);
         }
 
-        private void Awake()
-        {
-            OnReactionFinished += TriggerInteractable;
-        }
+        // private void Awake()
+        // {
+        //     OnReactionFinished += TriggerInteractable;
+        // }
 
         private void TriggerInteractable(bool rannToCompletion)
         {
