@@ -8,6 +8,10 @@ namespace Runtime.Scripts.Interactables
     {
         [SerializeField] private float countdownDuration;
         [SerializeField] private bool UseCountdownTrigger;
+        
+        [Header("Settings")]
+        [SerializeField] private bool showDebugButtons;
+        
         private float countdownRemaining;
         private bool countdownActive;
         private Coroutine countdownCoroutine;
@@ -33,6 +37,9 @@ namespace Runtime.Scripts.Interactables
 
         private void OnGUI()
         {
+            if (!showDebugButtons)
+                return;
+            
             if(GUI.Button(new Rect(0, 120,130,25), "Reset Scene", GuiStyleSettings.GetSkin().GetStyle("button")))
             {
                 SetupScene();
