@@ -117,7 +117,7 @@ namespace Runtime.Scripts.Core
         //     OnReactionFinished += TriggerInteractable;
         // }
 
-        private void TriggerInteractable(bool rannToCompletion)
+        private void TriggerInteractable(bool ranToCompletion)
         {
             if(TriggerInteractableAfterReactionFinished)
                 Interactable?.HandleInteraction();

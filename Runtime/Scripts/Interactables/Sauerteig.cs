@@ -22,6 +22,9 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private DialogOptionNode emotionalReactionDialogOption;
         [SerializeField] private SuperDuperWackler wackler;
         [SerializeField] private GigaGlowManager glowManager;
+        
+        [Header("Settings")]
+        [SerializeField] private bool showDebugButtons;
 
         private SphereCollider radarCollider;
          
@@ -184,6 +187,9 @@ namespace Runtime.Scripts.Interactables
 
         private void OnGUI()
         {
+            if (!showDebugButtons)
+                return;
+            
             GUILayout.BeginArea(new  Rect(0, 160,300 ,300));
             
             GUI.Label(new Rect(0, 40, 200, 25), $"Activity: {Activity} | Level: {awarenessLevel}");
