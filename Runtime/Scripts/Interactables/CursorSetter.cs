@@ -49,7 +49,7 @@ namespace Runtime.Scripts.Interactables
             }
         }
 
-        private void SetCursor(Texture2D texture)
+        public void SetCursor(Texture2D texture)
         {
             Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
         }
@@ -72,5 +72,20 @@ namespace Runtime.Scripts.Interactables
         }
 
         #endregion
+
+        public void SetCursor(bool hoveringInteractable)
+        {
+            SetCursor(hoveringInteractable ? resizedHoverCursor : resizedStandardCursor);
+        }
+    }
+    
+    
+    public enum InteractionType
+    {
+        None,
+        Move,
+        GoThroughDoor,
+        Inspect,
+        Use
     }
 }

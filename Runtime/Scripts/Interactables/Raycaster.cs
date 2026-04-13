@@ -118,9 +118,11 @@ namespace Runtime.Scripts.Interactables
 
                 break;
             }
+            
+            cursorSetter.SetCursor(hoveringInteractable);
 
-            if(hoveredInteractable != null)
-                cursorSetter.SetCursor(hoveredInteractable.Data.InteractionType);
+            // if(hoveredInteractable != null)
+            //     cursorSetter.SetCursor(hoveredInteractable.Data.InteractionType);
         }
 
         private void HandleClickOnInteractables()
