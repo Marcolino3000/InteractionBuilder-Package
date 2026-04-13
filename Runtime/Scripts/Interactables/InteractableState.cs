@@ -13,6 +13,7 @@ namespace Runtime.Scripts.Interactables
 
         public Texture2D Sprite;
         public AwarenessLevel AwarenessLevel;
+        public InteractionType InteractionType;
                 
         public virtual void HandleInteraction()
         {

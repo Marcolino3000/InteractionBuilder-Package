@@ -110,5 +110,13 @@ namespace Runtime.Scripts.Core
                 
         }
     }
+
+    public enum InteractionType
+    {
+        Move,
+        GoThroughDoor,
+        Inspect,
+        Use
+    }
 }
 

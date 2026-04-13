@@ -14,10 +14,6 @@ namespace Runtime.Scripts.Interactables
         public bool isShowingInteractable;
         
         [SerializeField] private bool logHits;
-        [SerializeField] private Texture2D standardCursor;
-        [SerializeField] private Texture2D hoverInteractableCursor;
-        [SerializeField] private int standardCursorSize = 24;
-        [SerializeField] private int interactionCursorSize = 48;
 
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
         [SerializeField] private Sauerteig sauerteig;
@@ -25,63 +21,39 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private LayerMask interactablesLayerMask;
         [SerializeField] private LayerMask groundLayerMask;
         [SerializeField] private MoveByClick moveByClick;
+        [SerializeField] private CursorSetter cursorSetter;
         
         private Camera cam;
         private bool clickedWall;
-        private Texture2D resizedStandardCursor;
-        private Texture2D resizedHoverCursor;
-
-        private Texture2D ResizeCursor(Texture2D original, int size)
-        {
-            if (original == null) return null;
-            Texture2D resized = new Texture2D(size, size, original.format, false);
-            for (int y = 0; y < size; y++)
-            {
-                for (int x = 0; x < size; x++)
-                {
-                    float u = x / (float)size;
-                    float v = y / (float)size;
-                    resized.SetPixel(x, y, original.GetPixelBilinear(u, v));
-                }
-            }
-            resized.Apply();
-            return resized;
-        }
 
         private void OnEnable()
         {
             cam = Camera.main;
-            resizedStandardCursor = ResizeCursor(standardCursor, standardCursorSize);
-            resizedHoverCursor = ResizeCursor(hoverInteractableCursor, interactionCursorSize);
-            SetCursor(resizedStandardCursor);
+            
+            cursorSetter.Initialize();
             
             DialogTreeRunner.OnDialogRunningStatusChanged += (isRunning, tree) =>
             {
                 isDialogRunning = isRunning;
-                
+
                 if(isRunning)
-                    SetCursor(resizedStandardCursor);
+                    cursorSetter.SetStandardCursor();
             };
-            
+
             SequenceRunner.OnSequenceRunningChanged += (isRunning) =>
             {
                 isDialogRunning = isRunning;
-                
-                if(isRunning)
-                    SetCursor(resizedStandardCursor);
-            };
-        }
 
-        private void SetCursor(Texture2D texture2D)
-        {
-            Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.Auto);
+                if(isRunning)
+                    cursorSetter.SetStandardCursor();
+            };
         }
 
         void Update()
         {
             if (isDialogRunning)
                 return; 
-            
+
             HandleHoverOnInteractables();
         }
 
@@ -96,7 +68,7 @@ namespace Runtime.Scripts.Interactables
                 OnCancelShowInteractable?.Invoke();
                 return;
             }
-            
+
             HandleClickOnInteractables();
         }
 
@@ -104,28 +76,30 @@ namespace Runtime.Scripts.Interactables
         {
             var hits = GetAllSortedRaycastHits();
             bool hoveringInteractable = false;
+            Interactable hoveredInteractable = null;
+            
             foreach (var hit in hits)
             {
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     break;
-                
+
                 if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
                     break;
-                
+
                 if (hit.interactable == null)
                 {
                     continue;
                 }
-                
+
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     return;
-                
+
                 if (hit.isTrigger)
                     continue;
 
                 if(sauerteig.awarenessLevel < hit.interactable.Data.AwarenessLevel)
                     continue;
-                
+
                 hoveringInteractable = true;
 
                 if(sauerteig == null)
@@ -140,13 +114,13 @@ namespace Runtime.Scripts.Interactables
 
                 hit.display?.TriggerHoverEffect();
                 sauerteig.GetGlowManager().Glow();
-                
+                hoveredInteractable = hit.interactable;
+
                 break;
             }
 
-            // Debug.Log("hovering interactable: " + hoveringInteractable);
-            
-            SetCursor(hoveringInteractable ? resizedHoverCursor : resizedStandardCursor);
+            if(hoveredInteractable != null)
+                cursorSetter.SetCursor(hoveredInteractable.Data.InteractionType);
         }
 
         private void HandleClickOnInteractables()
@@ -156,7 +130,7 @@ namespace Runtime.Scripts.Interactables
             if (logHits)
             {
                 Debug.Log("//////HITS///////////////////");
-            
+
                 foreach (var hit in hits)
                 {
                     Debug.Log(hit.target.name + ": " + hit.distance);
@@ -167,10 +141,10 @@ namespace Runtime.Scripts.Interactables
             {
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     return;
-                
+
                 if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
                     return;
-                    
+
                 if(hit.target.name == "Wall")
                     continue;
 
@@ -179,16 +153,16 @@ namespace Runtime.Scripts.Interactables
                     moveByClick.HandleMouseClick();
                     return;
                 }            
-                
+
                 if (hit.interactable == null)
                     continue;
-                
+
                 if (hit.interactable.Found)
                     continue;
-                
+
                 if(hit.isTrigger)
                     continue;
-                
+
                 if(hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
 
@@ -196,11 +170,11 @@ namespace Runtime.Scripts.Interactables
                 {
                     hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
                 }
-                
+
                 else if(hit.interactable.Data.AwarenessLevel != AwarenessLevel.NotSet && sauerteig.awarenessLevel >= hit.interactable.Data.AwarenessLevel)
                 {
                     hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
-                    
+
                     sauerteig.HandleInteractableDiscovered(hit.interactable.Data);
 
                     if(hit.interactable.MarkAsFoundWhenClicked)
@@ -229,7 +203,7 @@ namespace Runtime.Scripts.Interactables
             }
         }
 
-        private bool GetHitsFrom3DRaycast(List<RaycastInteractableHit> interactables)
+        private bool GetHitsFrom3DRaycast(List<Raycaster.RaycastInteractableHit> interactables)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             var layerMask = wallLayerMask | interactablesLayerMask | groundLayerMask;
@@ -239,12 +213,12 @@ namespace Runtime.Scripts.Interactables
                 var hitCollider = hit.collider;
                 var interactable = hitCollider.gameObject.GetComponentInChildren<Interactable>();
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hit.collider.gameObject));
+                interactables.Add(new Raycaster.RaycastInteractableHit(interactable, display, hit.distance, hit.collider.gameObject));
             }
             return interactables.Count > 0;
         }
 
-        private bool GetHitsFrom2DRaycast(List<RaycastInteractableHit> interactables)
+        private bool GetHitsFrom2DRaycast(List<Raycaster.RaycastInteractableHit> interactables)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             var hits = Physics2D.GetRayIntersectionAll(ray, Mathf.Infinity);
@@ -253,7 +227,7 @@ namespace Runtime.Scripts.Interactables
                 var hitCollider = hit.collider;
                 var interactable = hitCollider.gameObject.GetComponentInChildren<Interactable>();
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject, NameContainsTrigger(interactable?.gameObject)));
+                interactables.Add(new Raycaster.RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject, NameContainsTrigger(interactable?.gameObject)));
             }
             return interactables.Count > 0;
         }
@@ -263,13 +237,13 @@ namespace Runtime.Scripts.Interactables
             return interactableGameObject != null && interactableGameObject.name.ToLower().Contains("trigger");
         }
 
-        private List<RaycastInteractableHit> GetAllSortedRaycastHits()
+        private List<Raycaster.RaycastInteractableHit> GetAllSortedRaycastHits()
         {
-            var interactables3D = new List<RaycastInteractableHit>();
-            var interactables2D = new List<RaycastInteractableHit>();
+            var interactables3D = new List<Raycaster.RaycastInteractableHit>();
+            var interactables2D = new List<Raycaster.RaycastInteractableHit>();
             GetHitsFrom3DRaycast(interactables3D);
             GetHitsFrom2DRaycast(interactables2D);
-            var allInteractables = new List<RaycastInteractableHit>(interactables3D);
+            var allInteractables = new List<Raycaster.RaycastInteractableHit>(interactables3D);
             allInteractables.AddRange(interactables2D);
             allInteractables.Sort((a, b) => a.distance.CompareTo(b.distance));
             return allInteractables;
