@@ -22,6 +22,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private LayerMask groundLayerMask;
         [SerializeField] private MoveByClick moveByClick;
         [SerializeField] private CursorSetter cursorSetter;
+        [SerializeField] private InteractableDisplay currentlyHoveredInteractable;
         [SerializeField] private InteractableDisplay lastHoveredInteractable;
         
         private Camera cam;
@@ -110,18 +111,33 @@ namespace Runtime.Scripts.Interactables
                     continue;
 
                 if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
-                    continue;
+                {
+                    if (currentlyHoveredInteractable != hit.display)
+                    {
+                        currentlyHoveredInteractable?.HideStandardOutline();
+                        currentlyHoveredInteractable = hit.display;
+                        currentlyHoveredInteractable?.ShowStandardOutline();
+                        
+                        // lastHoveredInteractable = hit.display;
+                        // lastHoveredInteractable.ShowStandardOutline();
+                    }
+                    
+                }
 
 
                 // hit.display?.TriggerHoverEffect();
-                lastHoveredInteractable?.HideStandardOutline();
-                lastHoveredInteractable = hit.display;
-                lastHoveredInteractable.ShowStandardOutline();
+                
                 
                 sauerteig.GetGlowManager().Glow();
                 hoveredInteractable = hit.interactable;
 
                 break;
+            }
+            
+            if(!hoveringInteractable)
+            {
+                currentlyHoveredInteractable?.HideStandardOutline();
+                currentlyHoveredInteractable = null;
             }
             
             cursorSetter.SetCursor(hoveringInteractable);
