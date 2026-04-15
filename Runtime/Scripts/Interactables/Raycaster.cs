@@ -22,6 +22,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private LayerMask groundLayerMask;
         [SerializeField] private MoveByClick moveByClick;
         [SerializeField] private CursorSetter cursorSetter;
+        [SerializeField] private InteractableDisplay lastHoveredInteractable;
         
         private Camera cam;
         private bool clickedWall;
@@ -112,7 +113,11 @@ namespace Runtime.Scripts.Interactables
                     continue;
 
 
-                hit.display?.TriggerHoverEffect();
+                // hit.display?.TriggerHoverEffect();
+                lastHoveredInteractable?.HideStandardOutline();
+                lastHoveredInteractable = hit.display;
+                lastHoveredInteractable.ShowStandardOutline();
+                
                 sauerteig.GetGlowManager().Glow();
                 hoveredInteractable = hit.interactable;
 

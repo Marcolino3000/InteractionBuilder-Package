@@ -17,6 +17,8 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private float minOpacity = 0.2f;
         [SerializeField] private float maxOpacity = 0.7f;
         [SerializeField] private float cooldownBetweenHovers = 1f;
+        [SerializeField] private Color specialInteractablesColor;
+        [SerializeField] private Color standardInteractablesColor;
 
         [Header("References")]
         [SerializeField] private Interactable interactable;
@@ -26,13 +28,48 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private SpriteRenderer spriteRenderer;
         
         private float currentFadeTime;
+        private Color currentColor;
+        private bool showSpecialOutline;
 
-        public void TriggerHoverEffect()
+        public void ShowStandardOutline()
+        {
+            currentColor = standardInteractablesColor;
+            Show();
+        }
+
+        public void HideStandardOutline()
+        {
+            Hide();
+        }
+
+        public void ShowSpecialOutline()
+        {
+            currentColor = specialInteractablesColor;
+            showSpecialOutline = true;
+            StartCoroutine(TriggerSpecialOutline());
+        }
+
+        public void HideSpecialOutline()
+        {
+            showSpecialOutline = false;
+            StopAllCoroutines();
+        }
+
+        private IEnumerator TriggerSpecialOutline()
+        {
+            while (showSpecialOutline)
+            {
+                StartFadingOutlineInAndOut();
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        private void StartFadingOutlineInAndOut()
         {
             if (cooldownActive) 
                 return;
             
-            StartCoroutine(StartCooldownCoroutine());
+            // StartCoroutine(StartCooldownCoroutine());
             StartCoroutine(QuickFadeInAndOut());
         }
 
@@ -45,20 +82,23 @@ namespace Runtime.Scripts.Interactables
 
         private IEnumerator QuickFadeInAndOut()
         {
+            cooldownActive = true;
             yield return FadeOutline(true);
             yield return FadeOutline(false);
+            cooldownActive = false;
         }
 
         private IEnumerator FadeOutline(bool fadeIn)
         {
             Material outlineMaterial = spriteRenderer.material;
-            
+            outlineMaterial.SetColor(shaderColorPropertyRef, currentColor);
+
             while (currentFadeTime < fadeDuration)
             {
                 currentFadeTime += Time.deltaTime;
-                
-                currentOpacity = fadeIn ? 
-                    Mathf.Lerp(minOpacity, maxOpacity, currentFadeTime / fadeDuration) : 
+
+                currentOpacity = fadeIn ?
+                    Mathf.Lerp(minOpacity, maxOpacity, currentFadeTime / fadeDuration) :
                     Mathf.Lerp(maxOpacity, minOpacity, currentFadeTime / fadeDuration);
 
                 outlineMaterial.SetFloat(outlineAlphaRef, currentOpacity);
@@ -80,12 +120,12 @@ namespace Runtime.Scripts.Interactables
             StopAllCoroutines();
         }
 
-        public void Hide()
+        private void Hide()
         {
             StartCoroutine(FadeOutline(false));
         }
 
-        public void Show()
+        private void Show()
         {
             StartCoroutine(FadeOutline(true));
         }

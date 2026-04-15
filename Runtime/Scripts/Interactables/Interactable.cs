@@ -53,14 +53,15 @@ namespace Runtime.Scripts.Interactables
                 if(Data.AwarenessLevel <= sauerteig.awarenessLevel)
                 {
                     // _interactableDiscoveredCallback = sauerteig.HandleInteractableDiscovered;
-                    _interactableDisplay.TriggerHoverEffect();
+                    _interactableDisplay.ShowSpecialOutline();
                 }
             };
             
             _triggerArea.OnPlayerExited += () =>
             {
                 UnsubscribeFromPlayerInteraction();
-
+                _interactableDisplay.HideSpecialOutline();
+                
                 OnExitedTriggerArea?.Invoke(InteractionTriggerVia.ExitTrigger, Data);
             };
 
