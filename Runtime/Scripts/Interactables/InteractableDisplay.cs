@@ -13,10 +13,11 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private float currentOpacity;
         
         [Header("Settings")]
-        [SerializeField] private float fadeDuration = 0.5f;
-        [SerializeField] private float minOpacity = 0.2f;
+        [SerializeField] private float standardOutlineFadeDuration = 0.05f;
+        [SerializeField] private float minOpacity = 0;
         [SerializeField] private float maxOpacity = 0.7f;
-        [SerializeField] private float cooldownBetweenHovers = 1f;
+        [SerializeField] private float specialOutlineFadeDuration = 2;
+        [SerializeField] private float cooldownBetweenHovers = 1;
         [SerializeField] private Color specialInteractablesColor;
         [SerializeField] private Color standardInteractablesColor;
 
@@ -76,19 +77,19 @@ namespace Runtime.Scripts.Interactables
         private IEnumerator StartCooldownCoroutine()
         {
             cooldownActive = true;
-            yield return new WaitForSeconds(fadeDuration * 2 + cooldownBetweenHovers);
+            yield return new WaitForSeconds(standardOutlineFadeDuration * 2 + cooldownBetweenHovers);
             cooldownActive = false;
         }
 
         private IEnumerator QuickFadeInAndOut()
         {
             cooldownActive = true;
-            yield return FadeOutline(true);
-            yield return FadeOutline(false);
+            yield return FadeOutline(true, specialOutlineFadeDuration);
+            yield return FadeOutline(false, specialOutlineFadeDuration);
             cooldownActive = false;
         }
 
-        private IEnumerator FadeOutline(bool fadeIn)
+        private IEnumerator FadeOutline(bool fadeIn, float fadeDuration)
         {
             Material outlineMaterial = spriteRenderer.material;
             outlineMaterial.SetColor(shaderColorPropertyRef, currentColor);
@@ -122,12 +123,12 @@ namespace Runtime.Scripts.Interactables
 
         private void Hide()
         {
-            StartCoroutine(FadeOutline(false));
+            StartCoroutine(FadeOutline(false, standardOutlineFadeDuration));
         }
 
         private void Show()
         {
-            StartCoroutine(FadeOutline(true));
+            StartCoroutine(FadeOutline(true, standardOutlineFadeDuration));
         }
     }
 }
