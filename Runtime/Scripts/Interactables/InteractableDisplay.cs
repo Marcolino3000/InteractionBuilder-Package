@@ -35,19 +35,32 @@ namespace Runtime.Scripts.Interactables
         public void ShowStandardOutline()
         {
             currentColor = standardInteractablesColor;
-            Show();
+            Show(standardOutlineFadeDuration);
         }
 
         public void HideStandardOutline()
         {
-            Hide();
+            Hide(standardOutlineFadeDuration);
         }
 
-        public void ShowSpecialOutline()
+        public void ShowPulsatingSpecialOutline()
         {
             currentColor = specialInteractablesColor;
             showSpecialOutline = true;
             StartCoroutine(TriggerSpecialOutline());
+        }
+        
+        public void ShowStaticSpecialOutline()
+        {
+            currentColor = specialInteractablesColor;
+            showSpecialOutline = true;
+            Show(specialOutlineFadeDuration);
+        }
+        
+        public void HideStaticSpecialOutline()
+        {
+            showSpecialOutline = false;
+            Hide(specialOutlineFadeDuration);
         }
 
         public void HideSpecialOutline()
@@ -121,14 +134,14 @@ namespace Runtime.Scripts.Interactables
             StopAllCoroutines();
         }
 
-        private void Hide()
+        private void Hide(float duration)
         {
-            StartCoroutine(FadeOutline(false, standardOutlineFadeDuration));
+            StartCoroutine(FadeOutline(false, duration));
         }
 
-        private void Show()
+        private void Show(float duration)
         {
-            StartCoroutine(FadeOutline(true, standardOutlineFadeDuration));
+            StartCoroutine(FadeOutline(true, duration));
         }
     }
 }

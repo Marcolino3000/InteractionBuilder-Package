@@ -111,18 +111,10 @@ namespace Runtime.Scripts.Interactables
                     continue;
 
                 if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
-                {
-                    if (currentlyHoveredInteractable != hit.display)
-                    {
-                        currentlyHoveredInteractable?.HideStandardOutline();
-                        currentlyHoveredInteractable = hit.display;
-                        currentlyHoveredInteractable?.ShowStandardOutline();
-                        
-                        // lastHoveredInteractable = hit.display;
-                        // lastHoveredInteractable.ShowStandardOutline();
-                    }
-                    
-                }
+                    ShowStandardOutline(hit);
+                
+                if (hit.interactable.Data.AwarenessLevel >= AwarenessLevel.NotSet)
+                    ShowSpecialOutline(hit);
 
 
                 // hit.display?.TriggerHoverEffect();
@@ -144,6 +136,26 @@ namespace Runtime.Scripts.Interactables
 
             // if(hoveredInteractable != null)
             //     cursorSetter.SetCursor(hoveredInteractable.Data.InteractionType);
+        }
+
+        private void ShowSpecialOutline(RaycastInteractableHit hit)
+        {
+            if (currentlyHoveredInteractable == hit.display) 
+                return;
+            
+            currentlyHoveredInteractable?.HideStaticSpecialOutline();
+            currentlyHoveredInteractable = hit.display;
+            currentlyHoveredInteractable?.ShowStaticSpecialOutline();
+        }
+
+        private void ShowStandardOutline(RaycastInteractableHit hit)
+        {
+            if (currentlyHoveredInteractable == hit.display) 
+                return;
+            
+            currentlyHoveredInteractable?.HideStandardOutline();
+            currentlyHoveredInteractable = hit.display;
+            currentlyHoveredInteractable?.ShowStandardOutline();
         }
 
         private void HandleClickOnInteractables()
