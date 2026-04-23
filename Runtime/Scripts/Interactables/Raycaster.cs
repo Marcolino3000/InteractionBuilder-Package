@@ -120,7 +120,7 @@ namespace Runtime.Scripts.Interactables
                 // hit.display?.TriggerHoverEffect();
                 
                 
-                sauerteig.GetGlowManager().Glow();
+                // sauerteig.GetGlowManager().Glow();
                 hoveredInteractable = hit.interactable;
 
                 break;
@@ -138,24 +138,32 @@ namespace Runtime.Scripts.Interactables
             //     cursorSetter.SetCursor(hoveredInteractable.Data.InteractionType);
         }
 
-        private void ShowSpecialOutline(RaycastInteractableHit hit)
-        {
-            if (currentlyHoveredInteractable == hit.display) 
-                return;
-            
-            currentlyHoveredInteractable?.HideStaticSpecialOutline();
-            currentlyHoveredInteractable = hit.display;
-            currentlyHoveredInteractable?.ShowStaticSpecialOutline();
-        }
-
         private void ShowStandardOutline(RaycastInteractableHit hit)
         {
             if (currentlyHoveredInteractable == hit.display) 
                 return;
             
             currentlyHoveredInteractable?.HideStandardOutline();
+            
             currentlyHoveredInteractable = hit.display;
+            
             currentlyHoveredInteractable?.ShowStandardOutline();
+        }
+
+        private void ShowSpecialOutline(RaycastInteractableHit hit)
+        {
+            if (currentlyHoveredInteractable == hit.display) 
+                return;
+            
+            currentlyHoveredInteractable?.HideStaticSpecialOutline();
+            sauerteig.GetGlowManager().HideStaticGlow();
+            
+            currentlyHoveredInteractable = hit.display;
+            
+            currentlyHoveredInteractable?.ShowStaticSpecialOutline();
+            
+            if(currentlyHoveredInteractable != null)
+                sauerteig.GetGlowManager().ShowStaticGlow();
         }
 
         private void HandleClickOnInteractables()

@@ -14,6 +14,16 @@ namespace Runtime.Scripts.Interactables
         
         [SerializeField] private Image glowImage;
 
+        public void ShowStaticGlow()
+        {
+            StartCoroutine(LerpOpacity(true, Duration));
+        }
+        
+        public void HideStaticGlow()
+        {
+            StartCoroutine(LerpOpacity(false, Duration));
+        }
+        
         public void Glow()
         {
             if(cooldownActive || !activateGlow)
