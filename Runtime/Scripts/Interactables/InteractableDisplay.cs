@@ -43,24 +43,22 @@ namespace Runtime.Scripts.Interactables
             Hide(standardOutlineFadeDuration);
         }
 
-        public void ShowPulsatingSpecialOutline()
-        {
-            currentColor = specialInteractablesColor;
-            showSpecialOutline = true;
-            StartCoroutine(TriggerSpecialOutline());
-        }
-        
         public void ShowStaticSpecialOutline()
         {
             currentColor = specialInteractablesColor;
-            // showSpecialOutline = true;
             Show(specialOutlineFadeDuration);
         }
         
         public void HideStaticSpecialOutline()
         {
-            // showSpecialOutline = false;
             Hide(specialOutlineFadeDuration);
+        }
+
+        public void ShowPulsatingSpecialOutline()
+        {
+            currentColor = specialInteractablesColor;
+            showSpecialOutline = true;
+            StartCoroutine(TriggerSpecialOutline());
         }
 
         public void HideSpecialOutline()
@@ -115,8 +113,9 @@ namespace Runtime.Scripts.Interactables
                     Mathf.Lerp(minOpacity, maxOpacity, currentFadeTime / fadeDuration) :
                     Mathf.Lerp(maxOpacity, minOpacity, currentFadeTime / fadeDuration);
 
-                outlineMaterial.SetFloat(outlineAlphaRef, currentOpacity);
-
+                Color newcolor = new Color(currentColor.r, currentColor.g, currentColor.b, currentOpacity);
+                outlineMaterial.SetColor(shaderColorPropertyRef, newcolor);
+                
                 yield return null;
             }
 
