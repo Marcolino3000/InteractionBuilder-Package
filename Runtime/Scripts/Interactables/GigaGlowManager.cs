@@ -13,15 +13,23 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private float cooldownBetweenGlows;
         
         [SerializeField] private Image glowImage;
+        
+        private Coroutine currentShowGlowRoutine;
+        private Coroutine currentHideGlowRoutine;
 
         public void ShowStaticGlow()
         {
-            StartCoroutine(LerpOpacity(true, Duration));
+            if(currentShowGlowRoutine == null)
+                currentShowGlowRoutine = StartCoroutine(LerpOpacity(true, Duration));
         }
         
         public void HideStaticGlow()
         {
-            StartCoroutine(LerpOpacity(false, Duration));
+            if(currentHideGlowRoutine == null)
+            {
+                StopAllCoroutines();
+                currentHideGlowRoutine = StartCoroutine(LerpOpacity(false, Duration));
+            }
         }
         
         public void Glow()
@@ -63,7 +71,7 @@ namespace Runtime.Scripts.Interactables
                 var color = glowImage.color;
                 
                 if (lerpIn)
-                    color.a = Mathf.Lerp(0, maxOpacity, elapsed / duration);
+                    color.a = Mathf.Lerp(0f, maxOpacity, elapsed / duration);
                 else
                     color.a = Mathf.Lerp(maxOpacity, 0f, elapsed / duration);
                 

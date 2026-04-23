@@ -129,6 +129,8 @@ namespace Runtime.Scripts.Interactables
             if(!hoveringInteractable)
             {
                 currentlyHoveredInteractable?.HideStandardOutline();
+                currentlyHoveredInteractable?.HideStaticSpecialOutline();
+                sauerteig.GetGlowManager().HideStaticGlow();
                 currentlyHoveredInteractable = null;
             }
             

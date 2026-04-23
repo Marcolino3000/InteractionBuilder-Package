@@ -54,13 +54,13 @@ namespace Runtime.Scripts.Interactables
         {
             currentColor = specialInteractablesColor;
             // showSpecialOutline = true;
-            Show(standardOutlineFadeDuration);
+            Show(specialOutlineFadeDuration);
         }
         
         public void HideStaticSpecialOutline()
         {
             // showSpecialOutline = false;
-            Hide(standardOutlineFadeDuration);
+            Hide(specialOutlineFadeDuration);
         }
 
         public void HideSpecialOutline()
