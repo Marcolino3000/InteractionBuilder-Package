@@ -113,7 +113,7 @@ namespace Runtime.Scripts.Interactables
                 if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     ShowStandardOutline(hit);
                 
-                if (hit.interactable.Data.AwarenessLevel >= AwarenessLevel.NotSet)
+                if (hit.interactable.Data.AwarenessLevel >= AwarenessLevel.Basic)
                     ShowSpecialOutline(hit);
 
 
@@ -130,7 +130,7 @@ namespace Runtime.Scripts.Interactables
             {
                 currentlyHoveredInteractable?.HideStandardOutline();
                 currentlyHoveredInteractable?.HideStaticSpecialOutline();
-                sauerteig.GetGlowManager().HideStaticGlow();
+                // sauerteig.GetGlowManager().HideStaticGlow();
                 currentlyHoveredInteractable = null;
             }
             
