@@ -10,13 +10,17 @@ namespace Runtime.Scripts.Core
     {
         public static event Action<bool> OnSequenceRunningChanged; 
         
-        [SerializeField] private bool isSequenceRunning;
-        [SerializeField] private PlayerController playerController;
-        [SerializeField] private BoxCollider boxCollider;
-        [SerializeField] private List<Waypoint> Waypoints;
+        [Header("Settings")]
         [SerializeField] private float moveSpeed = 1f;
         [SerializeField] private float waypointThreshold = 0.2f;
-
+        [SerializeField] private bool disableColliderDuringSequence;
+        [SerializeField] private BoxCollider boxCollider;
+        
+        [Header("Debug")]
+        [SerializeField] private bool isSequenceRunning;
+        [SerializeField] private PlayerController playerController;
+        [SerializeField] private List<Waypoint> Waypoints;
+        
         private Coroutine moveCoroutine;
         private List<Reaction> allReactions;
         private Action ReactionFinishedCallback;
@@ -49,7 +53,7 @@ namespace Runtime.Scripts.Core
             isSequenceRunning = true;
             OnSequenceRunningChanged?.Invoke(isSequenceRunning);
             
-            if (boxCollider != null)
+            if (boxCollider != null && disableColliderDuringSequence)
                 boxCollider.enabled = false;
             
             if (Waypoints == null || Waypoints == null || Waypoints.Count == 0)
@@ -81,7 +85,7 @@ namespace Runtime.Scripts.Core
                 currentWaypointIndex++;
             }
             
-            if (boxCollider != null)
+            if (boxCollider != null && disableColliderDuringSequence)
                 boxCollider.enabled = true;
             
             ReactionFinishedCallback?.Invoke();
