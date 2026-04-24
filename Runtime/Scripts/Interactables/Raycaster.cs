@@ -27,6 +27,7 @@ namespace Runtime.Scripts.Interactables
         
         private Camera cam;
         private bool clickedWall;
+        private bool stoppedHoveringInteractableLastFrame;
 
         private void OnEnable()
         {
@@ -103,6 +104,8 @@ namespace Runtime.Scripts.Interactables
                     continue;
 
                 hoveringInteractable = true;
+                stoppedHoveringInteractableLastFrame = true;
+                hoveredInteractable = hit.interactable;
 
                 if(sauerteig == null)
                     Debug.LogWarning("sauerteig is null");
@@ -128,10 +131,15 @@ namespace Runtime.Scripts.Interactables
             
             if(!hoveringInteractable)
             {
-                currentlyHoveredInteractable?.HideStandardOutline();
-                currentlyHoveredInteractable?.HideStaticSpecialOutline();
-                sauerteig.GetGlowManager().HideStaticGlow();
-                currentlyHoveredInteractable = null;
+                if(stoppedHoveringInteractableLastFrame)
+                {
+                    stoppedHoveringInteractableLastFrame = false;
+                    currentlyHoveredInteractable?.HideStandardOutline();
+                    currentlyHoveredInteractable?.HideStaticSpecialOutline();
+                    sauerteig.GetGlowManager().HideStaticGlow();
+
+                    currentlyHoveredInteractable = null;
+                }
             }
             
             cursorSetter.SetCursor(hoveringInteractable);

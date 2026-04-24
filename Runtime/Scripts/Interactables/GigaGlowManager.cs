@@ -16,6 +16,7 @@ namespace Runtime.Scripts.Interactables
         
         private Coroutine currentShowGlowRoutine;
         private Coroutine currentHideGlowRoutine;
+        private bool isGlowing;
 
         public void ShowStaticGlow()
         {
@@ -25,6 +26,9 @@ namespace Runtime.Scripts.Interactables
         
         public void HideStaticGlow()
         {
+            if (!isGlowing)
+                return;
+            
             StopAllCoroutines();
             StartCoroutine(LerpOpacity(false, Duration));
         }
@@ -59,6 +63,7 @@ namespace Runtime.Scripts.Interactables
 
         private IEnumerator LerpOpacity(bool lerpIn, float duration)
         {
+            isGlowing = lerpIn;
             var elapsed = 0f;
 
             while (elapsed < duration)
