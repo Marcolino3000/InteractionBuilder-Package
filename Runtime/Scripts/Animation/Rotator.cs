@@ -6,9 +6,13 @@ namespace Runtime.Scripts.Animation
 {
     public class Rotator : MonoBehaviour
     {
-        [SerializeField] private Transform pivot;
+        [Header("Settings")]
+        [SerializeField] private bool disableColliderWhileRotating;
         [SerializeField] private float duration;
         [SerializeField] private float angle;
+        
+        [Header("References")]
+        [SerializeField] private Transform pivot;
         [SerializeField] private Interactable interactable;
         [SerializeField] private BoxCollider _collider;
         [SerializeField] private AudioSource audioSource;
@@ -42,7 +46,7 @@ namespace Runtime.Scripts.Animation
         {
             _isRunning = true;
             
-            if(_collider != null)
+            if(_collider != null && disableColliderWhileRotating)
                 _collider.enabled = false;
             
             while (_progress < 1f)
@@ -63,7 +67,7 @@ namespace Runtime.Scripts.Animation
             isOpen = !isOpen;
             _isRunning = false;
             
-            if(_collider != null)
+            if(_collider != null && disableColliderWhileRotating)
                 _collider.enabled = true;
         }
         
