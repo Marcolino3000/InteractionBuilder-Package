@@ -19,17 +19,15 @@ namespace Runtime.Scripts.Interactables
 
         public void ShowStaticGlow()
         {
-            if(currentShowGlowRoutine == null)
-                currentShowGlowRoutine = StartCoroutine(LerpOpacity(true, Duration));
+            StopAllCoroutines();
+            StartCoroutine(LerpOpacity(true, Duration));
         }
         
         public void HideStaticGlow()
         {
-            if(currentHideGlowRoutine == null)
-            {
-                StopAllCoroutines();
-                currentHideGlowRoutine = StartCoroutine(LerpOpacity(false, Duration));
-            }
+            
+            StopAllCoroutines();
+            StartCoroutine(LerpOpacity(false, Duration));
         }
         
         public void Glow()
