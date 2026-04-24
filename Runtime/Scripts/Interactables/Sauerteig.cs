@@ -47,8 +47,8 @@ namespace Runtime.Scripts.Interactables
 
             if (!IsUnlocked) return;
             
-            glowManager.Glow();
-            wackler.Wiggle(interactable);
+            // glowManager.Glow();
+            // wackler.Wiggle(interactable);
         }
 
         private void HandleDialogNodeSelected(DialogOptionNode node)

@@ -25,7 +25,6 @@ namespace Runtime.Scripts.Interactables
         
         public void HideStaticGlow()
         {
-            
             StopAllCoroutines();
             StartCoroutine(LerpOpacity(false, Duration));
         }
