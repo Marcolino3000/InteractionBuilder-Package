@@ -34,23 +34,27 @@ namespace Runtime.Scripts.Interactables
 
         public void ShowStandardOutline()
         {
+            StopAllCoroutines();
             currentColor = standardInteractablesColor;
             Show(standardOutlineFadeDuration);
         }
 
         public void HideStandardOutline()
         {
+            StopAllCoroutines();
             Hide(standardOutlineFadeDuration);
         }
 
         public void ShowStaticSpecialOutline()
         {
+            StopAllCoroutines();
             currentColor = specialInteractablesColor;
             Show(specialOutlineFadeDuration);
         }
         
         public void HideStaticSpecialOutline()
         {
+            StopAllCoroutines();
             Hide(specialOutlineFadeDuration);
         }
 
@@ -61,7 +65,7 @@ namespace Runtime.Scripts.Interactables
             StartCoroutine(TriggerSpecialOutline());
         }
 
-        public void HideSpecialOutline()
+        private void HideSpecialOutline()
         {
             showSpecialOutline = false;
             StopAllCoroutines();
@@ -102,6 +106,9 @@ namespace Runtime.Scripts.Interactables
 
         private IEnumerator FadeOutline(bool fadeIn, float fadeDuration)
         {
+            if (spriteRenderer == null)
+                yield break;
+            
             Material outlineMaterial = spriteRenderer.material;
             outlineMaterial.SetColor(shaderColorPropertyRef, currentColor);
 

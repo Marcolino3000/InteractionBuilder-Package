@@ -60,7 +60,7 @@ namespace Runtime.Scripts.Interactables
             _triggerArea.OnPlayerExited += () =>
             {
                 UnsubscribeFromPlayerInteraction();
-                _interactableDisplay.HideSpecialOutline();
+                // _interactableDisplay.HideSpecialOutline();
                 
                 OnExitedTriggerArea?.Invoke(InteractionTriggerVia.ExitTrigger, Data);
             };
