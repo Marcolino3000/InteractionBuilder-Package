@@ -130,7 +130,7 @@ namespace Runtime.Scripts.Interactables
             {
                 currentlyHoveredInteractable?.HideStandardOutline();
                 currentlyHoveredInteractable?.HideStaticSpecialOutline();
-                // sauerteig.GetGlowManager().HideStaticGlow();
+                sauerteig.GetGlowManager().HideStaticGlow();
                 currentlyHoveredInteractable = null;
             }
             
