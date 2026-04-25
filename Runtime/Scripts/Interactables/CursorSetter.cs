@@ -82,10 +82,9 @@ namespace Runtime.Scripts.Interactables
     
     public enum InteractionType
     {
-        None,
         Move,
-        GoThroughDoor,
         Inspect,
+        GoThroughDoor,
         Use
     }
 }

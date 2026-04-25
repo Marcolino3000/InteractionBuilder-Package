@@ -8,29 +8,29 @@ namespace Editor
     {
         private bool showStaticData = true;
         private SerializedProperty spriteProp;
-        // private SerializedProperty locationOnMapProp;
         private SerializedProperty discoveryTypeProp;
+        private SerializedProperty interactionType;
 
         protected override void OnEnable()
         {
             base.OnEnable();
             
             spriteProp = serializedObject.FindProperty("Sprite");
-            // locationOnMapProp = serializedObject.FindProperty("LocationOnMap");
             discoveryTypeProp = serializedObject.FindProperty("AwarenessLevel");
+            interactionType = serializedObject.FindProperty("InteractionType");
         }
 
         public override void OnInspectorGUI()
         {
-           base.OnInspectorGUI();
+            base.OnInspectorGUI();
            
             showStaticData = EditorGUILayout.Foldout(showStaticData, "Static Data");
             
             if (showStaticData)
             {
                 EditorGUILayout.PropertyField(spriteProp);
-                // EditorGUILayout.PropertyField(locationOnMapProp);
                 EditorGUILayout.PropertyField(discoveryTypeProp);
+                EditorGUILayout.PropertyField(interactionType);
             }
         
             serializedObject.ApplyModifiedProperties();
