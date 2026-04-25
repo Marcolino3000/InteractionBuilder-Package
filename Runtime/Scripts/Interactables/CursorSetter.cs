@@ -5,22 +5,26 @@ namespace Runtime.Scripts.Interactables
 {
     public class CursorSetter : MonoBehaviour
     {
-        [SerializeField] private Texture2D standardCursor;
-        [SerializeField] private Texture2D hoverInteractableCursor;
+        [Header("Settings")]
         [SerializeField] private int standardCursorSize = 24;
         [SerializeField] private int interactionCursorSize = 48;
-
-        [SerializeField] private Texture2D inspectorCursor;
+        
+        [Header("References")]
+        [SerializeField] private Texture2D standardCursor;
+        [SerializeField] private Texture2D handCursor;
+        [SerializeField] private Texture2D inspectCursor;
+        [SerializeField] private Texture2D moveCursor;
+        [SerializeField] private Texture2D goThroughDoorCursor;
         
         private Texture2D resizedStandardCursor;
-        private Texture2D resizedHoverCursor;
+        private Texture2D resizedHandCursor;
 
         #region Setup
 
         public void Initialize()
         {
             resizedStandardCursor = ResizeCursor(standardCursor, standardCursorSize);
-            resizedHoverCursor = ResizeCursor(hoverInteractableCursor, interactionCursorSize);
+            resizedHandCursor = ResizeCursor(handCursor, interactionCursorSize);
             SetStandardCursor();
         }
 
@@ -35,21 +39,30 @@ namespace Runtime.Scripts.Interactables
 
         public void SetCursor(InteractionType interactionType)
         {
-            // SetCursorByType(interactionType);
-            SetCursor(resizedHoverCursor);
+            SetCursorByType(interactionType);
+            // SetCursor(resizedHandCursor);
         }
 
         private void SetCursorByType(InteractionType type)
         {
             switch (type)
             {
+                case InteractionType.None:
+                    SetCursor(resizedStandardCursor);
+                    break;
+                case InteractionType.Move:
+                    SetCursor(moveCursor);
+                    break;
                 case InteractionType.Inspect:
-                    SetCursor(inspectorCursor);
+                    SetCursor(inspectCursor);
+                    break;
+                case InteractionType.GoThroughDoor:
+                    SetCursor(goThroughDoorCursor);
                     break;
             }
         }
 
-        public void SetCursor(Texture2D texture)
+        private void SetCursor(Texture2D texture)
         {
             Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
         }
@@ -73,18 +86,18 @@ namespace Runtime.Scripts.Interactables
 
         #endregion
 
-        public void SetCursor(bool hoveringInteractable)
+        public void SetCursor(bool hoveringInteractable, InteractionType interactionType)
         {
-            SetCursor(hoveringInteractable ? resizedHoverCursor : resizedStandardCursor);
+            SetCursor(hoveringInteractable ? resizedHandCursor : resizedStandardCursor);
         }
     }
     
     
     public enum InteractionType
     {
+        None,
         Move,
         Inspect,
-        GoThroughDoor,
-        Use
+        GoThroughDoor
     }
 }

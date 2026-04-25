@@ -80,6 +80,7 @@ namespace Runtime.Scripts.Interactables
             var hits = GetAllSortedRaycastHits();
             bool hoveringInteractable = false;
             Interactable hoveredInteractable = null;
+            var interactionType = InteractionType.None;
             
             foreach (var hit in hits)
             {
@@ -96,6 +97,12 @@ namespace Runtime.Scripts.Interactables
 
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     return;
+                
+                if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
+                {
+                    interactionType = InteractionType.Move;
+                    return;
+                }         
 
                 if (hit.isTrigger)
                     continue;
@@ -105,6 +112,7 @@ namespace Runtime.Scripts.Interactables
 
                 hoveringInteractable = true;
                 stoppedHoveringInteractableLastFrame = true;
+                interactionType = hit.interactable.Data.InteractionType;
                 hoveredInteractable = hit.interactable;
 
                 if(sauerteig == null)
@@ -142,7 +150,7 @@ namespace Runtime.Scripts.Interactables
                 }
             }
             
-            cursorSetter.SetCursor(hoveringInteractable);
+            cursorSetter.SetCursor(interactionType);
 
             // if(hoveredInteractable != null)
             //     cursorSetter.SetCursor(hoveredInteractable.Data.InteractionType);
