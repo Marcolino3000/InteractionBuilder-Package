@@ -147,6 +147,8 @@ namespace Runtime.Scripts.Interactables
             if(!IsUnlocked)
                 return;
             
+            wackler.Wiggle(interactable.Interactable);
+            
             switch (interactable.AwarenessLevel)
             {
                 case AwarenessLevel.Basic:

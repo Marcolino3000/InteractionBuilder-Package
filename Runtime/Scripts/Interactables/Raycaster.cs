@@ -8,7 +8,8 @@ namespace Runtime.Scripts.Interactables
 {
     public class Raycaster : MonoBehaviour
     {
-        public event Action OnCancelShowInteractable; 
+        public event Action OnCancelShowInteractable;
+        public event Action OnClick;
         
         public bool isDialogRunning;
         public bool isShowingInteractable;
@@ -101,7 +102,6 @@ namespace Runtime.Scripts.Interactables
                 if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
                 {
                     interactionType = InteractionType.Move;
-                    return;
                 }         
 
                 if (hit.isTrigger)
@@ -198,6 +198,8 @@ namespace Runtime.Scripts.Interactables
                 }
             }
 
+            OnClick?.Invoke();
+            
             foreach (var hit in hits)
             {
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
