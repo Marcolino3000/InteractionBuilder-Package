@@ -91,6 +91,11 @@ namespace Runtime.Scripts.Interactables
                 if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
                     break;
 
+                if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
+                {
+                    interactionType = InteractionType.Move;
+                }
+
                 if (hit.interactable == null)
                 {
                     continue;
@@ -98,11 +103,6 @@ namespace Runtime.Scripts.Interactables
 
                 if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     return;
-                
-                if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
-                {
-                    interactionType = InteractionType.Move;
-                }         
 
                 if (hit.isTrigger)
                     continue;

@@ -26,6 +26,10 @@ namespace Runtime.Scripts.Interactables
             resizedStandardCursor = ResizeCursor(standardCursor, standardCursorSize);
             resizedHandCursor = ResizeCursor(handCursor, interactionCursorSize);
             SetStandardCursor();
+
+            moveCursor = ResizeCursor(moveCursor, standardCursorSize);
+            inspectCursor = ResizeCursor(inspectCursor, standardCursorSize);
+            goThroughDoorCursor = ResizeCursor(goThroughDoorCursor, standardCursorSize);
         }
 
         #endregion
