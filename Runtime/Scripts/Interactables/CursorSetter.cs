@@ -18,6 +18,10 @@ namespace Runtime.Scripts.Interactables
         
         private Texture2D resizedStandardCursor;
         private Texture2D resizedHandCursor;
+        
+        private Texture2D resizedMoveCursor;
+        private Texture2D resizedInspectCursor;
+        private Texture2D resizedGoThroughDoorCursor;
 
         #region Setup
 
@@ -27,9 +31,9 @@ namespace Runtime.Scripts.Interactables
             resizedHandCursor = ResizeCursor(handCursor, interactionCursorSize);
             SetStandardCursor();
 
-            moveCursor = ResizeCursor(moveCursor, standardCursorSize);
-            inspectCursor = ResizeCursor(inspectCursor, standardCursorSize);
-            goThroughDoorCursor = ResizeCursor(goThroughDoorCursor, standardCursorSize);
+            resizedMoveCursor = ResizeCursor(moveCursor, standardCursorSize);
+            resizedInspectCursor = ResizeCursor(inspectCursor, standardCursorSize);
+            resizedGoThroughDoorCursor = ResizeCursor(goThroughDoorCursor, standardCursorSize);
         }
 
         #endregion
@@ -55,20 +59,23 @@ namespace Runtime.Scripts.Interactables
                     SetCursor(resizedStandardCursor);
                     break;
                 case InteractionType.Move:
-                    SetCursor(moveCursor);
+                    SetCursor(resizedMoveCursor);
                     break;
                 case InteractionType.Inspect:
-                    SetCursor(inspectCursor);
+                    SetCursor(resizedInspectCursor);
                     break;
                 case InteractionType.GoThroughDoor:
-                    SetCursor(goThroughDoorCursor);
+                    SetCursor(resizedGoThroughDoorCursor);
                     break;
             }
         }
 
         private void SetCursor(Texture2D texture)
         {
-            Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
+            // Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
+            
+            Vector2 hotspot = new Vector2(texture.width / 2f, texture.height / 2f);
+            Cursor.SetCursor(texture, hotspot, CursorMode.Auto);
         }
 
         private Texture2D ResizeCursor(Texture2D original, int size)
