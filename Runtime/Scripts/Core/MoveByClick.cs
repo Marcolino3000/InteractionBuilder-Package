@@ -1,3 +1,4 @@
+using System;
 using Runtime.Scripts.PlayerInput;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,10 +7,13 @@ namespace Runtime.Scripts.Core
 {
     public class MoveByClick : MonoBehaviour
     {
-        [Header("Settings")] 
+        public event Action<MoveDirection> OnNavMeshMovementStarted;
+        public event Action OnNavMeshMovementEnded;
+
+        [Header("Settings")]
         [SerializeField] private bool useNavMeshMovement;
         [SerializeField] private float verticalPositionOffset;
-        
+
         [Header("References")]
         [SerializeField] private PlayerController playerController;
         [SerializeField] private NavMeshAgent navMeshAgent;
@@ -17,11 +21,42 @@ namespace Runtime.Scripts.Core
 
         private Camera cam;
         private Vector3 targetPosition;
-        private bool isMoving = false;
+        private bool isMoving;
+        private MoveDirection lastMoveDirection;
 
         private void Start()
         {
             cam = Camera.main;
+        }
+
+        private void Update()
+        {
+            if (useNavMeshMovement && navMeshAgent != null)
+            {
+                CheckNavMeshMovementState();
+            }
+        }
+
+        private void CheckNavMeshMovementState()
+        {
+            bool wasMoving = isMoving;
+
+            isMoving = !navMeshAgent.isStopped;
+
+            if (isMoving)
+            {
+                MoveDirection currentDirection = navMeshAgent.velocity.x < 0 ? MoveDirection.Left : MoveDirection.Right;
+
+                if (!wasMoving || currentDirection != lastMoveDirection)
+                {
+                    OnNavMeshMovementStarted?.Invoke(currentDirection);
+                    lastMoveDirection = currentDirection;
+                }
+            }
+            else if (wasMoving && !isMoving)
+            {
+                OnNavMeshMovementEnded?.Invoke();
+            }
         }
 
         public void HandleMouseClick()
@@ -30,8 +65,8 @@ namespace Runtime.Scripts.Core
                 return;
 
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            
-            if(useNavMeshMovement) 
+
+            if(useNavMeshMovement)
                 MoveByNavMesh(ray);
             else
                 MoveUsingPlayerController(ray);
