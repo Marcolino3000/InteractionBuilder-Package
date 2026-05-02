@@ -34,7 +34,7 @@ namespace Runtime.Scripts.Interactables
         {
             cam = Camera.main;
             
-            cursorSetter.Initialize();
+            // cursorSetter.Initialize();
             
             DialogTreeRunner.OnDialogRunningStatusChanged += (isRunning, tree) =>
             {

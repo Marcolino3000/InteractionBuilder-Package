@@ -1,3 +1,4 @@
+using System;
 using Runtime.Scripts.Core;
 using UnityEngine;
 
@@ -25,15 +26,22 @@ namespace Runtime.Scripts.Interactables
 
         #region Setup
 
-        public void Initialize()
+        private void Awake()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
         {
             resizedStandardCursor = ResizeCursor(standardCursor, standardCursorSize);
             resizedHandCursor = ResizeCursor(handCursor, interactionCursorSize);
-            SetStandardCursor();
-
-            resizedMoveCursor = ResizeCursor(moveCursor, standardCursorSize);
+			resizedMoveCursor = ResizeCursor(moveCursor, standardCursorSize);
             resizedInspectCursor = ResizeCursor(inspectCursor, standardCursorSize);
-            resizedGoThroughDoorCursor = ResizeCursor(goThroughDoorCursor, standardCursorSize);
+            resizedGoThroughDoorCursor = ResizeCursor(goThroughDoorCursor, standardCursorSize);            
+
+			SetStandardCursor();
+
+            
         }
 
         #endregion
