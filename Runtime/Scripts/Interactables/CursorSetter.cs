@@ -82,7 +82,7 @@ namespace Runtime.Scripts.Interactables
         {
             // Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
             
-            Vector2 hotspot = new Vector2(texture.width / 2f, texture.height / 2f);
+            Vector2 hotspot = new Vector2(texture.width / 4f, texture.height / 4f);
             Cursor.SetCursor(texture, hotspot, CursorMode.Auto);
         }
 
