@@ -39,26 +39,28 @@ namespace Runtime.Scripts.Core
 
         private void CheckNavMeshMovementState()
         {
-            bool wasMoving = isMoving;
+            // Check if the agent is calculating a path or hasn't reached its destination yet
+            bool isCurrentlyMoving = navMeshAgent.pathPending || 
+                                     navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance;
 
-            isMoving = !navMeshAgent.isStopped;
-
-            if (isMoving)
+            if (isCurrentlyMoving)
             {
-                MoveDirection currentDirection = navMeshAgent.velocity.x < 0 ? MoveDirection.Left : MoveDirection.Right;
+                float deltaX = navMeshAgent.destination.x - transform.position.x;
+                MoveDirection currentDirection = deltaX > 0 ? MoveDirection.Right : MoveDirection.Left;
 
-                if (!wasMoving || currentDirection != lastMoveDirection)
+                if (!isMoving || currentDirection != lastMoveDirection)
                 {
-                    OnNavMeshMovementStarted?.Invoke(currentDirection);
+                    isMoving = true;
                     lastMoveDirection = currentDirection;
+                    OnNavMeshMovementStarted?.Invoke(lastMoveDirection);
                 }
             }
-            else if (wasMoving && !isMoving)
+            else if (!isCurrentlyMoving && isMoving)
             {
+                isMoving = false;
                 OnNavMeshMovementEnded?.Invoke();
             }
         }
-
         public void HandleMouseClick()
         {
             if (playerController == null || cam == null)
@@ -85,7 +87,8 @@ namespace Runtime.Scripts.Core
         {
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
             {
-                navMeshAgent.SetDestination(hit.point);
+                targetPosition = hit.point;
+                navMeshAgent.SetDestination(new Vector3(targetPosition.x, targetPosition.y, targetPosition.z + verticalPositionOffset));
             }
         }
     }
