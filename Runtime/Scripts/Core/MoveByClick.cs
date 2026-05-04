@@ -88,8 +88,13 @@ namespace Runtime.Scripts.Core
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
             {
                 targetPosition = hit.point;
-                navMeshAgent.SetDestination(new Vector3(targetPosition.x, targetPosition.y, targetPosition.z + verticalPositionOffset));
+                SetAgentDestination(targetPosition);
             }
+        }
+
+        public void SetAgentDestination(Vector3 position)
+        {
+            navMeshAgent.SetDestination(new Vector3(position.x, position.y, position.z + verticalPositionOffset));
         }
     }
 }
