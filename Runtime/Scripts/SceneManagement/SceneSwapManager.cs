@@ -16,7 +16,7 @@ namespace SceneManagement
                 Instance = this;
         }
         
-        public void ChangeScene(string sceneName = "Scene 1")
+        public static void ChangeScene(string sceneName = "Scene 1")
         {
             Instance.StartCoroutine(Instance.FadeOutAndChangeScene(sceneName));
         }
