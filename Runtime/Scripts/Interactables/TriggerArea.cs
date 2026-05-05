@@ -29,8 +29,12 @@ namespace Runtime.Scripts.Interactables
 
         private void OnTriggerExit(Collider other)
         {
-            // Debug.Log(other.name + " exited");
-            OnPlayerExited?.Invoke();
+            var player = other.gameObject.GetComponent<PlayerController>();
+
+            if(player != null)
+            {
+                OnPlayerExited?.Invoke();
+            }
         }
     }
 }
