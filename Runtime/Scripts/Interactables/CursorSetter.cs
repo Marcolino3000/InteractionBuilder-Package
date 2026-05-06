@@ -1,6 +1,5 @@
-using System;
-using Runtime.Scripts.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Runtime.Scripts.Interactables
 {
@@ -23,25 +22,34 @@ namespace Runtime.Scripts.Interactables
         private Texture2D resizedMoveCursor;
         private Texture2D resizedInspectCursor;
         private Texture2D resizedGoThroughDoorCursor;
+        private bool scene2;
 
         #region Setup
 
         private void Awake()
         {
             Initialize();
+            
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        
+        
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+        {
+            if(scene.name == "Scene 2 from package")
+                scene2 = true;
         }
 
         private void Initialize()
         {
             resizedStandardCursor = ResizeCursor(standardCursor, standardCursorSize);
             resizedHandCursor = ResizeCursor(handCursor, interactionCursorSize);
-			resizedMoveCursor = ResizeCursor(moveCursor, standardCursorSize);
+            resizedMoveCursor = ResizeCursor(moveCursor, standardCursorSize);
             resizedInspectCursor = ResizeCursor(inspectCursor, standardCursorSize);
-            resizedGoThroughDoorCursor = ResizeCursor(goThroughDoorCursor, standardCursorSize);            
-
-			SetStandardCursor();
-
+            resizedGoThroughDoorCursor = ResizeCursor(goThroughDoorCursor, standardCursorSize);
             
+            SetCursorUpperLeftHotspot(resizedStandardCursor);
         }
 
         #endregion
@@ -80,9 +88,19 @@ namespace Runtime.Scripts.Interactables
 
         private void SetCursor(Texture2D texture)
         {
-            // Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
+            if (!scene2)
+            {
+                SetCursorUpperLeftHotspot(resizedStandardCursor);
+                return;
+            }
             
             Vector2 hotspot = new Vector2(texture.width / 4f, texture.height / 4f);
+            Cursor.SetCursor(texture, hotspot, CursorMode.Auto);
+        }
+        
+        private void SetCursorUpperLeftHotspot(Texture2D texture)
+        {
+            Vector2 hotspot = Vector2.zero;
             Cursor.SetCursor(texture, hotspot, CursorMode.Auto);
         }
 

@@ -11,11 +11,16 @@ namespace SceneManagement
 
         [SerializeField] private float fadeDuration;
         [SerializeField] private SceneSetup sceneSetup;
-
+        
+        [SerializeField] private GameObject marlene;
+        [SerializeField] private bool deactivateCharacterInScene1;
         private void Awake()
         {
             if(Instance == null)
                 Instance = this;
+            
+            if(deactivateCharacterInScene1)
+                marlene.SetActive(false);
         }
         
         public static void ChangeScene(string sceneName = "Scene 1")
@@ -29,6 +34,9 @@ namespace SceneManagement
             while(SceneFader.Instance.IsFadingOut)
                 yield return null;
 
+            if(deactivateCharacterInScene1)
+                marlene.SetActive(true);
+            
             SceneManager.LoadScene(sceneName);
         }
         
