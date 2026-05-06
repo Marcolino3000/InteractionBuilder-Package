@@ -1,4 +1,5 @@
 using System.Collections;
+using Runtime.Scripts.Interactables;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ namespace SceneManagement
         public static SceneSwapManager Instance { get; private set; }
 
         [SerializeField] private float fadeDuration;
+        [SerializeField] private SceneSetup sceneSetup;
 
         private void Awake()
         {
@@ -33,6 +35,7 @@ namespace SceneManagement
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             SceneFader.Instance.StartFadeIn();
+            sceneSetup.SetupScene();
         }
 
         private void OnEnable()

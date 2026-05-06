@@ -35,7 +35,7 @@ namespace Runtime.Scripts.Core
         {
             if (!string.IsNullOrEmpty(SceneToLoad))
             {
-                SceneSwapManager.Instance.ChangeScene(SceneToLoad);
+                SceneSwapManager.ChangeScene(SceneToLoad);
             }
             
             if (CancelCurrentDialog)

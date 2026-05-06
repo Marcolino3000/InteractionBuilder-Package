@@ -21,7 +21,7 @@ namespace Runtime.Scripts.Interactables
             SetupScene();
         }
 
-        private void SetupScene()
+        public void SetupScene()
         {
             var loaded = Resources.LoadAll<ScriptableObject>("");
             var monobehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None).OfType<ISceneSetupCallbackReceiver>().ToArray();
