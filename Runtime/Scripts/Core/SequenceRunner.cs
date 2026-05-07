@@ -31,7 +31,7 @@ namespace Runtime.Scripts.Core
 
         private void OnEnable()
         {
-            allReactions = new List<Reaction>(Resources.FindObjectsOfTypeAll<Reaction>());
+            allReactions = new List<Reaction>(Resources.LoadAll<Reaction>(""));
 
             foreach (var reaction in allReactions)
             {

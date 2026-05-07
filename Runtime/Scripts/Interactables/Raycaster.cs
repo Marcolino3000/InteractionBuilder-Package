@@ -14,7 +14,9 @@ namespace Runtime.Scripts.Interactables
         public bool isDialogRunning;
         public bool isShowingInteractable;
         
+        [Header("Settings")]
         [SerializeField] private bool logHits;
+        [SerializeField] private bool disableMovementDuringDialog;
 
         [SerializeField] private DialogTreeRunner dialogTreeRunner;
         [SerializeField] private Sauerteig sauerteig;
@@ -55,7 +57,7 @@ namespace Runtime.Scripts.Interactables
 
         void Update()
         {
-            if (isDialogRunning)
+            if (disableMovementDuringDialog && isDialogRunning)
                 return; 
 
             HandleHoverOnInteractables();
@@ -63,7 +65,7 @@ namespace Runtime.Scripts.Interactables
 
         public void HandleMouseClick()
         {
-            if(isDialogRunning)
+            if(disableMovementDuringDialog && isDialogRunning)
                 return;
 
             if (isShowingInteractable)
@@ -95,6 +97,9 @@ namespace Runtime.Scripts.Interactables
                 {
                     interactionType = InteractionType.Move;
                 }
+                
+                if (isDialogRunning)
+                    continue; 
 
                 if (hit.interactable == null)
                 {
@@ -215,7 +220,10 @@ namespace Runtime.Scripts.Interactables
                 {
                     moveByClick.HandleMouseClick();
                     return;
-                }            
+                }     
+                
+                if(isDialogRunning)
+                    continue;
 
                 if (hit.interactable == null)
                     continue;
@@ -225,6 +233,8 @@ namespace Runtime.Scripts.Interactables
 
                 if(hit.isTrigger)
                     continue;
+                
+                Debug.Log("Raycaster: Clicked on interactable: " + hit.interactable.Data.name + ", AwarenessLevel: " + hit.interactable.Data.AwarenessLevel);
 
                 if(hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
