@@ -123,12 +123,13 @@ namespace Runtime.Scripts.Interactables
                 if(sauerteig == null)
                     Debug.LogWarning("sauerteig is null");
 
-                if (!sauerteig.IsUnlocked)
-                    continue;
 
                 if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
                     ShowStandardOutline(hit);
                 
+                if (!sauerteig.IsUnlocked)
+                    continue;
+
                 if (hit.interactable.Data.AwarenessLevel >= AwarenessLevel.Basic)
                     ShowSpecialOutline(hit);
 
