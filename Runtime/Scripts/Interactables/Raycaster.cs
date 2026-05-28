@@ -18,7 +18,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private bool logHits;
         [SerializeField] private bool disableMovementDuringDialog;
 
-        [SerializeField] private DialogTreeRunner dialogTreeRunner;
+        // [SerializeField] private DialogTreeRunner dialogTreeRunner;
         [SerializeField] private Sauerteig sauerteig;
         [SerializeField] private LayerMask wallLayerMask;
         [SerializeField] private LayerMask interactablesLayerMask;
@@ -31,12 +31,19 @@ namespace Runtime.Scripts.Interactables
         private Camera cam;
         private bool clickedWall;
         private bool stoppedHoveringInteractableLastFrame;
+        private int wallLayer;
+        private int groundLayer;
+        private int playerLayer;
+        private int interactablesLayer;
 
         private void OnEnable()
         {
-            cam = Camera.main;
+            wallLayer = LayerMask.NameToLayer("Walls");
+            groundLayer = LayerMask.NameToLayer("Scene Plane");
+            interactablesLayer = LayerMask.NameToLayer("Interactables");
+            playerLayer = LayerMask.NameToLayer("Marlene");
             
-            // cursorSetter.Initialize();
+            cam = Camera.main;
             
             DialogTreeRunner.OnDialogRunningStatusChanged += (isRunning, tree) =>
             {
@@ -78,118 +85,6 @@ namespace Runtime.Scripts.Interactables
             HandleClickOnInteractables();
         }
 
-        private void HandleHoverOnInteractables()
-        {
-            var hits = GetAllSortedRaycastHits();
-            bool hoveringInteractable = false;
-            Interactable hoveredInteractable = null;
-            var interactionType = InteractionType.None;
-            
-            foreach (var hit in hits)
-            {
-                if (hit.target.layer == LayerMask.NameToLayer("Walls"))
-                    break;
-
-                if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
-                    break;
-
-                if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
-                {
-                    interactionType = InteractionType.Move;
-                }
-                
-                if (isDialogRunning)
-                    continue; 
-
-                if (hit.interactable == null)
-                {
-                    continue;
-                }
-
-                if (hit.target.layer == LayerMask.NameToLayer("Walls"))
-                    return;
-
-                if (hit.isTrigger)
-                    continue;
-
-                if(sauerteig.awarenessLevel < hit.interactable.Data.AwarenessLevel)
-                    continue;
-
-                hoveringInteractable = true;
-                stoppedHoveringInteractableLastFrame = true;
-                interactionType = hit.interactable.Data.InteractionType;
-                hoveredInteractable = hit.interactable;
-
-                if(sauerteig == null)
-                    Debug.LogWarning("sauerteig is null");
-
-
-                if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
-                    ShowStandardOutline(hit);
-                
-                if (!sauerteig.IsUnlocked)
-                    continue;
-
-                if (hit.interactable.Data.AwarenessLevel >= AwarenessLevel.Basic)
-                    ShowSpecialOutline(hit);
-
-
-                // hit.display?.TriggerHoverEffect();
-                
-                
-                // sauerteig.GetGlowManager().Glow();
-                hoveredInteractable = hit.interactable;
-
-                break;
-            }
-            
-            if(!hoveringInteractable)
-            {
-                if(stoppedHoveringInteractableLastFrame)
-                {
-                    stoppedHoveringInteractableLastFrame = false;
-                    currentlyHoveredInteractable?.HideStandardOutline();
-                    currentlyHoveredInteractable?.HideStaticSpecialOutline();
-                    sauerteig.GetGlowManager().HideStaticGlow();
-
-                    currentlyHoveredInteractable = null;
-                }
-            }
-            
-            cursorSetter.SetCursor(interactionType);
-
-            // if(hoveredInteractable != null)
-            //     cursorSetter.SetCursor(hoveredInteractable.Data.InteractionType);
-        }
-
-        private void ShowStandardOutline(RaycastInteractableHit hit)
-        {
-            if (currentlyHoveredInteractable == hit.display) 
-                return;
-            
-            currentlyHoveredInteractable?.HideStandardOutline();
-            
-            currentlyHoveredInteractable = hit.display;
-            
-            currentlyHoveredInteractable?.ShowStandardOutline();
-        }
-
-        private void ShowSpecialOutline(RaycastInteractableHit hit)
-        {
-            if (currentlyHoveredInteractable == hit.display) 
-                return;
-            
-            currentlyHoveredInteractable?.HideStaticSpecialOutline();
-            sauerteig.GetGlowManager().HideStaticGlow();
-            
-            currentlyHoveredInteractable = hit.display;
-            
-            currentlyHoveredInteractable?.ShowStaticSpecialOutline();
-            
-            if(currentlyHoveredInteractable != null)
-                sauerteig.GetGlowManager().ShowStaticGlow();
-        }
-
         private void HandleClickOnInteractables()
         {
             var hits = GetAllSortedRaycastHits();
@@ -208,7 +103,8 @@ namespace Runtime.Scripts.Interactables
             
             foreach (var hit in hits)
             {
-                if (hit.target.layer == LayerMask.NameToLayer("Walls"))
+                if (hit.target.layer == wallLayer)
+                    // if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     return;
 
                 if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
@@ -260,6 +156,152 @@ namespace Runtime.Scripts.Interactables
             }
         }
 
+        private void HandleHoverOnInteractables()
+        {
+            var hits = GetAllSortedRaycastHits();
+            bool hoveringInteractable = false;
+            RaycastInteractableHit hoveredInteractable = default;
+            
+            var hoverStatus = CheckHoverStatus(hits, ref hoveredInteractable);
+
+            if(logHits)
+            {
+                Debug.Log("HITS////////////////////////");
+                foreach (var hit in hits)
+                {
+
+                    Debug.Log(hit.target.name);
+                }
+            }
+
+            switch (hoverStatus)
+            {
+                case HoverStatus.None:
+                    cursorSetter.SetCursor(InteractionType.None);
+                    hoveringInteractable = false;
+                    break;
+                case HoverStatus.Ground:
+                    cursorSetter.SetCursor(InteractionType.Move);
+                    hoveringInteractable = false;
+                    break;
+                case HoverStatus.BasicInteractable:
+                    ShowStandardOutline(hoveredInteractable);
+                    hoveringInteractable = true;
+                    stoppedHoveringInteractableLastFrame = true;
+                    cursorSetter.SetCursor(hoveredInteractable.interactable.Data.InteractionType);
+                    break;
+                case HoverStatus.SpecialInteractable:
+                    if (!sauerteig.IsUnlocked)
+                        break;
+                    ShowSpecialOutline(hoveredInteractable);
+                    hoveringInteractable = true;
+                    stoppedHoveringInteractableLastFrame = true;
+                    cursorSetter.SetCursor(hoveredInteractable.interactable.Data.InteractionType);
+                        break;
+            }
+            
+            if(!hoveringInteractable)
+            {
+                if(stoppedHoveringInteractableLastFrame)
+                {
+                    stoppedHoveringInteractableLastFrame = false;
+                    currentlyHoveredInteractable?.HideStandardOutline();
+                    currentlyHoveredInteractable?.HideStaticSpecialOutline();
+                    sauerteig.GetGlowManager().HideStaticGlow();
+
+                    currentlyHoveredInteractable = null;
+                }
+            }
+        }
+
+        private HoverStatus CheckHoverStatus(List<RaycastInteractableHit> hits, ref RaycastInteractableHit hoveredInteractable)
+        {
+            // InteractionType interactionType;
+            foreach (var hit in hits)
+            {
+                if (hit.target.layer == wallLayer || hit.target.layer == playerLayer)
+                {
+                    return HoverStatus.None;
+                }
+
+                if (hit.target.layer == groundLayer)
+                {
+                    return HoverStatus.Ground;
+                }
+
+                if (hit.isTrigger)
+                    continue;
+
+                if (hit.interactable == null)
+                    continue;
+                
+                if (sauerteig.awarenessLevel < hit.interactable.Data.AwarenessLevel)
+                {
+                    cursorSetter.SetCursor(InteractionType.None);
+                    return HoverStatus.None;
+                }
+
+                hoveredInteractable  = hit;
+                
+                switch (hit.interactable.Data.AwarenessLevel)
+                {
+                    case AwarenessLevel.NotSet:
+                        // ShowStandardOutline(hit);
+                        return HoverStatus.BasicInteractable;
+                        break;
+                    case > AwarenessLevel.NotSet:
+                        // if (!sauerteig.IsUnlocked)
+                            // return true;
+                        // ShowSpecialOutline(hit);
+                        return HoverStatus.SpecialInteractable;
+                        break;
+                }
+                
+                // hoveringInteractable = true;
+                // stoppedHoveringInteractableLastFrame = true;
+                // interactionType = hit.interactable.Data.InteractionType;
+                
+                
+                
+                // if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
+                //     ShowStandardOutline(hit);
+                // if (hit.interactable.Data.AwarenessLevel > AwarenessLevel.NotSet)
+                //     ShowSpecialOutline(hit);
+
+                break;
+            }
+
+            return HoverStatus.None;
+        }
+
+        private void ShowStandardOutline(RaycastInteractableHit hit)
+        {
+            if (currentlyHoveredInteractable == hit.display) 
+                return;
+            
+            currentlyHoveredInteractable?.HideStandardOutline();
+            
+            currentlyHoveredInteractable = hit.display;
+            
+            currentlyHoveredInteractable?.ShowStandardOutline();
+        }
+
+        private void ShowSpecialOutline(RaycastInteractableHit hit)
+        {
+            if (currentlyHoveredInteractable == hit.display) 
+                return;
+            
+            currentlyHoveredInteractable?.HideStaticSpecialOutline();
+            sauerteig.GetGlowManager().HideStaticGlow();
+            
+            currentlyHoveredInteractable = hit.display;
+            
+            currentlyHoveredInteractable?.ShowStaticSpecialOutline();
+            
+            if(currentlyHoveredInteractable != null)
+                sauerteig.GetGlowManager().ShowStaticGlow();
+        }
+
         private struct RaycastInteractableHit
         {
             public Interactable interactable;
@@ -277,7 +319,7 @@ namespace Runtime.Scripts.Interactables
             }
         }
 
-        private bool GetHitsFrom3DRaycast(List<Raycaster.RaycastInteractableHit> interactables)
+        private bool GetHitsFrom3DRaycast(List<RaycastInteractableHit> interactables)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             var layerMask = wallLayerMask | interactablesLayerMask | groundLayerMask;
@@ -287,12 +329,16 @@ namespace Runtime.Scripts.Interactables
                 var hitCollider = hit.collider;
                 var interactable = hitCollider.gameObject.GetComponentInChildren<Interactable>();
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                interactables.Add(new Raycaster.RaycastInteractableHit(interactable, display, hit.distance, hit.collider.gameObject));
+                
+                // if(interactable == null)
+                //     continue;
+                
+                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hit.collider.gameObject));
             }
             return interactables.Count > 0;
         }
 
-        private bool GetHitsFrom2DRaycast(List<Raycaster.RaycastInteractableHit> interactables)
+        private bool GetHitsFrom2DRaycast(List<RaycastInteractableHit> interactables)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             var hits = Physics2D.GetRayIntersectionAll(ray, Mathf.Infinity);
@@ -301,7 +347,11 @@ namespace Runtime.Scripts.Interactables
                 var hitCollider = hit.collider;
                 var interactable = hitCollider.gameObject.GetComponentInChildren<Interactable>();
                 var display = hitCollider.gameObject.GetComponentInChildren<InteractableDisplay>();
-                interactables.Add(new Raycaster.RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject, NameContainsTrigger(interactable?.gameObject)));
+                
+                // if(interactable == null)
+                //     continue;
+                
+                interactables.Add(new RaycastInteractableHit(interactable, display, hit.distance, hitCollider.gameObject, NameContainsTrigger(interactable?.gameObject)));
             }
             return interactables.Count > 0;
         }
@@ -311,16 +361,24 @@ namespace Runtime.Scripts.Interactables
             return interactableGameObject != null && interactableGameObject.name.ToLower().Contains("trigger");
         }
 
-        private List<Raycaster.RaycastInteractableHit> GetAllSortedRaycastHits()
+        private List<RaycastInteractableHit> GetAllSortedRaycastHits()
         {
-            var interactables3D = new List<Raycaster.RaycastInteractableHit>();
-            var interactables2D = new List<Raycaster.RaycastInteractableHit>();
+            var interactables3D = new List<RaycastInteractableHit>();
+            var interactables2D = new List<RaycastInteractableHit>();
             GetHitsFrom3DRaycast(interactables3D);
             GetHitsFrom2DRaycast(interactables2D);
-            var allInteractables = new List<Raycaster.RaycastInteractableHit>(interactables3D);
+            var allInteractables = new List<RaycastInteractableHit>(interactables3D);
             allInteractables.AddRange(interactables2D);
             allInteractables.Sort((a, b) => a.distance.CompareTo(b.distance));
             return allInteractables;
         }
+    }
+
+    enum HoverStatus
+    {
+        None,
+        Ground,
+        BasicInteractable,
+        SpecialInteractable
     }
 }
