@@ -17,11 +17,6 @@ namespace Runtime.Scripts.Interactables
         private bool countdownActive;
         private Coroutine countdownCoroutine;
 
-        private void Start()
-        {
-            SetupScene();
-        }
-
         public void SetupScene()
         {
             var loaded = Resources.LoadAll<ScriptableObject>("");
