@@ -11,36 +11,37 @@ namespace Runtime.Scripts.Interactables
         public event Action OnCancelShowInteractable;
         public event Action OnClick;
         
+        [Header("Debug")]
         public bool isDialogRunning;
+        public bool isSequenceRunning;
         public bool isShowingInteractable;
-        
+        [SerializeField] private InteractableDisplay currentlyHoveredInteractable;
+        [SerializeField] private InteractableDisplay lastHoveredInteractable;
+
         [Header("Settings")]
         [SerializeField] private bool logHits;
-        [SerializeField] private bool disableMovementDuringDialog;
+        [SerializeField] private bool disableMouseInputDuringDialog;
+        [SerializeField] private bool disableMouseInputDuringSequences;
 
-        // [SerializeField] private DialogTreeRunner dialogTreeRunner;
+        [Header("References")]
         [SerializeField] private Sauerteig sauerteig;
         [SerializeField] private LayerMask wallLayerMask;
         [SerializeField] private LayerMask interactablesLayerMask;
         [SerializeField] private LayerMask groundLayerMask;
         [SerializeField] private MoveByClick moveByClick;
         [SerializeField] private CursorSetter cursorSetter;
-        [SerializeField] private InteractableDisplay currentlyHoveredInteractable;
-        [SerializeField] private InteractableDisplay lastHoveredInteractable;
-        
+
         private Camera cam;
         private bool clickedWall;
         private bool stoppedHoveringInteractableLastFrame;
         private int wallLayer;
         private int groundLayer;
         private int playerLayer;
-        private int interactablesLayer;
 
         private void OnEnable()
         {
             wallLayer = LayerMask.NameToLayer("Walls");
             groundLayer = LayerMask.NameToLayer("Scene Plane");
-            interactablesLayer = LayerMask.NameToLayer("Interactables");
             playerLayer = LayerMask.NameToLayer("Marlene");
             
             cam = Camera.main;
@@ -55,7 +56,7 @@ namespace Runtime.Scripts.Interactables
 
             SequenceRunner.OnSequenceRunningChanged += (isRunning) =>
             {
-                isDialogRunning = isRunning;
+                isSequenceRunning = isRunning;
 
                 if(isRunning)
                     cursorSetter.SetStandardCursor();
@@ -64,15 +65,21 @@ namespace Runtime.Scripts.Interactables
 
         void Update()
         {
-            if (disableMovementDuringDialog && isDialogRunning)
+            if (disableMouseInputDuringDialog && isDialogRunning)
                 return; 
+            
+            if(disableMouseInputDuringSequences && isSequenceRunning)
+                return;
 
             HandleHoverOnInteractables();
         }
 
         public void HandleMouseClick()
         {
-            if(disableMovementDuringDialog && isDialogRunning)
+            if(disableMouseInputDuringDialog && isDialogRunning)
+                return;
+            
+            if(disableMouseInputDuringSequences && isSequenceRunning)
                 return;
 
             if (isShowingInteractable)
@@ -104,7 +111,6 @@ namespace Runtime.Scripts.Interactables
             foreach (var hit in hits)
             {
                 if (hit.target.layer == wallLayer)
-                    // if (hit.target.layer == LayerMask.NameToLayer("Walls"))
                     return;
 
                 if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
