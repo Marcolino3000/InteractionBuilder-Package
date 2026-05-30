@@ -31,6 +31,7 @@ namespace Runtime.Scripts.Core
         public bool InteractableDisappearsAutomatically;
         public string SceneToLoad;
 
+        [ContextMenu("Execute Reaction")]
         public void Execute()
         {
             if (!string.IsNullOrEmpty(SceneToLoad))
