@@ -1,5 +1,6 @@
 using System.Linq;
 using Runtime.Scripts.Utility;
+using SceneManagement;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
@@ -43,6 +44,11 @@ namespace Runtime.Scripts.Interactables
             if(GUI.Button(new Rect(0, 120,130,25), "Reset Scene", GuiStyleSettings.GetSkin().GetStyle("button")))
             {
                 SetupScene();
+            }
+            
+            if (GUI.Button(new Rect(10, 150, 130, 25), "Reset Game"))
+            {
+                SceneSwapManager.ChangeScene("Scene 1");
             }
         }
     }
