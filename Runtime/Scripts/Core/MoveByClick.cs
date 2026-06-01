@@ -43,24 +43,13 @@ namespace Runtime.Scripts.Core
             bool isCurrentlyMoving = navMeshAgent.pathPending || 
                                      navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance;
 
-            if (isCurrentlyMoving)
-            {
-                float deltaX = navMeshAgent.destination.x - transform.position.x;
-                MoveDirection currentDirection = deltaX > 0 ? MoveDirection.Right : MoveDirection.Left;
-
-                if (!isMoving || currentDirection != lastMoveDirection)
-                {
-                    isMoving = true;
-                    lastMoveDirection = currentDirection;
-                    OnNavMeshMovementStarted?.Invoke(lastMoveDirection);
-                }
-            }
-            else if (!isCurrentlyMoving && isMoving)
+            if (!isCurrentlyMoving && isMoving)
             {
                 isMoving = false;
                 OnNavMeshMovementEnded?.Invoke();
             }
         }
+        
         public void HandleMouseClick()
         {
             if (playerController == null || cam == null)
@@ -95,6 +84,16 @@ namespace Runtime.Scripts.Core
         public void SetAgentDestination(Vector3 position)
         {
             navMeshAgent.SetDestination(new Vector3(position.x, position.y, position.z + verticalPositionOffset));
+            
+            float deltaX = position.x - transform.position.x;
+            MoveDirection currentDirection = deltaX > 0 ? MoveDirection.Right : MoveDirection.Left;
+
+            if (!isMoving || currentDirection != lastMoveDirection)
+            {
+                isMoving = true;
+                lastMoveDirection = currentDirection;
+                OnNavMeshMovementStarted?.Invoke(lastMoveDirection);
+            }
         }
     }
 }
