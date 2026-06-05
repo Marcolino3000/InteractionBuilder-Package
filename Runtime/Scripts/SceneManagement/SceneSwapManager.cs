@@ -28,6 +28,11 @@ namespace SceneManagement
             Instance.StartCoroutine(Instance.FadeOutAndChangeScene(sceneName));
         }
         
+        public static void LoadFirstScene()
+        {
+            Instance.StartCoroutine(Instance.FadeOutAndChangeScene("Scene 1"));
+        }
+        
         private IEnumerator FadeOutAndChangeScene(string sceneName)
         {
             SceneFader.Instance.StartFadeOut();
