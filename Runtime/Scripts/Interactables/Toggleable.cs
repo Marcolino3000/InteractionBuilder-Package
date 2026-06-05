@@ -14,6 +14,10 @@ namespace Runtime.Scripts.Interactables
         public string StatusOn;
         public string StatusOff;
         
+        [Header("Toggle Settings")]
+        [SerializeField] private Sprite StatusOnSprite;
+        [SerializeField] private Sprite StatusOffSprite;
+        
         public override StateData CurrentState => new ToggleableStateDate { Owner = this, ToggleState = ToggleState };
     
         public override void HandleInteraction()
@@ -32,6 +36,23 @@ namespace Runtime.Scripts.Interactables
         {
             ToggleState = !ToggleState;
             StatusDescription = ToggleState ? StatusOn : StatusOff;
+            
+            GetSpriteRenderer().sprite = ToggleState ? StatusOnSprite : StatusOffSprite;
+        }
+
+        private SpriteRenderer GetSpriteRenderer()
+        {
+            var renderer = Interactable.GetComponent<SpriteRenderer>();
+            if(renderer != null)
+                return renderer;
+
+            renderer = Interactable.GetComponentInParent<SpriteRenderer>();
+            if(renderer != null)
+                return renderer;
+            
+            Debug.LogWarning($"No SpriteRenderer found on {Interactable.name} or its parents. Cannot update sprite.");
+            
+            return null;
         }
 
         [Serializable]
