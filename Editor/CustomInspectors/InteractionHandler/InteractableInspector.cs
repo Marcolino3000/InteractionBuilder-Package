@@ -31,6 +31,7 @@ namespace Editor
                 EditorGUILayout.PropertyField(spriteProp);
                 EditorGUILayout.PropertyField(discoveryTypeProp);
                 EditorGUILayout.PropertyField(interactionType);
+                
             }
         
             serializedObject.ApplyModifiedProperties();

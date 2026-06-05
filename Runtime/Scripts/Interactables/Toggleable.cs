@@ -15,8 +15,8 @@ namespace Runtime.Scripts.Interactables
         public string StatusOff;
         
         [Header("Toggle Settings")]
-        [SerializeField] private Sprite StatusOnSprite;
-        [SerializeField] private Sprite StatusOffSprite;
+        public Sprite StatusOnSprite;
+        public Sprite StatusOffSprite;
         
         public override StateData CurrentState => new ToggleableStateDate { Owner = this, ToggleState = ToggleState };
     

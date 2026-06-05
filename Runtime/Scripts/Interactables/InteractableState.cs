@@ -1,5 +1,4 @@
 using System;
-using Runtime.Scripts.Core;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
