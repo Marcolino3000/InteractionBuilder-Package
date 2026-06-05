@@ -13,6 +13,8 @@ namespace Runtime.Scripts.Core
         [Header("Settings")]
         [SerializeField] private bool useNavMeshMovement;
         [SerializeField] private float verticalPositionOffset;
+        [SerializeField] private float interactionStoppingDistance;
+        [SerializeField] private float standardStoppingDistance;
 
         [Header("References")]
         [SerializeField] private PlayerController playerController;
@@ -50,8 +52,10 @@ namespace Runtime.Scripts.Core
             }
         }
         
-        public void HandleMouseClick()
+        public void HandleMouseClick(bool isInteraction = false)
         {
+            navMeshAgent.stoppingDistance = isInteraction ? interactionStoppingDistance : standardStoppingDistance;
+            
             if (playerController == null || cam == null)
                 return;
 

@@ -9,7 +9,7 @@ namespace Runtime.Scripts.Interactables
     public class Raycaster : MonoBehaviour
     {
         public event Action OnCancelShowInteractable;
-        public event Action OnClick;
+        public event Action<bool, Interactable> OnClick;
         
         [Header("Debug")]
         public bool isDialogRunning;
@@ -105,8 +105,6 @@ namespace Runtime.Scripts.Interactables
                     Debug.Log(hit.target.name + ": " + hit.distance);
                 }
             }
-
-            OnClick?.Invoke();
             
             foreach (var hit in hits)
             {
@@ -121,7 +119,8 @@ namespace Runtime.Scripts.Interactables
 
                 if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
                 {
-                    moveByClick.HandleMouseClick();
+                    // moveByClick.HandleMouseClick();
+                    OnClick?.Invoke(false, null);
                     return;
                 }     
                 
@@ -139,23 +138,7 @@ namespace Runtime.Scripts.Interactables
                 
                 Debug.Log("Raycaster: Clicked on interactable: " + hit.interactable.Data.name + ", AwarenessLevel: " + hit.interactable.Data.AwarenessLevel);
 
-                if(hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
-                    hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
-
-                if (hit.interactable.Data.AwarenessLevel != AwarenessLevel.NotSet && !sauerteig.IsUnlocked)
-                {
-                    hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
-                }
-
-                else if(hit.interactable.Data.AwarenessLevel != AwarenessLevel.NotSet && sauerteig.awarenessLevel >= hit.interactable.Data.AwarenessLevel)
-                {
-                    hit.interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, hit.interactable.Data);
-
-                    sauerteig.HandleInteractableDiscovered(hit.interactable.Data);
-
-                    if(hit.interactable.MarkAsFoundWhenClicked)
-                        hit.interactable.Found = true;
-                }
+                OnClick?.Invoke(true, hit.interactable);
 
                 //only process the interactable closest to camera
                 return;
