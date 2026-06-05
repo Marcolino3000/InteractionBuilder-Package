@@ -40,10 +40,10 @@ namespace Runtime.Scripts.Interactables
             StatusDescription = ToggleState ? StatusOn : StatusOff;
             
             if(StatusSpriteOn != null && StatusSpriteOff != null)
-                GetSpriteRenderer().sprite = ToggleState ? StatusSpriteOn : StatusSpriteOff;
+                Interactable.SetSprite(ToggleState ? StatusSpriteOn : StatusSpriteOff);
             
             if(SpriteRotationOn != Vector3.zero || SpriteRotationOff != Vector3.zero)
-                Interactable.transform.localEulerAngles = ToggleState ? SpriteRotationOn : SpriteRotationOff;
+                Interactable.transform.parent.eulerAngles = ToggleState ? SpriteRotationOn : SpriteRotationOff;
         }
 
         private SpriteRenderer GetSpriteRenderer()

@@ -18,7 +18,7 @@ namespace Editor
         
             toggleStateProp = serializedObject.FindProperty("ToggleState");
             StatusOnSpriteProp = serializedObject.FindProperty("StatusSpriteOn");
-            StatusOffSpriteProp = serializedObject.FindProperty("SpriteRotationOff");
+            StatusOffSpriteProp = serializedObject.FindProperty("StatusSpriteOff");
             SpriteRotationOnProp = serializedObject.FindProperty("SpriteRotationOn");
             SpriteRotationOffProp = serializedObject.FindProperty("SpriteRotationOff");
         }

@@ -66,6 +66,36 @@ namespace Runtime.Scripts.Interactables
             };
 
             Data.OnInteractionFeedback += HandleInteractionFeedback;
+            
+            if(Data is Toggleable toggleable)
+            {
+                if(toggleable.StatusSpriteOn != null && toggleable.StatusSpriteOff != null)
+                    SetSprite(toggleable.ToggleState ? toggleable.StatusSpriteOn : toggleable.StatusSpriteOff);
+                
+                transform.parent.eulerAngles =
+                    toggleable.ToggleState ? toggleable.SpriteRotationOn : toggleable.SpriteRotationOff;
+            }
+        }
+        
+        public void SetSprite(Sprite sprite)
+        {
+            GetSpriteRenderer().sprite = sprite;
+        }
+        
+        private SpriteRenderer GetSpriteRenderer()
+        {
+            var renderer = GetComponent<SpriteRenderer>();
+            
+            if(renderer != null)
+                return renderer;
+
+            renderer = GetComponentInParent<SpriteRenderer>();
+            if(renderer != null)
+                return renderer;
+            
+            Debug.LogError($"No SpriteRenderer found on {name} or its parents. Cannot update sprite.");
+            
+            return null;
         }
 
         private void SubscribeToPlayerInteraction(PlayerController player)
