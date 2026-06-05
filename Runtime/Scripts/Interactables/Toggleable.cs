@@ -15,8 +15,10 @@ namespace Runtime.Scripts.Interactables
         public string StatusOff;
         
         [Header("Toggle Settings")]
-        public Sprite StatusOnSprite;
-        public Sprite StatusOffSprite;
+        public Sprite StatusSpriteOn;
+        public Sprite StatusSpriteOff;
+        public Vector3 SpriteRotationOn;
+        public Vector3 SpriteRotationOff;
         
         public override StateData CurrentState => new ToggleableStateDate { Owner = this, ToggleState = ToggleState };
     
@@ -37,7 +39,11 @@ namespace Runtime.Scripts.Interactables
             ToggleState = !ToggleState;
             StatusDescription = ToggleState ? StatusOn : StatusOff;
             
-            GetSpriteRenderer().sprite = ToggleState ? StatusOnSprite : StatusOffSprite;
+            if(StatusSpriteOn != null && StatusSpriteOff != null)
+                GetSpriteRenderer().sprite = ToggleState ? StatusSpriteOn : StatusSpriteOff;
+            
+            if(SpriteRotationOn != Vector3.zero || SpriteRotationOff != Vector3.zero)
+                Interactable.transform.localEulerAngles = ToggleState ? SpriteRotationOn : SpriteRotationOff;
         }
 
         private SpriteRenderer GetSpriteRenderer()

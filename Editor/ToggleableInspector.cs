@@ -9,14 +9,18 @@ namespace Editor
         private SerializedProperty toggleStateProp;
         private SerializedProperty StatusOnSpriteProp;
         private SerializedProperty StatusOffSpriteProp;
+        private SerializedProperty SpriteRotationOnProp;
+        private SerializedProperty SpriteRotationOffProp;
     
         protected override void OnEnable()
         {
             base.OnEnable();
         
             toggleStateProp = serializedObject.FindProperty("ToggleState");
-            StatusOnSpriteProp = serializedObject.FindProperty("StatusOnSprite");
-            StatusOffSpriteProp = serializedObject.FindProperty("StatusOffSprite");
+            StatusOnSpriteProp = serializedObject.FindProperty("StatusSpriteOn");
+            StatusOffSpriteProp = serializedObject.FindProperty("SpriteRotationOff");
+            SpriteRotationOnProp = serializedObject.FindProperty("SpriteRotationOn");
+            SpriteRotationOffProp = serializedObject.FindProperty("SpriteRotationOff");
         }
     
         public override void OnInspectorGUI()
@@ -32,6 +36,9 @@ namespace Editor
             
             EditorGUILayout.PropertyField(StatusOnSpriteProp);
             EditorGUILayout.PropertyField(StatusOffSpriteProp);
+            
+            EditorGUILayout.PropertyField(SpriteRotationOnProp);
+            EditorGUILayout.PropertyField(SpriteRotationOffProp);
         
             serializedObject.ApplyModifiedProperties();
         }
