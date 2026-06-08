@@ -21,16 +21,9 @@ namespace Runtime.Scripts.Core
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private LayerMask groundLayer;
 
-        private Camera cam;
-        private Vector3 targetPosition;
         private bool isMoving;
         private MoveDirection lastMoveDirection;
-
-        private void Start()
-        {
-            cam = Camera.main;
-        }
-
+        
         private void Update()
         {
             if (useNavMeshMovement && navMeshAgent != null)
@@ -52,42 +45,35 @@ namespace Runtime.Scripts.Core
             }
         }
         
-        public void HandleMouseClick(bool isInteraction = false)
+        public void HandleMouseClick(bool isInteraction, Vector3 position)
         {
             navMeshAgent.stoppingDistance = isInteraction ? interactionStoppingDistance : standardStoppingDistance;
-            
-            if (playerController == null || cam == null)
+
+            if (isInteraction)
+            {
+                MoveByNavMesh(position);
                 return;
-
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
+            }
+            
             if(useNavMeshMovement)
-                MoveByNavMesh(ray);
+                MoveByNavMesh(position);
             else
-                MoveUsingPlayerController(ray);
+                MoveUsingPlayerController(position);
         }
 
-        private void MoveUsingPlayerController(Ray ray)
+        private void MoveByNavMesh(Vector3 position)
         {
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
-            {
-                targetPosition = hit.point;
-                playerController.MoveToTargetPosition(new Vector2(targetPosition.x, targetPosition.z + verticalPositionOffset));
-            }
+            SetAgentDestination(position);
         }
 
-        private void MoveByNavMesh(Ray ray)
+        private void MoveUsingPlayerController(Vector3 position)
         {
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
-            {
-                targetPosition = hit.point;
-                SetAgentDestination(targetPosition);
-            }
+            playerController.MoveToTargetPosition(new Vector2(position.x, position.z + verticalPositionOffset));
         }
 
         public void SetAgentDestination(Vector3 position)
         {
-            navMeshAgent.SetDestination(new Vector3(position.x, position.y, position.z + verticalPositionOffset));
+            navMeshAgent.SetDestination(new Vector3(position.x, position.y, position.z));
             
             float deltaX = position.x - transform.position.x;
             MoveDirection currentDirection = deltaX > 0 ? MoveDirection.Right : MoveDirection.Left;

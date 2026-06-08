@@ -9,7 +9,8 @@ namespace Runtime.Scripts.Interactables
     public class Raycaster : MonoBehaviour
     {
         public event Action OnCancelShowInteractable;
-        public event Action<bool, Interactable> OnClick;
+        public event Action<Interactable> OnInteractableClicked;
+        public event Action<Vector3> OnGroundClicked; 
         
         [Header("Debug")]
         public bool isDialogRunning;
@@ -120,7 +121,9 @@ namespace Runtime.Scripts.Interactables
                 if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
                 {
                     // moveByClick.HandleMouseClick();
-                    OnClick?.Invoke(false, null);
+                    // OnInteractableClicked?.Invoke(false, null);
+                    var targetPosition = GetTargetPosition();
+                    OnGroundClicked?.Invoke(targetPosition);
                     return;
                 }     
                 
@@ -138,11 +141,25 @@ namespace Runtime.Scripts.Interactables
                 
                 Debug.Log("Raycaster: Clicked on interactable: " + hit.interactable.Data.name + ", AwarenessLevel: " + hit.interactable.Data.AwarenessLevel);
 
-                OnClick?.Invoke(true, hit.interactable);
+                OnInteractableClicked?.Invoke(hit.interactable);
 
                 //only process the interactable closest to camera
                 return;
             }
+        }
+
+        private Vector3 GetTargetPosition()
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+            {
+                return hit.point;
+            }
+
+            Debug.LogError("Raycast did not hit the ground layer. Returning zero vector.");
+            
+            return Vector3.zero;
         }
 
         private void HandleHoverOnInteractables()

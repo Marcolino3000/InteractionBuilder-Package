@@ -19,7 +19,8 @@ namespace Runtime.Scripts.Interactables
 
         private void Awake()
         {
-            raycaster.OnClick += HandleClick;
+            raycaster.OnInteractableClicked += HandleInteractableClicked;
+            raycaster.OnGroundClicked += HandleGroundClicked;
             moveByClick.OnNavMeshMovementEnded += HandleMovementEnded;
         }
 
@@ -45,13 +46,27 @@ namespace Runtime.Scripts.Interactables
                 if(currentInteractable.MarkAsFoundWhenClicked)
                     currentInteractable.Found = true;
             }
+            
+            currentInteractable = null;
         }
 
-        private void HandleClick(bool isInteraction, Interactable interactable)
+        private void HandleInteractableClicked(Interactable interactable)
         {
             currentInteractable = interactable;
 
-            moveByClick.HandleMouseClick(isInteraction);
+            if(currentInteractable == null)
+            {
+                Debug.LogError("HandleInteractableClicked was called but interactable was null. Returning early");
+                return;
+            }
+        
+            moveByClick.HandleMouseClick(true, interactable.transform.position);
+        }
+
+        private void HandleGroundClicked(Vector3 targetPosition)
+        {
+            currentInteractable = null;
+            moveByClick.HandleMouseClick(false, targetPosition);
         }
     }
 }
