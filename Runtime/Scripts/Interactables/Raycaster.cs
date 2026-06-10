@@ -152,7 +152,7 @@ namespace Runtime.Scripts.Interactables
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayerMask))
             {
                 return hit.point;
             }

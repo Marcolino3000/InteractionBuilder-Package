@@ -19,7 +19,6 @@ namespace Runtime.Scripts.Core
         [Header("References")]
         [SerializeField] private PlayerController playerController;
         [SerializeField] private NavMeshAgent navMeshAgent;
-        [SerializeField] private LayerMask groundLayer;
 
         private bool isMoving;
         private MoveDirection lastMoveDirection;
