@@ -20,7 +20,8 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private InteractableDisplay lastHoveredInteractable;
 
         [Header("Settings")]
-        [SerializeField] private bool logHits;
+        [SerializeField] private bool logClickHits;
+        [SerializeField] private bool logHoverHits;
         [SerializeField] private bool disableMouseInputDuringDialog;
         [SerializeField] private bool disableMouseInputDuringSequences;
 
@@ -97,7 +98,7 @@ namespace Runtime.Scripts.Interactables
         {
             var hits = GetAllSortedRaycastHits();
 
-            if (logHits)
+            if (logClickHits)
             {
                 Debug.Log("//////HITS///////////////////");
 
@@ -170,7 +171,7 @@ namespace Runtime.Scripts.Interactables
             
             var hoverStatus = CheckHoverStatus(hits, ref hoveredInteractable);
 
-            if(logHits)
+            if(logHoverHits)
             {
                 Debug.Log("HITS////////////////////////");
                 foreach (var hit in hits)
