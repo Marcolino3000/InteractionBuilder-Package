@@ -1,4 +1,6 @@
+using Nodes.Decorator;
 using Runtime.Scripts.Core;
+using Tree;
 using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
@@ -8,6 +10,8 @@ namespace Runtime.Scripts.Interactables
         [Header("Debug")]
         [SerializeField] private Interactable currentInteractable;
         [SerializeField] private bool isMovingToInteractable;
+        [SerializeField] private bool isDialogRunning;
+        [SerializeField] private DialogOptionNode currentDialogOption;
         
         [Header("Settings")]
         [SerializeField] private bool moveToInteractableOnClick;
@@ -25,6 +29,38 @@ namespace Runtime.Scripts.Interactables
             raycaster.OnGroundClicked += HandleGroundClicked;
             moveByClick.OnNavMeshMovementEnded += HandleMovementEnded;
             interactionHandler.OnPrerequisiteReady += HandlePrerequisiteReady;
+
+            DialogTreeRunner.DialogNodeSelected += HandleDialogNodeSelected;
+            DialogTreeRunner.OnDialogRunningStatusChanged += HandleDialogRunningStatusChanged;
+        }
+
+        private void OnDestroy()
+        {
+            DialogTreeRunner.DialogNodeSelected -= HandleDialogNodeSelected;
+            DialogTreeRunner.OnDialogRunningStatusChanged -= HandleDialogRunningStatusChanged;
+        }
+
+        private void HandleDialogNodeSelected(DialogOptionNode node)
+        {
+            currentDialogOption = node;
+        }
+
+        private void HandleDialogRunningStatusChanged(bool isRunning, DialogTree tree)
+        {
+            isDialogRunning = isRunning;
+
+            if (!isRunning)
+                currentDialogOption = null;
+        }
+
+        // Self-talk is the only dialog the player may walk away from: clicking to move or to start a
+        // new interaction is allowed to replace it. During any other dialog the player stays locked in.
+        private bool CanInterruptCurrentDialog()
+        {
+            if (!isDialogRunning)
+                return true;
+
+            return currentDialogOption is PlayerDialogOption { Type: AnswerType.SelfTalk };
         }
 
         private void HandlePrerequisiteReady(PrerequisiteRecord prereq)
@@ -67,6 +103,9 @@ namespace Runtime.Scripts.Interactables
 
         private void HandleInteractableClicked(Interactable interactable)
         {
+            if (!CanInterruptCurrentDialog())
+                return;
+
             currentInteractable = interactable;
             isMovingToInteractable = true;
 
@@ -81,6 +120,9 @@ namespace Runtime.Scripts.Interactables
 
         private void HandleGroundClicked(Vector3 targetPosition)
         {
+            if (!CanInterruptCurrentDialog())
+                return;
+
             currentInteractable = null;
             isMovingToInteractable = false;
             moveByClick.HandleMouseClick(false, targetPosition);
