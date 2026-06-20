@@ -7,6 +7,7 @@ namespace Runtime.Scripts.Interactables
     {
         [Header("Debug")]
         [SerializeField] private Interactable currentInteractable;
+        [SerializeField] private bool isMovingToInteractable;
         
         [Header("Settings")]
         [SerializeField] private bool moveToInteractableOnClick;
@@ -15,6 +16,7 @@ namespace Runtime.Scripts.Interactables
         [SerializeField] private Raycaster raycaster;
         [SerializeField] private MoveByClick moveByClick;
         [SerializeField] private Sauerteig sauerteig;
+        [SerializeField] private InteractionHandler interactionHandler;
 
 
         private void Awake()
@@ -22,8 +24,20 @@ namespace Runtime.Scripts.Interactables
             raycaster.OnInteractableClicked += HandleInteractableClicked;
             raycaster.OnGroundClicked += HandleGroundClicked;
             moveByClick.OnNavMeshMovementEnded += HandleMovementEnded;
+            interactionHandler.OnPrerequisiteReady += HandlePrerequisiteReady;
         }
 
+        private void HandlePrerequisiteReady(PrerequisiteRecord prereq)
+        {
+            if (isMovingToInteractable)
+            {
+                currentInteractable = null;
+                isMovingToInteractable = false;
+            }
+            
+            prereq.Execute();
+        }
+        
         private void HandleMovementEnded()
         {
             if (currentInteractable == null)
@@ -47,12 +61,14 @@ namespace Runtime.Scripts.Interactables
                     currentInteractable.Found = true;
             }
             
+            isMovingToInteractable = false;
             currentInteractable = null;
         }
 
         private void HandleInteractableClicked(Interactable interactable)
         {
             currentInteractable = interactable;
+            isMovingToInteractable = true;
 
             if(currentInteractable == null)
             {
@@ -66,6 +82,7 @@ namespace Runtime.Scripts.Interactables
         private void HandleGroundClicked(Vector3 targetPosition)
         {
             currentInteractable = null;
+            isMovingToInteractable = false;
             moveByClick.HandleMouseClick(false, targetPosition);
         }
     }
