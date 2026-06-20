@@ -16,6 +16,7 @@ namespace Runtime.Scripts.Interactables
         public bool isDialogRunning;
         public bool isSequenceRunning;
         public bool isShowingInteractable;
+        public bool IsMenuOpen;
         [SerializeField] private InteractableDisplay currentlyHoveredInteractable;
         [SerializeField] private InteractableDisplay lastHoveredInteractable;
 
@@ -67,6 +68,9 @@ namespace Runtime.Scripts.Interactables
 
         void Update()
         {
+            if (IsMenuOpen)
+                return;
+            
             if (disableMouseInputDuringDialog && isDialogRunning)
                 return; 
             
@@ -78,6 +82,9 @@ namespace Runtime.Scripts.Interactables
 
         public void HandleMouseClick()
         {
+            if (IsMenuOpen)
+                return;
+            
             if(disableMouseInputDuringDialog && isDialogRunning)
                 return;
             
