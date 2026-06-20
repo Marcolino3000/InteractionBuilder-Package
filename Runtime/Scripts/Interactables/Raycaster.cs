@@ -108,28 +108,27 @@ namespace Runtime.Scripts.Interactables
                 }
             }
             
+            bool hitGround = false;
+
             foreach (var hit in hits)
             {
                 if (hit.target.layer == wallLayer)
-                    return;
+                    break;
 
                 if (hit.target.layer == LayerMask.NameToLayer("Marlene"))
-                    return;
+                    break;
 
                 if(hit.target.name == "Wall")
                     continue;
 
                 if (hit.target.layer == LayerMask.NameToLayer("Scene Plane"))
                 {
-                    // moveByClick.HandleMouseClick();
-                    // OnInteractableClicked?.Invoke(false, null);
-                    var targetPosition = GetTargetPosition();
-                    OnGroundClicked?.Invoke(targetPosition);
-                    return;
-                }     
-                
-                // if(isDialogRunning)
-                //     continue;
+                    // The same ray hits the ground and, farther along, the interactable's collider.
+                    // The ground is closer, so don't stop here: keep scanning so an interactable can
+                    // take priority. Fall back to the ground click only if none is hit.
+                    hitGround = true;
+                    continue;
+                }
 
                 if (hit.interactable == null)
                     continue;
@@ -139,7 +138,7 @@ namespace Runtime.Scripts.Interactables
 
                 if(hit.isTrigger)
                     continue;
-                
+
                 Debug.Log("Raycaster: Clicked on interactable: " + hit.interactable.Data.name + ", AwarenessLevel: " + hit.interactable.Data.AwarenessLevel);
 
                 OnInteractableClicked?.Invoke(hit.interactable);
@@ -147,6 +146,9 @@ namespace Runtime.Scripts.Interactables
                 //only process the interactable closest to camera
                 return;
             }
+
+            if (hitGround)
+                OnGroundClicked?.Invoke(GetTargetPosition());
         }
 
         private Vector3 GetTargetPosition()
@@ -223,17 +225,22 @@ namespace Runtime.Scripts.Interactables
 
         private HoverStatus CheckHoverStatus(List<RaycastInteractableHit> hits, ref RaycastInteractableHit hoveredInteractable)
         {
-            // InteractionType interactionType;
+            bool hitGround = false;
+
             foreach (var hit in hits)
             {
                 if (hit.target.layer == wallLayer || hit.target.layer == playerLayer)
                 {
-                    return HoverStatus.None;
+                    break;
                 }
 
                 if (hit.target.layer == groundLayer)
                 {
-                    return HoverStatus.Ground;
+                    // The same ray hits the ground and, farther along, the interactable's collider.
+                    // The ground is closer, so don't stop here: keep scanning so an interactable can
+                    // take priority. Fall back to the ground (Move cursor) only if none is hit.
+                    hitGround = true;
+                    continue;
                 }
 
                 if (hit.isTrigger)
@@ -241,44 +248,27 @@ namespace Runtime.Scripts.Interactables
 
                 if (hit.interactable == null)
                     continue;
-                
+
                 if (sauerteig.awarenessLevel < hit.interactable.Data.AwarenessLevel)
                 {
                     cursorSetter.SetCursor(InteractionType.None);
                     return HoverStatus.None;
                 }
 
-                hoveredInteractable  = hit;
-                
+                hoveredInteractable = hit;
+
                 switch (hit.interactable.Data.AwarenessLevel)
                 {
                     case AwarenessLevel.NotSet:
-                        // ShowStandardOutline(hit);
                         return HoverStatus.BasicInteractable;
-                        break;
                     case > AwarenessLevel.NotSet:
-                        // if (!sauerteig.IsUnlocked)
-                            // return true;
-                        // ShowSpecialOutline(hit);
                         return HoverStatus.SpecialInteractable;
-                        break;
                 }
-                
-                // hoveringInteractable = true;
-                // stoppedHoveringInteractableLastFrame = true;
-                // interactionType = hit.interactable.Data.InteractionType;
-                
-                
-                
-                // if (hit.interactable.Data.AwarenessLevel == AwarenessLevel.NotSet)
-                //     ShowStandardOutline(hit);
-                // if (hit.interactable.Data.AwarenessLevel > AwarenessLevel.NotSet)
-                //     ShowSpecialOutline(hit);
 
                 break;
             }
 
-            return HoverStatus.None;
+            return hitGround ? HoverStatus.Ground : HoverStatus.None;
         }
 
         private void ShowStandardOutline(RaycastInteractableHit hit)
