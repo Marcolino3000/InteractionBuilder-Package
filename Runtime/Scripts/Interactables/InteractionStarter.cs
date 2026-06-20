@@ -80,11 +80,21 @@ namespace Runtime.Scripts.Interactables
                 return;
             
             if(currentInteractable.Data.AwarenessLevel == AwarenessLevel.NotSet)
+            {
                 currentInteractable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, currentInteractable.Data);
+                
+                isMovingToInteractable = false;
+                currentInteractable = null;
+                return;
+            }
 
             if (currentInteractable.Data.AwarenessLevel != AwarenessLevel.NotSet && !sauerteig.IsUnlocked)
             {
                 currentInteractable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, currentInteractable.Data);
+                
+                isMovingToInteractable = false;
+                currentInteractable = null;
+                return;
             }
 
             else if(currentInteractable.Data.AwarenessLevel != AwarenessLevel.NotSet && sauerteig.awarenessLevel >= currentInteractable.Data.AwarenessLevel)

@@ -128,8 +128,8 @@ namespace Runtime.Scripts.Interactables
                     return;
                 }     
                 
-                if(isDialogRunning)
-                    continue;
+                // if(isDialogRunning)
+                //     continue;
 
                 if (hit.interactable == null)
                     continue;
