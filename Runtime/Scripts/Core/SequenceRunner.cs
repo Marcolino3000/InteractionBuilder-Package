@@ -112,6 +112,16 @@ namespace Runtime.Scripts.Core
             // If we have a NavMeshAgent, wait for it to arrive at its destination
             if (navMeshAgent != null)
             {
+                // SetDestination computes the path asynchronously (over one or more frames).
+                // Give the agent one frame to register the new destination, then wait until
+                // the path is actually ready. Without this gate, remainingDistance/hasPath/
+                // velocity still read their stale defaults on the first frame and the loop
+                // below exits immediately, "skipping" the movement. (A debugger breakpoint
+                // masks this by giving the pathfinding time to finish.)
+                yield return null;
+                while (isSequenceRunning && navMeshAgent.pathPending)
+                    yield return null;
+
                 // Wait until the path is calculated and the agent arrives within stopping distance
                 while (isSequenceRunning)
                 {
