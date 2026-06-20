@@ -14,11 +14,13 @@ namespace Runtime.Scripts.Core
         [Header("Settings")]
         [SerializeField] private float moveSpeed = 1f;
         [SerializeField] private float waypointThreshold = 0.2f;
+        [SerializeField] private float waypointStoppingDistance;
         [SerializeField] private bool disableColliderDuringSequence;
         [SerializeField] private BoxCollider boxCollider;
         [SerializeField] private bool useProximityCheck;
         
         [Header("Debug")]
+        [SerializeField] private bool logWaypointArrival;
         [SerializeField] private bool isSequenceRunning;
         [SerializeField] private PlayerController playerController;
         [SerializeField] private List<Waypoint> Waypoints;
@@ -58,18 +60,24 @@ namespace Runtime.Scripts.Core
         {
             isSequenceRunning = true;
             OnSequenceRunningChanged?.Invoke(isSequenceRunning);
-            
+
             if (boxCollider != null && disableColliderDuringSequence)
                 boxCollider.enabled = false;
-            
+
             if (Waypoints == null || Waypoints == null || Waypoints.Count == 0)
             {
                 Debug.LogWarning("No waypoints set.");
                 yield break;
             }
-            
+
+            // The agent inherits whatever stoppingDistance the last click left on it (interaction
+            // clicks use a larger one). For waypoint movement we want the agent to actually reach
+            // each waypoint, so pin the stoppingDistance here instead of trusting leftover state.
+            if (navMeshAgent != null)
+                navMeshAgent.stoppingDistance = waypointStoppingDistance;
+
             int currentWaypointIndex = 0;
-            
+
             while (currentWaypointIndex < Waypoints.Count)
             {
                 var waypoint = Waypoints[currentWaypointIndex];
@@ -106,37 +114,62 @@ namespace Runtime.Scripts.Core
             if (waypoint == null)
                 yield break;
             
+            if (navMeshAgent == null)
+                yield break;
+
             var target = waypoint.Position;
-            var target2 = new Vector2(target.x, target.z);
+            var targetXZ = new Vector2(target.x, target.z);
 
-            // If we have a NavMeshAgent, wait for it to arrive at its destination
-            if (navMeshAgent != null)
+            // Arrival is decided from the agent's own transform position, which is the only
+            // value that is never stale. remainingDistance / hasPath / velocity all read their
+            // defaults (0 / false) for a frame or two after SetDestination on a fresh agent, so
+            // any check based on them can fire instantly before the agent has moved at all (this
+            // is what made the first run "skip" movement while a later run, with a warmed-up
+            // agent, worked). Distance from the agent to the waypoint cannot lie that way.
+            while (isSequenceRunning)
             {
-                // Wait until the path is calculated and the agent arrives within stopping distance
-                while (isSequenceRunning)
+                // Don't evaluate arrival while the path is still being computed.
+                if (navMeshAgent.pathPending)
                 {
-                    // If no path is pending and we're within stopping distance, consider it reached
-                    if (!navMeshAgent.pathPending)
-                    {
-                        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance + 0.01f)
-                        {
-                            // Either agent has no path or is effectively stopped
-                            if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
-                                break;
-                        }
-                    }
-
-                    // Fallback: also check player transform proximity (ignore height)
-                    if (playerController != null && playerController.transform != null)
-                    {
-                        var playerPos = playerController.transform.position;
-                        var player2 = new Vector2(playerPos.x, playerPos.z);
-                        if (Vector2.Distance(player2, target2) <= waypointThreshold)
-                            break;
-                    }
-
                     yield return null;
+                    continue;
                 }
+
+                var agentPos = navMeshAgent.transform.position;
+                var agentXZ = new Vector2(agentPos.x, agentPos.z);
+                var distance = Vector2.Distance(agentXZ, targetXZ);
+
+                // Genuinely standing on the waypoint.
+                bool reachedWaypoint = distance <= waypointThreshold;
+
+                // Or the agent has braked to a halt as close as stoppingDistance lets it get.
+                bool settledAtStoppingDistance =
+                    distance <= navMeshAgent.stoppingDistance + waypointThreshold &&
+                    navMeshAgent.velocity.sqrMagnitude <= 0.0001f;
+
+                // Waypoint is unreachable (off-mesh / blocked): the agent has a non-complete path
+                // and has come to rest somewhere short of it. Don't hang the sequence forever.
+                bool cannotReach =
+                    navMeshAgent.hasPath &&
+                    navMeshAgent.pathStatus != NavMeshPathStatus.PathComplete &&
+                    navMeshAgent.velocity.sqrMagnitude <= 0.0001f;
+
+                if (reachedWaypoint || settledAtStoppingDistance || cannotReach)
+                {
+                    if (logWaypointArrival)
+                        Debug.Log($"[SequenceRunner] Stopped at waypoint, distance {distance:F3} " +
+                                  $"(stoppingDistance {navMeshAgent.stoppingDistance:F3}, " +
+                                  $"pathStatus {navMeshAgent.pathStatus}, hasPath {navMeshAgent.hasPath}, " +
+                                  $"reachedWaypoint {reachedWaypoint}, settled {settledAtStoppingDistance}, " +
+                                  $"cannotReach {cannotReach})");
+
+                    if (cannotReach && !reachedWaypoint && !settledAtStoppingDistance)
+                        Debug.LogWarning($"[SequenceRunner] Waypoint not reachable; path is " +
+                                         $"{navMeshAgent.pathStatus}. Continuing sequence.");
+                    break;
+                }
+
+                yield return null;
             }
         }
 
