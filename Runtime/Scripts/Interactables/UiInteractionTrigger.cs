@@ -1,3 +1,4 @@
+using Runtime.Scripts.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -5,17 +6,12 @@ namespace Runtime.Scripts.Interactables
 {
     public class UiInteractionTrigger : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private InteractableState interactable;
-
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            UnityEngine.Debug.Log("pointer down");
-        }
+        [SerializeField] private Interactable interactable;
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            UnityEngine.Debug.Log("click");
+            Debug.Log("Sauerteig clicked");
+            interactable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, interactable.Data);
         }
     }
 }

@@ -99,12 +99,13 @@ namespace Runtime.Scripts.Interactables
 
             else if(currentInteractable.Data.AwarenessLevel != AwarenessLevel.NotSet && sauerteig.State.CurrentLevel >= currentInteractable.Data.AwarenessLevel)
             {
-                currentInteractable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, currentInteractable.Data);
-
                 sauerteig.HandleInteractableDiscovered(currentInteractable.Data);
 
                 if(currentInteractable.MarkAsFoundWhenClicked)
                     currentInteractable.Found = true;
+                
+                //do this last because it sets currentInteractable to null
+                currentInteractable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, currentInteractable.Data);
             }
             
             isMovingToInteractable = false;
@@ -122,6 +123,12 @@ namespace Runtime.Scripts.Interactables
             if(currentInteractable == null)
             {
                 Debug.LogError("HandleInteractableClicked was called but interactable was null. Returning early");
+                return;
+            }
+            
+            if (interactable.name == "Sauerteig")
+            {
+                HandleMovementEnded();
                 return;
             }
         
