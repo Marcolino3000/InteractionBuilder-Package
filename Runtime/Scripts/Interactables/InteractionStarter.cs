@@ -97,7 +97,7 @@ namespace Runtime.Scripts.Interactables
                 return;
             }
 
-            else if(currentInteractable.Data.AwarenessLevel != AwarenessLevel.NotSet && sauerteig.awarenessLevel >= currentInteractable.Data.AwarenessLevel)
+            else if(currentInteractable.Data.AwarenessLevel != AwarenessLevel.NotSet && sauerteig.State.CurrentLevel >= currentInteractable.Data.AwarenessLevel)
             {
                 currentInteractable.OnInteractionStarted(InteractionTriggerVia.ButtonPress, currentInteractable.Data);
 

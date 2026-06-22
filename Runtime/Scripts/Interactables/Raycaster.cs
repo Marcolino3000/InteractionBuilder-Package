@@ -256,7 +256,7 @@ namespace Runtime.Scripts.Interactables
                 if (hit.interactable == null)
                     continue;
 
-                if (sauerteig.awarenessLevel < hit.interactable.Data.AwarenessLevel)
+                if (sauerteig.State.CurrentLevel < hit.interactable.Data.AwarenessLevel)
                 {
                     cursorSetter.SetCursor(InteractionType.None);
                     return HoverStatus.None;

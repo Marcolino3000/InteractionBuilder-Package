@@ -50,7 +50,7 @@ namespace Runtime.Scripts.Interactables
                 if (Data.AwarenessLevel == AwarenessLevel.NotSet)
                     return;
                 
-                if(Data.AwarenessLevel <= sauerteig.awarenessLevel)
+                if(Data.AwarenessLevel <= sauerteig.State.CurrentLevel)
                 {
                     // _interactableDiscoveredCallback = sauerteig.HandleInteractableDiscovered;
                     // _interactableDisplay.ShowPulsatingSpecialOutline();

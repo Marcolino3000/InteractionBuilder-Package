@@ -8,14 +8,17 @@ using UnityEngine;
 
 namespace Runtime.Scripts.Interactables
 {
-    public class Sauerteig : MonoBehaviour, IPlayerInputReceiver
+    public class Sauerteig : MonoBehaviour
     {
-        public AwarenessLevel awarenessLevel = AwarenessLevel.Basic;
+        // public AwarenessLevel awarenessLevel = AwarenessLevel.Basic;
         // public AwarenessLevel levelBeforeUnlock;
         public AwarenessLevel levelAfterUnlock;
         public int Activity = 1;
         public bool IsUnlocked;
 
+        [Header("References")]
+        public SauerteigState State;
+        
         [SerializeField] private DialogTreeRunner treeRunner;
         [SerializeField] private SauerteigStatusDisplay statusDisplay;
         [SerializeField] private DialogOptionNode unlockDialogOption;
@@ -79,9 +82,9 @@ namespace Runtime.Scripts.Interactables
                 return false;
             
             IsUnlocked = true;
-            awarenessLevel = levelAfterUnlock;
+            State.CurrentLevel = levelAfterUnlock;
             statusDisplay.ShowSauerteig();
-            statusDisplay.UpdateStatus((int)awarenessLevel);
+            statusDisplay.UpdateStatus((int)State.CurrentLevel);
             
             return true;
         }
@@ -138,7 +141,7 @@ namespace Runtime.Scripts.Interactables
             
             radarCollider.enabled = false;
             
-            if(awarenessLevel != AwarenessLevel.Basic)
+            if(State.CurrentLevel != AwarenessLevel.Basic)
                 SetActivity(-1);
         }
 
@@ -170,16 +173,16 @@ namespace Runtime.Scripts.Interactables
             switch (Activity)
             {
                 case 0:
-                    awarenessLevel = AwarenessLevel.NotSet;
+                    State.CurrentLevel = AwarenessLevel.NotSet;
                     break;
                 case 1 or 2:   
-                    awarenessLevel = AwarenessLevel.Basic;
+                    State.CurrentLevel = AwarenessLevel.Basic;
                     break;
                 case >= 3 and <= 10:
-                    awarenessLevel = AwarenessLevel.Super;
+                    State.CurrentLevel = AwarenessLevel.Super;
                     break;
                 case > 10:
-                    awarenessLevel = AwarenessLevel.Overflow;
+                    State.CurrentLevel = AwarenessLevel.Overflow;
                     break;
             }
             
@@ -194,7 +197,7 @@ namespace Runtime.Scripts.Interactables
             
             GUILayout.BeginArea(new  Rect(0, 160,300 ,300));
             
-            GUI.Label(new Rect(0, 40, 200, 25), $"Activity: {Activity} | Level: {awarenessLevel}");
+            GUI.Label(new Rect(0, 40, 200, 25), $"Activity: {Activity} | Level: {State.CurrentLevel}");
             
             if(GUI.Button(new Rect(0, 0, 130, 25), "Reset Sauerteig", GUI.skin.button))
             {
@@ -202,11 +205,6 @@ namespace Runtime.Scripts.Interactables
             }
             
             GUILayout.EndArea();
-        }
-
-        public void HandleTrigger()
-        {
-            throw new NotImplementedException();
         }
     }
     
